@@ -3320,7 +3320,7 @@ async function doDeleteFile(r){
 function renderAll(){renderMusic();renderAdLists();renderHours();renderLog();renderQueue();renderLiveInfo();renderPrograms();renderPlayed();if(typeof spRenderAll==='function')spRenderAll();}
 /* 🏷 מספר-גרסה — עולה ב-1 בכל שדרוג, כדי לעקוב איזה עדכון רץ בפועל.
    מוצג מתחת לשם-התחנה בפינה, ונכתב גם לכותרת-החלון. */
-const APP_VER='VER 1024';
+const APP_VER='VER 1026';
 async function init(){
   Neutralino.init();
   try{
@@ -6165,7 +6165,13 @@ async function rsSpawn(eng){
   //    radio-detect.exe הייתה לוקחת את הכתובת האחרונה בלבד — ואז הראשי היה נעלם.
   //    לכן: הפעלה ראשונה תמיד עם הראשי בלבד, וברגע שהמנוע מאשר — מפעילים מחדש עם כולן.
   const list=rsUrls(),multiOk=c.rustMulti===true;
-  const use=multiOk?list:list.slice(0,1);
+  /* 🚦 מכסת-חיבורים (הלקח מ-28.8, "מתחבר ומתנתק"): כל מנוע פותח חיבור לכל
+     סטרים, ושרת-הסטרים מנתק כשיש יותר מדי מאותה כתובת — וכשהחיבורים נופלים
+     שוב ושוב, אין מי שישמע את הפתיח בדקה העגולה ("החדשות לא נכנסות").
+     לכן: מנוע-הסגירה תמיד בחיבור יחיד (הראשי — היציאה ממילא שייכת לסטרים
+     שמשודר), ומנוע-הפתיחה יורד זמנית לחיבור-יחיד כשגלאי-הסערה מזהה ניתוקים. */
+  const mono=eng===RS&&Date.now()<(RS._monoUntil||0);
+  const use=(eng===RE||mono)?list.slice(0,1):(multiOk?list:list.slice(0,1));
   eng.st=use.map((s,i)=>({label:s.label,url:s.url,last:null,lastAt:0,net:'',streak:0,_winLog:0}));
   let cmd='"'+exe+'"';
   use.forEach(s=>{cmd+=' --url "'+s.url+'" --label "'+s.label.replace(/"/g,'')+'"';});
@@ -6209,7 +6215,7 @@ function rsLine(eng,txt){
       dlog('aid','🦀 נתיב-המנוע ננעל',{exe:eng.tryExe,ver:eng.ver});}
     // 📡 המנוע תומך ברב-סטרימי ויש כתובות נוספות → מפעילים מחדש עם כולן (פעם אחת)
     if(j.multi&&c.rustMulti!==true){c.rustMulti=true;save();}
-    if(j.multi&&rsUrls().length>1&&(j.streams|0)<rsUrls().length&&!eng._reSpawn){
+    if(eng===RS&&Date.now()>=(RS._monoUntil||0)&&j.multi&&rsUrls().length>1&&(j.streams|0)<rsUrls().length&&!eng._reSpawn){
       eng._reSpawn=true;
       dlog('aid','🦀 '+en+' תומך ברב-סטרימי — מפעיל מחדש עם כל הסטרימים',
         {had:j.streams|0,want:rsUrls().length});
@@ -6221,8 +6227,21 @@ function rsLine(eng,txt){
   else if(j.ev==='stream'){const s=rsSt(i,eng);s.label=j.label||s.label;s.url=j.url||s.url;
     dlog('aid','🦀 סטרים נרשם ב'+en,{src:i,label:s.label,url:s.url});}
   else if(j.ev==='net'){const s=rsSt(i,eng);s.net=j.state||'';if(i===0)eng.net=j.state||'';
-    if(j.state==='lost'||j.state==='fail')
-      dlog('aid','🦀 חיבור-'+en+' ('+(s.label||i)+'): '+j.state,{src:i,why:j.why||''});}
+    if(j.state==='lost'||j.state==='fail'){
+      dlog('aid','🦀 חיבור-'+en+' ('+(s.label||i)+'): '+j.state,{src:i,why:j.why||''});
+      /* 🚦 גלאי-סערת-ניתוקים: כשהשרת מנתק שוב ושוב (מכסת-חיבורים), להתעקש
+         על כל הסטרימים רק מחמיר — יורדים זמנית לחיבור-יחיד ונותנים לשרת
+         להירגע. אחרי חצי שעה חוזרים אוטומטית לרב-סטרימי. */
+      const now=Date.now();
+      eng._lostLog=(eng._lostLog||[]).filter(t=>now-t<600000);
+      eng._lostLog.push(now);
+      if(eng===RS&&rsUrls().length>1&&eng._lostLog.length>=8&&now>=(RS._monoUntil||0)){
+        RS._monoUntil=now+1800000;eng._lostLog=[];
+        rsSay('🚦 סערת-ניתוקים (8+ ב-10 דק׳) — שרת-הסטרים כנראה מגביל חיבורים. מנוע-הפתיחה עובר ל-30 דק׳ לסטרים-הראשי בלבד, ואז חוזר לרב-סטרימי');
+        dlog('error','🚦 מצב-חיבור-יחיד זמני הופעל',{until:new Date(RS._monoUntil).toTimeString().slice(0,8)});
+        rsKill(RS);RS.spawnAt=0;rsSpawn(RS);
+      }
+    }}
   else if(j.ev==='print'){dlog('aid','🦀 הטבעה נטענה ב'+en+' ('+j.which+')',{rows:j.rows,secs:j.secs});}
   else if(j.ev==='stall'){dlog('aid','🦀 שקט בסטרים של '+en+' ('+(rsSt(i,eng).label||i)+')',{src:i,ageMs:j.ageMs});}
   else if(j.ev==='err'){dlog('error','🦀 שגיאת '+en+': '+(j.msg||''),{where:j.where||''});}
@@ -6404,6 +6423,12 @@ function rsTick(){
       });}catch(e){}
     }
     // 🎬🏁 שני מנועים, תמיד: הפתיחה — בכל מצב; הסגירה — כשיש קובץ-סיום
+    // 🚦 תמה תקופת-החיבור-היחיד → חוזרים לרב-סטרימי (הפעלה-מחדש אחת)
+    if(RS.proc&&RS._monoUntil&&Date.now()>=RS._monoUntil&&rsUrls().length>1){
+      RS._monoUntil=0;
+      rsSay('🚦 תקופת-החיבור-היחיד הסתיימה — מנוע-הפתיחה חוזר לרב-סטרימי');
+      rsKill(RS);RS.spawnAt=0;
+    }
     if(!RS.proc)rsSpawn(RS);
     if(!RE.proc&&(aidCfg().endFile||'').trim())rsSpawn(RE);
     // 🧹 ניקוי-יתומים תקופתי: כל 2 דקות, שומר על שני הפעילים
