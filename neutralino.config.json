@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/neutralinojs/neutralinojs/main/schemas/neutralino.config.schema.json",
   "applicationId": "il.radio.station",
-  "version": "1.0.0",
+  "version": "1.0.51",
   "defaultMode": "window",
   "port": 0,
   "documentRoot": "/resources/",
@@ -39,7 +39,7 @@
       "maximize": true,
       "hidden": false,
       "resizable": true,
-      "exitProcessOnClose": true
+      "exitProcessOnClose": false
     },
     "browser": {
       "globalVariables": {

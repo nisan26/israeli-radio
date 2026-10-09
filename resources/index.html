@@ -102,6 +102,17 @@ h2.pagetitle{font-size:25px;margin-bottom:4px;font-weight:800}
 #nowplaying:before{content:'';position:absolute;top:-40%;left:-10%;width:60%;height:180%;background:radial-gradient(closest-side,rgba(61,139,255,.10),transparent);pointer-events:none}
 #np-title{font-size:29px;font-weight:800;margin:8px 0 2px;min-height:37px;position:relative}
 #np-artist{color:var(--muted);font-size:15.5px;min-height:20px;position:relative}
+/* 🏷 שם-האמן חייב להופיע במלואו — בלי חיתוך ובלי שלוש-נקודות */
+#np-artist{white-space:normal;overflow-wrap:anywhere;line-height:1.35}
+/* ▶ משבצת "הבא בתור" בתוך שכבת-הגרירה — בולטת מהשאר */
+#dropoverlay .dz.dz-now{border-color:var(--accent);color:var(--accent);
+  background:linear-gradient(180deg,var(--hover),var(--panel))}
+#dropoverlay .dz.dz-now.over{box-shadow:0 0 50px rgba(61,139,255,.40);transform:scale(1.03)}
+.playedrow2{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid var(--line);font-size:13px}
+.playedrow2:last-child{border-bottom:none}
+.playedrow2 .pt2{color:var(--muted);font-size:11.5px;min-width:74px;flex-shrink:0}
+.playedrow2 .pn2{flex:1;overflow-wrap:anywhere}
+.playedrow2 input[type=checkbox]{width:16px;height:16px;flex-shrink:0;cursor:pointer}
 #np-head{display:flex;gap:16px;align-items:center}
 #np-art{width:118px;height:118px;flex:none;border-radius:14px;background:linear-gradient(135deg,#2a3550,#161c2e);background-size:cover;background-position:center;box-shadow:0 6px 20px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;font-size:46px;color:#42506e;overflow:hidden}
 #np-head-text{flex:1;min-width:0}
@@ -109,11 +120,13 @@ h2.pagetitle{font-size:25px;margin-bottom:4px;font-weight:800}
 #queue-art{width:100%;height:220px;border-radius:14px;margin:6px 0 12px;background-color:#161c2e;background-image:linear-gradient(135deg,#2a3550,#161c2e);background-size:contain;background-repeat:no-repeat;background-position:center;box-shadow:0 6px 20px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;font-size:70px;color:#42506e}
 #q-search{width:100%;box-sizing:border-box;padding:9px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:inherit;font-size:13.5px;margin-bottom:8px}
 #q-search:focus{outline:none;border-color:var(--accent)}
-#q-results{display:flex;flex-direction:column;gap:5px;max-height:230px;overflow-y:auto;margin-bottom:10px}
+#q-results{display:flex;flex-direction:column;gap:5px;max-height:320px;overflow-y:auto;margin-bottom:10px}
 #q-results:empty{display:none}
-.qres{display:flex;align-items:center;gap:6px}
-.qres-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}
-.qres .btn.small{padding:4px 9px;font-size:12px;white-space:nowrap}
+.qres{display:flex;align-items:flex-start;gap:6px}
+/* 🔤 שמות מלאים — בלי חיתוך. שם-קובץ ארוך נשבר לשורה שנייה במקום
+   להסתיים ב-"…", והכפתורים נשארים במקומם בקצה השורה. */
+.qres-t{flex:1;min-width:0;font-size:13px;white-space:normal;overflow-wrap:anywhere;line-height:1.45;padding-top:3px}
+.qres .btn.small{padding:4px 9px;font-size:12px;white-space:nowrap;flex-shrink:0}
 #np-progress{height:10px;background:var(--track);border-radius:6px;margin:18px 0 6px;overflow:hidden;cursor:pointer;position:relative}
 #np-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:6px;transition:width .25s linear}
 #np-times{display:flex;justify-content:space-between;color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums}
@@ -184,8 +197,8 @@ h2.pagetitle{font-size:25px;margin-bottom:4px;font-weight:800}
 #live-top .qitem .grip{color:#8298c2}
 #live-top .qitem.pend{background:rgba(255,171,46,.12);border-color:rgba(255,171,46,.4)}
 #live-top .qitem.drag-over{border-color:#4fd0ff;background:rgba(79,208,255,.12)}
-#live-top .qres{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:rgba(120,160,255,.08);margin-bottom:5px}
-#live-top .qres-t{flex:1;font-size:13.5px;color:#eaf1ff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#live-top .qres{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border-radius:10px;background:rgba(120,160,255,.08);margin-bottom:5px}
+#live-top .qres-t{flex:1;min-width:0;font-size:13.5px;color:#eaf1ff;white-space:normal;overflow-wrap:anywhere;line-height:1.45;padding-top:3px}
 #live-top .qres small{color:#9db2dc!important}
 #live-top .btn.small{background:rgba(120,160,255,.16);border:1px solid rgba(140,175,255,.24);color:#dbe7ff}
 #live-top .btn.small:hover{background:rgba(120,160,255,.28)}
@@ -198,7 +211,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .qitem.drag-over{border-color:var(--accent);background:var(--hover)}
 .qitem.dragging{opacity:.4}
 .qitem .grip{color:#9aa6bc;cursor:grab;font-size:13px}
-.qitem .t{flex:1;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qitem .t{flex:1;min-width:0;font-size:14px;white-space:normal;overflow-wrap:anywhere;line-height:1.45}
 .qitem .d{color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums}
 .qitem.pend{border-color:rgba(255,171,46,.4);background:rgba(255,171,46,.07)}
 .qitem .rm{color:var(--muted);opacity:0;transition:.12s}
@@ -281,9 +294,9 @@ tr:hover td{background:var(--hover)}
 #search-input{width:100%;font-size:18px;padding:18px 20px;border:none;border-bottom:1px solid var(--line);border-radius:0;background:transparent}
 #search-input:focus{box-shadow:none}
 #search-results{max-height:56vh;overflow-y:auto;padding:8px}
-.sres{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;cursor:default}
+.sres{display:flex;align-items:flex-start;gap:10px;padding:11px 12px;border-radius:10px;cursor:default}
 .sres:hover,.sres.sel{background:var(--hover)}
-.sres .t{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sres .t{flex:1;min-width:0;white-space:normal;overflow-wrap:anywhere;line-height:1.45}
 .sres .acts{display:flex;gap:4px}
 .sres small{color:var(--muted)}
 
@@ -377,11 +390,23 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
   </div>
   <main id="main">
 <style>
-#dropoverlay{position:fixed;inset:0;background:rgba(6,10,18,.94);backdrop-filter:blur(3px);z-index:80;display:none;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:16px;padding:36px}
-#dropoverlay.show{display:grid}
-#dropoverlay .dz{border:3px dashed #cbd5e6;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--muted);transition:.15s;gap:8px;text-align:center;background:var(--panel)}
-#dropoverlay .dz small{font-size:12.5px;font-weight:400;line-height:1.5}
-#dropoverlay .dz.over{border-color:var(--accent);color:var(--accent);background:var(--hover);transform:scale(1.02);box-shadow:0 0 40px rgba(61,139,255,.25)}
+/* 🎯 שכבת-הגרירה — הקוביות היו מתוחות על כל המסך (grid-rows:1fr 1fr),
+   ולכן נראו כארבעה לוחות ענקיים עם טקסט זעיר באמצע. עכשיו: רשת
+   ממורכזת ברוחב סביר, כרטיסים בגובה קבוע, וכותרת שמסבירה מה קורה. */
+#dropoverlay{position:fixed;inset:0;background:rgba(6,10,18,.90);backdrop-filter:blur(6px);z-index:80;
+  display:none;align-items:center;justify-content:center;padding:28px}
+#dropoverlay.show{display:flex}
+#dropgrid{display:grid;grid-template-columns:repeat(3,minmax(190px,250px));gap:14px;
+  width:100%;max-width:800px}
+#drophead{position:absolute;top:34px;inset-inline:0;text-align:center;color:#e9eefb;
+  font-size:17px;font-weight:700;letter-spacing:.2px;pointer-events:none}
+#drophead small{display:block;font-size:13px;font-weight:400;color:#9db2dc;margin-top:4px}
+#dropoverlay .dz{border:2px dashed #cbd5e6;border-radius:16px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--muted);
+  transition:.14s;gap:6px;text-align:center;background:var(--panel);min-height:118px;padding:14px 10px;cursor:copy}
+#dropoverlay .dz small{font-size:11.5px;font-weight:400;line-height:1.45;color:var(--muted)}
+#dropoverlay .dz.over{border-style:solid;border-color:var(--accent);color:var(--accent);
+  background:var(--hover);transform:translateY(-2px) scale(1.03);box-shadow:0 10px 34px rgba(61,139,255,.30)}
 .misswarn{color:var(--orange);font-size:12px}
 .bigstep{display:flex;gap:14px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:10px;font-size:14.5px;box-shadow:var(--shadow);flex-wrap:wrap}
 .bigstep .n{width:34px;height:34px;min-width:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--onfill);font-size:16px}
@@ -417,7 +442,7 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
 .cp-row input[type=time]{padding:5px 8px;font-size:13px}
 .dayrow{display:flex;gap:4px;flex-wrap:wrap}
 .sigrow{background:rgba(255,122,140,.07);border:1px dashed rgba(255,122,140,.35);border-radius:9px;padding:7px 9px}
-.signame{flex:1;min-width:90px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;unicode-bidi:plaintext;text-align:start;color:var(--muted);font-size:12.5px}
+.signame{flex:1;min-width:90px;max-width:340px;white-space:normal;overflow-wrap:anywhere;unicode-bidi:plaintext;text-align:start;color:var(--muted);font-size:12.5px;line-height:1.4}
 .signame.has{color:var(--news,#ff7a8c);font-weight:700}
 .sigclr{padding:4px 8px;color:var(--orange)}
 .dchip{width:34px;padding:6px 0;text-align:center;border-radius:8px;border:1.5px solid var(--line);cursor:pointer;font-weight:700;font-size:12.5px;background:var(--bg2);color:var(--muted);transition:.12s;user-select:none}
@@ -477,7 +502,7 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
 .playedrow{display:flex;align-items:center;gap:10px;padding:9px 6px;border-bottom:1px solid rgba(120,140,170,.16);font-size:14px}
 .playedrow:last-child{border-bottom:none}
 .playedrow .pt{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums;min-width:96px}
-.playedrow .pn{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.playedrow .pn{flex:1;min-width:0;white-space:normal;overflow-wrap:anywhere;line-height:1.45}
 .playedrow .iconbtn{opacity:.75}.playedrow .iconbtn:hover{opacity:1}
 .ag-card{border:1.5px solid var(--line)}
 .agbox{background:var(--bg2);border:1px solid var(--line);border-radius:11px;padding:12px;margin-top:10px}
@@ -544,6 +569,17 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
           <div id="q-results"></div>
           <div id="queue-list"><div class="empty">התור יתמלא אוטומטית כשהשידור יתחיל</div></div>
         </div>
+        </div>
+        <div class="card" id="played-card" style="margin-bottom:0">
+          <h3>🎵 שירים שכבר נוגנו
+            <span class="hint" style="font-weight:400;margin-inline-start:auto">🗑 מוחק את הקובץ מתיקיית המקור (לפח המיחזור)</span></h3>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px">
+            <input id="played-q" type="text" placeholder="🔍 סנן לפי שיר או אמן" spellcheck="false" autocomplete="off" style="flex:1;min-width:150px">
+            <button class="btn small" id="played-selall">☑ בחר הכל</button>
+            <button class="btn small danger" id="played-delsel">🗑 מחק את המסומנים</button>
+          </div>
+          <div id="played-main" style="max-height:300px;overflow-y:auto"><div class="empty">עדיין לא נוגנו שירים בשידור</div></div>
+          <div class="hint" id="played-sum" style="margin-top:8px"></div>
       </div>
       <div class="card" style="margin-top:16px">
         <h3>📢 הפרסומות הבאות <span class="hint" style="font-weight:400;margin-inline-start:auto">לפי לוח הזמנים של כל קובץ</span></h3>
@@ -570,6 +606,8 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
         <button class="btn" id="btn-add-songs">➕ הוסף שירים</button>
         <button class="btn" id="btn-rescan">🔄 רענן</button>
         <button class="btn" id="btn-open-music">📂 פתח את תיקיית המוזיקה</button>
+        <button class="btn" id="btn-tagfill" title="קורא את תגית ID3 שבתוך כל קובץ וממלא ממנה את שם האמן">🏷 השלם שמות אמנים מהקבצים</button>
+        <span class="hint" style="flex-basis:100%" id="tagfill-status"></span>
         <span class="hint" style="flex-basis:100%">💡 "חבר תיקייה" הוא הדרך המהירה: התיקייה נשארת איפה שהיא, מיד הופכת לפלייליסט, וכל קובץ שתוסיף אליה בעתיד ייקלט אוטומטית. גרירת קבצים לחלון עדיין עובדת (מעתיקה אל תיקיית "מדיה").</span>
         <span class="hint" style="flex-basis:100%" id="norm-status"></span>
       </div>
@@ -631,6 +669,22 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
             צאת שבת <input type="time" id="shb-end" style="width:118px">
           </span>
           <span class="hint" style="flex-basis:100%" id="shb-status">בין כניסת שבת לצאת שבת — רק פרסומות וחסויות לא מתנגנים. ג׳ינגלים, מוזיקה וחדשות ממשיכים כרגיל.</span>
+        </div>
+        <div class="card" id="adpause-card" style="display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+          <button class="btn" id="adp-btn" style="font-size:15px;font-weight:700;padding:10px 18px">⏸ הפסק פרסומות וחסויות</button>
+          <span style="display:flex;align-items:center;gap:6px;font-size:13px">למשך
+            <select id="adp-dur" style="min-width:150px">
+              <option value="0">עד ביטול ידני</option>
+              <option value="60">שעה</option>
+              <option value="180">3 שעות</option>
+              <option value="360">6 שעות</option>
+              <option value="eod">עד סוף היום</option>
+            </select></span>
+          <span style="flex:1"></span>
+          <label class="ck" style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;cursor:pointer"><input type="checkbox" id="yt-on" style="width:18px;height:18px"> 🍎 חגי ישראל — בלי פרסומות בחג</label>
+          <button class="btn small" id="yt-refresh" title="משיכת לוח-החגים מהרשת">↻ עדכן חגים</button>
+          <span class="hint" style="flex-basis:100%" id="adp-status">—</span>
+          <span class="hint" style="flex-basis:100%" id="yt-next"></span>
         </div>
         <div id="ads-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px">
           <div class="card"><h3>📢 פרסומות</h3><div id="ads-list"></div></div>
@@ -744,7 +798,17 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
           <label class="switch"><input type="checkbox" id="aid-rs-on"><span class="sl"></span></label>
           <span class="snhint" style="flex-basis:100%">תהליך נפרד (radio-detect.exe) שמאזין לסטרים בקוד מקומי — לא נרדם, לא מושפע מהדפדפן, ואם ייפול המוזיקה לא נעצרת. מוסיף זיהוי בלבד; לא חוסם כלום.</span>
           <div id="aid-rs-streams" style="flex-basis:100%"></div>
-          <textarea id="aid-rs-urls" rows="2" spellcheck="false" placeholder="סטרימים נוספים להאזנה מקבילה — כתובת בכל שורה, אפשר &quot;שם | כתובת&quot;" style="flex-basis:100%;direction:ltr;text-align:left;padding:7px 9px;font-size:12px;resize:vertical"></textarea>
+          <!-- 📡 שורת סטרים-הגיבוי — שדה ייעודי בממשק, לא טקסט חופשי -->
+          <div class="cp-row" style="flex-basis:100%;gap:8px;flex-wrap:wrap;align-items:center;background:rgba(61,180,255,.07);border:1px solid rgba(61,180,255,.25);border-radius:8px;padding:8px 10px;margin-top:2px">
+            <b style="font-size:12.5px;white-space:nowrap">📡 סטרים גיבוי</b>
+            <span id="aid-bk-pill" class="snpill off">כבוי</span>
+            <input id="aid-bk-name" type="text" placeholder="שם התחנה" spellcheck="false" autocomplete="off" style="width:120px;padding:7px 9px;font-size:12.5px">
+            <input id="aid-bk-url" type="text" placeholder="כתובת הסטרים של תחנת-הגיבוי" spellcheck="false" autocomplete="off" style="flex:1;min-width:200px;direction:ltr;text-align:left;padding:7px 9px;font-size:12.5px">
+            <label class="switch"><input type="checkbox" id="aid-bk-on"><span class="sl"></span></label>
+            <span class="snhint" id="aid-bk-status" style="flex-basis:100%">—</span>
+            <span class="snhint" style="flex-basis:100%">תחנה שנייה שמשדרת את <b>אותה מהדורה עם אותו פתיח</b>. הראשי תמיד קודם: כשיש מבזק בראשי — נכנסים ממנו. <b>רק כשאין מבזק בראשי</b> והפתיח נשמע בגיבוי — המבזק נכנס, ועולה לאוויר <b>מתחנת-הגיבוי עצמה</b>. גם היציאה נצמדת לתחנה שמשודרת.</span>
+          </div>
+          <textarea id="aid-rs-urls" rows="2" spellcheck="false" placeholder="סטרימים נוספים (מעבר לגיבוי) — כתובת בכל שורה, אפשר &quot;שם | כתובת&quot;" style="flex-basis:100%;direction:ltr;text-align:left;padding:7px 9px;font-size:12px;resize:vertical"></textarea>
           <span class="snhint" style="flex-basis:100%">📡 כל כתובת מקבלת חוט-האזנה משלה בתוך אותו תהליך. תחנות שונות משדרות את אותה מהדורה עם אותו פתיח — <b>די שאחת מהן תשמע בבירור כדי להיכנס</b>, וסטרים שנופל מתחבר מחדש לבד בלי לגעת באחרים. <b>היציאה</b> נשארת רק לסטרים הראשי, כדי שתחנה שמסיימת מוקדם לא תקטע מהדורה באמצע.</span>
         </div>
         <div class="cp-row" style="gap:8px;flex-wrap:wrap;align-items:center;border-top:1px dashed rgba(61,180,255,.3);padding-top:8px">
@@ -1043,11 +1107,15 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
 </div>
 
 <div id="dropoverlay">
+  <div id="drophead">לאן להכניס את הקובץ?<small>שחרר על אחת המשבצות · Esc לביטול</small></div>
+  <div id="dropgrid">
+  <div class="dz dz-now" data-t="__now">▶ השמע עכשיו<small>הקובץ ינוגן <b>מיד אחרי השיר הנוכחי</b><br>ויישמר גם בספריית המוזיקה</small></div>
   <div class="dz" data-t="song">🎵 מוזיקה<small>קבצים → לספרייה הכללית<br><b>תיקייה → פלייליסט חדש!</b></small></div>
   <div class="dz" data-t="ad">📢 פרסומות<small>ישודרו אוטומטית לפי הכלל שקבעת</small></div>
   <div class="dz" data-t="sponsor">🤝 תשדירי חסות<small>ישודרו בתחילת כל שעה</small></div>
   <div class="dz" data-t="jingle">🎛 ג'ינגלים<small>יופיעו בקיר הג'ינגלים</small></div>
   <div class="dz" data-t="news">📰 מבזקים<small>חדשות / מזג אוויר בשעות קבועות</small></div>
+  </div>
 </div>
 <div id="modal-back"><div id="modal"></div></div>
 <div id="search-back"><div id="search-box">
@@ -1164,6 +1232,8 @@ async function removeFile(p){try{await Neutralino.os.trashItem(p);}catch(e){try{
 const DEFAULT_STATE={
   settings:{stationName:'תחנת הרדיו שלי',fadeSec:2,djMix:true,duckPct:20,adEveryMin:30,adsPerBreak:3,adJingle:true,sponsorHour:true,songGapMin:60,artistGapMin:60,normalize:true,shuffle:true,adFadeSec:0,autoStart:true,winStartup:true,breakOrder:['jingle','ad','sponsor'],
     shabbat:{on:false,online:true,geonameid:4164138,city:'מיאמי · Miami, FL',startDay:5,startHm:'18:00',endDay:6,endHm:'20:00',cache:null},
+    yomtov:{on:true,cache:null},                      // 🍎 חגי ישראל — בלי פרסומות וחסויות בחג
+    adPause:{on:false,until:0,at:0,note:''},           // ⏸ הפסקה ידנית של פרסומות וחסויות
     newsAgent:{on:true,graceSec:90}},
   tracks:[], links:[], schedule:Object.fromEntries(Array.from({length:24},(_,h)=>[h,''])),
   colSched:{
@@ -1194,6 +1264,11 @@ function normalizeState(){
   for(const k in DEFAULT_STATE.settings)if(S.settings[k]===undefined)S.settings[k]=structuredClone(DEFAULT_STATE.settings[k]);
   // השלמת תת-שדות של מצב שבת עבור התקנות שדרוג (online/geonameid/city/cache)
   {const sh=S.settings.shabbat,d=DEFAULT_STATE.settings.shabbat;if(sh&&d)for(const k in d)if(sh[k]===undefined)sh[k]=structuredClone(d[k]);}
+  // 🍎/⏸ השלמת תת-שדות חדשים (VER 1050) עבור התקנות-שדרוג
+  for(const k of ['yomtov','adPause']){
+    if(!S.settings[k]||typeof S.settings[k]!=='object')S.settings[k]=structuredClone(DEFAULT_STATE.settings[k]);
+    else{const d=DEFAULT_STATE.settings[k];for(const f in d)if(S.settings[k][f]===undefined)S.settings[k][f]=structuredClone(d[f]);}
+  }
   // השלמת תת-שדות של אולפן-מרוחק ו-Google Drive עבור שדרוגים
   {const r=S.remoteStudio,d=DEFAULT_STATE.remoteStudio;if(r&&d)for(const k in d)if(r[k]===undefined)r[k]=structuredClone(d[k]);}
   {const g=S.gdrive,d=DEFAULT_STATE.gdrive;if(g&&d){for(const k in d)if(g[k]===undefined)g[k]=structuredClone(d[k]);if(!Array.isArray(g.items))g.items=[];}}
@@ -1266,36 +1341,158 @@ function normalizeState(){
     o.source='file'; // המסלול הישן כבוי — הזיהוי מתבצע רק בעמודה החדשה
   }
 }
+/* 💾 קובץ-הנתונים הוא כל התחנה: הספרייה, הלוח, ההגדרות. כתיבה רגילה מוחקת את
+   הקובץ ואז כותבת — ונפילה/כיבוי באמצע משאירה JSON קטוע. הטעינה הישנה תפסה
+   את שגיאת-הפענוח ו"תיקנה" אותה באיפוס-מפעל, כלומר מחקה הכל בשקט.
+   מעכשיו: גיבוי מתגלגל מהזיכרון (ידוע-תקין), ובטעינה מנסים לפי הסדר
+   ראשי → קובץ-ביניים (מגרסאות קודמות) → גיבוי, ורק אם כולם נכשלו נופלים
+   לברירות-המחדל — ואז אומרים את זה בקול במקום למחוק בשקט. */
+const DATA_TMP=DATA_FILE+'.tmp', DATA_BAK=DATA_FILE+'.bak';
+async function _tryRead(path){
+  try{
+    const raw=await FS().readFile(path);
+    if(!raw||raw.length<2)return null;
+    const o=JSON.parse(raw);
+    if(!o||typeof o!=='object'||Array.isArray(o))return null;
+    return o;
+  }catch(e){return null;}
+}
 async function loadState(){
-  try{S=JSON.parse(await FS().readFile(DATA_FILE));}catch(e){S=structuredClone(DEFAULT_STATE);}
+  let src='';
+  let o=await _tryRead(DATA_FILE);
+  if(o)src='רגיל';
+  if(!o){o=await _tryRead(DATA_TMP);if(o)src='קובץ-ביניים';}
+  if(!o){o=await _tryRead(DATA_BAK);if(o)src='גיבוי';}
+  if(o){
+    S=o;
+    if(src!=='רגיל'){
+      // 🛟 שוחזר ממקור-משנה — נודיע בקול, ונקבע את הקובץ הראשי מיד
+      setTimeout(()=>{try{logPlay('sys','🛟 קובץ-הנתונים הראשי היה פגום — שוחזר מ'+src,'');}catch(e){}},4000);
+      try{await FS().writeFile(DATA_FILE,JSON.stringify(S));}catch(e){}
+    }
+  }else{
+    S=structuredClone(DEFAULT_STATE);
+    setTimeout(()=>{try{logPlay('sys','⚠️ לא נמצא קובץ-נתונים תקין — התחלה מהגדרות ברירת-מחדל','');}catch(e){}},4000);
+  }
   // 📖 היומן נטען מהקובץ הנפרד; יומן ישן שנשאר בקובץ-הנתונים נקלט פעם אחת וממשיך בנפרד
   try{const lg=JSON.parse(await FS().readFile(LOG_FILE));if(Array.isArray(lg)&&lg.length)S.log=lg;}catch(e){}
   // 🔬 לוג-המפתח ממשיך מהקובץ — ההיסטוריה שורדת הפעלה-מחדש
   try{const dv=JSON.parse(await FS().readFile(DEVLOG_FILE));
     if(Array.isArray(dv)&&dv.length){DEV.buf=dv.slice(-DEV.cap);DEV.seq=DEV.buf.reduce((a,e)=>Math.max(a,e.n||0),0);}}catch(e){}
   normalizeState();
-  dlog('sys','▶ התוכנה עלתה',{tracks:S.tracks?S.tracks.length:0,journal:S.log?S.log.length:0});
+  dlog('sys','▶ התוכנה עלתה',{ver:(typeof APP_VER!=='undefined'?APP_VER:'?'),
+    build:(typeof APP_BUILD!=='undefined'?APP_BUILD:'?'),
+    tracks:S.tracks?S.tracks.length:0,journal:S.log?S.log.length:0});
 }
+/* 🔇 מונה חסימות-הניגון של הדפדפן. נגיעה אחת של המשתמש בחלון משחררת את
+   הנעילה לכל חיי-הדף, ולכן די במאזין אחד שרץ פעם אחת. */
+const AUTOBLK={n:0,at:0,freed:false};
+try{
+  const _free=()=>{
+    if(AUTOBLK.freed)return;AUTOBLK.freed=true;
+    try{const c=(typeof ctx!=='undefined'&&ctx)?ctx:null;if(c&&c.state==='suspended')c.resume();}catch(e){}
+    if(AUTOBLK.n>0){
+      try{logPlay('sys','🔊 נעילת-הניגון שוחררה אחרי '+AUTOBLK.n+' כשלונות — השידור חוזר','');}catch(e){}
+      try{dlog('aid','🔊 נעילת-הניגון שוחררה',{failures:AUTOBLK.n});}catch(e){}
+      AUTOBLK.n=0;
+      try{if(typeof autoOn!=='undefined'&&autoOn)playNext('שחרור-נעילת-ניגון');}catch(e){}
+    }
+  };
+  ['pointerdown','keydown','click'].forEach(ev=>
+    document.addEventListener(ev,_free,{once:false,capture:true}));
+}catch(e){}
+
 let _saveT=null;
 /* 🚦 קריאות-קודם (הלקח מ-24.8, 20:46 ו-21:03): קובצי-היומנים גדלים למגה-בייטים,
    והכתיבות העצלות שלהם עוברות באותו צינור-קבצים שטוען את השירים. כתיבה גדולה
    שנדחפת בזמן שקריאת-שיר ממתינה — חוסמת אותה, והשיר נופל על מגבלת 8 השניות.
    לכן: כל כתיבה עצלה נדחית בעדינות כל עוד יש קריאה תלויה (force=רק בסגירה). */
+let _saveDefSince=0, _bakAt=0, _saveBusy=false, _saveAgain=false, _savePromise=null, _lastBody='';
+const SAVE_MAX_DEFER_MS=45000;   // ⏳ תקרה לדחייה: אחרי 45ש' כותבים גם אם הצינור עמוס
 function _writeState(force){
-  if(!force&&_fsPend>0){clearTimeout(_saveT);_saveT=setTimeout(()=>{_saveT=null;_writeState();},3000);return Promise.resolve();}
+  /* ⏳ הדחייה בגלל צינור-קבצים עמוס הייתה חסרת-תקרה: תחנה עמוסה יכולה לדחות
+     את השמירה שעות, וכל שינוי שבוצע בינתיים אובד בנפילה. עכשיו יש דד-ליין. */
+  if(!force&&_fsPend>0){
+    if(!_saveDefSince)_saveDefSince=Date.now();
+    if(Date.now()-_saveDefSince<SAVE_MAX_DEFER_MS){
+      clearTimeout(_saveT);_saveT=setTimeout(()=>{_saveT=null;_writeState();},3000);return Promise.resolve();
+    }
+    try{dlog('sys','⏳ שמירה נדחתה מעל '+Math.round((Date.now()-_saveDefSince)/1000)+'ש׳ — כותבים בכל זאת',{fsPend:_fsPend});}catch(e){}
+  }
+  _saveDefSince=0;
+  if(_saveBusy){
+    // סגירה (force) חייבת לכתוב את המצב האחרון — מחכים לשמירה שרצה וכותבים אחריה
+    if(force)return (_savePromise||Promise.resolve()).catch(()=>{}).then(()=>_writeState(true));
+    _saveAgain=true;return Promise.resolve();
+  }
+  _saveBusy=true;
+  /* 🔓 שחרור-בטיחות: writeFile שנתקע (כונן שנרדם, צינור-IPC חסום) היה מקבע את
+     הנעילה — ואז שום שמירה לא מתבצעת יותר, flushSave לא נפתר, והחלון אפילו
+     לא נסגר. אחרי 30ש' מוותרים על הכתיבה התלויה וממשיכים. */
+  let _rel=null;
+  const guard=new Promise(res=>{_rel=setTimeout(()=>{
+    try{dlog('error','⛔ כתיבת-המצב לא הסתיימה תוך 30ש׳ — הנעילה שוחררה',{fsPend:_fsPend});}catch(e){}
+    res();},30000);});
+  _savePromise=Promise.race([_writeStateNow().catch(e=>console.warn('save',e)),guard]).finally(()=>{
+    clearTimeout(_rel);
+    _saveBusy=false;
+    if(_saveAgain){_saveAgain=false;save();}
+  });
+  return _savePromise;
+}
+async function _writeStateNow(){
   // קובץ-הנתונים נכתב בלי היומן (חוסך מגה-בייטים בכל שמירה); היומן נכתב בנפרד ובעצלתיים
   const {log,...rest}=S;
-  return FS().writeFile(DATA_FILE,JSON.stringify(rest)).catch(e=>console.warn('save',e));
+  let body;
+  try{body=JSON.stringify(rest);}catch(e){dlog('error','⛔ המצב לא ניתן להמרה ל-JSON — השמירה בוטלה',{err:String(e&&e.message||e)});return;}
+  if(!body||body.length<20){dlog('error','⛔ מצב ריק חשוד — השמירה בוטלה',{len:body?body.length:0});return;}
+  /* 🔁 דילוג על כתיבה זהה. קובץ-הנתונים הוא 2.4 מגה-בייט, והוא עובר באותו
+     צינור-IPC יחיד שדרכו נטענים השירים — כל כתיבה מיותרת היא שיר שמתעכב.
+     חלק גדול מקריאות save() מגיעות מציור-מסך ומפעימות שלא שינו כלום. */
+  if(body===_lastBody)return;
+  /* 🗄 גיבוי מתגלגל כל 10 דקות, מהזיכרון ולא מהדיסק — כך הוא ידוע-תקין גם אם
+     הקובץ הראשי נקטע. יחד עם הטעינה הנסוגה (ראשי → ביניים → גיבוי), נפילה
+     באמצע כתיבה עולה לכל היותר עשר דקות של שינויים, לא את התחנה כולה.
+     לא עושים כתיבה-כפולה בכל שמירה בכוונה: המחיר על הצינור גבוה מהתועלת. */
+  if(Date.now()-_bakAt>600000&&_lastBody){
+    try{await FS().writeFile(DATA_BAK,_lastBody);_bakAt=Date.now();}catch(e){}
+  }
+  try{
+    await FS().writeFile(DATA_FILE,body);
+    _lastBody=body;
+  }catch(e){
+    dlog('error','⛔ כתיבת קובץ-הנתונים נכשלה — יינסה שוב',{err:String(e&&e.message||e)});
+    setTimeout(()=>{try{save();}catch(x){}},10000);
+  }
 }
 let _logT=null,_logDirty=false;
+let _logDefSince=0,_devDefSince=0;
 function _writeLog(force){
-  if(!force&&_fsPend>0){_logT=setTimeout(()=>{_logT=null;_writeLog();},3000);return;}
-  _logDirty=false;return FS().writeFile(LOG_FILE,JSON.stringify(S.log||[])).catch(e=>{});}
+  if(!force&&_fsPend>0){
+    if(!_logDefSince)_logDefSince=Date.now();
+    if(Date.now()-_logDefSince<SAVE_MAX_DEFER_MS){_logT=setTimeout(()=>{_logT=null;_writeLog();},3000);return;}
+  }
+  _logDefSince=0;
+  /* 🚩 הדגל מתנקה רק אחרי כתיבה שהצליחה. קודם הוא נוקה מראש, וכתיבה שנכשלה
+     השאירה את היומן "נקי" — כלומר השורות שנכתבו מאז אבדו בלי אזהרה. */
+  const snap=JSON.stringify(S.log||[]);
+  return FS().writeFile(LOG_FILE,snap).then(()=>{_logDirty=false;})
+    .catch(e=>{try{dlog('error','⛔ כתיבת יומן-האירועים נכשלה — יינסה שוב',{err:String(e&&e.message||e)});}catch(x){}
+               if(!_logT)_logT=setTimeout(()=>{_logT=null;_writeLog();},20000);});}
 function saveLog(){_logDirty=true;if(_logT)return;_logT=setTimeout(()=>{_logT=null;_writeLog();},15000);}
 function save(){clearTimeout(_saveT);_saveT=setTimeout(()=>{_saveT=null;_writeState();},2000);}
 // 💾 שמירה מיידית (מבטלת את ההשהיה) — נקראת לפני סגירת החלון כך שאף שינוי (כמו תזמון פרסומות) לא יאבד
-function flushSave(){if(_saveT){clearTimeout(_saveT);_saveT=null;}if(_logT||_logDirty){clearTimeout(_logT);_logT=null;_writeLog(true);}
-  if(DEV._t||DEV.dirty){clearTimeout(DEV._t);DEV._t=null;_writeDev(true);}return _writeState(true);}
+/* 🚪 שמירה מיידית לפני סגירה: היומנים נכתבים במקביל, אבל ההבטחה המוחזרת
+   ממתינה לכולם. קודם היא חיכתה רק לקובץ-הנתונים, והחלון נסגר באמצע כתיבת
+   היומן — כך אבדו שורות, ולפעמים נשאר קובץ-יומן קטוע. */
+function flushSave(){
+  const jobs=[];
+  if(_saveT){clearTimeout(_saveT);_saveT=null;}
+  if(_logT||_logDirty){clearTimeout(_logT);_logT=null;jobs.push(Promise.resolve(_writeLog(true)).catch(()=>{}));}
+  if(DEV._t||DEV.dirty){clearTimeout(DEV._t);DEV._t=null;jobs.push(Promise.resolve(_writeDev(true)).catch(()=>{}));}
+  jobs.push(Promise.resolve(_writeState(true)).catch(()=>{}));
+  return Promise.all(jobs);
+}
 
 /* ================= 🔬 לוג-מפתח: יומן טכני מעמיק ================= */
 /* עקרונות (הלקח מיומן-האירועים): קובץ נפרד, שמירה עצלה (10ש'), ציור רק כשהטאב
@@ -1317,8 +1514,14 @@ function dlog(cat,ev,data){
   }catch(x){}
 }
 function _writeDev(force){
-  if(!force&&_fsPend>0){DEV._t=setTimeout(()=>{DEV._t=null;_writeDev();},3000);return;}
-  DEV.dirty=false;return FS().writeFile(DEVLOG_FILE,JSON.stringify(DEV.buf)).catch(e=>{});}
+  if(!force&&_fsPend>0){
+    if(!_devDefSince)_devDefSince=Date.now();
+    if(Date.now()-_devDefSince<SAVE_MAX_DEFER_MS){DEV._t=setTimeout(()=>{DEV._t=null;_writeDev();},3000);return;}
+  }
+  _devDefSince=0;
+  const snap=JSON.stringify(DEV.buf);
+  return FS().writeFile(DEVLOG_FILE,snap).then(()=>{DEV.dirty=false;})
+    .catch(e=>{if(!DEV._t)DEV._t=setTimeout(()=>{DEV._t=null;_writeDev();},30000);});}
 function devSave(){DEV.dirty=true;if(DEV._t)return;DEV._t=setTimeout(()=>{DEV._t=null;_writeDev();},30000);}
 /* ⛔ כל שגיאת-קוד נלכדת אוטומטית עם מיקום ו-stack — גם כאלו שלא רואים בעין */
 window.addEventListener('error',e=>{
@@ -1394,24 +1597,37 @@ const plSongs=pl=>S.tracks.filter(t=>t.type==='song'&&!t.missing&&(pl===''||t.pl
 async function ensureDirs(){
   for(const p of [MEDIA_ROOT,...Object.values(DIR)]){try{await FS().createDirectory(p);}catch(e){}}
 }
+/* 🛡 סריקה שנכשלה חייבת להיראות אחרת מ"תיקייה ריקה". בלי ההבחנה הזו, כונן
+   שלא נענה לרגע גורם לסריקה להחזיר אפס קבצים, וכל הספרייה מסומנת חסרה
+   ובסריקה הבאה נמחקת. SCAN.err נדלק בכל קריאה שנכשלה ומקפיא את המחיקה. */
+const SCAN={err:0,lastErr:'',bad:[],busy:null};
 async function listAudio(dir,recursive){
   let entries=[];
-  try{entries=await FS().readDirectory(dir,{recursive:!!recursive});}catch(e){return {files:[],dirs:[]};}
+  try{entries=await FS().readDirectory(dir,{recursive:!!recursive});}
+  catch(e){SCAN.err++;SCAN.lastErr=String(e&&e.message||e).slice(0,160);
+           if(dir&&SCAN.bad.indexOf(dir)<0)SCAN.bad.push(dir);
+           return {files:[],dirs:[],failed:true};}
   return{files:entries.filter(e=>e.type==='FILE'&&AUDIO_RE.test(e.entry)),
          dirs:entries.filter(e=>e.type==='DIRECTORY')};
 }
-async function scanMedia(silent){
+/* 🔒 סריקה אחת בכל רגע. הסריקה נקראת משבעה מקומות (כפתור, עלייה, הורדה
+   מ-Drive, שחזור-גיבוי…); שתיים במקביל אפסו זו לזו את מוני-השגיאה, ואז
+   הסריקה הראשונה סימנה "חסר" לפי רשימה חלקית — בדיוק המחיקה שנמנעת כאן. */
+function scanMedia(silent){
+  if(SCAN.busy)return SCAN.busy;
+  SCAN.busy=_scanMediaRun(silent).finally(()=>{SCAN.busy=null;});
+  return SCAN.busy;
+}
+async function _scanMediaRun(silent){
   await ensureDirs();
+  SCAN.err=0;SCAN.lastErr='';SCAN.bad=[];
   let added=0;const seen=new Set();
   const register=(en,type,pl)=>{
     seen.add(en.path);
     let t=S.tracks.find(x=>x.file===en.path);
     if(!t){
-      const nm=en.entry.replace(/\.[^.]+$/,'');
-      let artist='',name=nm;
-      const parts=nm.split(' - ');
-      if(parts.length===2){artist=parts[0].trim();name=parts[1].trim();}
-      S.tracks.push({id:uid(),file:en.path,name,artist,type,pl:pl||'',duration:0,missing:false,addedAt:Date.now()});
+      const g=guessFromName(en.entry);
+      S.tracks.push({id:uid(),file:en.path,name:g.name,artist:g.artist,type,pl:pl||'',duration:0,missing:false,addedAt:Date.now()});
       added++;
     }else{t.missing=false;t.type=type;t.pl=pl||'';}
   };
@@ -1432,10 +1648,31 @@ async function scanMedia(silent){
     const r=await listAudio(lk.path,true);
     r.files.forEach(en=>register(en,lk.type,lk.type==='song'?lk.name:''));
   }
-  S.tracks=S.tracks.filter(t=>seen.has(t.file)||!t.missing);
-  S.tracks.forEach(t=>{if(!seen.has(t.file))t.missing=true;});
+  /* 🛡 שער-בטיחות לפני כל סימון-חסר או מחיקה. סריקה שחזרה ריקה בזמן שיש
+     ספרייה שלמה היא תקלת-דיסק, לא מחיקה של המשתמש — עוצרים לגמרי. */
+  if(seen.size===0&&S.tracks.length>0){
+    dlog('error','⛔ הסריקה חזרה ריקה — הספרייה לא נגעה',
+      {failedDirs:SCAN.err,lastErr:SCAN.lastErr,kept:S.tracks.length});
+    try{logPlay('sys','⛔ סריקת-מדיה חזרה ריקה — הספרייה נשמרה כמות שהיא ('+S.tracks.length+' קבצים)','');}catch(e){}
+    if(!silent)toast('⚠ הסריקה לא קראה אף תיקייה — הספרייה נשמרה כמות שהיא');
+    save();renderAll();
+    return added;
+  }
+  /* 🎯 כשרק *חלק* מהתיקיות נכשל, אין סיבה להקפיא הכל: מדלגים על סימון-חסר
+     לקבצים שיושבים מתחת לתיקייה שלא נקראה, וממשיכים כרגיל בכל השאר. כך
+     כונן מנותק לא מוחק ספרייה, אבל גם לא מקפיא את התחזוקה לנצח. */
+  const badRoots=SCAN.bad.slice();
+  const underBad=f=>{const x=String(f||'').replace(/\\/g,'/');
+    return badRoots.some(b=>x.indexOf(String(b||'').replace(/\\/g,'/'))===0);};
+  if(badRoots.length){
+    dlog('error','⚠ תיקיות שלא נקראו — קבציהן לא סומנו חסרים',{dirs:badRoots.slice(0,6),lastErr:SCAN.lastErr});
+    try{logPlay('sys','⚠️ '+badRoots.length+' תיקיות לא נקראו בסריקה — הקבצים שבהן נשמרו כמות שהם','');}catch(e){}
+  }
+  S.tracks=S.tracks.filter(t=>seen.has(t.file)||!t.missing||underBad(t.file));
+  S.tracks.forEach(t=>{if(!seen.has(t.file)&&!underBad(t.file))t.missing=true;});
   save();renderAll();
-  if(!silent)toast(added?`✅ נוספו ${added} קבצים`:'הכל מעודכן');
+  if(!silent)toast(badRoots.length?('⚠ נסרק חלקית — '+badRoots.length+' תיקיות לא נקראו')
+                                  :(added?`✅ נוספו ${added} קבצים`:'הכל מעודכן'));
   return added;
 }
 /* משך הקובץ נקרא בעצלתיים — רק כשמנגנים/מאזינים, כדי שחיבור ספרייה ענקית יהיה מיידי */
@@ -1493,12 +1730,19 @@ window.addEventListener('dragenter',e=>{
 window.addEventListener('dragleave',()=>{dragDepth--;if(dragDepth<=0){dragDepth=0;$('#dropoverlay').classList.remove('show');}});
 window.addEventListener('dragover',e=>e.preventDefault());
 window.addEventListener('drop',e=>{e.preventDefault();dragDepth=0;$('#dropoverlay').classList.remove('show');});
+// ⎋ מילוט — שכבה שנתקעה פתוחה (גרירה שיצאה מהחלון) לא תחסום את המסך
+window.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){dragDepth=0;const o=$('#dropoverlay');if(o)o.classList.remove('show');}});
 $$('#dropoverlay .dz').forEach(z=>{
   z.addEventListener('dragover',e=>{e.preventDefault();z.classList.add('over');});
   z.addEventListener('dragleave',()=>z.classList.remove('over'));
   z.addEventListener('drop',e=>{
     e.preventDefault();e.stopPropagation();
     z.classList.remove('over');dragDepth=0;$('#dropoverlay').classList.remove('show');
+    /* ▶ "השמע עכשיו" אינו ייבוא-לקטגוריה אלא כניסה לראש התור.
+       עד 1060 היו כאן שתי מערכות-גרירה נפרדות — השכבה הזו, ומסגרת
+       נוספת בעמוד הראשי — ושתיהן נדלקו יחד. עכשיו מסלול אחד. */
+    if(z.dataset.t==='__now'){dropFiles(e.dataTransfer&&e.dataTransfer.files);return;}
     importDropped(e.dataTransfer,z.dataset.t);
   });
 });
@@ -1562,6 +1806,7 @@ const bindClick=(id,fn)=>{const e=$('#'+id);if(e)e.onclick=fn;};
 bindClick('btn-link-music',()=>linkFolder('song'));
 bindClick('btn-add-songs',()=>pickAudioFiles('song',selPl||''));
 bindClick('btn-rescan',()=>scanMedia(false));
+bindClick('btn-tagfill',()=>tagFillStart());
 bindClick('btn-open-music',async()=>{await ensureDirs();try{await Neutralino.os.open(DIR.song);}catch(e){}});
 /* פרסומות/חסויות/ג'ינגלים/מבזקים הוסרו — אין כפתורים כאלה יותר */
 
@@ -1605,7 +1850,7 @@ function renderSearch(){
   const box=$('#search-results');
   box.innerHTML=rows.length?rows.map((t,i)=>`<div class="sres ${i===searchSel?'sel':''}" data-i="${i}">
     <span class="badge ${t.type}">${TYPE_EMOJI[t.type]}</span>
-    <span class="t">${esc(t.name)}${t.artist?` <small>— ${esc(t.artist)}</small>`:''}${t.pl?` <small>· ${esc(t.pl)}</small>`:''}</span>
+    <span class="t">${esc(t.name)}${artistOf(t)?` <small>— ${esc(artistOf(t))}</small>`:''}${t.pl?` <small>· ${esc(t.pl)}</small>`:''}</span>
     <span style="color:var(--muted);font-size:12.5px">${fmtD(t)}</span>
     <span class="acts">
       <button class="iconbtn" title="האזנה מוקדמת" data-act="prev" data-id="${t.id}">▶</button>
@@ -1660,7 +1905,7 @@ function renderMusic(){
   $('#songs-body').innerHTML=rows.map(t=>`<tr>
     <td><button class="iconbtn" onclick="previewTrack('${t.id}',this)">▶</button></td>
     <td>${esc(t.name)}${t.missing?' <span class="misswarn">⚠️</span>':''}${(!selPl&&t.pl)?` <small style="color:var(--muted)">· ${esc(t.pl)}</small>`:''}</td>
-    <td style="color:var(--muted)">${esc(t.artist)||'—'}</td>
+    <td style="color:var(--muted)">${esc(artistOf(t))||'—'}</td>
     <td style="font-variant-numeric:tabular-nums">${fmtD(t)}</td>
     <td style="white-space:nowrap"><button class="iconbtn" style="color:var(--accent)" onclick="queueNext('${t.id}')" title="שים הבא בתור — ישודר מיד אחרי הפריט הנוכחי">⏭</button><button class="iconbtn" onclick="deleteTrack('${t.id}')" title="מחיקה">🗑</button></td></tr>`).join('');
 }
@@ -2318,6 +2563,7 @@ function eqCurve(from,to,rising,n){n=n||64;const c=new Float32Array(n);
     c[i]=Math.max(1e-4,rising?from+(to-from)*sh:to+(from-to)*sh);}
   return c;}
 function mixIn(el,target,sec){ // כניסה שווה-הספק: 0 → target על צומת העוצמה
+  if(el){clearTimeout(el._stopT);el._stopT=null;try{clearInterval(el._fade);el._fade=null;}catch(e){}}   // 🛡 ביטול דעיכה/עצירה תלויה
   const g=nodeOf(el);if(!g||!ctx){try{el.volume=1;}catch(e){}return;}
   const t0=ctx.currentTime,s=Math.max(0.05,sec),c=eqCurve(0,Math.max(1e-4,target),true);
   gCancel(g.gain,t0);
@@ -2326,19 +2572,29 @@ function mixIn(el,target,sec){ // כניסה שווה-הספק: 0 → target ע�
 }
 function mixOut(el,sec,then){ // יציאה שווה-הספק: target → 0, ואז עצירה
   if(!el){if(then)then();return;}
+  clearTimeout(el._stopT);el._stopT=null;
+  try{clearInterval(el._fade);el._fade=null;}catch(e){}
   const g=nodeOf(el);
   if(g&&ctx&&sec>0){const t0=ctx.currentTime,s=Math.max(0.05,sec),start=Math.max(1e-4,g.gain.value||1e-4),c=eqCurve(start,0,false);
     gCancel(g.gain,t0);
     try{g.gain.setValueAtTime(start,t0);g.gain.setValueCurveAtTime(c,t0,s);g.gain.setValueAtTime(1e-4,t0+s);}catch(e){gSet(g.gain,1e-4,t0+s);}
-    setTimeout(then,s*1000+60);
+    /* ⏱ הטיימר הזה עוצר את האלמנט בסוף הדעיכה. אם בינתיים אותו אלמנט נלקח
+       לשיר הבא (playItem מחליף A/B לסירוגין — אחרי מעבר אחד, האלמנט הדועך
+       הוא בדיוק זה שייבחר בהמשך), העצירה תשתוק את השיר החדש. לכן המזהה
+       נשמר על האלמנט, ו-playItem/stopEl מבטלים אותו לפני שימוש חוזר. */
+    clearTimeout(el._stopT);
+    el._stopT=setTimeout(()=>{el._stopT=null;if(then)then();},s*1000+60);
   }else if(sec>0&&el.volume!==undefined){fadeEl(el,el.volume,0,sec,then);}
   else{if(then)then();}
 }
 
 let loading=false,_loadingSince=0;
+const PLAYGEN={n:0};   // 🎫 מונה דורות-ניגון — מונע מקריאה ישנה לדרוס חדשה
 async function playItem(item,depth=0){
   if(depth>12){loading=false;setIdleUI();
-    try{logPlay('sys','⚠️ 12 פריטים ברצף לא נטענו — כנראה הדיסק/הדרייב לא מגיב. ממשיכים לנסות אוטומטית','');}catch(e){}
+    // 🔇 כשהסיבה היא חסימת-ניגון, ההודעה על "הדיסק לא מגיב" מטעה ומציפה — נאמרת פעם בדקה
+    if(!(AUTOBLK.n>0&&Date.now()-(AUTOBLK.at||0)<60000))
+      try{logPlay('sys','⚠️ 12 פריטים ברצף לא נטענו — כנראה הדיסק/הדרייב לא מגיב. ממשיכים לנסות אוטומטית','');}catch(e){}
     return;}
   // 🩺 אבחון מעבר-מוקדם: הפריט הקודם עזב לפני 70% מאורכו — רושמים מי גרם למעבר
   try{
@@ -2349,17 +2605,31 @@ async function playItem(item,depth=0){
     }
   }catch(e){}
   loading=true;_loadingSince=Date.now();
+  /* 🎫 דור-ניגון: בין ה-await של קריאת-הקובץ לבין ה-await של play() יכולות לחלוף
+     שניות. אם בינתיים התחילה בקשת-ניגון חדשה (דילוג ידני, מבזק, סוף-שיר),
+     ההמשך של הקריאה הישנה היה דורס את החדשה — נגן שקופץ אחורה בלי סיבה.
+     כל קריאה מקבלת מספר; מי שלא הכי חדש, פורש בשקט ולא נוגע במצב. */
+  const _gen=++PLAYGEN.n;
   const isStream=!!item.stream;
   const t=isStream?null:trk(item.trackId);
+  /* 🎚 מעבר-שדרן נצרך פעם אחת בלבד: אם הפריט הזה ייפול, הערך לא יישאר תלוי
+     ויוחל בטעות על השיר הבא (נצפה כמעבר ארוך במקום חיתוך). */
+  const djEf=(typeof window._djEf==='number')?window._djEf:null;window._djEf=null;
   const url=isStream?item.stream:(t?await trackURL(item.trackId):null);
+  if(_gen!==PLAYGEN.n)return;                    // 🎫 קריאה חדשה עקפה אותנו
   if(!url){playNextInner(depth+1);return;}
   initGraph();if(ctx.state==='suspended')ctx.resume();
   const prev=active,el=isStream?STRM:((active===A)?B:A);
+  /* 🛡 ביטול כל דעיכה-ועצירה תלויה על האלמנט הזה. שני מסלולים: הטיימר של
+     גרף-האודיו (_stopT) והאינטרוול של fadeEl (_fade) — האחרון הוא המסלול של
+     הסטרים, כי nodeOf() לא מכיר את STRM. בלי שניהם, עצירה מהמעבר הקודם
+     משתיקה את המבזק החי שרק עכשיו עלה. */
+  clearTimeout(el._stopT);el._stopT=null;
+  try{clearInterval(el._fade);el._fade=null;}catch(e){}
   el.src=url;try{el.currentTime=0;}catch(e){}
   const fade=Math.max(0,+S.settings.fadeSec||0);
   const adFade=Math.max(0,+S.settings.adFadeSec||0);
   // סטרים חי — תמיד חיתוך נקי; פרסומות/חסויות/ג'ינגלים — מעבר משלהם (ברירת מחדל: חיתוך נקי)
-  const djEf=(typeof window._djEf==='number')?window._djEf:null;window._djEf=null;
   const ef=isStream?0:((item.kind==='song'&&(!current||current.kind==='song'))?(djEf!=null?djEf:fade):adFade);
   const doFade=ef>0&&prev&&!prev.paused&&prev.src;
   if(isStream){el.volume=Math.max(0,Math.min(1,baseVol));el.muted=false;}
@@ -2374,8 +2644,30 @@ async function playItem(item,depth=0){
     else await Promise.race([el.play(),new Promise((_,rej)=>setTimeout(()=>rej(new Error('play-timeout')),10000))]);
   }catch(e){console.warn(e);
     if(isStream){try{el.pause();el.removeAttribute('src');el.load();}catch(e2){}toast('⚠️ הסטרים של החדשות לא נטען — ממשיכים');}
-    else{try{logPlay('sys','⚠️ "'+((t&&t.name)||'הקובץ')+'" לא התחיל להתנגן ('+((e&&e.message)||e)+') — מדלגים לבא בתור','');}catch(e2){}}
+    else{
+      /* 🔇 חסימת-ניגון של המנוע (autoplay policy): כשהדפדפן חוסם את play() כי
+         לא הייתה נגיעה של משתמש, *כל* קובץ ייכשל — וההודעה נרשמה לכל אחד מהם.
+         נמדד 31.8: 2,511 שורות ב-30 דקות (עד 174 בדקה), שהציפו את היומן ואת
+         צינור-המערכת וגרמו לקריאות-קובץ של 9 שניות — לולאה שמזינה את עצמה.
+         מזהים את המקרה בשמו, רושמים פעם בדקה, ואומרים למשתמש מה לעשות. */
+      const _m=String((e&&e.message)||e||'');
+      const _blocked=/didn't interact|user gesture|NotAllowedError/i.test(_m);
+      if(_blocked){
+        AUTOBLK.n++;
+        if(Date.now()-(AUTOBLK.at||0)>60000){
+          AUTOBLK.at=Date.now();
+          try{logPlay('sys','🔇 הדפדפן חוסם ניגון אוטומטי — '+AUTOBLK.n+' קבצים נכשלו. '
+            +'לחץ פעם אחת בתוך חלון התוכנה כדי לשחרר את הנעילה; עד אז לא ישודר כלום','');}catch(e2){}
+          try{dlog('error','🔇 חסימת-ניגון אוטומטי',{failures:AUTOBLK.n,msg:_m.slice(0,120)});}catch(e2){}
+          try{toast('🔇 לחץ פעם אחת בחלון — הדפדפן חוסם ניגון אוטומטי');}catch(e2){}
+        }
+      }else{
+        try{logPlay('sys','⚠️ "'+((t&&t.name)||'הקובץ')+'" לא התחיל להתנגן ('+_m+') — מדלגים לבא בתור','');}catch(e2){}
+      }
+    }
+    if(_gen!==PLAYGEN.n)return;
     playNextInner(depth+1);return;}
+  if(_gen!==PLAYGEN.n){try{el.pause();}catch(e){}return;}   // 🎫 קריאה חדשה עקפה אותנו בזמן ה-play
   if(t&&t.cueIn&&t.cueIn>0.15&&t.cueIn<10&&el.currentTime<t.cueIn)el.currentTime=t.cueIn; // דילוג על שקט בפתיחה
   loading=false;
   if(doFade){
@@ -2395,7 +2687,7 @@ async function playItem(item,depth=0){
   renderNow();renderQueue();
   preloadNext();
 }
-function stopEl(el){try{el.pause();el.removeAttribute('src');el.load();el.volume=1;}catch(e){}}
+function stopEl(el){if(!el)return;clearTimeout(el._stopT);el._stopT=null;try{clearInterval(el._fade);el._fade=null;}catch(e){}try{el.pause();el.removeAttribute('src');el.load();el.volume=1;}catch(e){}}
 /* השיר הבא נבחר ונטען מראש — גם בזמן הפסקת פרסומות וגם במצב אקראי.
    כשהפריט האחרון בתור נגמר, המוזיקה נכנסת מיידית. */
 function preloadNext(){
@@ -2476,6 +2768,13 @@ function playNextInner(depth){
     if(cs){
       if(Date.now()-(window._diskSayAt||0)>60000){window._diskSayAt=Date.now();
         try{logPlay('sys','🆘 עוברים לנגן שירים מהזיכרון — עד שצינור-הקבצים ישתחרר','');}catch(e){}}
+      /* 📥 פריט שהוצא מהתור ולא נוגן חייב לחזור אליו. קודם הוא פשוט הוחלף —
+         כלומר פרסומת, תוכנית או מבזק שנשלפו בדיוק ברגע שהדיסק נתקע נמחקו
+         לתמיד, בלי שורה ביומן. עכשיו הם ממתינים לצינור שישתחרר. */
+      if(item.kind&&item.kind!=='song'){
+        pending.unshift(item);
+        try{dlog('play','📥 פריט הוחזר לתור עד שהדיסק ישתחרר',{src:item.src||null,kind:item.kind,pending:pending.length});}catch(e){}
+      }
       item=cs;
     }
   }
@@ -2541,10 +2840,35 @@ B.onended=()=>{if(active===B&&autoOn&&!loading)playNext('סוף-קובץ');else 
 STRM.onended=()=>{
   if(typeof AID!=='undefined'&&AID.mode==='onair'){aidExit('שמע החדשות הסתיים מצד השרת');return;}
   if(active===STRM&&autoOn)playNext('סוף-סטרים');else if(active===STRM)setIdleUI();};
+/* ⛔ הבאג החמור ביותר שנמצא עד כה — "המסך אומר גיבוי, האוזן שומעת ראשי":
+   כשמהדורה עולה מתחנת-הגיבוי, הנגן פותח חיבור *ישיר* וטרי אליה (בניגוד למסלול
+   הראשי, שרוכב על צינור-הסנכרון שכבר חם) — ולכן דווקא הוא רגיש לנפילה רגעית.
+   השחזור כאן היה כתוב קשיח על c.url, כלומר על *הראשי*: כל גמגום אחד החליף
+   בשקט את מקור-השידור מגלי צה"ל לגלגלצ. הממשק המשיך להציג את כתובת הגיבוי,
+   AID.airUrl המשיך להצביע עליה, ומנוע-הסגירה המשיך לחפש את ג'ינגל-הסיום
+   בסטרים שכבר לא היה באוויר — ולכן המהדורה גם לא ידעה לצאת ונחתכה על
+   6 הדקות. מבחינת המאזין: במקום מהדורת חדשות — מוזיקה, שש דקות.
+   מעכשיו: משחזרים אל הסטרים שבאמת באוויר, רושמים כל נפילה, ואם הוא לא חוזר
+   אחרי שני ניסיונות — יוצאים למוזיקה במודע במקום לשדר מקור שגוי בשקט. */
 STRM.onerror=()=>{
   if(typeof AID!=='undefined'&&AID.mode==='onair'){
+    const c0=aidCfg();
+    const mainU=String(c0.url||'').trim();
+    const want=String(AID.airUrl||'').trim()||mainU;
+    AID._srErr=(AID._srErr||0)+1;
+    try{dlog('error','⛔ שמע-החדשות נפל באוויר — משחזרים לאותו מקור',
+      {attempt:AID._srErr,airFrom:AID.airFrom||'main',onBackup:want!==mainU,
+       url:want.slice(0,90),code:STRM.error?STRM.error.code:null,
+       elapsedS:Math.round((Date.now()-AID.onAirAt)/1000)});}catch(e){}
+    if(AID._srErr>2){
+      try{aidSay('⛔ שמע-החדשות נפל '+AID._srErr+' פעמים ולא חזר — יוצאים למוזיקה במקום לשדר מקור שגוי');}catch(e){}
+      aidExit('שמע החדשות לא התאושש');return;
+    }
     setTimeout(()=>{if(AID.mode!=='onair')return;
-      try{STRM.src=(aidCfg().url||'').trim();STRM.load();STRM.play().catch(()=>{});}catch(e){}},1500);
+      try{STRM.src=want;STRM.load();STRM.play().catch(()=>{});
+        // הממשק חייב להמשיך לשקף את המציאות — לא את הכוונה
+        if(typeof current!=='undefined'&&current&&current.kind==='news'){current.stream=want;try{renderNow();}catch(e){}}
+      }catch(e){}},1500);
     setTimeout(()=>{if(AID.mode==='onair'&&(STRM.error||STRM.paused))aidExit('שמע החדשות לא התאושש');},6000);
     return;}
   if(active===STRM&&autoOn&&!loading){toast('⚠️ הסטרים התנתק — ממשיכים בשידור');playNext('סטרים-נפל');}};
@@ -2639,6 +2963,199 @@ function parseAPIC(u8){
   }
   return null;
 }
+/* 🏷 שמות אמן/שיר מתוך תגיות-הקובץ (VER 1060)
+   ────────────────────────────────────────────────────────────
+   עד עכשיו שם-האמן נגזר *רק* מפיצול שם-הקובץ על " - ", ורק כששני
+   חלקים בדיוק. לכן "אייל גולן - מלכת היופי - רמיקס" (שלושה חלקים)
+   או "מלכת היופי.mp3" (בלי מקף) נשארו בלי אמן בכלל — ובעמוד הראשי
+   פשוט לא הופיעה שורת-האמן. זו אינה בעיית תצוגה אלא בעיית קריאה:
+   שם-האמן יושב בתגית ID3 שבתוך הקובץ, ואיש לא קרא אותה.
+   כאן קוראים TPE1 (אמן) ו-TIT2 (שם השיר), ובגרסה 2.2 גם TP1/TT2. */
+function _id3Text(u8,p,end){
+  if(p>=end)return '';
+  const enc=u8[p];p++;
+  let b=u8.slice(p,end);
+  /* ✂ גזירת מסיימי-האפס — חייבת להיות מודעת-קידוד. גרסה ראשונה גזרה
+     בייט-בייט, וב-UTF-16 זה אכל את חצי התו האחרון: "Static" נגמר ב-'c'
+     שהוא 0x63,0x00, והאפס הזה *הוא חלק מהתו*. התוצאה הייתה "Stati?"
+     בכל שם לועזי בתגית UTF-16 — כלומר ברוב הקבצים.
+     לכן: ב-UTF-16 גוזרים זוגות ושומרים אורך זוגי; אחרת בייט-בייט. */
+  if(enc===1||enc===2){
+    let n=b.length;
+    if(n%2)n--;                                   // אורך אי-זוגי = תגית פגומה
+    while(n>=2&&b[n-1]===0&&b[n-2]===0)n-=2;
+    b=b.slice(0,n);
+  }else{
+    let n=b.length;while(n>0&&b[n-1]===0)n--;b=b.slice(0,n);
+  }
+  if(!b.length)return '';
+  try{
+    if(enc===1){                                  // UTF-16 עם BOM
+      if(b.length>=2&&b[0]===0xFF&&b[1]===0xFE)return new TextDecoder('utf-16le').decode(b.slice(2));
+      if(b.length>=2&&b[0]===0xFE&&b[1]===0xFF)return new TextDecoder('utf-16be').decode(b.slice(2));
+      return new TextDecoder('utf-16le').decode(b);
+    }
+    if(enc===2)return new TextDecoder('utf-16be').decode(b);
+    if(enc===3)return new TextDecoder('utf-8').decode(b);
+    /* enc===0 → ISO-8859-1 לפי התקן. אבל בפועל הרבה קבצים עבריים
+       כותבים שם UTF-8 בלי להצהיר, ואחרים כותבים windows-1255.
+       לכן: קודם UTF-8 קפדני, ורק אם הוא נכשל — 1255. בלי זה שמות
+       בעברית יוצאים ג'יבריש. */
+    try{return new TextDecoder('utf-8',{fatal:true}).decode(b);}catch(e){}
+    try{return new TextDecoder('windows-1255').decode(b);}catch(e){}
+    let out='';for(const c of b)out+=String.fromCharCode(c);return out;
+  }catch(e){
+    let out='';for(const c of b)out+=String.fromCharCode(c);return out;
+  }
+}
+function parseTags(u8){
+  const out={artist:'',title:'',album:''};
+  if(!u8||u8.length<10||u8[0]!==0x49||u8[1]!==0x44||u8[2]!==0x33)return out;   // "ID3"
+  const ver=u8[3];
+  const tagSize=((u8[6]&0x7f)<<21)|((u8[7]&0x7f)<<14)|((u8[8]&0x7f)<<7)|(u8[9]&0x7f);
+  let i=10;const end=Math.min(u8.length,10+tagSize);
+  const put=(id,fstart,size)=>{
+    const lim=Math.min(end,fstart+size);
+    if(id==='TPE1'||id==='TP1'){if(!out.artist)out.artist=_id3Text(u8,fstart,lim);}
+    else if(id==='TIT2'||id==='TT2'){if(!out.title)out.title=_id3Text(u8,fstart,lim);}
+    else if(id==='TALB'||id==='TAL'){if(!out.album)out.album=_id3Text(u8,fstart,lim);}
+  };
+  if(ver===2){
+    while(i+6<=end){
+      const id=String.fromCharCode(u8[i],u8[i+1],u8[i+2]),size=(u8[i+3]<<16)|(u8[i+4]<<8)|u8[i+5];
+      if(size<=0||u8[i]===0)break;
+      put(id,i+6,size); i=i+6+size;
+    }
+  }else{
+    while(i+10<=end){
+      const id=String.fromCharCode(u8[i],u8[i+1],u8[i+2],u8[i+3]);let size;
+      if(ver===4)size=((u8[i+4]&0x7f)<<21)|((u8[i+5]&0x7f)<<14)|((u8[i+6]&0x7f)<<7)|(u8[i+7]&0x7f);
+      else size=(u8[i+4]<<24)|(u8[i+5]<<16)|(u8[i+6]<<8)|u8[i+7];
+      if(size<=0||u8[i]===0)break;
+      put(id,i+10,size); i=i+10+size;
+    }
+  }
+  const clean=v=>String(v||'').split('\u0000').join('').trim();
+  out.artist=clean(out.artist);out.title=clean(out.title);out.album=clean(out.album);
+  return out;
+}
+/* 🏷 פירוק שם-קובץ — נפילה-לאחור כשאין תגית. תומך במה שהקודם לא:
+   יותר משני חלקים, מספר-רצועה בהתחלה, קו-תחתון, ומקפים ארוכים. */
+function guessFromName(fileName){
+  let nm=String(fileName||'').replace(/\.[^.]+$/,'').replace(/_/g,' ').trim();
+  nm=nm.replace(/^\s*\d{1,3}\s*[-.)\]]\s*/,'');          // "01. " · "07 - " · "3) "
+  const sep=nm.split(/\s+[-–—]\s+/);
+  if(sep.length>=2){
+    const artist=sep[0].trim();
+    const name=sep.slice(1).join(' - ').trim();          // "אמן - שיר - רמיקס" → השיר נשאר שלם
+    if(artist&&name)return {artist,name};
+  }
+  return {artist:'',name:nm};
+}
+/* 🏷 תגיות לפי נתיב, עם מטמון. הקריאה היא *רק הכותרת* של הקובץ —
+   256KB במקום קובץ שלם של מגה-בייטים. עם 6,600 שירים זה ההבדל בין
+   השלמה שרצה ברקע לבין חניקה של צינור-הקבצים ושל השידור עצמו. */
+const _tagCache=new Map();
+async function trackTags(path){
+  if(!path)return null;
+  const c=_tagCache.get(path);
+  if(c!==undefined)return c==='pending'?null:c;
+  if(_fsPend>=2||Date.now()<_diskBadUntil)return null;   // אותה בלימה כמו עטיפת-האלבום
+  _tagCache.set(path,'pending');
+  try{
+    let rd;
+    try{rd=FS().readBinaryFile(path,{pos:0,size:262144});}   // קריאת-כותרת בלבד
+    catch(e){rd=FS().readBinaryFile(path);}                  // גרסה ישנה — קובץ שלם
+    _fsPend++;
+    rd.then(()=>{_fsPend=Math.max(0,_fsPend-1);},()=>{_fsPend=Math.max(0,_fsPend-1);});
+    const ab=await Promise.race([rd,new Promise(r=>setTimeout(()=>r('timeout'),6000))]);
+    if(ab==='timeout'){_tagCache.set(path,null);return null;}
+    const u8=(ab instanceof Uint8Array)?ab:new Uint8Array(ab);
+    const tg=parseTags(u8);
+    _tagCache.set(path,tg);
+    return tg;
+  }catch(e){_tagCache.set(path,null);return null;}
+}
+/* 🏷 שם-אמן להצגה: השדה השמור → מה שכבר במטמון → ריק.
+   לעולם לא קריאת-דיסק מתוך לולאת-ציור. */
+function artistOf(t){
+  if(!t)return '';
+  if(String(t.artist||'').trim())return t.artist;
+  const c=_tagCache.get(t.file);
+  if(c&&c!=='pending'&&c.artist)return c.artist;
+  return '';
+}
+/* 🏷 קריאה עצלה לשורות שעל המסך: כשמוצגת רשימה ובה שירים בלי אמן,
+   נקראות התגיות של *אותן שורות בלבד* וברגע שהן חוזרות הרשימה מצוירת
+   מחדש. כך שם-האמן מופיע תוך שנייה בחיפוש, בתור ובספרייה, בלי לחכות
+   לסריקה הגדולה. חסום ל-12 קבצים בבת-אחת כדי לא להעמיס. */
+let _lazyBusy=false;
+function tagsForRows(tracks,redraw){
+  if(_lazyBusy)return;
+  const need=(tracks||[]).filter(t=>t&&t.file&&!String(t.artist||'').trim()
+                                   &&_tagCache.get(t.file)===undefined).slice(0,12);
+  if(!need.length)return;
+  _lazyBusy=true;
+  (async()=>{
+    let got=0;
+    for(const t of need){
+      if(_fsPend>=2||Date.now()<_diskBadUntil)break;
+      const tg=await trackTags(t.file);
+      if(tg&&tg.artist){t.artist=tg.artist;
+        if(tg.title&&tg.title.length>1)t.name=tg.title;
+        got++;}
+      else{const g=guessFromName(t.file.split(/[\\/]/).pop());
+        if(g.artist){t.artist=g.artist;t.name=g.name;got++;}}
+    }
+    _lazyBusy=false;
+    if(got){save();try{if(typeof redraw==='function')redraw();}catch(e){}}
+  })();
+}
+/* 🏷 השלמה רטרואקטיבית לכל השירים שאין להם אמן. מוגבלת בקצב
+   ומכבדת את מד-הצינור — אף פעם לא על חשבון השידור. */
+let _tagFill={run:false,done:0,found:0,total:0,stop:false};
+async function tagFillStart(){
+  if(_tagFill.run){_tagFill.stop=true;return;}
+  const todo=S.tracks.filter(t=>t.type==='song'&&!t.missing&&!String(t.artist||'').trim());
+  _tagFill={run:true,done:0,found:0,total:todo.length,stop:false};
+  tagFillRender();
+  if(!todo.length){_tagFill.run=false;tagFillRender();toast('לכל השירים כבר יש שם אמן');return;}
+  try{toast('🏷 קורא שמות אמנים מתוך '+todo.length+' קבצים — השמות יופיעו תוך כדי');}catch(e){}
+  for(const t of todo){
+    if(_tagFill.stop)break;
+    while(!_tagFill.stop&&(_fsPend>=2||Date.now()<_diskBadUntil))await new Promise(r=>setTimeout(r,800));
+    if(_tagFill.stop)break;
+    const tg=await trackTags(t.file);
+    if(tg&&tg.artist){t.artist=tg.artist;_tagFill.found++;
+      if(tg.title&&tg.title.length>1)t.name=tg.title;}
+    else{
+      const g=guessFromName(t.file.split(/[\\/]/).pop());
+      if(g.artist){t.artist=g.artist;t.name=g.name;_tagFill.found++;}
+    }
+    _tagFill.done++;
+    /* מצייר מחדש כל 15 קבצים — כך רואים את השמות מופיעים תוך כדי,
+       ולא רק בסוף סריקה של אלפי קבצים. */
+    if(_tagFill.done%15===0){save();tagFillRender();
+      try{renderQueue();renderNow();if(typeof renderQSearch==='function')renderQSearch();}catch(e){}}
+    await new Promise(r=>setTimeout(r,25));            // נושמים בין קבצים
+  }
+  save();_tagFill.run=false;tagFillRender();
+  try{renderMusic();renderNow();renderQueue();renderPlayed();}catch(e){}
+  toast('🏷 הושלמו ' + _tagFill.found + ' שמות אמנים מתוך ' + _tagFill.total);
+}
+function tagFillRender(){
+  const el=$('#tagfill-status');if(!el)return;
+  const b=$('#btn-tagfill');
+  if(_tagFill.run){
+    if(b)b.textContent='⏹ עצור השלמה';
+    el.textContent='🏷 קורא תגיות… '+_tagFill.done+' / '+_tagFill.total+' · נמצאו '+_tagFill.found+' שמות אמנים';
+  }else{
+    if(b)b.textContent='🏷 השלם שמות אמנים מהקבצים';
+    const miss=(S.tracks||[]).filter(t=>t.type==='song'&&!t.missing&&!String(t.artist||'').trim()).length;
+    el.textContent=miss?('ל-'+miss+' שירים אין שם אמן. הכפתור קורא את התגית שבתוך כל קובץ וממלא אותה.')
+                       :'לכל השירים יש שם אמן ✓';
+  }
+}
 // חיפוש תמונה מוטמעת: קודם ניתוח APIC תקין, ואם נכשל — סריקת בייטים אחר JPEG/PNG (עמיד לכל מבנה תגית)
 function findEmbeddedImage(u8){
   const a=parseAPIC(u8);
@@ -2660,9 +3177,23 @@ async function trackArt(path){
   if(!path)return '';
   const c=_artCache.get(path);
   if(c!==undefined)return c==='pending'?'':c;
+  /* 🚦 עטיפת-אלבום היא קישוט, השידור הוא לא. הקריאה כאן היא קובץ-שיר *שלם*
+     (מגה-בייטים) והיא עברה מחוץ למד-הצינור — כלומר בזמן שהנגן כבר נאבק,
+     הציור של "מה מתנגן" הוסיף עוד קריאה כבדה ודחף את השיר הבא אל מעבר
+     למגבלת 8 השניות. עכשיו היא נספרת, ובזמן עומס פשוט מדלגים. */
+  if(_fsPend>=2||Date.now()<_diskBadUntil)return '';
   _artCache.set(path,'pending');
   try{
-    const ab=await FS().readBinaryFile(path);            // קריאה מלאה — בדיוק כמו בהשמעה (עובד)
+    /* ⏱ בדיוק כמו קריאת-שיר: מירוץ מול פסק-זמן, והמונה משוחרר גם כשהקריאה
+       מסתיימת מאוחר או נכשלת. בלי זה, קריאה אחת שנתקעת על כונן-רשת הייתה
+       מקבעת את המונה לנצח — ואז גם השירים וגם היומנים נחסמים לתמיד. */
+    let done=false;
+    const rd=FS().readBinaryFile(path);
+    _fsPend++;
+    rd.then(()=>{done=true;_fsPend=Math.max(0,_fsPend-1);},
+            ()=>{done=true;_fsPend=Math.max(0,_fsPend-1);});
+    const ab=await Promise.race([rd,new Promise(res=>setTimeout(()=>res('⏱'),6000))]);
+    if(ab==='⏱'){_artCache.set(path,'');return '';}   // איטי מדי — בלי עטיפה, בלי לתקוע כלום
     const u8=(ab instanceof Uint8Array)?ab:new Uint8Array(ab);
     const a=findEmbeddedImage(u8);
     if(a&&a.data&&a.data.length>200){
@@ -2671,7 +3202,7 @@ async function trackArt(path){
       _artCache.set(path,url);return url;
     }
   }catch(e){}
-  _artCache.set(path,'');return '';
+  _artCache.set(path,'');return '';   // כשל/אין-עטיפה נזכר, אחרת הציור כל 5ש' היה קורא את הקובץ שוב ושוב
 }
 function npArtSet(emoji){const el=$('#np-art');if(el){el.style.backgroundImage='';el.textContent=emoji||'🎵';}}
 async function updateNpArt(path){
@@ -2863,11 +3394,14 @@ async function mtSend(np){
   // אחרת שיר קצר (ג'ינגל/פרסומת) היה מדלג על העדכון והשם בשרת היה נשאר תקוע.
   if(MT.busy){MT.next=np;return;}
   MT.busy=true;
+  /* 🔁 היציאה המוקדמת (כשהשליחה לשרת כבויה) שחררה את MT.busy אבל דילגה על
+     ניקוז MT.next — כך נשאר שם שיר ישן, ובשליחה הבאה השם *הקודם* נשלח לשרת
+     במקום הנוכחי. עכשיו השחרור והניקוז נמצאים ב-finally, מסלול אחד לכולם. */
   try{
     const artUrl=await mtArt(np.kind==='news'?'':np.file,np.title);
     MT.artUrl=artUrl;
     await mtWriteLocal(np,artUrl);
-    if(!mtOn()){MT.busy=false;return;}
+    if(!mtOn())return;
     const url=mtUrlFor(np.title,artUrl);
     const r=await mtHttp(url);
     // Shoutcast/Icecast מחזירים HTML קצר; כישלון-אימות מכיל בדרך כלל Invalid/401/403
@@ -2881,9 +3415,14 @@ async function mtSend(np){
     else if(MT.lastOk&&!MT._okOnce){MT._okOnce=true;
       mtSay('"מה מתנגן" מחובר לשרת ✅ — השם מתעדכן בכל החלפת שיר');}
   }catch(e){MT.lastOk=false;MT.lastMsg=String(e&&e.message||e);}
-  MT.busy=false;
-  const nx=MT.next;MT.next=null;
-  if(nx)await mtSend(nx);
+  finally{
+    MT.busy=false;
+    const nx=MT.next;MT.next=null;
+    /* ממתינים כאן ולא דרך setTimeout: בפער של תור-המשימות הייתה מספיקה
+       פעימת mtTick לראות busy=false, לשלוח שם חדש — ואז השם הישן היה נשלח
+       *אחריו* ומקפיא בשרת את השיר הקודם. */
+    if(nx)await mtSend(nx);
+  }
 }
 /* פעימה: מזהה החלפה, ומשהה לפי השהיית-האולפן לפני השליחה */
 function mtTick(){
@@ -2955,10 +3494,12 @@ function renderQSearch(){
   if(!q){box.innerHTML='';return;}
   const rows=S.tracks.filter(t=>t.type==='song'&&!t.missing&&(((t.name||'').toLowerCase().includes(q))||((t.artist||'').toLowerCase().includes(q)))).slice(0,14);
   box.innerHTML=rows.length?rows.map(t=>`<div class="qres">
-    <span class="qres-t">${esc(t.name)}${t.artist?` <small style="color:var(--muted)">· ${esc(t.artist)}</small>`:''}</span>
+    <span class="qres-t">${esc(t.name)}${artistOf(t)?`<br><small style="color:var(--muted)">${esc(artistOf(t))}</small>`:''}</span>
     <button class="btn small" onclick="qInsert('${t.id}',true)" title="שדר עכשיו — קוטע את השיר הנוכחי">▶ עכשיו</button>
     <button class="btn small" onclick="qInsert('${t.id}',false)" title="שים הבא בתור — ישודר אחרי השיר הנוכחי">⏭ הבא</button>
   </div>`).join(''):'<div class="empty" style="padding:8px">לא נמצאו שירים</div>';
+  // 🏷 לשורות שעל המסך ואין להן אמן — קוראים תגית ומציירים מחדש
+  tagsForRows(rows,renderQSearch);
 }
 function qInsert(id,now){
   const t=trk(id);if(!t||t.missing){toast('⚠️ הקובץ חסר');return;}
@@ -2984,7 +3525,19 @@ function renderNow(){
   }
   if(!t)return;
   $('#np-title').textContent=t.name;
-  $('#np-artist').textContent=t.artist||'';
+  /* 🏷 שם-האמן המלא. אם השדה ריק — נקראת התגית פעם אחת, נשמרת לתמיד,
+     ומכאן והלאה היא מופיעה מיד. הקריאה אסינכרונית ואינה מעכבת ציור. */
+  $('#np-artist').textContent=artistOf(t);
+  if(t.file&&!String(t.artist||'').trim()&&_tagCache.get(t.file)===undefined){
+    trackTags(t.file).then(tg=>{
+      if(!tg||!tg.artist)return;
+      t.artist=tg.artist;
+      if(tg.title&&tg.title.length>1)t.name=tg.title;
+      save();
+      if(current&&current.track&&current.track.file===t.file){
+        $('#np-title').textContent=t.name;$('#np-artist').textContent=t.artist;}
+    }).catch(()=>{});
+  }
   $('#np-badge').className='badge '+t.type;
   $('#np-badge').textContent=TYPE_EMOJI[t.type]+' '+TYPE_HE[t.type];
   $('#np-source').textContent=current.src||'';
@@ -3231,7 +3784,21 @@ function renderPrograms(){
       <button class="btn small" data-pgtest="${pr.id}" title="השמע עכשיו לבדיקה">▶</button>
       <button class="btn small danger" data-pgdel="${pr.id}" title="מחק">🗑</button></div>`;
   }).join('');
-  box.querySelectorAll('[data-pgtog]').forEach(el=>el.onchange=()=>{const pr=S.programs.find(x=>x.id===el.dataset.pgtog);if(pr){pr.enabled=el.checked;if(el.checked)delete pr.lastKey;save();renderPrograms();if(el.checked)toast('✔ התוכנית אושרה לשידור הבא');}});
+  box.querySelectorAll('[data-pgtog]').forEach(el=>el.onchange=()=>{const pr=S.programs.find(x=>x.id===el.dataset.pgtog);if(pr){pr.enabled=el.checked;
+      if(el.checked){
+        /* 🔑 האישור-מחדש מנקה את חסימת-היום (אחרת הוא לא תפס עד הפעלה-מחדש),
+           אבל *לא* מחזיר לחיים את החלון שכבר חלף: מי שמאשר ב-08:04 תוכנית של
+           08:00 מתכוון לשידור הבא, לא לשידור מיידי בשנייה שאחרי הלחיצה. */
+        const nowMin=new Date().getHours()*60+new Date().getMinutes();
+        const sm=/^\d\d:\d\d$/.test(pr.time||'')?(+pr.time.slice(0,2)*60+ +pr.time.slice(3,5)):-9999;
+        const inWin=(nowMin-sm)>=0&&(nowMin-sm)<=10;
+        if(inWin)pr.lastKey=new Date().toDateString()+'|'+pr.id+'|'+pr.time;
+        else delete pr.lastKey;
+        try{for(const k of [..._progFired])if(k.indexOf('|'+pr.id+'|')>0)_progFired.delete(k);}catch(e){}
+        el._inWin=inWin;
+      }
+      save();renderPrograms();
+      if(el.checked)toast(el._inWin?('✔ אושרה — תשודר במופע הבא (החלון של '+pr.time+' כבר חלף)'):'✔ התוכנית אושרה לשידור הבא');}});
   box.querySelectorAll('[data-pgdel]').forEach(el=>el.onclick=()=>{S.programs=S.programs.filter(x=>x.id!==el.dataset.pgdel);save();renderPrograms();toast('התוכנית הוסרה');});
   box.querySelectorAll('[data-pgtest]').forEach(el=>el.onclick=()=>firePgNow(el.dataset.pgtest));
 }
@@ -3248,24 +3815,34 @@ function firePrograms(now){
   const today=now.getDay(),dk=now.toDateString();
   const dateStr=now.getFullYear()+'-'+pad2(now.getMonth()+1)+'-'+pad2(now.getDate());
   const nowMin=now.getHours()*60+now.getMinutes();
+  // 🌙 תוכנית של 23:5x שנדחתה מעבר לחצות: היום כבר התחלף, ולכן גם המפתח וגם
+  //    בדיקת-הימים חייבים להתייחס לאתמול — אחרת היא פשוט לא תשודר לעולם.
+  const yd=new Date(now.getTime()-86400000);
+  const ydk=yd.toDateString(), ydDay=yd.getDay();
+  const ydStr=yd.getFullYear()+'-'+pad2(yd.getMonth()+1)+'-'+pad2(yd.getDate());
   for(const pr of (S.programs||[])){
     if(!pr.enabled||!pr.file||!/^\d\d:\d\d$/.test(pr.time||''))continue;
     // 🕐 חלון-השלמה: התוכנית נכנסת גם אם הדקה המדויקת "נבלעה" (חדשות באוויר,
     // שיר ארוך, עומס) — עד 10 דקות איחור. מפתח-הירי מונע כפילות.
     const schedMin=+pr.time.slice(0,2)*60+ +pr.time.slice(3,5);
-    const diff=nowMin-schedMin;
+    let diff=nowMin-schedMin, wrapped=false;
+    if(diff<0&&diff<-720){diff+=1440;wrapped=true;}     // התוכנית שייכת לאתמול
     if(diff<0||diff>10)continue;
-    if(pr.days&&pr.days.length&&pr.days.length<7&&!pr.days.includes(today))continue;
-    if(pr.date&&pr.date!==dateStr)continue;
-    const key=dk+'|'+pr.id+'|'+pr.time;
+    const useDay=wrapped?ydDay:today, useDk=wrapped?ydk:dk, useDate=wrapped?ydStr:dateStr;
+    if(pr.days&&pr.days.length&&pr.days.length<7&&!pr.days.includes(useDay))continue;
+    if(pr.date&&pr.date!==useDate)continue;
+    const key=useDk+'|'+pr.id+'|'+pr.time;
     if(_progFired.has(key))continue;
     if(pr.lastKey===key)continue;                       // 🛡 שורד-ריסטארט: כבר שודרה בזמן הזה היום
-    _progFired.add(key);
-    if(_progFired.size>500)_progFired=new Set([..._progFired].slice(-200));
     const tr=S.tracks.find(x=>x.file===pr.file&&!x.missing);
     if(!tr){logPlay('info','⚠️ תוכנית "'+(pr.name||'')+'" — הקובץ חסר','');continue;}
     if(pending.some(x=>x.kind==='program'&&x.trackId===tr.id))continue;   // כבר ממתינה בתור
     if(current&&current.track&&current.track.id===tr.id)continue;         // מתנגנת ממש עכשיו
+    /* 🔑 המפתח נשרף רק כאן — אחרי שכל השערים עברו. קודם הוא נשרף מיד אחרי
+       בדיקת-הכפילות, כך שתוכנית שקובצה היה חסר לרגע (כונן שהתעורר, סריקה
+       באמצע) איבדה את החלון שלה ולא שודרה גם כשהקובץ חזר תוך שניות. */
+    _progFired.add(key);
+    if(_progFired.size>500)_progFired=new Set([..._progFired].slice(-200));
     pending.unshift({trackId:tr.id,src:'🎬 תוכנית: '+(pr.name||tr.name),kind:'program'});
     pr.lastKey=key;
     pr.enabled=false;                                    // 🔒 חד-פעמית: שודרה → מושבתת עד אישור מחדש
@@ -3275,6 +3852,87 @@ function firePrograms(now){
   }
 }
 
+/* 🎯 גרירת קובץ שמע מבחוץ → השיר הבא (VER 1060)
+   ────────────────────────────────────────────────────────────
+   דפדפן אינו חושף את הנתיב האמיתי של קובץ שנגרר — File.path אינו
+   קיים כאן. לכן לא מנסים "להצביע" על הקובץ שבשולחן העבודה, אלא
+   קוראים את הבייטים שלו וכותבים עותק לתיקיית-המוזיקה. היתרון:
+   עובד תמיד, וגם אם הקובץ המקורי יימחק או יישלף הדיסק — השידור
+   לא נשבר באמצע. */
+const DROP_MAX=80*1024*1024;                       // 80MB — שיר סביר בכל פורמט
+function dropSafeName(n){
+  return String(n||'שיר').replace(/[\\/:*?"<>|]/g,'-').replace(/\s+/g,' ').trim().slice(0,120);
+}
+async function dropFreeName(dir,base,ext){
+  for(let i=0;i<50;i++){
+    const nm=base+(i?' ('+(i+1)+')':'')+ext;
+    try{const st=await FS().getStats(dir+'/'+nm);if(!st)return nm;}catch(e){return nm;}
+  }
+  return base+' '+Date.now()+ext;
+}
+/* משוב-גרירה: מוצג ב-toast, כי אחרי איחוד המערכות אין עוד אלמנט
+   קבוע בעמוד. `_dropMsg` נשמר כדי שהבדיקות יוכלו לקרוא את ההודעה. */
+let _dropMsg='';
+function dropUI(cls,txt,ico){
+  if(!txt)return;
+  _dropMsg=txt;
+  try{toast((ico&&txt.indexOf(ico)!==0?ico+' ':'')+txt);}catch(e){}
+}
+function dropReset(){_dropMsg='';}
+async function dropFiles(fileList){
+  const files=Array.from(fileList||[]).filter(f=>AUDIO_RE.test(f.name));
+  const rejected=Array.from(fileList||[]).length-files.length;
+  if(!files.length){
+    dropUI('','⚠️ לא קובץ שמע. נתמכים: MP3 · WAV · M4A · AAC · FLAC · OGG · WMA','⚠️');
+    setTimeout(dropReset,4000);return;
+  }
+  await ensureDirs();
+  let added=0,first=null;
+  for(let k=0;k<files.length;k++){
+    const f=files[k];
+    if(f.size>DROP_MAX){
+      dropUI('','⚠️ "'+f.name+'" גדול מדי ('+Math.round(f.size/1048576)+'MB) — דולג','⚠️');
+      await new Promise(r=>setTimeout(r,1500));continue;
+    }
+    dropUI('busy','⏳ מעתיק '+(k+1)+' מתוך '+files.length+': '+f.name,'⏳');
+    try{
+      const m=/\.[^.]+$/.exec(f.name);
+      const ext=m?m[0].toLowerCase():'.mp3';
+      const base=dropSafeName(f.name.replace(/\.[^.]+$/,''));
+      const nm=await dropFreeName(DIR.song,base,ext);
+      const dest=DIR.song+'/'+nm;
+      const buf=await f.arrayBuffer();
+      await FS().writeBinaryFile(dest,buf);
+      /* 🏷 שם-האמן — מהתגית שבתוך הקובץ, ורק אם אין ממנה — משם-הקובץ */
+      let artist='',name='';
+      try{const tg=parseTags(new Uint8Array(buf));
+        if(tg){artist=tg.artist||'';if(tg.title&&tg.title.length>1)name=tg.title;}}catch(e){}
+      if(!artist||!name){const g=guessFromName(nm);artist=artist||g.artist;name=name||g.name;}
+      const t={id:uid(),file:dest,name,artist,type:'song',pl:'',duration:0,missing:false,addedAt:Date.now(),dropped:true};
+      S.tracks.push(t);
+      _tagCache.delete(dest);
+      if(!first)first=t;
+      added++;
+    }catch(e){
+      dropUI('','⚠️ ההעתקה נכשלה: '+String(e&&e.message||e).slice(0,60),'⚠️');
+      await new Promise(r=>setTimeout(r,2500));
+    }
+  }
+  if(!added){dropReset();return;}
+  save();
+  /* ⏭ הראשון שנגרר קופץ לראש התור — הוא "השיר הבא". השאר נכנסים
+     אחריו לפי הסדר שנגררו. אם חדשות באוויר, התור ממתין כרגיל. */
+  const drops=S.tracks.filter(t=>t.dropped).slice(-added);
+  for(let i=drops.length-1;i>=0;i--)
+    pending.unshift({trackId:drops[i].id,src:'🎯 נגרר',kind:'song'});
+  plannedNext=null;
+  try{renderAll();}catch(e){}
+  dropUI('','✅ '+(added===1?('"'+(first.name||'')+'" ינוגן הבא בתור'):(added+' שירים נכנסו לראש התור')),'✅');
+  toast(added===1?'🎯 "'+(first.name||'')+'" הבא בתור':'🎯 '+added+' שירים נכנסו לראש התור');
+  try{logPlay('song','🎯 נגרר לשידור: '+(first.name||'')+(first.artist?' — '+first.artist:''),'גרירה');}catch(e){}
+  if(rejected)setTimeout(()=>dropUI('',rejected+' קבצים שאינם שמע דולגו','ℹ️'),1800);
+  setTimeout(dropReset,6000);
+}
 /* ================= 🎵 שירים שנוגנו + מחיקה מהתיקייה ================= */
 let _playedRows=[];
 function playedTimeStr(ts){
@@ -3316,11 +3974,112 @@ async function doDeleteFile(r){
   toast('🗑 "'+r.name+'" הועבר לפח המיחזור');
 }
 
+/* 🎵 רשימת השירים שנוגנו בעמוד הראשי — שירים בלבד (VER 1060)
+   הרשימה הקיימת בעמוד-הפרסומות כללה כל סוג: ג'ינגלים, פרסומות,
+   אותות. כאן מסננים ל-type==='song' בלבד, כי זה מה שמוחקים. */
+let _pmRows=[],_pmSel=new Set();
+function renderPlayedMain(){
+  const box=$('#played-main');if(!box)return;
+  const q=String(($('#played-q')||{}).value||'').toLowerCase().trim();
+  const hist=S.playHist||[],seen=new Set();_pmRows=[];
+  for(let i=hist.length-1;i>=0;i--){
+    const h=hist[i];if(!h||!h.file||seen.has(h.file))continue;seen.add(h.file);
+    const t=S.tracks.find(x=>x.file===h.file);
+    if(t&&t.type!=='song')continue;                       // רק שירים
+    const name=t?t.name:((h.file.split(/[\\/]/).pop())||h.file);
+    const artist=t?artistOf(t):(h.a||'');
+    if(q&&!(String(name).toLowerCase().includes(q)||String(artist).toLowerCase().includes(q)))continue;
+    _pmRows.push({file:h.file,name,artist,t:h.t,missing:!t||t.missing,id:t?t.id:null});
+    if(_pmRows.length>=200)break;
+  }
+  const sum=$('#played-sum');
+  if(!_pmRows.length){
+    box.innerHTML='<div class="empty">'+(q?'אין תוצאות לסינון':'עדיין לא נוגנו שירים בשידור')+'</div>';
+    if(sum)sum.textContent='';return;
+  }
+  box.innerHTML=_pmRows.map((r,i)=>'<div class="playedrow2">'
+    +'<input type="checkbox" data-pmc="'+i+'"'+(_pmSel.has(r.file)?' checked':'')+'>'
+    +'<span class="pt2">'+playedTimeStr(r.t)+'</span>'
+    +'<span class="pn2">'+esc(r.name)+(r.artist?' <small style="color:var(--muted)">— '+esc(r.artist)+'</small>':'')
+      +(r.missing?' <span class="misswarn">חסר</span>':'')+'</span>'
+    +'<button class="iconbtn" data-pmp="'+i+'" title="השמע">▶</button>'
+    +'<button class="iconbtn" data-pmd="'+i+'" title="מחק מתיקיית המקור" style="color:var(--red)">🗑</button></div>').join('');
+  box.querySelectorAll('[data-pmc]').forEach(cb=>cb.onchange=()=>{
+    const r=_pmRows[+cb.dataset.pmc];if(!r)return;
+    if(cb.checked)_pmSel.add(r.file);else _pmSel.delete(r.file);
+    renderPlayedSum();});
+  box.querySelectorAll('[data-pmp]').forEach(bn=>bn.onclick=()=>{
+    const r=_pmRows[+bn.dataset.pmp];
+    if(r&&r.id&&typeof previewTrack==='function')previewTrack(r.id,bn);else toast('הקובץ כבר לא זמין');});
+  box.querySelectorAll('[data-pmd]').forEach(bn=>bn.onclick=()=>{
+    const r=_pmRows[+bn.dataset.pmd];if(r)confirmDeleteFiles([r]);});
+  renderPlayedSum();
+}
+function renderPlayedSum(){
+  const sum=$('#played-sum');if(!sum)return;
+  sum.textContent=_pmSel.size?(_pmSel.size+' שירים מסומנים למחיקה')
+    :(_pmRows.length+' שירים ברשימה · המחיקה מעבירה לפח המיחזור של Windows, אפשר לשחזר');
+}
+/* 🗑 מחיקה — תמיד דרך אישור, ולעולם לא את מה שמתנגן עכשיו או שכבר בתור */
+function confirmDeleteFiles(rows){
+  rows=(rows||[]).filter(Boolean);
+  if(!rows.length){toast('לא נבחרו שירים');return;}
+  const nowFile=current&&current.track?current.track.file:null;
+  const inQueue=new Set(pending.map(it=>{const t=trk(it.trackId);return t?t.file:'';}).filter(Boolean));
+  const blocked=rows.filter(r=>r.file===nowFile);
+  const queued=rows.filter(r=>r.file!==nowFile&&inQueue.has(r.file));
+  const ok=rows.filter(r=>r.file!==nowFile&&!inQueue.has(r.file));
+  if(!ok.length){
+    toast(blocked.length?'⚠️ השיר מתנגן כרגע — דלג ואז מחק':'⚠️ השירים שנבחרו ממתינים בתור');return;}
+  const list=ok.slice(0,12).map(r=>'<div style="padding:2px 0">• '+esc(r.name)+(r.artist?' — '+esc(r.artist):'')+'</div>').join('')
+    +(ok.length>12?('<div style="padding:2px 0;color:var(--muted)">ועוד '+(ok.length-12)+'…</div>'):'');
+  let warn='';
+  if(blocked.length)warn+='<div style="color:var(--red);margin-top:8px">⚠️ '+blocked.length+' מתנגן כרגע — לא יימחק</div>';
+  if(queued.length)warn+='<div style="color:var(--red);margin-top:8px">⚠️ '+queued.length+' ממתין בתור — לא יימחק</div>';
+  showModal('<h3>🗑 מחיקה מתיקיית המקור</h3>'
+    +'<div class="hint" style="margin:10px 0 12px;font-size:14px;line-height:1.6">למחוק '
+    +(ok.length===1?'את השיר הזה':('את '+ok.length+' השירים האלה'))+' מתיקיית המקור?<br>'
+    +'הקבצים יועברו לפח המיחזור של Windows — אפשר לשחזר משם.</div>'
+    +'<div style="max-height:190px;overflow-y:auto;font-size:13px;border:1px solid var(--line);border-radius:8px;padding:8px;margin-bottom:10px">'+list+'</div>'
+    +warn
+    +'<div id="modal-actions"><button class="btn danger" id="pmd-yes">🗑 מחק '+ok.length+' קבצים</button>'
+    +'<button class="btn" onclick="closeModal()">ביטול</button></div>',
+    ()=>{const y=$('#pmd-yes');if(y)y.onclick=async()=>{closeModal();await doDeleteMany(ok);};});
+}
+async function doDeleteMany(rows){
+  let n=0,fail=0;
+  for(const r of rows){
+    try{await removeFile(r.file);n++;}catch(e){fail++;continue;}
+    S.tracks=S.tracks.filter(t=>t.file!==r.file);
+    S.playHist=(S.playHist||[]).filter(h=>h.file!==r.file);
+    pending=pending.filter(it=>{const tt=trk(it.trackId);return !tt||tt.file!==r.file;});
+    if(plannedNext&&trk(plannedNext.trackId)&&trk(plannedNext.trackId).file===r.file)plannedNext=null;
+    _pmSel.delete(r.file);_tagCache.delete(r.file);
+  }
+  save();
+  try{renderAll();}catch(e){}
+  try{logPlay('info','🗑 נמחקו '+n+' שירים מתיקיית המקור','מחיקה ידנית');}catch(e){}
+  toast(fail?('🗑 נמחקו '+n+' · '+fail+' נכשלו'):('🗑 '+n+' שירים הועברו לפח המיחזור'));
+}
+function playedMainWire(){
+  const q=$('#played-q');if(q&&!q._w){q._w=1;q.oninput=()=>renderPlayedMain();}
+  const a=$('#played-selall');
+  if(a&&!a._w){a._w=1;a.onclick=()=>{
+    const all=_pmRows.every(r=>_pmSel.has(r.file));
+    if(all)_pmRows.forEach(r=>_pmSel.delete(r.file));
+    else _pmRows.forEach(r=>_pmSel.add(r.file));
+    renderPlayedMain();};}
+  const d=$('#played-delsel');
+  if(d&&!d._w){d._w=1;d.onclick=()=>{
+    const rows=_pmRows.filter(r=>_pmSel.has(r.file));
+    confirmDeleteFiles(rows);};}
+}
+
 /* ================= אתחול ================= */
-function renderAll(){renderMusic();renderAdLists();renderHours();renderLog();renderQueue();renderLiveInfo();renderPrograms();renderPlayed();if(typeof spRenderAll==='function')spRenderAll();}
+function renderAll(){renderMusic();renderAdLists();renderHours();renderLog();renderQueue();renderLiveInfo();renderPrograms();renderPlayed();try{renderPlayedMain();playedMainWire();tagFillRender();}catch(e){}if(typeof spRenderAll==='function')spRenderAll();}
 /* 🏷 מספר-גרסה — עולה ב-1 בכל שדרוג, כדי לעקוב איזה עדכון רץ בפועל.
    מוצג מתחת לשם-התחנה בפינה, ונכתב גם לכותרת-החלון. */
-const APP_VER='VER 1026';
+const APP_VER='VER 1063', APP_BUILD='2026-09-17';
 async function init(){
   Neutralino.init();
   try{
@@ -3328,14 +4087,53 @@ async function init(){
     if(_v)_v.textContent='מערכת שידור מקצועית · '+APP_VER;
     document.title=APP_VER+' · אולפן רדיו — מערכת שידור מקצועית';
   }catch(e){}
+  /* 🔄 "שיניתי ואין שינוי": החבילה מוחלפת על הדיסק, אבל עד הפעלה-מחדש
+     ממשיכה לרוץ הגרסה הישנה — ומבחוץ זה נראה בדיוק כמו תיקון שלא עבד.
+     כאן משווים את זמן-הקובץ לזמן-העלייה, ואומרים את זה במפורש. */
+  try{
+    const _bootAt=Date.now();
+    const _chk=async()=>{
+      try{
+        const st=await FS().getStats(BASE+'/resources.neu');
+        const mt=st&&(st.modifiedAt||st.modifiedTime||st.mtime);
+        const ms=typeof mt==='number'?(mt<1e12?mt*1000:mt):Date.parse(mt||'');
+        if(!isFinite(ms)||!ms)return;
+        if(ms>_bootAt+15000&&!AID._updSaid){
+          AID._updSaid=true;
+          const mins=Math.round((Date.now()-ms)/60000);
+          try{logPlay('sys','🔄 חבילת-עדכון חדשה ממתינה על הדיסק ('+(mins<1?'ממש עכשיו':'לפני '+mins+' דק׳)')+' — הגרסה הרצה היא '+APP_VER+'. סגור ופתח את התוכנה כדי לטעון אותה','');}catch(e){}
+          try{dlog('sys','🔄 עדכון ממתין להפעלה-מחדש',{running:APP_VER,pkgAgeMin:mins});}catch(e){}
+          try{toast('🔄 יש עדכון שממתין — סגור ופתח את התוכנה');}catch(e){}
+          try{const el=document.getElementById('app-ver');
+            if(el){el.textContent='מערכת שידור מקצועית · '+APP_VER+' · 🔄 עדכון ממתין להפעלה-מחדש';
+                   el.style.color='#e0a34a';}}catch(e){}
+        }
+      }catch(e){}
+    };
+    setTimeout(_chk,20000);setInterval(_chk,600000);
+  }catch(e){}
   /* 🏷 הוכחה מתועדת: בכל הפעלה נרשמת הגרסה ביומן-השידור, עם תאריך ושעה.
      כך אין צורך "להאמין" ששדרוג נכנס — רואים אותו בשחור-על-לבן. נרשם רק
      אחרי טעינת-המצב, וברגע ש-logPlay כבר זמין. */
   try{setTimeout(()=>{try{if(typeof logPlay==='function')
-    logPlay('info','▶ התוכנה עלתה — '+APP_VER,'');}catch(e){}},1500);}catch(e){}
+    logPlay('info','▶ התוכנה עלתה — '+APP_VER+' (נבנתה '+APP_BUILD+')','');}catch(e){}},1500);}catch(e){}
   // 🧹 ניקוי-פתיחה: הורגים עותקים תלושים של המנוע המקומי מהרצות קודמות,
   //    לפני שהמשגיח (rsTick) מפעיל אחד טרי. כך לא מצטברים 7-8 עותקים.
+  /* 🧹 טאטוא-פתיחה מלא (VER 1051) — לפני שמופעל מנוע כלשהו.
+     rsKillStray מכסה רק את השמות של המנוע-הישן, ורק בתנאים מסוימים.
+     כאן, בבוט, אין לנו אף מנוע חי — ולכן הריגה של *כל* השמות בטוחה
+     לחלוטין, והיא מה שמנקה שאריות של הרצה שנקטעה: קריסה, כיבוי-פתאומי,
+     "סיים משימה" במנהל-המשימות, או כל מסלול שבו הקוד שלנו לא רץ.
+     סגירה מסודרת מטפלת במקרה הרגיל; זה מטפל בכל השאר. */
   try{rsKillStray();}catch(e){}
+  try{
+    const _sweep=['radio-start.exe','radio-end.exe','radio-listen.exe','radio-logo.exe',
+                  'radio-detect.exe','radiodetect.exe','radio_detect.exe','radiostart.exe','radioc.exe'];
+    setTimeout(()=>{try{
+      rsKillExec('cmd /c "'+_sweep.map(n=>'taskkill /F /IM '+n).join(' & ')+'"',12000)
+        .then(ok=>{try{dlog('sys','🧹 טאטוא-פתיחה של המנועים',{done:!!ok});}catch(e){}});
+    }catch(e){}},1200);
+  }catch(e){}
   // 🪟 פתיחה גדולה: ההגדרה maximize:true שבקונפיג אינה נאכפת אמין (החלון
   //    נפתח קטן או ממוזער לשורת-המשימות). קוראים למקסום מפורשות אחרי
   //    האתחול, ומבטלים מיזעור אם הגיע ממוזער. עטוף ב-try — בדפדפן אין חלון.
@@ -3346,8 +4144,60 @@ async function init(){
   }catch(e){}};
   try{Neutralino.events.on('ready',bigWin);}catch(e){}
   setTimeout(bigWin,150);            // גם אם אירוע-המוכנות כבר עבר
-  // 💾 מנקים את השמירה-הממתינה לפני היציאה — אחרת שינוי אחרון (תזמון פרסומות וכו') היה נאבד
-  try{Neutralino.events.on('windowClose',async()=>{try{await flushSave();}catch(e){}Neutralino.app.exit();});}catch(e){}
+  /* 🚪 סגירת התוכנה — אישור, שמירה, וסגירת כל המנועים (VER 1051)
+     ────────────────────────────────────────────────────────────
+     למה זה לא עבד עד עכשיו: בקונפיג היה exitProcessOnClose:true.
+     עם הדגל הזה Neutralino הורג את התהליך *מיד* בלחיצה על X —
+     מטפל-הסגירה מתחיל לרוץ ונקטע באמצע. לכן aidShutdownEngines()
+     שנוספה ב-1041 פשוט לא הספיקה לרוץ, והמנועים שרדו. שינינו
+     ל-false, וכעת התהליך ממתין לנו.
+
+     ⚠ המחיר: מרגע ש-exitProcessOnClose=false, *רק* הקוד הזה סוגר
+     את התוכנה. אם הוא ייתקע — התחנה תישאר פתוחה ולא תיסגר לעולם.
+     לכן שלוש רשתות-ביטחון, בסדר הזה:
+       1. כל שלב עטוף ב-try — כישלון בשמירה או בהריגה אינו עוצר.
+       2. שעון-חירום של 15ש' מרגע האישור: יוצא בכל מקרה.
+       3. יציאה נקראת ב-finally, לא בסוף הבלוק. */
+  let _closing=false;
+  async function appClose(){
+    if(_closing)return;                       // לחיצה כפולה על X
+    _closing=true;
+    let go=true;
+    try{
+      const box=Neutralino.os&&Neutralino.os.showMessageBox;
+      if(box){
+        const r=await Neutralino.os.showMessageBox(
+          'סגירת התוכנה',
+          'לסגור את תחנת הרדיו?\n\nהשידור ייפסק, מנועי-הזיהוי ייסגרו, וכל ההגדרות והתזמונים יישמרו.',
+          'YES_NO','QUESTION');
+        go=(String(r).toUpperCase()==='YES');
+      }
+    }catch(e){/* אין תיבת-הודעה — סוגרים בלי לשאול, לא נועלים את המשתמש בפנים */}
+    if(!go){
+      _closing=false;
+      // 🪟 מחזירים את החלון — ב-exitProcessOnClose:false הוא עלול כבר להיות מוסתר
+      try{if(Neutralino.window.show)await Neutralino.window.show();}catch(e){}
+      try{if(Neutralino.window.unminimize)await Neutralino.window.unminimize();}catch(e){}
+      try{await Neutralino.window.focus();}catch(e){}
+      return;
+    }
+    // ⏱ רשת-ביטחון עליונה: קורה מה שיקרה — התוכנה נסגרת תוך 15ש'
+    let bail=setTimeout(()=>{try{Neutralino.app.exit();}catch(e){}},15000);
+    try{
+      try{aidSay('🚪 סוגרים — שומרים הגדרות ומכבים את מנועי-הזיהוי…');}catch(e){}
+      try{dlog('sys','🚪 סגירת התוכנה — התחילה',{ver:APP_VER});}catch(e){}
+      try{await flushSave();}catch(e){}
+      try{await aidShutdownEngines();}catch(e){}
+      try{dlog('sys','🚪 המנועים נסגרו — יוצאים',{});}catch(e){}
+      try{await flushSave();}catch(e){}        // היומן האחרון גם הוא נשמר
+    }catch(e){}
+    finally{clearTimeout(bail);try{Neutralino.app.exit();}catch(e){}}
+  }
+  try{Neutralino.events.on('windowClose',appClose);}catch(e){}
+  try{window.addEventListener('keydown',e=>{            // Alt+F4 / Ctrl+W עוברים באותו מסלול
+    if((e.altKey&&e.key==='F4')||(e.ctrlKey&&(e.key==='w'||e.key==='W'))){e.preventDefault();appClose();}
+  });}catch(e){}
+  try{window.appClose=appClose;}catch(e){}
   try{window.addEventListener('visibilitychange',()=>{if(document.hidden)flushSave();});
       window.addEventListener('beforeunload',()=>{try{flushSave();}catch(e){}});}catch(e){}
   await loadState();
@@ -3361,6 +4211,25 @@ async function init(){
   const _shbOn=()=>S.settings.shabbat&&S.settings.shabbat.on&&S.settings.shabbat.online!==false;
   try{if(_shbOn())shabbatFetch(false);}catch(e){}
   setInterval(()=>{try{if(_shbOn())shabbatFetch(false);}catch(e){}},3*3600*1000);
+  /* 🏷 השלמת שמות-האמנים מתחילה לבד (VER 1062). ב-1060 היא הייתה
+     תלויה בכפתור שצריך למצוא — ולכן בפועל הרשימות נשארו בלי אמנים,
+     בדיוק כמו לפני התיקון. עכשיו: מתחילה 40 שניות אחרי העלייה, כדי
+     לא להתחרות בטעינת-הספרייה, ורק אם באמת חסרים אמנים.
+     הסריקה קוראת 256KB מכל קובץ, נעצרת מעצמה כשהדיסק עמוס, ואפשר
+     לעצור אותה מהכפתור בעמוד המוזיקה. רצה פעם אחת בכל עליית-תוכנה. */
+  setTimeout(()=>{try{
+    const miss=(S.tracks||[]).filter(t=>t.type==='song'&&!t.missing&&!String(t.artist||'').trim()).length;
+    if(miss>0&&!_tagFill.run){
+      dlog('sys','🏷 השלמת שמות-אמנים התחילה אוטומטית',{missing:miss});
+      tagFillStart();
+    }
+  }catch(e){}},40000);
+  // 🍎 לוח-החגים — משיכה בהפעלה ורענון יומי (המטמון מחזיק שנה)
+  const _ytOn=()=>S.settings.yomtov&&S.settings.yomtov.on!==false;
+  try{if(_ytOn())yomtovFetch(false);}catch(e){}
+  setInterval(()=>{try{if(_ytOn())yomtovFetch(false);}catch(e){}},24*3600*1000);
+  // ⏸ בדיקת פקיעה של ההפסקה הידנית — פעם בדקה, גם כשאיש לא צופה במסך
+  setInterval(()=>{try{adPauseExpire();}catch(e){}},60000);
   setInterval(normLoop,1200);        // 🎚 ניתוח איזון עוצמה ברקע, קובץ אחר קובץ
   setInterval(transitionTick,250);   // מעבר חופף בין שירים — בלי שקט
   setInterval(antiSilence,2000);     // 🔊 מונע-שקט — התחנה לעולם לא שקטה כשמשדרים
@@ -3420,6 +4289,10 @@ function rbSafeNow(emergency){
     if(typeof AID!=='undefined'&&AID.mode==='onair')return false;   // חדשות באוויר — לעולם לא
     if(typeof loading!=='undefined'&&loading)return false;
     if(window.wxTalking)return false;
+    /* 📥 תור ממתין = פרסומת/תוכנית/מבזק שכבר תוזמנו ועוד לא שודרו.
+       ריענון כאן מוחק אותם מהזיכרון בלי שאיש ישים לב. */
+    if(!emergency&&typeof pending!=='undefined'&&pending.length)return false;
+    if(!emergency&&typeof current!=='undefined'&&current&&current.kind&&current.kind!=='song')return false;
     const m=new Date().getMinutes();
     if(!emergency&&(m>=53||m<=6))return false;                      // רחוק מחלון-החדשות
     return true;
@@ -3427,6 +4300,9 @@ function rbSafeNow(emergency){
 }
 async function rbGo(reason){
   if(_rbBusy)return;_rbBusy=true;
+  /* 🔓 שחרור-בטיחות: אם הטעינה-מחדש לא קרתה (חסימה, שגיאה), הדגל היה נשאר
+     דלוק לנצח והתוכנה לא הייתה מרעננת את עצמה שוב לעולם. */
+  setTimeout(()=>{if(_rbBusy){_rbBusy=false;try{dlog('error','⛔ הריענון לא התבצע — הנעילה שוחררה',{reason});}catch(e){}}},15000);
   try{
     try{
       if(autoOn&&current&&current.track&&active&&isFinite(active.currentTime))
@@ -3579,6 +4455,11 @@ const SHABBAT_CITIES=[
   {id:293703,name:'ראשון לציון'},{id:293918,name:'פתח תקווה'},{id:295277,name:'אילת'},{id:293322,name:'טבריה'}
 ];
 let _shbFetching=false;
+/* ⏱ מחסום-קצב. inShabbat() קוראת לרענון כשהמטמון פג — ו-spScan() קוראת
+   ל-inShabbat() פעם לכל קובץ בכל אחת מ-24 השעות שהיא סורקת. בלי המחסום
+   הזה, כל ציור של לוח-השידור פתח מאות בקשות-רשת ברצף (אחת בכל פעם, אבל
+   בלי הפסקה) — עומס מתמשך שלא נגמר עד שהשרת עונה. */
+let _shbNextTry=0;
 async function shabbatFetch(force){
   const sh=S.settings&&S.settings.shabbat; if(!sh||_shbFetching)return;
   const c=sh.cache;
@@ -3603,7 +4484,11 @@ function inShabbat(now){
   if(sh.online!==false&&sh.cache&&sh.cache.candles&&sh.cache.havdalah){
     const c=Date.parse(sh.cache.candles), h=Date.parse(sh.cache.havdalah), t=now.getTime();
     if(isFinite(c)&&isFinite(h)){
-      if(t>=h)shabbatFetch(true);       // עברה שבת — מרעננים לשבוע הבא; בינתיים נופלים לזמנים הידניים
+      /* ⏱ הרענון האוטומטי מכאן חייב מחסום-קצב: spScan() קוראת ל-inShabbat()
+         פעם לכל קובץ בכל אחת מ-24 השעות שהיא סורקת, וכל ציור של לוח-השידור
+         פתח מאות בקשות-רשת ברצף. פעולות-משתמש (עיר, מצב, כפתור-רענון)
+         קוראות ישירות ל-shabbatFetch ולא נוגעות במחסום הזה. */
+      if(t>=h&&Date.now()>=_shbNextTry){_shbNextTry=Date.now()+900000;shabbatFetch(true);}
       else return t>=c&&t<h;
     }
   }
@@ -3615,13 +4500,158 @@ function inShabbat(now){
   if(day===ed)return mins<s2;
   return false;
 }
+/* 🍎 חגי ישראל — בלי פרסומות וחסויות בחג (VER 1050)
+   ────────────────────────────────────────────────────────────────
+   מודול-השבת הקיים מושך רק את השבת הקרובה מ-/shabbat, ולכן חג שאינו
+   צמוד לשבת פשוט לא קיים בשבילו. דוגמה מהנתונים של התחנה עצמה:
+   ראש-השנה תשפ"ז נופל על שישי-ראשון, ולכן ה-cache של השבת כבר מכיל
+   הדלקה 11.9 19:10 והבדלה 13.9 20:01 — טווח של יומיים, במקרה. אבל
+   יום-כיפור (ראשון בערב → שני בלילה) אינו נוגע בשבת כלל, ואף שורה
+   ב-/shabbat לא תדע עליו.
+   לכן: משיכה נפרדת של שנה קדימה מ-/hebcal עם הדלקות-נרות, לפי אותה
+   עיר שנבחרה במודול-השבת (בוקה רטון), ובניית טווחי "אין פרסומות".
+
+   ⚠ שרשור נכון: ביו"ט רצוף Hebcal פולט הדלקה, הדלקה, ואז הבדלה אחת.
+   לכן הדלקה פותחת טווח רק אם אין טווח פתוח — אחרת שני ימי החג היו
+   נחשבים שני טווחים נפרדים, והלילה שביניהם היה "מותר לפרסומות".
+
+   ⚠ סינון שבת-רגילה: הטווחים כאן אמורים להיות חגים בלבד; שבת מטופלת
+   במודול שלה, ולמשתמש יש עליה מתג נפרד. הזיהוי אינו נשען על שדה אחד
+   של ה-API אלא על שניים, בסדר הזה:
+     1. הדגל yomtov שמגיע מ-Hebcal, כשהוא קיים;
+     2. ואם אינו קיים — מבחן מבני: שבת-רגילה היא *תמיד* הדלקה ביום
+        שישי וטווח של פחות מ-30 שעות. כל דבר אחר מכיל יום-טוב. */
+const YT_PLAIN_SHABBAT_H=30;              // טווח ארוך מזה אינו שבת-רגילה
+let _ytFetching=false, _ytNextTry=0;
+function ytISO(d){return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());}
+/* בונה טווחי הדלקה→הבדלה מתוך פריטי-Hebcal, ומשאיר רק את אלה שיש בהם חג.
+   מופרד מהמשיכה כדי שיהיה אפשר לבדוק אותו על נתונים מוכנים. */
+function ytBuildRanges(items){
+  const yomDays=new Set(), names={};
+  for(const x of (items||[])){
+    if(x&&x.yomtov===true&&x.date){
+      const k=String(x.date).slice(0,10);
+      yomDays.add(k); names[k]=x.title||x.hebrew||'חג';
+    }
+  }
+  const marks=[];
+  for(const x of (items||[])){
+    if(!x||!x.date)continue;
+    if(x.category!=='candles'&&x.category!=='havdalah')continue;
+    const t=Date.parse(x.date);
+    if(isFinite(t))marks.push({cand:x.category==='candles',t,d:x.date});
+  }
+  marks.sort((a,b)=>a.t-b.t);
+  const ranges=[]; let open=null;
+  for(const m of marks){
+    if(m.cand){ if(!open)open=m; }          // הדלקה שנייה ברצף אינה פותחת טווח חדש
+    else if(open){ ranges.push({a:open.d,at:open.t,b:m.d,bt:m.t}); open=null; }
+  }
+  const out=[];
+  for(const r of ranges){
+    let name='', isYom=false;
+    // 1️⃣ לפי הדגל של Hebcal
+    /* מעבר לפי תאריכי-לוח ולא בקפיצות של 24 שעות: במעבר שעון-קיץ יממה
+       אינה 24 שעות, וקפיצה קבועה הייתה מדלגת על יום או חוזרת עליו. */
+    {const A=new Date(r.at),B=new Date(r.bt);
+     for(let d=new Date(A.getFullYear(),A.getMonth(),A.getDate());d<=B;d.setDate(d.getDate()+1)){
+       const k=ytISO(d);
+       if(yomDays.has(k)){isYom=true;if(!name)name=names[k];}
+     }}
+    // 2️⃣ מבחן מבני — כשהדגל לא הגיע מה-API בכלל
+    if(!isYom&&!yomDays.size){
+      const hrs=(r.bt-r.at)/3600000;
+      if(new Date(r.at).getDay()!==5||hrs>YT_PLAIN_SHABBAT_H){isYom=true;name='חג';}
+    }
+    if(isYom)out.push([r.a,r.b,name||'חג']);
+  }
+  return out;
+}
+async function yomtovFetch(force){
+  const yt=S.settings&&S.settings.yomtov; if(!yt||_ytFetching)return false;
+  const c=yt.cache;
+  // המטמון מחזיק שנה; מרעננים כשנשאר בו פחות מחודש
+  if(!force&&c&&c.until&&Date.parse(c.until)>Date.now()+30*864e5)return true;
+  _ytFetching=true;
+  try{
+    const gid=(S.settings.shabbat&&S.settings.shabbat.geonameid)||4148411;   // אותה עיר כמו השבת
+    const t0=new Date(Date.now()-2*864e5), t1=new Date(Date.now()+400*864e5);
+    const url='https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=off&mod=off&nx=off'
+             +'&ss=off&mf=off&c=on&s=off&M=on&lg=he&geonameid='+gid
+             +'&start='+ytISO(t0)+'&end='+ytISO(t1);
+    const r=await fetch(url,{cache:'no-store'});
+    const j=await r.json();
+    const ranges=ytBuildRanges((j&&j.items)||[]);
+    if(ranges.length){
+      yt.cache={ranges,until:ranges[ranges.length-1][1],fetchedAt:Date.now(),
+                city:(S.settings.shabbat&&S.settings.shabbat.city)||''};
+      save();
+      try{dlog('sys','🍎 לוח-החגים נמשך',{n:ranges.length,city:yt.cache.city,
+        first:ranges[0],last:ranges[ranges.length-1]});}catch(e){}
+      if(typeof spRenderCfg==='function')spRenderCfg();
+      if(typeof spRefresh==='function')spRefresh();
+      if(typeof adpRender==='function')adpRender();
+      return true;
+    }
+    try{dlog('error','🍎 לוח-החגים חזר ריק',{url:url.slice(0,120)});}catch(e){}
+  }catch(e){/* אופליין — נשארים עם המטמון הקיים */}
+  finally{_ytFetching=false;}
+  return false;
+}
+/* מחזיר {name,end} כשעכשיו בתוך חג, אחרת null */
+function inYomTov(now){
+  const yt=S.settings&&S.settings.yomtov;
+  if(!yt||!yt.on)return null;
+  const c=yt.cache;
+  if(!c||!Array.isArray(c.ranges)||!c.ranges.length){
+    // ⏱ מחסום-קצב — spScan קוראת לכאן מאות פעמים בכל ציור של הלוח
+    if(Date.now()>=_ytNextTry){_ytNextTry=Date.now()+900000;yomtovFetch(false);}
+    return null;
+  }
+  const t=(now||new Date()).getTime();
+  for(const r of c.ranges){
+    const a=Date.parse(r[0]),b=Date.parse(r[1]);
+    if(isFinite(a)&&isFinite(b)&&t>=a&&t<b)return {name:r[2]||'חג',start:r[0],end:r[1]};
+  }
+  if(c.until&&Date.parse(c.until)<Date.now()+30*864e5&&Date.now()>=_ytNextTry){
+    _ytNextTry=Date.now()+900000;yomtovFetch(false);
+  }
+  return null;
+}
+/* ⏸ הפסקה ידנית של פרסומות וחסויות (VER 1050)
+   פג-התוקף נבדק מול השעון *האמיתי* בלבד. spScan סורקת 24 שעות קדימה
+   ומעבירה לכאן זמנים עתידיים — ולו הפקיעה הייתה נשענת עליהם, ציור של
+   לוח-השידור היה מכבה למשתמש את ההפסקה שהוא הרגע הדליק. */
+function adPauseExpire(){
+  const ap=S.settings&&S.settings.adPause;
+  if(!ap||!ap.on||!ap.until)return;
+  if(Date.now()<ap.until)return;
+  ap.on=false;ap.until=0;ap.at=0;save();
+  try{toast('▶ ההפסקה הידנית הסתיימה — פרסומות וחסויות חזרו לאוויר');}catch(e){}
+  try{dlog('sys','▶ ההפסקה הידנית של הפרסומות פגה מעצמה',{});}catch(e){}
+  try{adpRender();}catch(e){}
+}
+/* התשובה היחידה לשאלה "האם פרסומת/חסות יכולה להתנגן עכשיו".
+   מחזיר null = מותר · אובייקט = חסום, עם הסיבה. */
+function adsBlocked(now){
+  now=now||new Date();
+  adPauseExpire();
+  const ap=S.settings&&S.settings.adPause;
+  if(ap&&ap.on&&(!ap.until||now.getTime()<ap.until))
+    return {why:'הפסקה ידנית',manual:true,until:ap.until||0};
+  const yt=inYomTov(now);
+  if(yt)return {why:yt.name,holiday:true,name:yt.name,end:yt.end};
+  if(inShabbat(now))return {why:'שבת',shabbat:true};
+  return null;
+}
 /* האם הקובץ פעיל בכלל ביום הזה (בלי קשר לשעה) */
 function spEligible(t,now,dstr){
   const p=spPlan(t);
   if(!p.on)return false;
   if(t.missing)return false;
-  // 🕯️ שבת — רק פרסומות וחסויות לא מתנגנים (ג׳ינגלים/חדשות/מוזיקה כן ממשיכים)
-  if((t.type==='ad'||t.type==='sponsor')&&inShabbat(now))return false;
+  // 🕯️/🍎/⏸ שבת · חג · הפסקה ידנית — רק פרסומות וחסויות נעצרים.
+  //    ג׳ינגלים, מוזיקה, חדשות ותוכניות ממשיכים כרגיל.
+  if((t.type==='ad'||t.type==='sponsor')&&adsBlocked(now))return false;
   if(!p.hours.length||!p.days.length)return false;
   if(!p.days.includes(now.getDay()))return false;
   const ds=dstr||spDateStr(now);
@@ -3680,7 +4710,23 @@ function spFireNow(list,label,now,released){
    const playingId=(typeof current!=='undefined'&&current&&current.track)?current.track.id:null;
    const inQ=new Set(pending.filter(x=>x&&x.spot).map(x=>x.trackId));
    const before=list.map(t=>t.name);
-   list=list.filter(t=>!inQ.has(t.id)&&t.id!==playingId&&!(t.lastPlay&&nowMs-t.lastPlay<150000));
+   /* ⏱ חלון-הכפילות של 2.5 דקות נועד לעצור שחרור-כפול אחרי חדשות — אבל הוא
+      חל גם על מי שהמשתמש *ביקש* במפורש פעמיים קרוב, למשל מצב "דקות מדויקות"
+      עם 00 ו-02. שם החסימה שגויה: זה לא כפל, זו התוכנית. לכן החלון נגזר
+      מהמרווח הקטן ביותר שהמשתמש עצמו הגדיר, ולא יורד מ-40 שניות. */
+   const dedupMs=t=>{
+     try{
+       const p=spPlan(t);
+       if(p.mode==='exact'&&Array.isArray(p.mins)&&p.mins.length>1){
+         const ms=[...p.mins].sort((a,b)=>a-b);
+         let gap=60;for(let i=1;i<ms.length;i++)gap=Math.min(gap,ms[i]-ms[i-1]);
+         gap=Math.min(gap,60-ms[ms.length-1]+ms[0]);   // גם המעבר בין שעה לשעה (למשל 59 ואז 00)
+         return Math.max(40000,Math.min(150000,gap*60000-20000));
+       }
+     }catch(e){}
+     return 150000;
+   };
+   list=list.filter(t=>!inQ.has(t.id)&&t.id!==playingId&&!(t.lastPlay&&nowMs-t.lastPlay<dedupMs(t)));
    // 🔬 תיעוד סינון-הכפילויות: מי נחסם ולמה
    if(before.length!==list.length){const kept=new Set(list.map(t=>t.name));
      try{dlog('sched','🛡 סינון-כפילות: '+before.filter(n=>!kept.has(n)).join(', ')+' — '+label,{requested:before.length,passed:list.length});}catch(e){}}}
@@ -3946,6 +4992,45 @@ function spSortForList(type){
     return String(a.name||'').localeCompare(String(b.name||''),'he');
   });
 }
+/* ⏸/🍎 ציור כרטיס ההפסקה + לוח-החגים */
+function adpRender(){
+  const ap=(S.settings&&S.settings.adPause)||{}, yt=(S.settings&&S.settings.yomtov)||{};
+  const DN=['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+  const fmt=t=>{const d=new Date(t);return DN[d.getDay()]+' '+pad2(d.getDate())+'/'+pad2(d.getMonth()+1)+' '+pad2(d.getHours())+':'+pad2(d.getMinutes());};
+  const b=$('#adp-btn');
+  if(b){
+    if(ap.on){b.textContent='▶ החזר פרסומות וחסויות לאוויר';b.classList.add('primary');}
+    else{b.textContent='⏸ הפסק פרסומות וחסויות';b.classList.remove('primary');}
+  }
+  const yo=$('#yt-on');if(yo)yo.checked=yt.on!==false;
+  const st=$('#adp-status');
+  if(st){
+    const blk=(typeof adsBlocked==='function')?adsBlocked(new Date()):null;
+    if(ap.on){
+      st.innerHTML='⏸ <b>פרסומות וחסויות מופסקות עכשיו</b>'
+        +(ap.until?(' — עד <b>'+fmt(ap.until)+'</b>, ואז חוזרות לבד'):' — עד שתחזיר אותן ידנית')
+        +'. ג׳ינגלים, מוזיקה, חדשות ותוכניות ממשיכים כרגיל.';
+    }else if(blk&&blk.holiday){
+      st.innerHTML='🍎 <b>'+esc(blk.name)+'</b> — פרסומות וחסויות מושהות'
+        +(blk.end?(' עד <b>'+fmt(Date.parse(blk.end))+'</b>'):'')+'.';
+    }else if(blk&&blk.shabbat){
+      st.innerHTML='🕯️ <b>שבת</b> — פרסומות וחסויות מושהות.';
+    }else{
+      st.textContent='פרסומות וחסויות משודרות כרגיל. הכפתור עוצר אותן מיד — ההפסקה נשמרת גם אם התוכנה נסגרת ונפתחת.';
+    }
+  }
+  const nx=$('#yt-next');
+  if(nx){
+    if(yt.on===false){nx.textContent='זיהוי החגים כבוי — פרסומות ישודרו גם בחג.';}
+    else{
+      const c=yt.cache, now=Date.now();
+      const fut=(c&&Array.isArray(c.ranges)?c.ranges:[]).filter(r=>Date.parse(r[1])>now).slice(0,3);
+      if(!fut.length)nx.textContent='📡 מושך את לוח-החגים מהרשת…';
+      else nx.innerHTML='🍎 החגים הקרובים ('+esc(c.city||'')+'): '
+        +fut.map(r=>'<b>'+esc(r[2])+'</b> '+fmt(Date.parse(r[0]))+' → '+fmt(Date.parse(r[1]))).join(' · ');
+    }
+  }
+}
 function spRenderCfg(){
   // 🕯️ מצב שבת
   const sh=S.settings.shabbat||(S.settings.shabbat={on:false,online:true,geonameid:4164138,city:'מיאמי · Miami, FL',startDay:5,startHm:'18:00',endDay:6,endHm:'20:00',cache:null});
@@ -3970,6 +5055,7 @@ function spRenderCfg(){
     } else st.textContent='זמנים ידניים קבועים: כניסת שבת (שישי) → צאת שבת (מוצ״ש).';
   }
   if(sh.on&&online)shabbatFetch(false);
+  try{adpRender();}catch(e){}
   const sum=$('#sp-sum');if(!sum)return;
   const all=spTracks(),on=all.filter(t=>spPlan(t).on&&!t.missing);
   const miss=all.filter(t=>t.missing).length;
@@ -4227,6 +5313,38 @@ function spTab(name){
   on('#shb-mode',()=>{const s=shb();s.online=($('#shb-mode').value==='online');save();spRenderCfg();spRefresh();if(s.on&&s.online)shabbatFetch(true);},'onchange');
   on('#shb-city',()=>{const s=shb();const id=+$('#shb-city').value;s.geonameid=id;const c=SHABBAT_CITIES.find(x=>x.id===id);s.city=c?c.name:'';s.cache=null;save();shabbatFetch(true);spRenderCfg();},'onchange');
   on('#shb-refresh',()=>{shabbatFetch(true);toast('📡 מעדכן זמני שבת מהרשת…');});
+  // ⏸ הפסקה ידנית של פרסומות וחסויות
+  on('#adp-btn',()=>{
+    const ap=S.settings.adPause||(S.settings.adPause={on:false,until:0,at:0,note:''});
+    if(ap.on){
+      ap.on=false;ap.until=0;ap.at=0;save();adpRender();spRefresh();
+      toast('▶ פרסומות וחסויות חזרו לאוויר');
+      try{dlog('sys','▶ ההפסקה הידנית של הפרסומות בוטלה',{});}catch(e){}
+      return;
+    }
+    const v=String(($('#adp-dur')||{}).value||'0');
+    let until=0;
+    if(v==='eod'){const d=new Date();d.setHours(23,59,59,999);until=d.getTime();}
+    else if(+v>0)until=Date.now()+(+v)*60000;
+    ap.on=true;ap.until=until;ap.at=Date.now();save();adpRender();spRefresh();
+    toast(until?'⏸ פרסומות וחסויות הופסקו — יחזרו לבד בזמן שנקבע':'⏸ פרסומות וחסויות הופסקו עד ביטול ידני');
+    try{dlog('sys','⏸ פרסומות וחסויות הופסקו ידנית',{until:until||null});}catch(e){}
+  });
+  on('#adp-dur',()=>{
+    const ap=S.settings.adPause;if(!ap||!ap.on)return;    // שינוי משך בזמן הפסקה פעילה = הארכה/קיצור מיידיים
+    const v=String(($('#adp-dur')||{}).value||'0');
+    if(v==='eod'){const d=new Date();d.setHours(23,59,59,999);ap.until=d.getTime();}
+    else ap.until=(+v>0)?Date.now()+(+v)*60000:0;
+    save();adpRender();spRefresh();
+  },'onchange');
+  // 🍎 חגי ישראל
+  on('#yt-on',()=>{
+    const yt=S.settings.yomtov||(S.settings.yomtov={on:true,cache:null});
+    yt.on=$('#yt-on').checked;save();adpRender();spRefresh();
+    if(yt.on)yomtovFetch(true);
+    toast(yt.on?'🍎 חגי ישראל הופעלו — אין פרסומות בחג':'זיהוי החגים כובה');
+  },'onchange');
+  on('#yt-refresh',()=>{const yt=S.settings.yomtov;if(yt)yt.cache=null;yomtovFetch(true);toast('📡 מושך את לוח-החגים מהרשת…');});
   on('#shb-start',()=>{shb().startHm=$('#shb-start').value||'18:00';save();spRefresh();},'onchange');
   on('#shb-end',()=>{shb().endHm=$('#shb-end').value||'20:00';save();spRefresh();},'onchange');
   on('#sp-board-refresh',()=>{spBust();spRenderBoard();toast('↻ הלוח רוענן');});
@@ -4260,6 +5378,16 @@ const AID_SPEEDS=[0.95,1.0,1.05], AID_PRINT_MAXS=5.5;
 /* 🧊 צינון קצרצר בלבד (30ש') — כלל-הברזל: כל השמעה של הפתיח מכניסה חדשות. הצינון קיים רק כדי
    שאותה השמעה עצמה (שעדיין בחוצץ-הניתוח) לא תיכנס פעמיים — לא כדי לחסום מהדורה/בדיקה חוזרת. */
 const AID_ENTER=0.72, AID_APART=0.05, AID_COOLDOWN_S=30;
+/* 🪟 רף הדקה-העגולה — קבוע, לא נלמד (VER 1040). כל מנגנון-הכיול הלומד נעקר:
+   aidPromoFloor · aidWinBar · aidClosePromo · aidCloseWin · aidLearnPeak,
+   והשדות mainPeak · promoPeak · promoPeakMax · winPk.
+   למה 0.62: זה הערך שהמערכת השתמשה בו בכל השעות שבהן היא עבדה, וזו הייתה
+   התקרה המקורית בקוד — Math.min(0.62,…) — עד שהרצפה הנלמדת דרסה אותה ל-0.72.
+   אימות על 43 מהדורות-אמת מ-5 ימי אוויר: הנמוכה ביותר ניקדה 0.620, כלומר
+   43/43 עוברות. מדידות-הפרומו מאותה תקופה: ממוצע 0.539, ו-10 מתוך 11 ≤0.614.
+   ההגנה מפני כניסת-שווא אינה הרף: שער-הזמן (רק אחרי xx:00:00, ורק על צליל
+   שנשמע אחרי השעה), שתי פעימות רצופות, נעילת-מסלול וספריית-המתחזים. */
+const AID_WIN_BAR=0.62;
 /* ⚡ כניסה מהירה: "הטבעת-ראש" מ-3 השניות הראשונות של הפתיח — מזהה ~3ש' אחרי תחילת הג׳ינגל
    (אומת: פתיח-בסטרים 0.924 · הכי-גרוע-שלילי 0.643 → סף 0.76 עם שוליים משני הצדדים). */
 const AID_HEAD_S=3.0, AID_HEAD_ENTER=0.76;
@@ -4448,11 +5576,28 @@ function aidEntryWindowOk(now){now=now||new Date();return now.getMinutes()===0;}
    לאשר כניסה על סמך מה שלא נמדד. */
 const AID_ANALYZE_SEC=18;
 function aidHeardAt(behindS,winS){
-  const back=behindS==null?(winS||AID_ANALYZE_SEC):behindS;
+  let back=behindS;
+  /* 🎯 כשמיקום-ההתאמה לא נמדד בפעימה הזו — משתמשים במדידה הטרייה האחרונה
+     ומשערכים אותה קדימה לפי הזמן שעבר, במקום לקפוץ להנחה של "כל החלון אחורה".
+     ההנחה הזו היא ששלחה את רגע-השמיעה לדקה 59 וחסמה את הפעימות הראשונות. */
+  if(back==null){
+    const pv=(typeof AID!=='undefined'&&AID)?AID._syncBehind:null;
+    if(pv&&Date.now()-pv.at<6000)back=pv.v+(Date.now()-pv.at)/1000;
+  }
+  if(back==null)back=(winS||AID_ANALYZE_SEC);
   return Date.now()-back*1000;
 }
+/* 🎺 סבילות-קדם-שעה (נמדד מהאוויר 28.8): הפתיח האמיתי מתחיל ~שנייה *לפני* השעה —
+   רגע-השמיעה נעול על xx:59:59 בכל המהדורות. שער-רגע-השמיעה דרש דקה 0 בדיוק, ולכן
+   חסם כל זיהוי-אמת שוב ושוב עד שהשעון התקדם מספיק (הכניסות נכנסו תמיד ב-:05—:17,
+   ולפעמים כלל לא). 5 שניות מכסות את הפתיח בשוליים נדיבים ונשארות רחוק מהפרומו
+   שמכיל אותו — הוא מתנגן ב-:57:5x—:58:5x, יותר מדקה משם. רגע-ההחלטה עצמו
+   נשאר כפוף לדקה העגולה בלבד (aidEntryWindowOk) — הסבילות היא על רגע-השמיעה. */
+const AID_PRE_HOUR_S=5;
 function aidHeardWindowOk(behindS,winS){
-  return aidEntryWindowOk(new Date(aidHeardAt(behindS,winS)));
+  const hs=new Date(aidHeardAt(behindS,winS));
+  if(aidEntryWindowOk(hs))return true;
+  return hs.getMinutes()===59&&hs.getSeconds()>=60-AID_PRE_HOUR_S;
 }
 /* 🚫 מתי מותר ללמוד "מתחזה": רק באמצע-השעה (דקות 6–57). דקות 58–59 מוחרגות
    בכוונה — הפרומו שם מכיל את צליל-הפתיח האמיתי, ולימוד שלו כ"מתחזה" היה
@@ -4727,8 +5872,6 @@ function aidCfg(){
   if(c.url2==null)c.url2='';                         // 🛰 מקור-עזר: כתובת סטרים שנייה עם אותו פתיח
   if(c.on2==null)c.on2=true;
   if(!Array.isArray(c.negPrints))c.negPrints=[];     // 🚫 ספריית "מתחזים": צלילים שנשמעים כמו הפתיח אך אינם (נלמדים מאמצע-השעה)
-  if(!Array.isArray(c.winPk))c.winPk=[];             // 🪟 שיא-הניקוד בכל דקה עגולה — גם כשלא נכנסה מהדורה
-  if(c.promoPeak==null)c.promoPeak=0;                // 📊 כמה מנקד הפרומו (דקות 58-59) — המתחרה של הפתיח
   if(c.endOffMax==null)c.endOffMax=0;                // 🏁 מנוע-הסיום: השיא שהסיומת מנקדת מחוץ למהדורות
   if(c.endOffN==null)c.endOffN=0;                    //    בכמה שעות שונות נמדדה
   if(!Array.isArray(c.edLog))c.edLog=[];             // 📋 טבלת-מעקב מהדורות: שורה לכל מהדורה (כניסה/אוויר/משך/יציאה)
@@ -4738,17 +5881,28 @@ function aidCfg(){
   if(c.rustExeEnd==null)c.rustExeEnd='';             // 🏁 נתיב radio-end.exe שנמצא בפועל (נלמד בהפעלה)
   if(c.endBg24Max==null)c.endBg24Max=0;              // 🏁 מנוע-הסיום 24/7: שיא-רקע הסיומת מהמנוע-המקומי (כל היממה)
   if(c.endBg24N==null)c.endBg24N=0;                  //    בכמה שעות נמדד
-  if(c.promoPeakMax==null)c.promoPeakMax=0;
-  if(c.promoPeakN==null)c.promoPeakN=0;
   if(!c.hourStats||typeof c.hourStats!=='object')c.hourStats={};   // 🎓 פרופיל-שעה נלמד: משך/ציון לכל שעת-מבזק מאומתת
   if(!c.hourMiss||typeof c.hourMiss!=='object')c.hourMiss={};      // 📊 מעקב שעות שבהן לא זוהתה מהדורה
   if(c.learnDone==null)c.learnDone=false;            // 🎓 סיום-לימודים: כשהמערכת למדה והצליחה — הידע ננעל והלמידה נעצרת
+  /* 🗑 עקירת-הכיול הלומד (VER 1040) — מחיקה חד-פעמית של המספרים שכבר נשמרו.
+     בלי זה אין טעם בשינוי הקוד: הערכים חיים ב-radio-data.json ושרדו כל עדכון
+     גרסה עד היום — ולכן כל גרסה חדשה התנהגה כמו הקודמת. mainPeak=0.754 נצבר
+     מ-335 כניסות *שהצליחו בלבד*, promoPeakMax=0.690 היה מקסימום של מדידה
+     חריגה אחת, ומהם נגזר רף 0.72 שחסם 4 מהדורות ב-7.9 אחרי שנדלק ב-09:00. */
+  if(c.calV!==4){c.calV=4;
+    delete c.mainPeak;delete c.mainPeakN;
+    delete c.promoPeak;delete c.promoPeakMax;delete c.promoPeakN;
+    delete c.winPk;
+    c.endOffMax=0;c.endOffN=0;          // 🏁 שיא-רקע-הסיומת נמדד גם הוא בחלון מורעל
+    c.hourMiss={};
+    if((+c.maxMin||6)<6)c.maxMin=6;     // ⏱ ממוצע-מהדורה 3:44 — 4 דק' חתכו מהדורות באמצע
+    save();
+    try{aidSay('🗑 מנגנון-הכיול הלומד נעקר. רף-הכניסה קבוע מעתה על 62% — הערך שבו המערכת עבדה 8 מתוך 8 מהדורות. הרף לא יעלה יותר מעצמו');}catch(e){}
+  }
   // ⏱ תיקון חד-פעמי מנתוני הלילה (11.8): מהדורות-הלילה נמשכות יותר מ-4 דק' וכולן נחתכו
   //    ב-240ש' בדיוק. מעלים ל-6 דק' — היציאה האמיתית ממילא מגיעה מזיהוי-הסיום/מצב-העירנות.
   if(c.rustOn==null)c.rustOn=true;
   if(c.rustExe==null)c.rustExe='';       // 🦀 נתיב-המנוע שנמצא בפועל (נלמד בהפעלה הראשונה)                   // 🦀 מנוע-זיהוי מקומי (תהליך נפרד) — פעיל אם הקובץ קיים
-  if(c.mainPeak==null)c.mainPeak=0;      // 🎯 ממוצע שיא-הפתיח במקור הראשי (מכייל את סף-החלון)
-  if(c.mainPeakN==null)c.mainPeakN=0;
   if(c.rustUrls==null)c.rustUrls='';     // 📡 סטרימים נוספים למנוע המקומי — שורה לכל אחד ("שם | כתובת")
   if(c.rustMulti==null)c.rustMulti=null; // נודע מה-hello של המנוע: null=טרם ידוע, true=תומך רב-סטרימי
   // 📡 זריעה חד-פעמית: מקור-העזר וסטרים-האוויר-החלופי כבר ידועים כמשדרים את אותה
@@ -4759,6 +5913,30 @@ function aidCfg(){
     if((c.auxAirUrl||'').trim()&&c.auxAirUrl.trim()!==(c.url2||'').trim())
       seed.push('גלגלצ | '+c.auxAirUrl.trim());
     if(seed.length&&!(c.rustUrls||'').trim())c.rustUrls=seed.join('\n');
+  }
+  /* 📡 סטרים-גיבוי למנוע המקומי — "אם אין חדשות בראשי, שומעים אותן במקום אחר".
+     המנוע המקומי מאזין לכל הכתובות במקביל בתוך אותו תהליך, וכל אחת רשאית
+     להצביע לכניסה. כשהפתיח נשמע רק בגיבוי והראשי שקט — האוויר עולה מהגיבוי
+     עצמו (AID._enterAirUrl), ולא מהראשי ששידר בלי מבזק.
+     עד כה השדה הכיל את כתובת הראשי בלבד, ולכן הרשימה התכווצה לסטרים אחד
+     ולא היה שום גיבוי בפועל. ניתן לערוך/למחוק בשדה "סטרימים נוספים". */
+  /* 📡 סטרים-הגיבוי — שדה ייעודי בממשק (שם + כתובת + מתג), לא שורה בטקסט חופשי.
+     נכנס לרשימת-ההאזנה של המנוע המקומי מיד אחרי הראשי. */
+  if(c.spxOn==null)c.spxOn=true;         // 🎙 יציאת-גיבוי לפי דיבור (מוצא-אחרון לפני המשך-המרבי)
+  if(c.rsBkOn==null)c.rsBkOn=true;
+  if(c.rsBkName==null)c.rsBkName='גלי צה"ל';
+  if(c.rsBkUrl==null)c.rsBkUrl='';
+  if(!c.rsBackupV2){c.rsBackupV2=1;
+    const mainU=String(c.url||'').trim().toLowerCase();
+    // כתובת-המפנה הרשמית של גלי צה"ל, כפי שהמשתמש מסר. המפנה מחזיר תמיד קצה חי.
+    if(!String(c.rsBkUrl||'').trim())
+      c.rsBkUrl='https://api.bynetcdn.com/Redirector/glz/glz/ICE-LIVE';
+    // מנקים משדה "סטרימים נוספים" שורות שהן בעצם הראשי (כפילות חסרת-תועלת)
+    c.rustUrls=String(c.rustUrls||'').split(/\r?\n/).map(x=>x.trim()).filter(Boolean)
+      .filter(ln=>{const i=ln.indexOf('|');const u=(i>0?ln.slice(i+1):ln).trim().toLowerCase();
+                   return u&&u!==mainU;}).join('\n');
+    save();
+    setTimeout(()=>{try{aidSay('📡 נוספה שורת סטרים-גיבוי בהגדרות המנוע המקומי ('+(c.rsBkName||'גיבוי')+') — הראשי תמיד קודם; רק כשאין בו מבזק, המבזק ייכנס מהגיבוי ויעלה לאוויר ממנו');}catch(e){}},6000);
   }
   if(!Array.isArray(c.auxAirHours))c.auxAirHours=[]; // 📡 שעות שבהן לאוויר עולה המקור-החלופי (הזיהוי רגיל)
   if(c.auxAirUrl==null)c.auxAirUrl='';               //    הסטרים שישודר בשעות אלה (ריק = url2)
@@ -4780,16 +5958,71 @@ function aidCfg(){
     save();
     try{aidSay('🧹 ספריות-הלמידה אופסו — כללי-למידה חדשים ובטוחים נכנסו לתוקף, הלמידה מתחילה נקי');}catch(e){}
   }
+  /* 🛰 מנוע-העזר כובה לבדיקה: url2 היה זהה בדיוק ל-url, השרת דחה את החיבור הכפול,
+     והלולאה ניסתה מחדש כל 1.8ש' — 570 מתוך 587 שורות היומן היו הרעש הזה. */
+  /* 📛 שם-קובץ נפרד לכל מנוע: שניהם רצו תחת radio-detect.exe, ולכן ניקוי-היתומים
+     (taskkill לפי שם עם סינון-PID) לא יכול היה להבחין ביניהם — וגם במנהל-המשימות
+     הם נראו זהים. משחררים את הנתיבים הנעולים פעם אחת, כדי שהגילוי יאתר
+     radio-start.exe / radio-end.exe. אם אינם בתיקייה — נופלים חזרה ל-radio-detect.exe
+     שנמצא ברשימת-השמות מיד אחריהם, כך שאין סיכון. */
+  if(!c.rsNameV1){c.rsNameV1=1;
+    if(/radio[-_]?detect/i.test(String(c.rustExe||''))||/radio[-_]?detect/i.test(String(c.rustExeEnd||''))){
+      c.rustExe='';c.rustExeEnd='';
+    }
+    save();
+  }
+  /* 🛑 המנוע המקומי הישן (radio-detect/start/end) מכובה: המנוע החדש
+     radio-listen.exe נכנס לשלב-צל, ושרת-הסטרים מגביל חיבורים — שני מנועים
+     במקביל היו מתחרים עליו ומפילים זה את זה. הזיהוי בדפדפן ממשיך כרגיל
+     ומטפל בכניסה. אפשר להחזיר בכל רגע במתג "מנוע-זיהוי מקומי". */
+  if(!c.rsOffV1){c.rsOffV1=1;c.rustOn=false;save();
+    setTimeout(()=>{try{aidSay('🛑 המנוע המקומי הישן כובה — המנוע החדש (radio-listen) נכנס לשלב-צל, ושני מנועים היו מתחרים על חיבורי-הסטרים. הכניסה ממשיכה מהזיהוי בדפדפן');}catch(e){}},7000);
+  }
+  if(c.lsOn==null)c.lsOn=true;            // 🕵 מנוע-הצל החדש
+  if(c.lsExe==null)c.lsExe='';
+  /* 🛰 מנוע-העזר בדפדפן נדלק שוב, ושוב על אותה כתובת בדיוק כמו הראשי —
+     חיבור חמישי לאותו שרת, שנדחה בלולאה. כשהכתובת זהה, אין לו שום תועלת. */
+  if(!c.auxOffV2){c.auxOffV2=1;
+    if((c.url2||'').trim()&&(c.url2||'').trim()===(c.url||'').trim()&&c.on2!==false){
+      c.on2=false;save();
+      setTimeout(()=>{try{aidSay('🛰 מנוע-העזר כובה שוב — כתובתו זהה לראשי, ולכן הוא רק פותח חיבור מיותר לאותו שרת');}catch(e){}},8000);
+    }
+  }
+  if(!c.auxOffV1){c.auxOffV1=1;
+    if((c.url2||'').trim()&&(c.url2||'').trim()===(c.url||'').trim()){
+      c.on2=false;save();
+      setTimeout(()=>{try{aidSay('🛰 מנוע-העזר כובה — כתובת המקור השני זהה לראשי, והחיבור הכפול נדחה בלולאה. להפעלה מחדש: הזן כתובת סטרים שונה');}catch(e){}},5000);
+    }
+  }
   return c;
 }
 function aidSay(msg){try{logPlay('news',msg,'');}catch(e){}try{aidStatus(msg);}catch(e){}}
 function aidStatus(t){const el=document.getElementById('aid-status');if(el)el.textContent=t;}
 
 /* ---------- הטבעות מהקבצים ---------- */
-async function aidLoadPrints(force){
+/* 🔒 טעינת-ההטבעות היא מסע של עד 14 קריאות-קובץ ופענוח. השומר הישן בדק
+   AID.startPrint — שנקבע רק *אחרי* ה-await הראשון — בזמן ש-AID.printsFor נקבע
+   מיד. לכן כל פעימה (שנייה!) פתחה מסע נוסף, וכולם רצו במקביל על אותו צינור-
+   קבצים ודחקו את קריאות-השירים. עכשיו: מנעול-הבטחה אחד. קריאה שנייה מקבלת
+   את אותה הבטחה במקום לפתוח מסע חדש, וקובץ שלא נפענח נזכר כשלילי כדי שלא
+   ינוסה שוב כל שנייה. */
+function aidLoadPrints(force){
   const c=aidCfg(),key=(c.startFile||'')+'|'+(c.endFile||'');
-  if(!force&&AID.printsFor===key&&AID.startPrint)return;
-  AID.printsFor=key;
+  // מסע פעיל: בקשה רגילה מצטרפת אליו; בקשה כפויה (הקבצים השתנו) נתלית בסופו
+  if(AID._printsBusy&&!force)return AID._printsBusy;
+  if(!AID._printsBusy&&!force&&AID.printsFor===key&&AID._printsDone)return Promise.resolve();
+  /* 🔗 המנעול הוא תמיד החוליה *האחרונה* בשרשרת. בגרסה קודמת כל חוליה נשאה
+     finally משלה שאיפס את המנעול — כך שכשהחוליה הראשונה הסתיימה, המנעול
+     התאפס בזמן שהחוליה השנייה עוד רצה, וכל קורא נוסף פתח מסע מקביל שלישי.
+     כאן החוליה מנקה את המנעול רק אם הוא עדיין מצביע עליה. */
+  const prev=AID._printsBusy||Promise.resolve();
+  const chain=prev.catch(()=>{}).then(()=>_aidLoadPrintsRun(aidCfg(),key))
+    .finally(()=>{if(AID._printsBusy===chain)AID._printsBusy=null;});
+  AID._printsBusy=chain;
+  return chain;
+}
+async function _aidLoadPrintsRun(c,key){
+  AID.printsFor=key;AID._printsDone=false;
   const dec=async p=>{
     if(!p)return null;
     try{const raw=await FS().readBinaryFile(p);return await aidDecode(new Uint8Array(raw));}
@@ -4824,6 +6057,7 @@ async function aidLoadPrints(force){
     const npc=await dec(np);const pr=npc?aidPrintFromPcm(npc):null;
     if(pr)AID.negPrints.push(pr);
   }
+  AID._printsDone=true;
   if(c.startFile&&!AID.startPrint&&AID._warned!==key){AID._warned=key;aidSay('⚠️ קובץ הפתיח לא נטען — בחר קובץ תקין או "למד מהאוויר"');}
 }
 
@@ -4835,16 +6069,17 @@ function aidMseSetup(mime){
     if(!(window.MediaSource&&MediaSource.isTypeSupported(mime)))return false;
     const ms=new MediaSource();
     AID.ms={ms,sb:null,q:[],busy:false};
-    STRM.muted=true;STRM.volume=0;STRM.preload='auto';STRM.src=URL.createObjectURL(ms);
+    const _msUrl=URL.createObjectURL(ms);AID.ms.url=_msUrl;
+    STRM.muted=true;STRM.volume=0;STRM.preload='auto';STRM.src=_msUrl;
     ms.addEventListener('sourceopen',()=>{try{
       if(!AID.ms||AID.ms.ms!==ms)return;
       const sb=ms.addSourceBuffer(mime);AID.ms.sb=sb;
       sb.addEventListener('updateend',()=>{if(AID.ms&&AID.ms.ms===ms){AID.ms.busy=false;aidMsePump();}});
       aidMsePump();
-    }catch(e){AID.ms=null;}},{once:true});
+    }catch(e){aidMseTeardown();}},{once:true});   // 🧹 גם כאן דרך הפירוק — אחרת ה-blob נשאר תלוי
     try{STRM.play().catch(()=>{});}catch(e){}
     return true;
-  }catch(e){AID.ms=null;return false;}
+  }catch(e){try{aidMseTeardown();}catch(e2){AID.ms=null;}return false;}
 }
 function aidMsePush(chunk){const m=AID.ms;if(!m)return;m.q.push(chunk);
   if(m.q.length>300)m.q.splice(0,m.q.length-200);aidMsePump();}
@@ -4860,6 +6095,10 @@ function aidMseTeardown(){
   const m=AID.ms;if(!m)return;AID.ms=null;
   try{if(m.ms&&m.ms.readyState==='open')m.ms.endOfStream();}catch(e){}
   try{if(String(STRM.src||'').startsWith('blob:')){STRM.pause();STRM.removeAttribute('src');STRM.load();STRM.muted=false;STRM.volume=1;}}catch(e){}
+  /* 🧹 כל בנייה של הצינור יצרה blob-URL חדש שאיש לא שחרר. הצינור נבנה מחדש
+     בכל חיבור-מחדש ובכל כניסה/יציאה מהאוויר — עשרות פעמים ביממה — וכל אחד
+     החזיק את חוצץ-ה-MediaSource שלו בזיכרון עד לטעינה-מחדש. */
+  try{if(m.url)URL.revokeObjectURL(m.url);}catch(e){}
 }
 /* ---------- 🎯 שומר-הקצה-החי ----------
    הנגן המושתק מנגן ברצף את אותם בייטים שהזיהוי מנתח, אבל כל גמגום-רשת, כל
@@ -5002,7 +6241,10 @@ function aidSyncBehind(Q,winS){
     if(!Q||!(winS>0))return null;
     const nowE=new Date();
     const secHour=nowE.getMinutes()*60+nowE.getSeconds();
-    const minOff=Math.max(0,Math.floor((winS-(secHour+2.5))*AID_SR/AID_HOP));
+    /* 🎯 הרצפה חייבת לכלול את הפתיח שהתחיל לפני השעה: 2.5ש' בלבד הפכו את
+       הפעימות הראשונות של הדקה לעיוורות (מיקום לא נמצא → behindS=null →
+       רגע-שמיעה מנוחש → חסימה). AID_PRE_HOUR_S + 7ש' מכסים גם פיגור-חוצץ. */
+    const minOff=Math.max(0,Math.floor((winS-(secHour+AID_PRE_HOUR_S+7))*AID_SR/AID_HOP));
     let bp={r:0,at:0};
     for(const pr of [AID.startPrint,...(AID.altPrints||[])]){
       if(!pr)continue;const h2=aidSeekAtLast(pr,Q,minOff);
@@ -5099,23 +6341,23 @@ function aidEnterGate(src,score,behindS,winS){
     //    מחזיק את השניות שלפני השעה. הצליל שהתאים חייב להיות צליל שהגיע
     //    *אחרי* השעה, אחרת זהו הפרומו ולא מהדורה.
     if(src==='clock')return true;                      // שער-השעון אינו נסמך על אודיו
-    // 📊 רצפת-הפרומו חלה על *כל* מסלולי-הכניסה, גם על סף-ההטבעה הקבוע:
-    //    הפרומו מכיל את אותו צליל בדיוק, ולכן סף שהוא מסוגל לעבור אינו
-    //    ראיה למהדורה. נאכף כאן, בנקודת-המעבר היחידה, ולא בכל מסלול.
-    {const fl=aidPromoFloor();
-     if(fl>0&&(score||0)>0&&(score||0)<fl){
-       AID.gateBlocks=(AID.gateBlocks||0)+1;
-       AID.gateLastAt=Date.now();AID.gateLastSrc=src||'main';
-       if(Date.now()-(AID._floorLogAt||0)>20000){AID._floorLogAt=Date.now();
-         aidSay('📊 שער-הכניסה חסם: '+aidSrcName(src)+' התאים ב-'+Math.round((score||0)*100)
-           +'% — הפרומו עצמו מגיע ל-'+Math.round(+(aidCfg().promoPeakMax||0)*100)
-           +'%, ולכן ציון כזה אינו מוכיח מהדורה. נדרש '+Math.round(fl*100)+'% ומעלה.');}
-       dlog('aid','📊 שער-הכניסה חסם ציון שהפרומו מסוגל לו',
-         {src:src||'main',score:+(score||0).toFixed(3),floor:fl,
-          promoMax:+(aidCfg().promoPeakMax||0),mainPeak:+(aidCfg().mainPeak||0)});
-       return false;
-     }}
-    if(aidHeardWindowOk(behindS,winS))return true;
+    /* 🗑 רצפת-הפרומו הוסרה (VER 1040). היא נבנתה מ-promoPeakMax (מקסימום של
+       מדידות-הפרומו) והושוותה ל-mainPeak (ממוצע של כניסות שהצליחו) — מקסימום
+       מול ממוצע, ומדגם שנבנה רק מהצלחות. מדידה על 5 ימי-אוויר: הרצפה עמדה על
+       0.720 בעוד ממוצע-הציון של מהדורה אמיתית הוא 0.721 — כלומר היא נחתה בדיוק
+       על אמצע ההתפלגות שהיא אמורה להעביר: 33% מהמהדורות שנכנסו בפועל היו
+       נחסמות בה, ו-100% מהשעות שהוחמצו נמצאו מתחתיה. ההגנה מפני הפרומו נשארת
+       שער-הזמן שמיד למטה — הפרומו מתנגן לפני xx:00:00 ולכן נחסם לפי מתי נשמע,
+       לא לפי כמה ניקד. אין כאן עוד שום סף נלמד. */
+    if(aidHeardWindowOk(behindS,winS)){
+      // 🎺 תיעוד: כניסה שאושרה בזכות סבילות-קדם-השעה — כך רואים ביומן שהתיקון עבד
+      const _hs=new Date(aidHeardAt(behindS,winS));
+      if(_hs.getMinutes()===59)dlog('aid','🎺 סבילות-קדם-שעה אישרה כניסה',
+        {src:src||'main',score:+(score||0).toFixed(3),
+         heard:pad2(_hs.getHours())+':'+pad2(_hs.getMinutes())+':'+pad2(_hs.getSeconds()),
+         behindS:behindS==null?null:+(+behindS).toFixed(2)});
+      return true;
+    }
     const hs=new Date(aidHeardAt(behindS,winS));
     AID.gateBlocks=(AID.gateBlocks||0)+1;
     AID.gateLastAt=Date.now();AID.gateLastSrc=src||'main';
@@ -5166,8 +6408,8 @@ function aidEnter(score,votes,src,behindS,winS){
     manual:score>=0.999,src:src||'main'};}catch(e){AID.pend=null;}
   AID.mode='onair';AID.onAirAt=Date.now();AID.lastEnterAt=Date.now();AID._endStreak=0;AID._endStreak2=0;
   AID._endPeak=null;AID._devEndAt=0;AID._winStreak=0;AID._winStreak2w=0;AID._graceOn=false; // 🔬 מעקב נקי למהדורה הזו
-  aidLearnPeak(src);                                 // 🎯 לפני איפוס המונים — כמה הראשי ניקד בחלון הזה
-  AID._winPeak=0;
+  // 🗑 aidLearnPeak הוסרה (VER 1040): היא למדה "כמה מנקדת מהדורה" רק ממהדורות
+  //    שכבר עברו את הרף — מדגם קטום שיכול רק לטפס, ושהזין את הרף שחסם את הבאות.
   AID.lastEdKey=aidEdKey();                          // 🔂 המהדורה של השעה הזו שודרה — אין כניסה שנייה
   AID.aux.strongAt=0;AID.aux.endAt=0;               // 🛰 מאפסים את מוני-העזר — הכניסה קרתה
   if(AID.feed){AID.feed.buf=[];AID.feed.total=0;}   // מנקים את חוצץ-הניתוח — שההשמעה הזו לא תיספר שוב
@@ -5192,6 +6434,8 @@ function aidEnter(score,votes,src,behindS,winS){
   const stalePipe=src==='rust'&&Date.now()-AID.lastGoodDecode>20000;
   const airUrl=hourAlt?altUrl:(auxBk?(c.url2||'').trim():(altDet?altDetUrl:(c.url||'').trim()));
   AID.airFrom=auxAir?'alt':'main';AID.airUrl=airUrl;   // 📡 מי באוויר — הזיהוי-ביציאה יעקוב אחריו
+  AID._srErr=0;                                        // ⛔ מונה נפילות-שמע — חדש לכל מהדורה
+  try{spxReset();}catch(e){}                           // 🎙 כיול-דיבור חדש לכל מהדורה
   AID._xEntry=!!(AID._xPend&&Date.now()-AID._xPend<2500);AID._xPend=0;   // 🤝 האם זו כניסת-1:1
   if(hourAlt)aidSay('📡 שעת מקור-חלופי ('+pad2(edH)+':00) — הפתיח זוהה, והמבזק עולה לאוויר מהסטרים החלופי');
   else if(auxBk)aidSay('📡 הראשי לא משדר פתיח כרגע — עולים לאוויר עם המקור השני עצמו');
@@ -5291,6 +6535,17 @@ function aidExit(reason){
     {durS:Math.round((Date.now()-AID.onAirAt)/1000),endScore:+(AID.meter.end||0).toFixed(3),
      end2:+(AID.meter2&&AID.meter2.end||0).toFixed(3),
      endPeak:AID._endPeak?AID._endPeak.r:null,endPeakAtS:AID._endPeak?AID._endPeak.atS:null});}catch(e){}
+  /* 🕵 שורת-ההשוואה של שלב-הצל: מתי מנוע-הדיבור היה מסיים מול מתי סיימנו
+     בפועל. זו בדיוק השורה שממנה ייגזרו הספים בשלב הבא — ההפרש הוא המדד. */
+  try{
+    const _d=Math.round((Date.now()-AID.onAirAt)/1000);
+    dlog('aid','🕵 השוואת-צל למהדורה שהסתיימה',
+      {actualS:_d,shadowS:LS.wouldAtS,
+       deltaS:LS.wouldAtS==null?null:(_d-LS.wouldAtS),
+       speechAtEnter:LS.nAtEnter==null?null:+LS.nAtEnter.toFixed(3),
+       minSpeech:+LS.minSp.toFixed(3),maxSpeech:+LS.maxSp.toFixed(3),
+       reason:String(reason).slice(0,60)});
+  }catch(e){}
   // 📋 טבלת-המעקב: השלמת שורת-המהדורה — משך, סיבת-יציאה, ציון-סיום
   try{const _c=aidCfg(),_L=_c.edLog||[],_r=_L[_L.length-1];
     if(_r&&_r.durS==null&&Date.now()-_r.at<30*60000){
@@ -5427,134 +6682,15 @@ function aidGradCheck(){
     aidRender();
   }
 }
-/* 🎯 סף-החלון המתכייל.
-   הסף הקבוע (62%) הניח שהפתיח מנקד גבוה במקור הראשי. בלילה שנמדד הוא ניקד
-   שם 55-60% בלבד בכל שעה עגולה — מתחת לכל סף — ולכן כל הכניסות הגיעו
-   ממקור-העזר או משער-השעון, ובשעות שבהן שניהם שתקו לא נכנסה מהדורה כלל.
-   הפתרון: ללמוד כמה הפתיח באמת מנקד *בתחנה הזו*, ולהציב את הרף מעט מתחת.
-   ההגנה נשארת הזמן ולא הציון: זה חל אך ורק בדקה העגולה, ששם רק חדשות
-   אמיתיות משודרות — ומעליה יושב שער-הכניסה שאינו ניתן למעקף. */
-/* ============================================================================
-   📊 רצפת-הפרומו — "רק התאמה שהפרומו אינו מסוגל לה"
-
-   הפרומו מכיל את צליל-הפתיח האמיתי, ולכן שאלת "האם זה נשמע כמו הפתיח?"
-   מחזירה "כן" על שניהם. אבל הפרומו אינו חייב להישמע *באותה מידה* כמו
-   המהדורה: לרוב הוא קצר יותר, או שיש עליו קריינות, או שהוא מעובד אחרת.
-   ההפרש הזה נמדד — ואם הוא קיים, הוא בדיוק מה שמפריד.
-
-   הדקות 58-59 הן מדידה נקייה של המתחרה: שם אין מהדורה, ולכן כל מה
-   שמתאים שם הוא הפרומו — על אותו סטרים, באותו קידוד ובאותו עיבוד.
-   הרצפה יושבת מעליו, וכך נפתחת רק התאמה שהפרומו הוכיח שאינו מסוגל לה.
-
-   ⚠ הרצפה נקבעת רק כשיש מרווח מוכח בין השניים. אם הפרומו מנקד כמו
-   המהדורה או יותר — אין ציון שמפריד ביניהם, ורצפה הייתה חוסמת מהדורות
-   אמיתיות. חדשות לא קוטעים: בלי ראיה למרווח, אין רצפה. */
-function aidPromoFloor(){
-  try{
-    const c=aidCfg();
-    const pp=+(c.promoPeakMax||0);
-    if(!(c.promoPeakN>=2)||!(pp>0))return 0;          // עוד לא נמדד מספיק
-    const ref=+(c.mainPeak||0);
-    if(!(c.mainPeakN>=2&&ref>0))return 0;             // לא ידוע כמה מנקדת המהדורה
-    const want=+(pp+0.03).toFixed(3);
-    if(!(want<=ref-0.03))return 0;                    // אין מרווח — לא נוגעים
-    return want;
-  }catch(e){return 0}
-}
-function aidWinBar(){
-  const c=aidCfg();
-  /* 🥇 המקור הטוב ביותר: שיאים מכניסות שכבר אומתו באוויר. */
-  if(c.mainPeakN>=2&&c.mainPeak){
-    const bar=Math.max(0.50,Math.min(0.62,+(c.mainPeak-0.06).toFixed(3)),aidPromoFloor());
-    return {bar,need:bar<0.58?2:1,learned:true};   // רף נמוך → דורשים רצף ארוך יותר
-  }
-  /* 🪟 ואם עוד לא נכנסה אף מהדורה — הכיול חייב להתניע בלי כניסות, אחרת
-     הוא לעולם לא יתניע: רף גבוה מדי מונע כניסה, וללא כניסה אין ממה ללמוד
-     שהרף גבוה מדי. זו בדיוק הלולאה שגרמה לכך שבשעות שלמות לא נכנסה
-     מהדורה. לכן נמדד שיא-הניקוד בכל דקה עגולה — גם כשלא נכנסנו — ונלקח
-     החציון: בדקה העגולה משודרות רק חדשות אמיתיות, וחציון עמיד בפני
-     מיעוט שעות שבהן התחנה לא שידרה מהדורה כלל. */
-  const pk=(c.winPk||[]).slice().sort((a,b)=>a-b);
-  if(pk.length>=4){
-    const med=pk[Math.floor(pk.length/2)];
-    const bar=Math.max(0.50,Math.min(0.62,+(med-0.06).toFixed(3)),aidPromoFloor());
-    return {bar,need:bar<0.58?2:1,learned:true,fromWin:true};
-  }
-  return {bar:0.62,need:1,learned:false};
-}
-/* 📊 סגירת מדידת-הפרומו: נקראת כשהדקה העגולה נפתחת — כלומר בדיוק ברגע
-   שבו נגמרו הדקות שבהן רק הפרומו יכול היה להתנגן. השיא שנמדד שם הוא
-   הציון שהמתחרה מסוגל לו, ומכאן נגזרת הרצפה. */
-function aidClosePromo(){
-  try{
-    const pk=AID._preHourPeak||0;AID._preHourPeak=0;
-    if(!(pk>0.20))return;                    // שקט או מוזיקה — אין מתחרה למדוד
-    const c=aidCfg();
-    c.promoPeak=c.promoPeakN?+(((c.promoPeak*2+pk)/3).toFixed(3)):+pk.toFixed(3);
-    c.promoPeakMax=Math.max(+(c.promoPeakMax||0),+pk.toFixed(3));
-    c.promoPeakN=(c.promoPeakN||0)+1;save();
-    const fl=aidPromoFloor(),mp=+(c.mainPeak||0);
-    dlog('aid','📊 שיא-הפרומו נמדד',{peak:+pk.toFixed(3),avg:c.promoPeak,
-      max:c.promoPeakMax,n:c.promoPeakN,mainPeak:mp,mainN:c.mainPeakN||0,floor:fl});
-    if(c.promoPeakN>=2&&Date.now()-(AID._promoRepAt||0)>3600000){AID._promoRepAt=Date.now();
-      if(fl>0)
-        aidSay('📊 הפרומו שלפני השעה מגיע עד '+Math.round(c.promoPeakMax*100)
-          +'%, והמהדורה עצמה מגיעה ל-'+Math.round(mp*100)+'% — יש מרווח. '
-          +'הרף הועלה ל-'+Math.round(fl*100)+'%: רק התאמה שהפרומו אינו מסוגל לה תפתח חדשות');
-      else if(!(c.mainPeakN>=2&&mp>0))
-        aidSay('📊 הפרומו שלפני השעה מגיע עד '+Math.round(c.promoPeakMax*100)
-          +'% — אך עוד לא נמדד כמה מנקדת מהדורה אמיתית, ולכן הרף לא הועלה עדיין');
-      else
-        aidSay('📊 הפרומו מגיע עד '+Math.round(c.promoPeakMax*100)
-          +'% והמהדורה ל-'+Math.round(mp*100)+'% — אין ביניהם מרווח, כלומר אי-אפשר '
-          +'להפריד ביניהם לפי ציון. הרף לא הועלה (מוטב פרסומת שנקטעת ממהדורה שנחסמת); '
-          +'ההפרדה נשענת על רגע-השמיעה');
-    }
-  }catch(e){}
-}
-/* 🪟 סגירת חלון-הכניסה: רושמים את השיא שנמדד בו. נקרא כשהדקה העגולה
-   מסתיימת, בלי קשר לשאלה אם נכנסה מהדורה. */
-function aidCloseWin(){
-  try{
-    const pk=AID._winPeak||0;
-    if(!(pk>0.20))return;                 // שקט/רעש — אין מה ללמוד ממנו
-    const c=aidCfg();
-    const was=aidWinBar();
-    c.winPk.push(+pk.toFixed(3));
-    while(c.winPk.length>16)c.winPk.shift();
-    save();
-    const now=aidWinBar();
-    dlog('aid','🪟 שיא-החלון נרשם',{peak:+pk.toFixed(3),n:c.winPk.length,bar:now.bar});
-    if(now.fromWin&&Math.abs(now.bar-was.bar)>=0.02)
-      aidSay('🪟 סף-הזיהוי בדקה העגולה כויל ל-'+Math.round(now.bar*100)
-        +'% לפי '+c.winPk.length+' חלונות שנמדדו (הפתיח מנקד כאן ~'
-        +Math.round(now.bar*100+6)+'%)');
-  }catch(e){}
-}
-/* נלמד רק ממהדורה שבאמת עלתה לאוויר בדקה העגולה — לא משנה איזה מקור הכניס
-   אותה. מה שנמדד הוא תמיד שיא-הניקוד של המנוע הראשי באותו חלון. */
-function aidLearnPeak(src){
-  try{
-    if(src==='manual')return;
-    const c=aidCfg();
-    if(!aidEntryWindowOk())return;
-    const pk=Math.max(AID._winPeak||0,AID.meter.start||0);
-    if(!(pk>0.25))return;
-    const was=aidWinBar().bar;
-    c.mainPeak=c.mainPeakN?+(((c.mainPeak*2+pk)/3).toFixed(3)):+pk.toFixed(3);
-    c.mainPeakN=(c.mainPeakN||0)+1;save();
-    const now=aidWinBar();
-    dlog('aid','🎯 שיא-הפתיח במקור הראשי נלמד',
-      {peak:+pk.toFixed(3),avg:c.mainPeak,n:c.mainPeakN,bar:now.bar,need:now.need+1});
-    if(now.learned&&Math.abs(now.bar-was)>=0.02)
-      aidSay('🎯 סף-הזיהוי בדקה העגולה כויל ל-'+Math.round(now.bar*100)
-        +'% (הפתיח מנקד כאן בממוצע '+Math.round(c.mainPeak*100)+'% במקור הראשי)');
-  }catch(e){}
-}
 function aidStatWin(pend,durMs){
   try{
-    const c=aidCfg();if(c.learnDone)return;
+    const c=aidCfg();
     const h=pend.edHour!=null?pend.edHour:pend.hour;
+    /* ✅ מהדורה שודרה — מונה-ההחמצות של השעה מתאפס תמיד, גם כשהלמידה נעולה.
+       עד כה האיפוס ישב אחרי היציאה-המוקדמת של learnDone, ולכן hourMiss רק טיפס
+       והפיק התראות-שווא ("בשעה 06:00 לא זוהתה מהדורה 5 פעמים") על שעות ששודרו. */
+    c.hourMiss[h]=0;save();
+    if(c.learnDone)return;
     const s=c.hourStats[h]||(c.hourStats[h]={n:0,durS:0,score:0});
     const dS=Math.round(durMs/1000);
     s.durS=s.n?Math.round((s.durS*2+dS)/3):dS;       // ממוצע-נע: העבר שומר משקל, מהדורה חריגה לא הורסת
@@ -5592,11 +6728,29 @@ function aidClockGate(){
 
    מה שנשאר תמיד: זמן-המינימום באוויר (חדשות לא קוטעים — צליל דמוי-סיום
    בפתיחת המהדורה לא מוציא), וההכרעה מול הפתיח (הסיום חייב לנצח אותו). */
+/* 🏁 הרף הגולמי — "כמה הסיומת מנקדת כשאין סיום": ממנו נגזרות גם היציאה-המהירה
+   (עם תקרה לפי סיומות-אמת) וגם החסימה (בלי תקרה, ורק עם מרווח מוכח). */
+function aidEndFloorRaw(){
+  try{
+    const c=aidCfg();
+    if(!(c.endOffN>=2))return 0;
+    return Math.min(0.85,Math.max(0.62,+((c.endOffMax||0)+0.06).toFixed(3)));
+  }catch(e){return 0}
+}
 function aidEndFloor(){
   try{
     const c=aidCfg();
     if(!(c.endOffN>=2))return 0;                       // נמדד בפחות משתי שעות — אין רף
-    return Math.min(0.85,Math.max(0.62,+((c.endOffMax||0)+0.06).toFixed(3)));
+    const fl=aidEndFloorRaw();
+    /* 🏁 תקרה לפי סיומות-אמת: רף שגבוה מהציון שסיום אמיתי מגיע אליו הוא רף
+       שלא ייורה לעולם. נמדד 27-28.8: רף 79% מול ממוצע-סיום-אמת 65% — ולכן
+       10 מ-44 המהדורות רצו עד המשך-המרבי במקום להסתיים בזיהוי.
+       התקרה חלה על היציאה-המהירה בלבד; החסימה נגזרת מהרף הגולמי (למטה). */
+    if(c.endOnN>=2&&c.endOnAvg>0){
+      const cap=+(c.endOnAvg-0.02).toFixed(3);
+      if(fl>cap)return cap>=0.62?cap:0;
+    }
+    return fl;
   }catch(e){return 0}
 }
 /* 🚧 רף-החסימה — נפרד מרף-היציאה-המהירה, והלקח מ-24.8 (09/10/11 נחתכו
@@ -5607,10 +6761,13 @@ function aidEndFloor(){
    והממוצע שלהן גבוה מהרף. היציאה-המהירה (ציון מעל הרקע) נשארת תמיד. */
 function aidEndBlockFloor(){
   try{
-    const c=aidCfg(),fl=aidEndFloor();
+    const c=aidCfg(),fl=aidEndFloorRaw();
     if(!(fl>0))return 0;
     if(!(c.endOnN>=2))return 0;                      // עוד לא יודעים כמה סיום-אמת מנקד
-    if(!(c.endOnAvg>=fl+0.02))return 0;              // אין מרווח — חסימה עלולה לחסום סיום אמיתי
+    /* מרווח 0.06 (במקום 0.02): הממוצע לבדו אינו מספיק — סיומות-אמת מתפזרות
+       (נמדד 58%-80% סביב ממוצע 65%), וחסימה שנצמדת לממוצע חוסמת את הזנב הנמוך
+       ומשאירה את המהדורה באוויר עד המשך-המרבי. */
+    if(!(c.endOnAvg>=fl+0.06))return 0;              // אין מרווח — חסימה עלולה לחסום סיום אמיתי
     return fl;
   }catch(e){return 0}
 }
@@ -5792,18 +6949,24 @@ function aid2Listen(){
         const ctrl=new AbortController();feed.ctrl=ctrl;
         const resp=await fetch(url,{signal:ctrl.signal});
         const reader=resp.body.getReader();
-        aid2Say('🛰 מנוע-העזר מאזין למקור השני — ממתין לפתיח');
+        // 🔇 חניקת-יומן: כשהשרת דוחה את החיבור, הלולאה חוזרת כל 1.8ש' — והשורה הזו
+        //    הציפה את היומן (570 מתוך 587 שורות) ומחקה את היסטוריית-החדשות האמיתית
+        if(Date.now()-(AID._aux2LogAt||0)>60000){AID._aux2LogAt=Date.now();
+          aid2Say('🛰 מנוע-העזר מאזין למקור השני — ממתין לפתיח');}
         for(;;){
           const {done,value}=await reader.read();
           if(done||AID.feed2!==feed||feed.stop)break;
           if(value&&value.length){
+            feed.tries=0;                                  // ⏳ זרימה תקינה — ההשהיה המדורגת מתאפסת
             feed.buf.push(value);feed.total+=value.length;feed.lastData=Date.now();
             while(feed.total>480000&&feed.buf.length>1){feed.total-=feed.buf[0].length;feed.buf.shift();}
           }
         }
       }catch(e){}
       if(AID.feed2!==feed||feed.stop)break;
-      await new Promise(r=>setTimeout(r,1800));   // ניתוק — ננסה שוב
+      // ⏳ השהיה מדורגת עד 30ש' — מקור שדוחה את החיבור לא נתקף בלולאה
+      feed.tries=(feed.tries||0)+1;
+      await new Promise(r=>setTimeout(r,Math.min(30000,1800*feed.tries)));
     }
   })();
 }
@@ -5828,7 +6991,10 @@ async function aid2Pulse(){
     }
     aid2Listen();
     const f=AID.feed2;
-    if(f&&Date.now()-f.lastData>25000){aid2Say('⏱ מקור-העזר שתק ~25ש׳ — מתחבר מחדש');aid2Hangup();aid2Listen();return;}
+    if(f&&Date.now()-f.lastData>25000){
+      if(Date.now()-(AID._aux2SilLogAt||0)>300000){AID._aux2SilLogAt=Date.now();
+        aid2Say('⏱ מקור-העזר שתק ~25ש׳ — מתחבר מחדש');}
+      aid2Hangup();aid2Listen();return;}
     if(f&&Date.now()-AID.lastGoodDecode2>20000){aid2Hangup();AID.lastGoodDecode2=Date.now();aid2Listen();return;}
     // 😴 גם מנוע-העזר נח מחוץ לחלון-הפעילות (באוויר — ממשיך לחפש את הסיום)
     if(AID.mode!=='onair'&&!aidActiveWin()){
@@ -5839,7 +7005,8 @@ async function aid2Pulse(){
     const tail=aidTail(280000,AID.feed2);if(!tail)return;
     AID.busy2=true;AID._busy2At=Date.now();
     let pcm=null;
-    try{pcm=await aidDecode(tail);AID.lastGoodDecode2=Date.now();AID._decFails=0;}catch(e){AID._decErr=String(e&&e.message||e);}
+    // 🔧 מונה-הכשלים של הראשי שייך לראשי בלבד — איפוסו מכאן הסתיר תקלות-פענוח שלו
+    try{pcm=await aidDecode(tail);AID.lastGoodDecode2=Date.now();AID._dec2Fails=0;}catch(e){AID._dec2Err=String(e&&e.message||e);}
     AID.busy2=false;
     if(!pcm||pcm.length<AID_SR*4)return;
     if(pcm.length>14*AID_SR)pcm=pcm.subarray(pcm.length-14*AID_SR);
@@ -5967,8 +7134,8 @@ async function aid2Pulse(){
       const en={r:aidSeekEnd(pcm,null)};
       const st=AID.startPrint?aidSeek(AID.startPrint,pcm):{r:0};
       AID.meter2.end=en.r;AID.meter2.start=st.r;
-      const disc=en.r>st.r+AID_APART;
       const okTime=Date.now()-AID.onAirAt>aidExitMinMs();
+      const disc=okTime?(en.r>st.r-0.20):(en.r>st.r+AID_APART);   // 🏁 ראה ההסבר במסלול הראשי
       const zone2=aidEndZone();
       const grace2=!!AID._graceOn;                    // ⏳ מצב-העירנות חל גם על עזרת-היציאה
       const ev=en.r>=(grace2?0.48:(zone2?0.55:AID_EXIT))&&disc;
@@ -6029,6 +7196,8 @@ function rsUrls(){
     if(!u||seen[u.toLowerCase()])return;seen[u.toLowerCase()]=1;
     out.push({url:u,label:(l||'').trim()||('מקור '+(out.length+1))});};
   add(c.url,'ראשי');
+  if(c.rsBkOn!==false&&String(c.rsBkUrl||'').trim())          // 📡 הגיבוי — מיד אחרי הראשי
+    add(c.rsBkUrl,String(c.rsBkName||'').trim()||'גיבוי');
   String(c.rustUrls||'').split(/\r?\n/).forEach(ln=>{
     ln=ln.trim();if(!ln)return;
     const i=ln.indexOf('|');
@@ -6060,17 +7229,71 @@ function rsWin(p){return String(p||'').replace(/\//g,'\\');}
    היא לא מפעילה מנוע חדש, ולכן יתום מריצה קודמת שקרסה יושב לנצח. כאן
    הורגים לפי image-name עם סינון PID: taskkill /FI "PID ne <שלנו>" —
    כך הבריא (RS.pid) שורד וכל השאר נהרגים. נקרא תקופתית, בלי לגעת בפעיל. */
+/* ⛔ הפונקציה הזו היא שהרגה את המנועים — ההוכחה, מהיומן החי של 30.8:
+     15:57:27 יצא code 1 upS 900  →  15:57:31 🧹 יתומים נוקו
+     16:12:26 יצא code 1 upS 894  →  16:12:30 🧹 יתומים נוקו
+     16:27:26 · 16:42:26 · 16:57:27 · 17:12:30 · 17:27:36 · 17:42:31 — בדיוק כל 15 דק'.
+   וכשמרווח-הניקוי היה 2 דקות, אורך-החיים היה 107-124 שניות. מתאם מושלם.
+   הסיבה: taskkill /F /IM <שם> /FI "PID ne <id>" — אבל ה-id ש-Neutralino מחזיר
+   מ-spawnProcess אינו ה-PID של ה-exe בחלונות (הוא של עטיפת-ההרצה). לכן המסנן
+   לא הגן על כלום, וה-taskkill הרג את המנוע שלנו עצמו. code 1 הוא בדיוק מה
+   שתהליך שנהרג ע"י taskkill /F מדווח, ו-gotData:true הראה שהוא עבד עד הרגע האחרון.
+   מכאן: אין ניקוי-לפי-שם כל עוד מנוע שלנו חי. מרוץ-ההפעלה תוקן ולכן יתומים
+   כבר לא נוצרים, ושאריות מהרצה קודמת מנוקות ב-rsKillStray לפני ההפעלה —
+   בדיוק ברגע שבו התהליך שלנו אינו רץ, ולכן בטוח. */
+/* 🧯 מריץ-הניקוי היחיד (VER 1043) — כל קריאות ה-taskkill בזמן-ריצה עוברות דרכו.
+   הבאג שנמצא ב-9.9 במנהל-המשימות: Promise.race *נוטש* קריאה שחרגה מהזמן,
+   אבל אינו *מבטל* אותה — תהליך ה-cmd נשאר חי לנצח. נמדד: 3 זוגות
+   cmd+conhost תקועים, ואחרי סגירה-ופתיחה 6. וכל זוג כזה הוא עוד תהליך
+   שהאנטי-וירוס סורק, מה שמאט את הקריאה הבאה וגורם לה לחרוג גם היא —
+   לולאה שמזינה את עצמה.
+   הפתרון: קריאת-ניקוי אחת בכל רגע נתון. כל עוד הקודמת לא חזרה, לא
+   מפעילים חדשה — ולכן לכל היותר cmd אחד תלוי, במקום הצטברות בלי גבול.
+   השחרור נעשה כשהקריאה חוזרת בסוף, גם אם מזמן הפסקנו להמתין לה. */
+const RSX={busy:false,at:0,tok:0,timeouts:0,skipped:0};
+async function rsKillExec(cmd,ms){
+  try{
+    if(typeof NL_OS!=='undefined'&&NL_OS!=='Windows')return false;
+    if(RSX.busy){
+      // 🔓 מנעול-תקוע: קריאה שלא חזרה 3 דק' לא תשבית את הניקוי לנצח
+      if(Date.now()-RSX.at<180000){RSX.skipped++;return false;}
+      try{dlog('error','🧯 קריאת-ניקוי לא חזרה 3 דק׳ — המנעול שוחרר',
+        {skipped:RSX.skipped,timeouts:RSX.timeouts});}catch(e){}
+    }
+    const tok=++RSX.tok;
+    RSX.busy=true;RSX.at=Date.now();
+    const call=Promise.resolve()
+      .then(()=>Neutralino.os.execCommand(cmd))
+      .then(()=>true,()=>true)
+      .then(v=>{if(RSX.tok===tok)RSX.busy=false;return v;});
+    const ok=await Promise.race([call,new Promise(r=>setTimeout(()=>r(false),ms||10000))]);
+    if(!ok){RSX.timeouts++;
+      try{dlog('error','🧯 taskkill לא חזר בזמן — אין קריאה נוספת עד שיחזור',
+        {ms:ms||10000,timeouts:RSX.timeouts,cmd:String(cmd).slice(0,70)});}catch(e){}}
+    return ok;
+  }catch(e){return false}
+}
 async function rsKillOthers(){
   try{
     if(typeof NL_OS!=='undefined'&&NL_OS!=='Windows')return;
+    if(RS.proc||RE.proc){
+      if(Date.now()-(RS._koLogAt||0)>3600000){RS._koLogAt=Date.now();
+        dlog('aid','🧹 ניקוי-היתומים דולג — מנוע פעיל, וניקוי-לפי-שם היה הורג אותו',
+          {rs:!!RS.proc,re:!!RE.proc});}
+      return;
+    }
     const keepIds=[RS.pid,RE.pid].filter(Boolean);
     if(!keepIds.length)return;
     const keep=keepIds.map(p=>' /FI "PID ne '+p+'"').join('');
-    const names=['radio-start.exe','radio-end.exe','radio-detect.exe','radiodetect.exe','radio_detect.exe','radioc.exe'];
-    for(const n of names){
-      try{await Neutralino.os.execCommand('taskkill /F /IM '+n+keep);}catch(e){}
-    }
-    dlog('aid','🧹 יתומים בזמן-ריצה נוקו (נשמרו PID '+keepIds.join(', ')+')');
+    /* ⚡ נמדד 30.8: spawnMs=13548 — ההפעלה של המנוע נתקעה 13 שניות. הסיבה היא
+       שכל הפעלת-תהליך (cmd/taskkill) נסרקת ע"י האנטי-וירוס ועולה שנייה-שתיים,
+       ושש כאלה כל שתי דקות חסמו את צינור-Neutralino היחיד — אותו צינור שדרכו
+       עוברת גם ההפעלה עצמה. עכשיו שלכל מנוע יש שם-קובץ משלו, שני שמות מספיקים. */
+    // 🧯 שתי הפקודות ממוזגות ל-cmd אחד: חצי מהפעלות-התהליך, וחצי מהסריקות
+    const names=['radio-start.exe','radio-end.exe'];
+    const one='cmd /c "'+names.map(n=>'taskkill /F /IM '+n+keep).join(' & ')+'"';
+    if(await rsKillExec(one,10000))
+      dlog('aid','🧹 יתומים בזמן-ריצה נוקו (נשמרו PID '+keepIds.join(', ')+')');
   }catch(e){}
 }
 async function rsKillStray(eng){
@@ -6079,7 +7302,7 @@ async function rsKillStray(eng){
     if(eng){
       // ניקוי-שם-ייעודי לפני הפעלת מנוע: בטוח תמיד — לאח יש שם-קובץ אחר
       const n=eng===RE?'radio-end.exe':'radio-start.exe';
-      try{await Neutralino.os.execCommand('taskkill /F /IM '+n);}catch(e){}
+      await rsKillExec('taskkill /F /IM '+n,10000);
       return;
     }
     if(RS.pid||RE.pid)return;                    // מנוע שלנו רץ — הריגת-הכל תפיל גם אותו; הניקוי-התקופתי מטפל ביתומים
@@ -6088,14 +7311,70 @@ async function rsKillStray(eng){
     const cmd='cmd /c "taskkill /F /IM radio-start.exe & taskkill /F /IM radio-end.exe '
              +'& taskkill /F /IM radio-detect.exe & taskkill /F /IM radiodetect.exe '
              +'& taskkill /F /IM radio_detect.exe & taskkill /F /IM radioc.exe"';
-    await Neutralino.os.execCommand(cmd);
-    dlog('aid','🧹 עותקים תלושים של המנועים המקומיים נוקו');
+    if(await rsKillExec(cmd,12000))
+      dlog('aid','🧹 עותקים תלושים של המנועים המקומיים נוקו');
   }catch(e){}
 }
+/* 🛑 כיבוי-המנועים ביציאה (VER 1041) — הבאג: מטפל-היציאה עשה flushSave ואז
+   Neutralino.app.exit() בלבד. הצאצאים שנפתחו ב-spawnProcess אינם נכרכים
+   לתהליך-האב בחלונות, ולכן radio-start / radio-end / radio-listen המשיכו לרוץ
+   אחרי סגירת התוכנה — נראה במנהל-המשימות. מה שזה עושה בפועל:
+   היתום ממשיך להחזיק חיבור פתוח לסטרים. בהפעלה הבאה המנוע החדש פותח חיבור
+   שני מאותה כתובת — וזה בדיוק המצב שכבר תועד כאן: "url2 היה זהה ל-url, השרת
+   דחה את החיבור הכפול". המנוע שנדחה מקבל אודיו קטוע, ומאודיו קטוע יוצא ציון
+   נמוך. כלומר היתומים אינם רק לכלוך במנהל-המשימות — הם מורידים את ציון-הזיהוי.
+   ביציאה הריגה-בשם בטוחה לחלוטין: אין מנוע "שלנו" שצריך לשרוד. */
+async function aidShutdownEngines(){
+  // א׳ — סגירה מסודרת של הצאצאים המוכרים (מיידית, בלי תהליך חדש)
+  try{
+    const kids=[];
+    try{if(RS&&RS.proc)kids.push(RS.proc.id);}catch(e){}
+    try{if(RE&&RE.proc)kids.push(RE.proc.id);}catch(e){}
+    try{if(LS&&LS.proc)kids.push(LS.proc.id);}catch(e){}
+    for(const id of kids)if(id!=null){try{Neutralino.os.updateSpawnedProcess(id,'exit');}catch(e){}}
+  }catch(e){}
+  // ב׳ — ואז סריקה-בשם, לכל השמות שהיו בשימוש אי-פעם
+  try{
+    if(typeof NL_OS!=='undefined'&&NL_OS!=='Windows')return;
+    const names=['radio-start.exe','radio-end.exe','radio-listen.exe','radio-logo.exe',
+                 'radio-detect.exe','radiodetect.exe','radio_detect.exe',
+                 'radiostart.exe','radioc.exe'];
+    const cmd='cmd /c "'+names.map(n=>'taskkill /F /IM '+n).join(' & ')+'"';
+    // ⏱ תקרת-זמן: taskkill על תהליך גוסס עלול לא לחזור, והתוכנה לא תיתקע בסגירה
+    await Promise.race([Neutralino.os.execCommand(cmd),new Promise(r=>setTimeout(r,6000))]);
+  }catch(e){}
+}
+/* 🔒 מנעול-הפעלה — הלקח מ-30.8 ("המנוע מתחבר ומתנתק"):
+   המסלול הזה נמשך 8-10 שניות (11 בדיקות-נתיב, סריקת-תיקייה ו-taskkill,
+   כולם בתור על צינור-Neutralino היחיד), אבל שער-הזמן היה 8 שניות בלבד —
+   ולכן rsSpawn נכנס לתוך עצמו לפני ש-eng.proc הספיק להיקבע.
+   נמדד ביומן החי: 14:09:36 (הפעלה 4) → 14:09:46 (5) → 14:09:56 (6),
+   בלי אף יציאה ביניהן. כל הפעלה כזו דרסה את eng.proc והשאירה תהליך-יתום
+   שממשיך להחזיק חיבור לשרת-הסטרים; אירוע-היציאה שלו כבר לא נותב לאף מנוע
+   ולכן גם לא נרשם (198 הפעלות מול 97 יציאות ביומן).
+   היתומים הצטברו, שרת-הסטרים חתך את החיבורים — והמנוע יצא בקוד 1 אחרי
+   ~107 שניות, שוב ושוב. מנעול + שער 25ש' עוצרים את ההצטברות מהשורש. */
 async function rsSpawn(eng){
   eng=eng||RS;
   const c=aidCfg();
-  if(!rsOn()||eng.proc||Date.now()-eng.spawnAt<8000)return;
+  /* ⏳ המנעול פג אחרי 60ש': אם קריאה נייטיבית נתקעת (taskkill על תהליך גוסס,
+     getStats על נתיב עברי) — מנעול נצחי היה משאיר את המנוע כבוי לתמיד.
+     נמדד 30.8 14:49: שלוש דקות בלי אף הפעלה. עדיף הפעלה מאוחרת מאשר אף אחת. */
+  const _lockAge=Date.now()-(eng._spawnLockAt||0);
+  if((eng._spawning&&_lockAge<60000)||!rsOn()||eng.proc||Date.now()-eng.spawnAt<25000){
+    // 🔎 למה לא הופעל — כדי שדממה לעולם לא תישאר בלי הסבר ביומן
+    if(!eng.proc&&Date.now()-(eng._skipLogAt||0)>60000){
+      eng._skipLogAt=Date.now();
+      dlog('aid','🦀 '+rsEngName(eng)+' לא הופעל בפעימה הזו',
+        {spawning:!!eng._spawning,lockAgeS:Math.round(_lockAge/1000),
+         sinceSpawnS:Math.round((Date.now()-eng.spawnAt)/1000),
+         on:rsOn(),nextTryInS:Math.max(0,Math.round(((eng.nextTryAt||0)-Date.now())/1000))});
+    }
+    return;
+  }
+  if(eng._spawning)dlog('error','🦀 מנעול-ההפעלה של '+rsEngName(eng)+' פג — מנסים שוב',{lockAgeS:Math.round(_lockAge/1000)});
+  eng._spawning=true;eng._spawnLockAt=Date.now();
+  try{
   if(eng===RE&&!(c.endFile||'').trim())return;   // מנוע-הסגירה זקוק לקובץ-סיום
   // 🛑 נסיגה אחרי כשלונות: exe שנסגר מיד שוב ושוב אל לו לייצר סערת-הפעלות
   //    (taskkill+spawn כל 8ש' לנצח) שמעמיסה על צינור-המערכת ומרעיבה את
@@ -6108,6 +7387,9 @@ async function rsSpawn(eng){
   //    (אצל המשתמש הקובץ ירד בשם radiodetect.exe — וזו הסיבה שהמנוע לא נמצא)
   const names=rsNames(eng),exeKey=rsExeKey(eng);
   let found='';
+  /* ⚡ הסריקה כולה מיותרת כשהנתיב כבר נעול — והיא זו שמתחה את ההפעלה ל-8-10ש'
+     (11 קריאות getStats + readDirectory, כולן בתור על צינור-Neutralino). */
+  if(!c[exeKey])
   for(const n of names){
     for(const p of [BASE+'/'+n,rsWin(BASE+'/'+n)]){
       try{const st=await FS().getStats(p);if(st&&(st.size==null||st.size>0)){found=p;break;}}catch(e){}
@@ -6115,7 +7397,7 @@ async function rsSpawn(eng){
     if(found)break;
   }
   // גיבוי-איתור: סריקת תיקיית-התוכנה — כל קובץ ששמו "radiodetect" אחרי הסרת תווי-הפרדה
-  if(!found){
+  if(!found&&!c[exeKey]){
     try{const ents=await FS().readDirectory(BASE);
       if(Array.isArray(ents)){
         const hit=ents.map(e=>String(e.entry||e.name||''))
@@ -6125,7 +7407,7 @@ async function rsSpawn(eng){
       }
     }catch(e){}
   }
-  if(!found){
+  if(!found&&!c[exeKey]){
     // לא אותר בבדיקת-הנתיב — לא עוצרים! ממשיכים למסלול-הגילוי (הודעה פעם בדקה בלבד)
     const sayNow=Date.now()-(eng._probeAt||0)>60000;
     if(sayNow)eng._probeAt=Date.now();
@@ -6139,8 +7421,11 @@ async function rsSpawn(eng){
   //    תיקיית-התוכנה הנתיב השמור הצביע על המקום הישן, וההפעלה נכשלה מיד
   //    (קוד 1) שוב ושוב לנצח — אף שהקובץ ישב יפה בתיקייה החדשה. לא קיים →
   //    משחררים את הנעילה וחוזרים לחיפוש הרגיל ליד התוכנה.
-  if(c[exeKey]){
+  // ⏱ אימות-הנתיב פעם ב-5 דק' ולא בכל הפעלה — 3 קריאות-דיסק פחות בכל מחזור
+  if(c[exeKey]&&Date.now()-(eng._pathChkAt||0)>300000){
+    eng._pathChkAt=Date.now();
     let ok=false;
+    // ⏱ אימות-נתיב לא יעצור הפעלה: אם בדיקת-הדיסק לא חוזרת, ממשיכים בכל זאת
     for(const q of [c[exeKey],rsWin(c[exeKey]),String(c[exeKey]).replace(/\\/g,'/')]){
       try{const st=await FS().getStats(q);if(st){ok=true;break;}}catch(e){}
     }
@@ -6171,31 +7456,83 @@ async function rsSpawn(eng){
      לכן: מנוע-הסגירה תמיד בחיבור יחיד (הראשי — היציאה ממילא שייכת לסטרים
      שמשודר), ומנוע-הפתיחה יורד זמנית לחיבור-יחיד כשגלאי-הסערה מזהה ניתוקים. */
   const mono=eng===RS&&Date.now()<(RS._monoUntil||0);
-  const use=(eng===RE||mono)?list.slice(0,1):(multiOk?list:list.slice(0,1));
+  /* 🏁 מנוע-הסגירה חייב לשמוע את הסטרים שמשודר בפועל. עד כה הוא נעל את עצמו
+     על הראשי בלבד — ולכן כשמהדורה עלתה לאוויר מסטרים-הגיבוי, reDecide נחסם
+     ב-_isAir והיציאה המקומית לא יכלה לירות כלל. נמדד 30-31.8: כל המהדורות
+     שסומנו "משני (גלי צהל)" יצאו רק דרך מקור-העזר או בהמשך-המרבי.
+     עכשיו הוא מקבל את אותה רשימה (עד 2 סטרימים — הראשי והגיבוי). */
+  const use=mono?list.slice(0,1)
+           :(eng===RE?(multiOk?list.slice(0,2):list.slice(0,1))
+                     :(multiOk?list:list.slice(0,1)));
   eng.st=use.map((s,i)=>({label:s.label,url:s.url,last:null,lastAt:0,net:'',streak:0,_winLog:0}));
   let cmd='"'+exe+'"';
   use.forEach(s=>{cmd+=' --url "'+s.url+'" --label "'+s.label.replace(/"/g,'')+'"';});
   // 🎬/🏁 הפרדה מלאה: מנוע-הפתיחה עם הטבעת-הפתיח בלבד; מנוע-הסגירה עם הסיום בלבד
   if(eng===RS&&c.startFile)cmd+=' --start "'+rsWin(c.startFile)+'"';
   if(eng===RE&&c.endFile)cmd+=' --end "'+rsWin(c.endFile)+'"';
-  await rsKillStray(eng);                     // 🧹 מנקים תלושים של השם-שלנו בלבד — האח בטוח
+  /* 🧹 ניקוי-שם רק כשהוא רלוונטי: כשהמנוע רץ בפועל תחת radio-detect.exe,
+     taskkill על radio-start.exe הוא סיבוב-סרק שמאט כל הפעלה במאות אלפיות. */
+  {const _n=(eng===RE?'radio-end.exe':'radio-start.exe').toLowerCase();
+   /* דילוג כשהמופע הקודם יצא בצורה מסודרת — אין מה לנקות, וכל taskkill מיותר
+      עולה שנייה-שתיים על צינור-המערכת ומאחר את ההפעלה.
+      ⏱ ובכל מקרה — לכל היותר 10ש': taskkill על תהליך גוסס עלול לא לחזור. */
+   const _dedicated=String(exe).toLowerCase().endsWith(_n);
+   if(_dedicated&&!eng._cleanExit)
+     await Promise.race([rsKillStray(eng),new Promise(r=>setTimeout(r,10000))]);
+   eng._cleanExit=false;
+   /* ⚠ אזהרה גלויה (VER 1042) — הכשל השקט שנמצא ב-9.9 במחשב השני:
+      כששני קובצי-המנוע הייעודיים חסרים בתיקייה, rsNames נופל למועמד הבא —
+      radio-detect.exe — ואז *כל שלושת מנגנוני-הניקוי מושבתים בבת-אחת*:
+        · הניקוי-שלפני-ההפעלה כאן — התנאי endsWith('radio-start.exe') נכשל
+        · rsKillOthers — מדלג כל עוד מנוע שלנו חי (וכאן הוא תמיד חי)
+        · והפרדת-השמות — שני המנועים תחת שם אחד, אי-אפשר להבחין ביניהם
+      התוצאה: כל הפעלה מוסיפה תהליך ואף אחד לא נסגר. נמדד: 4 עותקים,
+      כל אחד עם חיבור פתוח לסטרים — וזה בדיוק מה ששרת-הסטרים חונק.
+      עד עכשיו זה קרה בלי שורה אחת ביומן. מעכשיו זה נאמר. */
+   if(!_dedicated&&Date.now()-(eng._nameWarnAt||0)>21600000){
+     eng._nameWarnAt=Date.now();
+     const _f=String(exe).split(/[\\/]/).pop();
+     dlog('error','📛 המנוע רץ תחת שם משותף — ניקוי-היתומים מושבת',
+       {eng:rsEngName(eng),exe:_f,wanted:_n});
+     aidSay('📛 '+rsEngName(eng)+' רץ מהקובץ '+_f+' ולא מ-'+_n
+       +' — ולכן ניקוי-העותקים-התלושים מושבת, והם נערמים ותופסים חיבורים לסטרים. '
+       +'התיקון: להעתיק את '+_n+' לתיקיית התוכנה ולהפעיל מחדש');
+   }}
   try{
     const p=await Neutralino.os.spawnProcess(cmd);
-    eng.proc=p;eng.id=p.id;eng.pid=p.pid;eng.starts++;eng.buf='';eng._err='';
-    dlog('aid','🦀 '+rsEngName(eng)+' הופעל',{pid:p.pid,starts:eng.starts});
+    // 🧯 רשת-ביטחון: אם בכל-זאת חפפו שתי הפעלות — הישן נסגר מיד ולא נשאר יתום
+    if(eng.proc&&eng.proc.id!==p.id){
+      const _old=eng.proc;
+      dlog('error','🦀 שתי הפעלות של '+rsEngName(eng)+' חפפו — התהליך הישן נסגר',
+        {oldPid:_old.pid,newPid:p.pid});
+      try{Neutralino.os.updateSpawnedProcess(_old.id,'exit');}catch(e){}
+    }
+    eng.proc=p;eng.id=p.id;eng.pid=p.pid;eng.starts++;eng.buf='';eng._err='';eng._rawN=0;
+    dlog('aid','🦀 '+rsEngName(eng)+' הופעל',
+      {pid:p.pid,starts:eng.starts,spawnMs:Date.now()-eng.spawnAt,
+       exe:String(exe).split(/[\\/]/).pop()});
     if(eng.starts===1)rsSay(rsEngName(eng)+' עלה — תהליך נפרד ('+(eng===RE?'הטבעת-הסיום':'הטבעת-הפתיח')+')');
   }catch(e){const em=String(e&&e.message||e);
     if(eng._err!==em){eng._err=em;
       rsSay('הפעלת '+rsEngName(eng)+' נכשלה: '+em);}
     dlog('error','🦀 הפעלת '+rsEngName(eng)+' נכשלה',{err:em,exe:exe});}
+  }finally{eng._spawning=false;}
 }
 function rsKill(eng){
   eng=eng||RS;
-  const p=eng.proc;eng.proc=null;eng.last=null;eng.st=[];
+  const p=eng.proc;eng.proc=null;eng.last=null;eng.st=[];eng.pid=0;
   if(p)try{Neutralino.os.updateSpawnedProcess(p.id,'exit');}catch(e){}
 }
 function rsLine(eng,txt){
-  let j=null;try{j=JSON.parse(txt);}catch(e){return;}
+  /* 📣 פלט שאינו JSON נזרק עד כה בשקט מוחלט — ובדיוק שם יושבת הודעת-הקריסה
+     של המנוע (panic / error / הודעת-רשת). זו הסיבה היחידה שאפשר ללמוד ממנה
+     למה הוא יוצא בקוד 1 אחרי ~2 דקות. עד 20 שורות לכל הרצה — בלי הצפה. */
+  let j=null;try{j=JSON.parse(txt);}catch(e){
+    if((eng._rawN=(eng._rawN||0)+1)<=20)
+      dlog('error','🦀 פלט-גולמי מ'+rsEngName(eng),
+        {line:String(txt).slice(0,400),n:eng._rawN,upS:Math.round((Date.now()-eng.spawnAt)/1000)});
+    return;
+  }
   const i=j.src|0,en=rsEngName(eng);
   if(j.ev==='tick'){
     const s=rsSt(i,eng);s.last=j;s.lastAt=Date.now();if(j.label)s.label=j.label;
@@ -6233,11 +7570,16 @@ function rsLine(eng,txt){
          על כל הסטרימים רק מחמיר — יורדים זמנית לחיבור-יחיד ונותנים לשרת
          להירגע. אחרי חצי שעה חוזרים אוטומטית לרב-סטרימי. */
       const now=Date.now();
-      eng._lostLog=(eng._lostLog||[]).filter(t=>now-t<600000);
-      eng._lostLog.push(now);
-      if(eng===RS&&rsUrls().length>1&&eng._lostLog.length>=8&&now>=(RS._monoUntil||0)){
-        RS._monoUntil=now+1800000;eng._lostLog=[];
-        rsSay('🚦 סערת-ניתוקים (8+ ב-10 דק׳) — שרת-הסטרים כנראה מגביל חיבורים. מנוע-הפתיחה עובר ל-30 דק׳ לסטרים-הראשי בלבד, ואז חוזר לרב-סטרימי');
+      /* 🚦 ניתוקים ב-20 השניות הראשונות אחרי הפעלה הם רעש-התחברות רגיל ולא
+         "סערה". בלי הסינון הזה, מנוע שמופעל מחדש כל שתי דקות היה מצטבר לסף
+         תוך זמן קצר ומכבה את סטרים-הגיבוי ל-30 דקות — בדיוק מה שנועד לעזור. */
+      if(now-(eng.spawnAt||0)>20000){
+        eng._lostLog=(eng._lostLog||[]).filter(t=>now-t<600000);
+        eng._lostLog.push(now);
+      }
+      if(eng===RS&&rsUrls().length>1&&(eng._lostLog||[]).length>=8&&now>=(RS._monoUntil||0)){
+        RS._monoUntil=now+600000;eng._lostLog=[];      // 10 דק' ולא 30 — הגיבוי חוזר מהר
+        rsSay('🚦 סערת-ניתוקים (8+ ב-10 דק׳) — שרת-הסטרים כנראה מגביל חיבורים. מנוע-הפתיחה עובר ל-10 דק׳ לסטרים-הראשי בלבד, ואז חוזר לרב-סטרימי');
         dlog('error','🚦 מצב-חיבור-יחיד זמני הופעל',{until:new Date(RS._monoUntil).toTimeString().slice(0,8)});
         rsKill(RS);RS.spawnAt=0;rsSpawn(RS);
       }
@@ -6347,6 +7689,250 @@ function rsDecide(i){
   rsSay('הפתיח זוהה במנוע המקומי ('+Math.round(best*100)+'% · '+nm+') — המנוע שלא נרדם');
   aidEnter(best,0,'rust',r.behindS);
 }
+
+/* ============================================================================
+   🕵 מנוע-הצל — radio-listen.exe
+   ----------------------------------------------------------------------------
+   תהליך נפרד שקורא את הסטרים ומודד דיבור-מול-מוזיקה. בשלב הזה יש לו
+   *אפס סמכות* על השידור: הוא רק רושם ליומן. המטרה היחידה היא לאסוף יממה
+   של נתונים אמיתיים מהסטרים הזה — ורק מהם ייגזרו הספים בשלב הבא.
+   הרציונל: ג'ינגל-הסיום של גלגלצ דומה מדי לפתיח (נמדד: הטבעת-הפתיח מנקדת
+   על הסיומת יותר מהטבעת-הסיום), ולכן זיהוי-הסיום לפי ג'ינגל נלחם בנתונים.
+   "הדיבור נגמר והמוזיקה חזרה" הוא סיגנל חזק והרבה יותר פשוט.
+   ========================================================================== */
+const LS={proc:null,id:0,pid:0,buf:'',starts:0,spawnAt:0,_spawning:false,_spawnLockAt:0,
+          _wired:false,ver:'',st:[],_rawN:0,_cleanExit:false,
+          edKey:'',minSp:1,maxSp:0,quiet:0,wouldAtS:null,nAtEnter:null};
+function lsOn(){const c=aidCfg();return !!c.on&&c.lsOn!==false&&!!(c.url||'').trim();}
+function lsUrls(){
+  const c=aidCfg(),out=[],seen={};
+  const add=(u,l)=>{u=String(u||'').trim();if(!u||seen[u.toLowerCase()])return;
+    seen[u.toLowerCase()]=1;out.push({url:u,label:(l||'').trim()||('מקור '+(out.length+1))});};
+  add(c.url,'ראשי');
+  if(c.rsBkOn!==false&&String(c.rsBkUrl||'').trim())
+    add(c.rsBkUrl,String(c.rsBkName||'').trim()||'גיבוי');
+  return out.slice(0,2);
+}
+function lsSt(i){if(!LS.st[i])LS.st[i]={label:'',url:'',last:null,lastAt:0,net:''};return LS.st[i];}
+/* 🎙 ערך-הדיבור של הסטרים שמשודר כרגע (או הראשי) */
+/* ============================================================================
+   🎙 יציאת-גיבוי: "הדיבור פסק, המוזיקה חזרה"
+   ----------------------------------------------------------------------------
+   למה: ג'ינגל-הסיום הוא סיגנל אמין בראשי (יציאות ב-73%-81%), אבל לא בכל
+   תחנה ולא בכל שעה. במהדורות-הלילה מגלי צה"ל הוא הגיע ל-40% בלבד — הרבה
+   מתחת לכל סף — ולכן שלוש מהדורות רצופות נחתכו על המשך-המרבי: 6 דקות
+   באוויר במקום 3, כלומר שלוש דקות של *מוזיקה* המשודרות כ"חדשות".
+   הסיגנל שכן עבד שם הוא הפשוט: מהדורה = דיבור. במדידה מהאוויר, הדיבור
+   בסטרים ששודר צנח מ-0.58 בליבת-המהדורה ל-0.25 בשנייה ~165 — בדיוק
+   כשהמהדורה נגמרה.
+   איך: מכיילים לכל מהדורה *בנפרד* — חציון-הדיבור בשניות 20-80 הוא הבסיס,
+   וירידה מתמשכת מתחתיו מסמנת סיום. הכיול-העצמי הזה הוא מה שהופך את זה
+   לעמיד מול הבדלים בין תחנות, שעות ורמות-דחיסה, במקום סף מוחלט שנמדד
+   כלא-אמין (AUC 0.72 על אודיו אמיתי מהתחנה הזו).
+   סייגים — זו יציאת-מוצא-אחרון בלבד:
+     · לא לפני 150ש' ולא לפני המינימום הנלמד של השעה;
+     · רק אם הדיבור בליבת-המהדורה באמת נמדד (בסיס ≥ 0.35) — אחרת הגלאי
+       לא עובד על הסטרים הזה ואסור לו להחליט;
+     · ממוצע על 60ש' שלמות, לא דגימה בודדת, כדי שקטע-רקע שקט באמצע
+       מהדורה לא יקטע אותה.
+   המחיר במקרה של טעות: יציאה מוקדמת בכ-30-60ש'. המחיר בלעדיה, כפי שנמדד:
+   3.5 דקות של מוזיקה באוויר תחת הכותרת "חדשות", בכל מהדורה כזו. */
+const SPX_MIN_S=150, SPX_DROP=0.60, SPX_MIN_BASE=0.35;
+const SPX={buf:[]};
+function spxReset(){SPX.buf=[];}
+function spxSample(){
+  try{
+    if(typeof AID==='undefined'||AID.mode!=='onair'||!AID.onAirAt)return;
+    const v=lsSpeech();if(v==null||!isFinite(v))return;
+    SPX.buf.push({t:Date.now(),v:+v,el:(Date.now()-AID.onAirAt)/1000});
+    if(SPX.buf.length>500)SPX.buf.splice(0,SPX.buf.length-400);
+  }catch(e){}
+}
+setInterval(spxSample,1000);
+function spxBaseline(){                       // חציון-הדיבור בליבת-המהדורה
+  const a=SPX.buf.filter(x=>x.el>=20&&x.el<=80).map(x=>x.v).sort((p,q)=>p-q);
+  return a.length>=15?a[Math.floor(a.length/2)]:0;
+}
+function spxRecent(){                          // ממוצע-הדיבור ב-60ש' האחרונות
+  const now=Date.now(),a=SPX.buf.filter(x=>now-x.t<=60000).map(x=>x.v);
+  return a.length>=25?a.reduce((s,x)=>s+x,0)/a.length:null;
+}
+/* מחזיר תיאור-יציאה כשהתנאים מתקיימים, אחרת null */
+function spxShouldExit(){
+  try{
+    if(aidCfg().spxOn===false)return null;
+    if(typeof AID==='undefined'||AID.mode!=='onair')return null;
+    const el=(Date.now()-AID.onAirAt)/1000;
+    if(el<SPX_MIN_S)return null;
+    if(Date.now()-AID.onAirAt<=aidExitMinMs())return null;
+    const base=spxBaseline();if(base<SPX_MIN_BASE)return null;
+    const cur=spxRecent();if(cur==null)return null;
+    if(cur>base*SPX_DROP)return null;
+    return {base:+base.toFixed(3),cur:+cur.toFixed(3),
+            ratio:+(cur/base).toFixed(2),elapsedS:Math.round(el),samples:SPX.buf.length};
+  }catch(e){return null;}
+}
+/* 🎙 ערך-הדיבור של הסטרים שמשודר כרגע — ורק שלו.
+   הגרסה הקודמת נכשלה בדיוק במקרה שבשבילו נבנתה: שרשרת ה-|| כללה
+   "או שזה הסטרים במקום 0", והלולאה מתחילה במקום 0 — כלומר בראשי. לכן
+   בזמן שידור מתחנת-הגיבוי הפונקציה החזירה את הדיבור של *הראשי*, שממשיך
+   לדבר בשלו (נמדד 0.5-0.9 לאורך כל המהדורה) ולא יורד לעולם. כל החלטה
+   שנשענת על זה — כולל יציאת-הגיבוי — פשוט לא יכלה לירות.
+   עכשיו: כשידוע מי באוויר, מודדים אותו בלבד; ואם דווקא הוא לא מדווח,
+   מחזירים null. אין למדוד תחנה אחת כדי להחליט על אחרת. */
+function lsSpeech(){
+  try{
+    const airU=String(AID.airUrl||'').trim();
+    const fresh=st=>!!(st&&st.last&&Date.now()-st.lastAt<8000);
+    if(airU){
+      for(const st of LS.st)
+        if(fresh(st)&&String(st.url||'').trim()===airU)return +st.last.speech;
+      return null;
+    }
+    for(const st of LS.st)if(fresh(st))return +st.last.speech;
+  }catch(e){}
+  return null;
+}
+async function lsSpawn(){
+  const c=aidCfg();
+  const age=Date.now()-(LS._spawnLockAt||0);
+  if((LS._spawning&&age<60000)||!lsOn()||LS.proc||Date.now()-LS.spawnAt<25000)return;
+  LS._spawning=true;LS._spawnLockAt=Date.now();
+  try{
+    LS.spawnAt=Date.now();
+    let exe=c.lsExe;
+    if(!exe){
+      for(const p of [BASE+'/radio-listen.exe',rsWin(BASE+'/radio-listen.exe')]){
+        try{const st=await FS().getStats(p);if(st){exe=rsWin(p);break;}}catch(e){}
+      }
+      if(!exe){
+        if(Date.now()-(LS._missAt||0)>600000){LS._missAt=Date.now();
+          dlog('aid','🕵 radio-listen.exe לא נמצא בתיקיית התוכנה — מנוע-הצל אינו פועל',{base:BASE});}
+        return;
+      }
+    }
+    const list=lsUrls();
+    let cmd='"'+exe+'"';
+    list.forEach(x=>{cmd+=' --url "'+x.url+'" --label "'+x.label.replace(/"/g,'')+'"';});
+    LS.st=list.map(x=>({label:x.label,url:x.url,last:null,lastAt:0,net:''}));
+    if(!LS._cleanExit)
+      await rsKillExec('taskkill /F /IM radio-listen.exe',8000);
+    LS._cleanExit=false;
+    try{
+      const p=await Neutralino.os.spawnProcess(cmd);
+      if(LS.proc&&LS.proc.id!==p.id){try{Neutralino.os.updateSpawnedProcess(LS.proc.id,'exit');}catch(e){}}
+      LS.proc=p;LS.id=p.id;LS.pid=p.pid;LS.starts++;LS.buf='';LS._rawN=0;
+      if(!c.lsExe){c.lsExe=exe;save();}
+      dlog('aid','🕵 מנוע-הצל הופעל',{pid:p.pid,starts:LS.starts,
+        spawnMs:Date.now()-LS.spawnAt,streams:list.map(x=>x.label)});
+      if(LS.starts===1)aidSay('🕵 מנוע-הצל עלה — מודד דיבור-מול-מוזיקה ורושם ליומן בלבד, בלי לגעת בשידור');
+    }catch(e){dlog('error','🕵 הפעלת מנוע-הצל נכשלה',{err:String(e&&e.message||e),exe});}
+  }finally{LS._spawning=false;}
+}
+function lsKill(){const p=LS.proc;LS.proc=null;LS.pid=0;LS.st=[];
+  if(p)try{Neutralino.os.updateSpawnedProcess(p.id,'exit');}catch(e){}}
+function lsLine(txt){
+  let j=null;
+  try{j=JSON.parse(txt);}catch(e){
+    if((LS._rawN=(LS._rawN||0)+1)<=20)
+      dlog('error','🕵 פלט-גולמי ממנוע-הצל',{line:String(txt).slice(0,300),n:LS._rawN});
+    return;
+  }
+  const i=j.src|0;
+  if(j.ev==='tick'){const st=lsSt(i);st.last=j;st.lastAt=Date.now();if(j.label)st.label=j.label;}
+  else if(j.ev==='hello'){LS.ver=j.ver||'';
+    dlog('aid','🕵 מנוע-הצל מדבר',{ver:LS.ver,streams:j.streams,mode:j.mode});}
+  else if(j.ev==='stream'){const st=lsSt(i);st.label=j.label||st.label;st.url=j.url||st.url;
+    dlog('aid','🕵 סטרים נרשם במנוע-הצל',{src:i,label:st.label});}
+  else if(j.ev==='net'){const st=lsSt(i);st.net=j.state||'';
+    dlog('aid','🕵 חיבור-הצל ('+(st.label||i)+'): '+j.state,{src:i,why:j.why||''});}
+  else if(j.ev==='err')dlog('error','🕵 שגיאת מנוע-הצל: '+(j.msg||''),{});
+}
+function lsFeed(chunk){
+  LS.buf+=chunk;
+  if(LS.buf.length>65536)LS.buf=LS.buf.slice(-8192);
+  let i;
+  while((i=LS.buf.indexOf('\n'))>=0){
+    const line=LS.buf.slice(0,i).trim();LS.buf=LS.buf.slice(i+1);
+    if(line)lsLine(line);
+  }
+}
+/* 🕵 ההחלטה-בצל: מתי *היינו* יוצאים אילו הדיבור היה מכריע. רק נרשם.
+   הסף כאן ארעי בכוונה (0.35 למשך 5 שניות) — הוא ייקבע מהנתונים שנאסוף. */
+function lsShadow(){
+  try{
+    if(AID.mode!=='onair'){LS.edKey='';return;}
+    const key=AID.lastEdKey||'x';
+    if(LS.edKey!==key){LS.edKey=key;LS.minSp=1;LS.maxSp=0;LS.quiet=0;
+      LS.wouldAtS=null;LS.nAtEnter=lsSpeech();}
+    const sp=lsSpeech();if(sp==null)return;
+    if(sp<LS.minSp)LS.minSp=sp;
+    if(sp>LS.maxSp)LS.maxSp=sp;
+    const el=Math.round((Date.now()-AID.onAirAt)/1000);
+    LS.quiet=sp<0.35?LS.quiet+1:0;
+    if(LS.wouldAtS==null&&el>=90&&LS.quiet>=5){
+      LS.wouldAtS=el;
+      dlog('aid','🕵 בצל: כאן הייתי יוצא — הדיבור נפסק',
+        {atS:el,speech:+sp.toFixed(3),minSp:+LS.minSp.toFixed(3),maxSp:+LS.maxSp.toFixed(3)});
+      aidSay('🕵 מנוע-הצל: הדיבור נפסק בשנייה '+el+' — כאן הייתי מסיים את המהדורה (רישום בלבד, השידור לא הושפע)');
+    }
+  }catch(e){}
+}
+/* 📈 דגימה תקופתית: בלי זה כל נתוני-הצל היו רק מזמן-מהדורה, ולא היה לי
+   קו-בסיס של "איך נראית מוזיקה" — ובלי שני הצדדים אי-אפשר לכייל סף.
+   גם משמש כהוכחת-חיים: אם המנוע שותק, זה נרשם. */
+function lsSample(){
+  try{
+    if(!lsOn()||!LS.proc)return;
+    const now=Date.now(),onair=AID.mode==='onair';
+    const every=onair?15000:60000;             // באוויר צפוף יותר — שם ההחלטה
+    if(now-(LS._sampAt||0)<every)return;
+    LS._sampAt=now;
+    const rows=[];
+    for(const st of LS.st){
+      if(!st)continue;
+      const fresh=st.last&&now-st.lastAt<8000;
+      rows.push(fresh?{s:st.label,speech:+(+st.last.speech).toFixed(3),
+                       ler:+(+st.last.ler).toFixed(3),mod4:+(+st.last.mod4).toFixed(3),
+                       zcrVar:+(+st.last.zcrVar).toFixed(5),flat:+(+st.last.flat).toFixed(3),
+                       rms:+(+st.last.rms).toFixed(4)}
+                     :{s:st.label,stale:true,ageS:st.lastAt?Math.round((now-st.lastAt)/1000):null});
+    }
+    if(!rows.length)return;
+    const alive=rows.some(r=>!r.stale);
+    dlog(alive?'aid':'error','📈 דגימת-דיבור'+(onair?' · באוויר':' · מוזיקה'),
+      {onair,elapsedS:onair?Math.round((now-AID.onAirAt)/1000):null,streams:rows});
+    if(!alive&&now-(LS._deadAt||0)>300000){LS._deadAt=now;
+      aidSay('🕵 מנוע-הצל לא מדווח נתונים — בודק את החיבור');}
+  }catch(e){}
+}
+function lsTick(){
+  try{
+    if(typeof S==='undefined'||!S)return;
+    if(!lsOn()){if(LS.proc)lsKill();return;}
+    if(!LS._wired){
+      LS._wired=true;
+      try{Neutralino.events.on('spawnedProcess',ev=>{
+        const d=ev&&ev.detail;if(!d||!LS.proc||d.id!==LS.proc.id)return;
+        if(d.action==='stdOut'||d.action==='stdErr'){
+          let x=d.data;
+          if(Array.isArray(x)){try{x=new TextDecoder().decode(new Uint8Array(x));}catch(e){x=String(x);}}
+          lsFeed(String(x||''));
+        }else if(d.action==='exit'){
+          dlog('error','🕵 מנוע-הצל יצא',{code:d.data,
+            upS:Math.round((Date.now()-LS.spawnAt)/1000),starts:LS.starts});
+          LS.proc=null;LS.pid=0;LS._cleanExit=true;
+        }
+      });}catch(e){}
+    }
+    if(!LS.proc)lsSpawn();
+    lsShadow();
+    lsSample();
+  }catch(e){}
+}
+setInterval(lsTick,5000);
+setInterval(lsShadow,1000);
+
 /* 🛡 משגיח: מפעיל את התהליך, ומחליף אותו אם הפסיק לדווח */
 /* 🏁 מסלול-ההחלטה של מנוע-הסגירה — תהליך נפרד שרץ תמיד, עם הטבעת-הסיום
    בלבד. תפקידו היחיד: היציאה. אותם כללים בדיוק שנבנו עד כה — רקע-היממה,
@@ -6391,17 +7977,44 @@ function reDecide(i){
     dlog('aid','🔒 יציאת-הסגירה נחסמה: ציון-סיום בלי נעילת-מסלול',{end:+r.end.toFixed(3),hard:+hard.toFixed(3)});
   }
 }
+let _rsTickAt=0;
 function rsTick(){
+  /* ⏱ הפונקציה הזו מונעת גם מ-setInterval וגם משומר-הלב. בלי המחסום היא
+     רצה פעמיים בכל מחזור — סריקות-תהליכים כפולות על אותו צינור-מערכת. */
+  if(Date.now()-_rsTickAt<3000)return;
+  _rsTickAt=Date.now();
   try{
     if(typeof S==='undefined'||!S)return;
-    if(!rsOn()){if(RS.proc)rsKill(RS);if(RE.proc)rsKill(RE);return;}
+    if(!rsOn()){
+      if(RS.proc)rsKill(RS);
+      if(RE.proc)rsKill(RE);
+      /* 🧹 טאטוא חד-פעמי: המנוע הישן כבוי, אבל תהליכים מהרצה קודמת שורדים את
+         סגירת התוכנה (Neutralino לא תמיד הורג את הצאצאים שלו), וממשיכים
+         להחזיק חיבורים לשרת-הסטרים. כאן זה בטוח לחלוטין — כשהמנוע כבוי
+         אנחנו לא מפעילים אותו כלל, ולכן כל עותק שרץ הוא בהכרח יתום.
+         פעם אחת בכל עליית-תוכנה, ואז שקט. */
+      if(!RS._offSweep){RS._offSweep=1;
+        setTimeout(async()=>{try{
+          const ok=await rsKillExec('cmd /c "taskkill /F /IM radio-start.exe & taskkill /F /IM radio-end.exe'
+                                   +' & taskkill /F /IM radio-detect.exe & taskkill /F /IM radiodetect.exe"',12000);
+          if(!ok)return;
+          dlog('aid','🧹 תהליכי המנוע-הישן שנותרו מהרצה קודמת נוקו',{});
+          aidSay('🧹 נוקו תהליכי המנוע-הישן שנשארו פתוחים מהרצה קודמת — החיבורים לשרת השתחררו');
+        }catch(e){}},5000);}
+      return;
+    }
     if(!RS._wired){
       RS._wired=true;
       try{Neutralino.events.on('spawnedProcess',ev=>{
         const d=ev&&ev.detail;if(!d)return;
         // ניתוב לפי מזהה-התהליך: כל מנוע והצינור שלו
         const eng=(RS.proc&&d.id===RS.proc.id)?RS:((RE.proc&&d.id===RE.proc.id)?RE:null);
-        if(!eng)return;
+        /* 🔎 יציאה של תהליך שאינו ה"נוכחי" נבלעה עד כה בשקט מוחלט — וכך יתומים
+           לא נספרו כלל. עכשיו לפחות נרשמת, כדי שנראה אם הם עדיין נוצרים. */
+        if(!eng){
+          if(d.action==='exit')dlog('error','🦀 תהליך-יתום של מנוע-הזיהוי יצא',{id:d.id,code:d.data});
+          return;
+        }
         if(d.action==='stdOut'||d.action==='stdErr'){
           let s=d.data;
           if(Array.isArray(s)){try{s=new TextDecoder().decode(new Uint8Array(s));}catch(e){s=String(s);}}
@@ -6418,7 +8031,8 @@ function rsTick(){
               if(eng.failN===3||eng.failN===6)
                 rsSay(rsEngName(eng)+' נכשל '+eng.failN+' פעמים ברצף — ממתינים '+(eng.failN>=6?15:5)+' דק׳ בין נסיונות (הזיהוי בדפדפן ממשיך כרגיל)');}
           }else{eng.failN=0;eng.nextTryAt=0;}
-          eng.proc=null;eng.last=null;
+          eng.proc=null;eng.last=null;eng.pid=0;   // 🧹 בלי איפוס-PID, סריקת-היתומים "שמרה" מזהה מת
+          eng._cleanExit=true;                     // יצא מסודר — ההפעלה הבאה לא צריכה taskkill
         }
       });}catch(e){}
     }
@@ -6432,7 +8046,9 @@ function rsTick(){
     if(!RS.proc)rsSpawn(RS);
     if(!RE.proc&&(aidCfg().endFile||'').trim())rsSpawn(RE);
     // 🧹 ניקוי-יתומים תקופתי: כל 2 דקות, שומר על שני הפעילים
-    if((RS.pid||RE.pid)&&Date.now()-(RS._cleanAt||0)>120000){RS._cleanAt=Date.now();rsKillOthers();}
+    /* 🧹 סריקת-היתומים רצה רק כששני המנועים למטה — אז אין את מי להרוג בטעות.
+       הקריאה הישנה רצה דווקא כשהם *כן* רצו (RS.pid||RE.pid), וזו הייתה התקלה. */
+    if(!RS.proc&&!RE.proc&&Date.now()-(RS._cleanAt||0)>900000){RS._cleanAt=Date.now();rsKillOthers();}
     for(const eng of [RS,RE]){
       if(!eng.proc)continue;
       // 🔁 הופעל אך לא אמר מילה תוך 12ש' → כנראה שם-קובץ שגוי: מנסים את הווריאציה הבאה
@@ -6525,6 +8141,16 @@ async function aidPulse(){
         aidSay('⏳ עברנו את המשך-המהדורה המוכר של השעה ('+Math.round(smart/60000)+' דק׳) והסיום טרם זוהה — לא קוטעים: ממשיכים בסף-רגיש עד זיהוי-הסיום או עד המשך המרבי');
         try{dlog('aid','⏳ מצב-עירנות: מעבר למשך הנלמד',{smartS:Math.round(smart/1000)});}catch(e){}
       }
+      /* 🎙 מוצא-אחרון לפני המספריים: אם ג'ינגל-הסיום לא זוהה אבל הדיבור
+         פסק והמוזיקה חזרה — יוצאים על הסיגנל הזה במקום לשדר מוזיקה
+         כ"חדשות" עד המשך-המרבי. */
+      {const sx=spxShouldExit();
+       if(sx){
+         try{dlog('aid','🎙 יציאה לפי דיבור-מול-מוזיקה (הסיומת לא זוהתה)',sx);}catch(e){}
+         aidExit('הדיבור פסק והמוזיקה חזרה ('+Math.round(sx.cur*100)+'% מול '
+           +Math.round(sx.base*100)+'% בליבת-המהדורה) — ג׳ינגל-הסיום לא זוהה');
+         return;
+       }}
       if(Date.now()-AID.onAirAt>=Math.max(2,+c.maxMin||6)*60000){
         aidExit('הגענו למשך המרבי ('+Math.max(2,+c.maxMin||6)+' דק׳)');return;
       }
@@ -6617,28 +8243,23 @@ async function aidPulse(){
       //    מקרי יכול לחצות את הרף לפעימה אחת ולקטוע שיר. פתיח-אמת נמשך שניות ומייצר
       //    פעימות-זיהוי רצופות; לכן נדרשות *שתי פעימות רצופות* — זה דוחה בליפ בודד
       //    בלי לעכב פתיח אמיתי (פעימה אחת נוספת, והסנכרון ממילא מיישר את ההשמעה).
-      //    שומרות עלינו גם ההגנות שבשער: רגע-השמיעה ורצפת-הפרומו. מחוץ לחלון — לא קיים.
-      const wb=aidWinBar();
+      //    שומרות עלינו גם ההגנות שבשער: רגע-השמיעה. מחוץ לחלון — לא קיים.
       // 🧠 כל שמונת המנועים במקביל: די שאחד מהם חצה את הסף שלו בדקה העגולה.
       //    עד כה מסלול-החלון הביט רק ב-e1/e2 (ההטבעות); מנוע-קצב או מנוע-מלודיה
       //    חזק לבדו לא הפעיל כניסה. votes>=1 = לפחות מנוע אחד מזהה.
       //    ההגנה על "שעה בלי מהדורה" אינה כאן אלא בשער (רגע-השמיעה): צליל
       //    שהגיע לפני השעה נחסם שם, יהיה המנוע שזיהה אשר יהיה.
       const anyEng=votes>=1;
-      const winNear=inWin&&(best>=wb.bar||anyEng)&&best>en.r+AID_APART;
+      const winNear=inWin&&(best>=AID_WIN_BAR||anyEng)&&best>en.r+AID_APART;
       const winStreakHit=winNear&&(AID._winStreak||0)>=1; // שתי פעימות רצופות בדקה העגולה = כניסה (בליפ בודד לא קוטע שיר)
       // שיא-הניקוד בחלון נמדד תמיד — גם כשלא נכנסים — וזה מה שמכייל את הרף.
       // 🪟 השיא שייך לחלון *הזה* בלבד: עד כה הוא אופס רק בכניסה מוצלחת,
       //    ולכן בשעות שבהן לא נכנסה מהדורה הוא נשא איתו את שיא השעות
       //    הקודמות והרעיל את הכיול — הרף טיפס והכניסות נחסמו עוד יותר.
-      /* 📊 בדקות 58-59 אין מהדורה — כל התאמה שם היא הפרומו, ולכן זו מדידה
-         נקייה של המתחרה על אותו סטרים ובאותה איכות-קידוד. */
-      {const mm=new Date().getMinutes();
-       if(mm===58||mm===59)AID._preHourPeak=Math.max(AID._preHourPeak||0,best);}
-      {const wk=inWin?new Date().getHours():-1;
-       if(inWin&&AID._winKey!==wk){AID._winKey=wk;AID._winPeak=0;aidClosePromo();}
-       else if(!inWin&&AID._winKey!=null&&AID._winKey>=0){aidCloseWin();AID._winKey=-1;AID._winPeak=0;}}
-      if(inWin)AID._winPeak=Math.max(AID._winPeak||0,best);
+      /* 🗑 מדידות-הכיול הוסרו (VER 1040): שיא-הפרומו (דקות 58-59), שיא-החלון
+         והרף שנגזר מהם. הן יצרו שני מדגמים מנוגדים — winPk נאסף רק בשעות
+         שהוחמצו, mainPeak רק בשעות שהצליחו — ומהן חושב רף אחד שהוחל על שתיהן.
+         הרף כבר אינו נלמד: AID_WIN_BAR קבוע. */
       // כניסה: המסלולים המדויקים (E1/E2) — או הצבעת-צוות (4/6) — או, סמוך לשעה: 3+ קולות-מוקלים / הטבעה ≥0.66 עם 2+
       // — או בחיזוק-העזר: הטבעה ≥0.60 *וגם* 2+ קולות-מוקלים — או מסלול-החלון (דגימה אחת מעל הרף בדקה העגולה)
       const rawMatch=((((e1>=AID_ENTER||e2>=AID_HEAD_ENTER)||(e7>=0.55&&best>=0.55)||(votes>=5&&best>=0.55))
@@ -6652,12 +8273,12 @@ async function aidPulse(){
       /* 🧠 בתוך הדקה העגולה: התאמה מתחת לרף-המכויל (מסלולי-הקולות: מנוע-בודד,
          הצבעת-צוות, שעה-עגולה) נכנסת רק עם נעילת-מסלול — ההוכחה שהצליל
          מתנהג כמו שידור-הפתיח ולא כשיר שדומה לו. מעל הרף — כרגיל. */
-      const lowScore=best<Math.max(0.60,wb.bar);
+      const lowScore=best<AID_WIN_BAR;
       const match=rawMatch&&(inWin||best>negR+0.04)&&!(inWin&&lowScore&&AID._trackLock!==true);
       if(rawMatch&&inWin&&lowScore&&AID._trackLock!==true
          &&Date.now()-(AID._lockLogAt||0)>20000){AID._lockLogAt=Date.now();
         aidSay('🧠 נעילת-מסלול חסמה כניסה ('+Math.round(best*100)+'%): ההתאמה אינה זזה בקצב-השעון בין הפעימות — שיר שדומה לפתיח, לא שידור-הפתיח. ממשיכים להאזין');
-        dlog('aid','🧠 נעילת-מסלול חסמה',{best:+best.toFixed(3),bar:+wb.bar.toFixed(3),votes});}
+        dlog('aid','🧠 נעילת-מסלול חסמה',{best:+best.toFixed(3),bar:AID_WIN_BAR,votes});}
       if(rawMatch&&!match&&Date.now()-(AID._negLogAt||0)>20000){AID._negLogAt=Date.now();
         aidSay('🚫 הצליל תואם מתחזה-שנלמד ('+Math.round(negR*100)+'%) — לא פתיח אמיתי, לא נכנסים');}
       // 🚫 באמצע השעה (דקות 6-55) התאמה היא בהגדרה מתחזה — לומדים אותה
@@ -6714,9 +8335,17 @@ async function aidPulse(){
       //    והוא שקטע מהדורות-משני באמצע (24.8). היציאה אז שייכת למי שמאזין
       //    לזרם המשודר: מנוע-העזר והמנוע-המקומי. באוויר-ראשי — הכל כרגיל.
       const mainAirs=AID.airFrom!=='alt';
-      // 🛡️ יציאה רק כשזה באמת הסיום: מנצח את הפתיח (הכרעה-מבדילה) + שתי מסגרות רצופות (או חזקה בודדת)
-      const disc=en.r>st.r+AID_APART;
+      // 🛡️ יציאה רק כשזה באמת הסיום: רף + רצף + נעילת-מסלול + זמן-מינימום
       const okTime=Date.now()-AID.onAirAt>aidExitMinMs();
+      /* 🏁 ההכרעה-המבדילה — רק בזמן שבו הפתיח באמת יכול להתנגן.
+         נמדד 30-31.8 מהאוויר: הג'ינגל הסוגר של גלגלצ דומה לפותח עד כדי כך
+         שהטבעת-הפתיח מנקדת עליו *יותר* מהטבעת-הסיום — ברגע הסיום האמיתי
+         נמדד end 0.556 מול start 0.685. לכן disc היה false בכל דגימה, וכל
+         מסלולי-היציאה (שכולם דורשים אותו) לא יכלו לירות אף פעם: שש מהדורות
+         רצו עד המשך-המרבי ושודרו 3 דקות מיותרות של התחנה השנייה.
+         אחרי זמן-המינימום באוויר (90ש'+) הפתיח כבר אינו אפשרות מציאותית,
+         ולכן הדרישה מיותרת שם; מה ששומר עלינו הוא הרף, הרצף ונעילת-המסלול. */
+      const disc=okTime?(en.r>st.r-0.20):(en.r>st.r+AID_APART);
       const zone=aidEndZone();
       const elapsed=Math.round((Date.now()-AID.onAirAt)/1000);
       // 🎯 הלקח מ-08:00: צלילים אמיתיים בסטרים מגיעים ל-65-75% (כמו הפתיח שנכנס ב-74%),
@@ -6733,7 +8362,10 @@ async function aidPulse(){
       if(Date.now()-(AID._devEndAt||0)>6000){AID._devEndAt=Date.now();
         dlog('aid','🔚 דגימת-סיום: '+Math.round(en.r*100)+'%'+(soft?' · סף-מוקל':''),
           {end:+en.r.toFixed(3),start:+st.r.toFixed(3),endAux:+((AID.meter2&&AID.meter2.end)||0).toFixed(3),
-           disc,okTime,elapsed,exitMinS:Math.round(aidExitMinMs()/1000),zone,soft,grace,streak:AID._endStreak||0});}
+           disc,okTime,elapsed,exitMinS:Math.round(aidExitMinMs()/1000),zone,soft,grace,
+           lock:AID._endLockM===true,          // 🔒 נעילת-המסלול היא התנאי האחרון ליציאה — חייבים לראות אותה ביומן
+           speech:(function(){try{const v=lsSpeech();return v==null?null:+v.toFixed(3);}catch(e){return null;}})(),
+           streak:AID._endStreak||0});}
       if(!okTime&&ev&&Date.now()-(AID._earlyEndAt||0)>30000){AID._earlyEndAt=Date.now();
         aidSay('🛡 צליל דמוי-סיום ('+Math.round(en.r*100)+'%) באמצע המהדורה — מוקדם מדי ביחס למשך, ממשיכים בחדשות');}
       // 🏁 מנוע-הסיום: דגימה אחת מעל הרף שנמדד מהאוויר — יציאה מיידית
@@ -6870,6 +8502,39 @@ function aidEdLogRender(){
 function aidRender(){
   try{aidEdLogRender();}catch(e){}
   const $id=x=>document.getElementById(x);
+  /* 📡 מצב חי של סטרים-הגיבוי — האם התהליך המקומי באמת מקבל ממנו נתונים */
+  try{
+    const c0=aidCfg(),bp=$id('aid-bk-pill'),bs=$id('aid-bk-status');
+    if(bp||bs){
+      const url=String(c0.rsBkUrl||'').trim(),on=c0.rsBkOn!==false&&!!url;
+      let idx=-1;
+      if(on)for(let k=0;k<RS.st.length;k++){
+        const st=RS.st[k];if(st&&String(st.url||'').trim()===url){idx=k;break;}}
+      const st=idx>=0?RS.st[idx]:null;
+      const live=!!(st&&st.last&&Date.now()-st.lastAt<8000);
+      if(bp){bp.className='snpill '+(live?'live':(on?'wait':'off'));
+        bp.textContent=live?'מאזין':(on?'מתחבר':'כבוי');}
+      if(bs){
+        if(!on)bs.textContent=url?'הגיבוי כבוי — הזיהוי מהראשי בלבד':'לא הוגדרה כתובת גיבוי';
+        else if(c0.rustOn===false)bs.textContent='המנוע המקומי כבוי — הגיבוי לא פעיל';
+        else if(live){
+          const r=st.last||{},b=Math.max(+r.start||0,+r.head||0);
+          /* 🏁 ציון-הסיום מגיע ממנוע-הסגירה, לא ממנוע-הפתיחה. מנוע-הפתיחה
+             מופעל עם --start בלבד, ולכן r.end אצלו הוא תמיד 0 — והשורה הציגה
+             "סיום 0%" קבוע שנראה כמו מדידה אמיתית. מנוע-הסגירה מקבל את אותם
+             שני סטרימים (ראשי + גיבוי), אז הציון הנכון יושב ב-RE.st באותו
+             אינדקס. אם הוא עוד לא דיווח — אומרים זאת במפורש. */
+          const es=RE.st[idx];
+          const eFresh=!!(es&&es.last&&Date.now()-es.lastAt<8000);
+          const endTxt=eFresh?('סיום '+Math.round((+es.last.end||0)*100)+'%')
+                             :(RE.proc?'סיום — מתחבר…':'סיום — מנוע-הסגירה אינו רץ');
+          bs.textContent='🎧 '+(st.label||'גיבוי')+' — פתיח '+Math.round(b*100)+'%'
+            +' · '+endTxt+(st.net?' · '+st.net:'');
+        }
+        else bs.textContent=RS.proc?'ממתין לנתונים מתחנת-הגיבוי…':'המנוע המקומי אינו רץ';
+      }
+    }
+  }catch(e){}
   // 🦀 מצב מנוע-הזיהוי המקומי
   {const p=$id('aid-rs-pill'),st=$id('aid-rs-status');
    if(p){const live=RS.proc&&rsFresh();
@@ -7009,16 +8674,49 @@ function aidUIWire(){
   const rso=$id('aid-rs-on');
   if(rso){rso.checked=c.rustOn!==false;
     rso.onchange=e=>{c.rustOn=e.target.checked;save();
-      if(!c.rustOn){rsKill();rsSay('המנוע המקומי כובה — הזיהוי הרגיל ממשיך');}
+      // 🔧 rsKill() בלי ארגומנט סגר רק את מנוע-הפתיחה — מנוע-הסגירה נשאר רץ כיתום
+      if(!c.rustOn){rsKill(RS);rsKill(RE);rsSay('המנוע המקומי כובה — הזיהוי הרגיל ממשיך');}
       else rsSay('המנוע המקומי הופעל');};}
+  /* 📡 שורת סטרים-הגיבוי: שם, כתובת ומתג. כל שינוי מפעיל את המנוע המקומי
+     מחדש עם רשימת-הסטרימים המעודכנת, כדי שהשינוי ייכנס לתוקף מיד. */
+  const _bkApply=(msg)=>{
+    save();
+    const l=rsUrls();
+    if(msg)aidSay(msg);
+    dlog('aid','📡 סטרים-הגיבוי עודכן',{streams:l.map(x=>x.label)});
+    if(RS.proc){rsKill(RS);RS.spawnAt=0;rsSpawn(RS);}
+    aidRender();
+  };
+  const bkOn=$id('aid-bk-on');
+  if(bkOn){bkOn.checked=c.rsBkOn!==false;
+    bkOn.onchange=e=>{c.rsBkOn=e.target.checked;
+      _bkApply(c.rsBkOn
+        ?('📡 סטרים-הגיבוי הופעל'+(String(c.rsBkUrl||'').trim()?' ('+(c.rsBkName||'גיבוי')+')':' — עדיין חסרה כתובת'))
+        :'📡 סטרים-הגיבוי כובה — הזיהוי מהראשי בלבד');};}
+  const bkNm=$id('aid-bk-name');
+  if(bkNm){bkNm.value=c.rsBkName||'';
+    bkNm.onchange=e=>{c.rsBkName=String(e.target.value||'').trim();_bkApply('');};}
+  const bkUrl=$id('aid-bk-url');
+  if(bkUrl){bkUrl.value=c.rsBkUrl||'';
+    bkUrl.onchange=e=>{
+      const v=String(e.target.value||'').trim();
+      if(v&&v.toLowerCase()===String(c.url||'').trim().toLowerCase()){
+        aidSay('⚠️ כתובת-הגיבוי זהה לסטרים הראשי — זה לא גיבוי. הזן תחנה אחרת שמשדרת את אותה מהדורה');
+        e.target.value=c.rsBkUrl||'';return;
+      }
+      c.rsBkUrl=v;
+      _bkApply(v?('📡 סטרים-הגיבוי הוגדר: '+(c.rsBkName||'גיבוי'))
+                :'📡 כתובת-הגיבוי נמחקה — הזיהוי מהראשי בלבד');};}
   // 📡 סטרימים נוספים למנוע המקומי — שינוי מפעיל את התהליך מחדש עם הרשימה החדשה
   const rsu=$id('aid-rs-urls');
   if(rsu){rsu.value=c.rustUrls||'';
     rsu.onchange=e=>{c.rustUrls=String(e.target.value||'').trim();save();
       const l=rsUrls();
+      const typed=String(c.rustUrls||'').split(/\r?\n/).map(x=>x.trim()).filter(Boolean).length;
       aidSay(l.length>1
         ?('📡 המנוע המקומי יאזין ל-'+l.length+' סטרימים במקביל: '+l.map(s=>s.label).join(' · ')+' — כניסה מכל אחד מהם, יציאה רק מהראשי')
-        :'📡 המנוע המקומי יאזין לסטרים הראשי בלבד');
+        :(typed?'⚠️ הכתובת שהוזנה זהה לסטרים הראשי — אין גיבוי. הזן כתובת של תחנה אחרת שמשדרת את אותה מהדורה'
+               :'📡 המנוע המקומי יאזין לסטרים הראשי בלבד — בלי גיבוי'));
       dlog('aid','📡 רשימת-הסטרימים של המנוע המקומי עודכנה',{streams:l});
       if(RS.proc){rsKill(RS);RS.spawnAt=0;rsSpawn(RS);}
       if(RE.proc){rsKill(RE);RE.spawnAt=0;rsSpawn(RE);}};}
@@ -7143,14 +8841,34 @@ function aidHeartbeat(){
 }
 // ⏱ ערוץ-הזמן של שומר-הלב: Worker נפרד (חסין לחניקת-טיימרים); אם Worker לא זמין — טיימר רגיל
 (function(){
-  try{
-    const w=new Worker(URL.createObjectURL(new Blob(['setInterval(function(){postMessage(1)},5000)'],{type:'application/javascript'})));
-    w.onmessage=()=>{try{aidHeartbeat();}catch(e){}};
-    HB.channel='worker';
-  }catch(e){
-    setInterval(()=>{try{aidHeartbeat();}catch(e2){}},5000);
+  let backup=null;
+  const startBackup=(why)=>{
+    if(backup)return;
+    backup=setInterval(()=>{try{aidHeartbeat();}catch(e){}},5000);
     HB.channel='timer';
-  }
+    try{dlog('error','🫀 ערוץ-הזמן עבר לטיימר רגיל',{why});}catch(e){}
+  };
+  try{
+    const blobUrl=URL.createObjectURL(new Blob(['setInterval(function(){postMessage(1)},5000)'],{type:'application/javascript'}));
+    const w=new Worker(blobUrl);
+    try{URL.revokeObjectURL(blobUrl);}catch(e){}     // 🧹 ה-Worker כבר נטען; הקישור מיותר
+    w.onmessage=()=>{HB.wAt=Date.now();if(backup){clearInterval(backup);backup=null;HB.channel='worker';}try{aidHeartbeat();}catch(e){}};
+    /* 🩺 Worker שמת בשקט (שגיאה, קריסה, חניקה) השאיר את שומר-הלב בלי דופק,
+       ואת מנוע-הזיהוי בלי מי שיחייה אותו — בלי שורה אחת ביומן. עכשיו יש
+       משגיח: 25 שניות בלי פעימה ואנחנו עוברים לטיימר רגיל. */
+    w.onerror=()=>startBackup('worker-error');
+    HB.channel='worker';HB.wAt=Date.now();
+    /* 🩺 שני מדדים ולא אחד: גם ה-Worker שתק וגם *הטיימר הזה עצמו* רץ בקצב.
+       אחרי יקיצה משינה שניהם קופאים יחד, וזה לא כשל — לכן משווים את הפער
+       של ה-Worker לפער של המשגיח. אם המשגיח גם הוא "אחר", זו שינה: מאפסים.
+       והמעבר הפיך — פעימה אחת מה-Worker מחזירה אליו את ההגה. */
+    let wdAt=Date.now();
+    setInterval(()=>{
+      const now=Date.now(),self=now-wdAt;wdAt=now;
+      if(self>60000){HB.wAt=now;return;}                  // המחשב ישן — לא כשל
+      if(now-(HB.wAt||0)>25000)startBackup('worker-silent');
+    },15000);
+  }catch(e){startBackup('worker-unavailable');}
 })();
 
 
@@ -7231,10 +8949,16 @@ function gdTick(){
     const M=Math.max(0,Math.min(59,+it.minute||0));
     if(mm<M||mm-M>10)continue;   // 🕐 חלון-השלמה: עד 10 דק' איחור (חדשות/שיר ארוך)
     const key=dk+'|'+it.id+'|'+hh;
-    if(_gdFired.has(key))continue;_gdFired.add(key);
-    if(_gdFired.size>800)_gdFired=new Set([..._gdFired].slice(-300));
+    if(_gdFired.has(key))continue;
+    if(it.lastKey===key)continue;                     // 🛡 שורד הפעלה-מחדש: כבר שודר בשעה הזו היום
     const tr=S.tracks.find(x=>x.file===it.file&&!x.missing);
     if(!tr){try{logPlay('info','⚠️ Drive: הקובץ "'+it.name+'" חסר — הורד מחדש','');}catch(e){}continue;}
+    if(pending.some(x=>x.kind==='program'&&x.trackId===tr.id))continue;     // כבר ממתין בתור
+    if(current&&current.track&&current.track.id===tr.id)continue;           // מתנגן ממש עכשיו
+    /* 🔑 כמו בתוכניות: המפתח נשרף רק כשהפריט באמת נכנס לתור, ונשמר לקובץ כדי
+       שהפעלה-מחדש בתוך חלון-ההשלמה לא תשדר אותו פעם שנייה. */
+    _gdFired.add(key);it.lastKey=key;
+    if(_gdFired.size>800)_gdFired=new Set([..._gdFired].slice(-300));
     pending.unshift({trackId:tr.id,src:'📁 Drive: '+it.name,kind:'program'});
     try{save();renderQueue();logPlay('info','📁 קובץ מ-Google Drive: '+it.name,pad2(hh)+':'+pad2(M));}catch(e){}
     // 🎵 שידור טבעי: התוכנית ממתינה בתור — נכנסת אחרי סוף השיר, החדשות והפרסומות
