@@ -1166,6 +1166,20 @@ const AUDIO_RE=/\.(mp3|wav|ogg|m4a|aac|flac|opus|wma)$/i;
 const FS=()=>Neutralino.filesystem;
 const urlCache={},urlOrder=[];
 let _fsPend=0,_diskBadUntil=0;   // 🚦 קריאות-קבצים תלויות · עד-מתי הצינור נחשב חסום
+/* 🔎 רישום הקריאות-הפתוחות — לאבחון "מי תוקע את מי" (הלקח מ-19.10: "מיליון
+   עננים" קיים ותקין, אבל חיכה בתור מאחורי שתי קריאות שנתלו על כונן לא-נגיש.
+   היומן אמר רק מי הקורבן; עכשיו הוא אומר גם מי התוקע וכמה זמן הוא תלוי). */
+const _fsInflight=new Map();let _fsSeq=0;
+function _fsWatch(name,pr){
+  const k=++_fsSeq;_fsInflight.set(k,{name:String(name||'?'),at:Date.now()});
+  try{pr.then(()=>_fsInflight.delete(k),()=>_fsInflight.delete(k));}catch(e){_fsInflight.delete(k);}
+}
+function _fsStuck(exclude){
+  const out=[],now=Date.now();
+  for(const v of _fsInflight.values())
+    if(now-v.at>7000&&v.name!==exclude)out.push('"'+v.name+'" ('+Math.round((now-v.at)/1000)+'ש׳)');
+  return out.join(' · ');
+}
 function pruneUrlCache(){
   const inUse=[$('#audioA').src,$('#audioB').src,$('#audioCart').src,$('#audioPrev').src];
   while(urlOrder.length>10){
@@ -1191,6 +1205,18 @@ function pickCachedSong(){
 async function trackURL(id){
   const t=trk(id);if(!t||t.missing)return null;
   if(urlCache[t.file])return urlCache[t.file];
+  /* 🚦 הקובץ יושב מתחת לתיקייה שהסריקה האחרונה לא הצליחה לקרוא (כונן מנותק /
+     נתיב לא נגיש): קריאה כזו נתלית דקות וסותמת את צינור-הקבצים לכל השירים —
+     זה מה שעיכב שיר תקין מעבר ל-8ש' (19.10). מדלגים עליו, בלי לסמן "חסר",
+     עד שסריקה תצליח לקרוא את התיקייה שוב. */
+  if(typeof SCAN!=='undefined'&&SCAN.bad&&SCAN.bad.length){
+    const _x=String(t.file).replace(/\\/g,'/');
+    if(SCAN.bad.some(b=>b&&_x.indexOf(String(b).replace(/\\/g,'/'))===0)){
+      if(Date.now()-(window._badRootSayAt||0)>120000){window._badRootSayAt=Date.now();
+        try{logPlay('sys','🚦 מדלגים על "'+(t.name||t.file)+'" — התיקייה שלו לא נקראה בסריקה האחרונה (כונן מנותק?), וקריאה ממנה הייתה סותמת את צינור-הקבצים','');}catch(e){}}
+      return null;
+    }
+  }
   /* ⏱ קריאה עם מגבלת-זמן — הלקח מ"נתקעים השירים" (23.8, 19:20): דיסק/דרייב-ענן
      שהפסיק להגיב השאיר את ה-await הזה תלוי לנצח. loading נשאר דלוק, הממשק קפא
      על השיר הקודם, וכלום לא נכתב ליומן — כי היומן נכתב רק אחרי ניגון מוצלח.
@@ -1217,10 +1243,12 @@ async function trackURL(id){
       return u;
     });
     read.catch(()=>{_fsPend=Math.max(0,_fsPend-1);});   // כשל מאוחר — משחררים את המונה בשקט
+    _fsWatch(t.name||t.file,read);
     const u=await Promise.race([read,new Promise(res=>setTimeout(()=>res('⏱'),8000))]);
     if(u==='⏱'){
       _diskBadUntil=Date.now()+30000;
-      try{logPlay('sys','⚠️ "'+(t.name||t.file)+'" לא נטען תוך 8ש׳ ('+_fsPend+' קריאות תלויות) — עוברים לשירים מהזיכרון עד שהצינור ישתחרר','');}catch(e){}
+      const _st=_fsStuck(t.name||t.file);
+      try{logPlay('sys','⚠️ "'+(t.name||t.file)+'" לא נטען תוך 8ש׳ ('+_fsPend+' קריאות תלויות) — עוברים לשירים מהזיכרון עד שהצינור ישתחרר'+(_st?'. תקועות בצינור: '+_st:''),'');}catch(e){}
       return null;                               // לא מסמנים "חסר" — הקובץ כנראה קיים, רק איטי
     }
     return u;
@@ -3070,6 +3098,7 @@ async function trackTags(path){
     catch(e){rd=FS().readBinaryFile(path);}                  // גרסה ישנה — קובץ שלם
     _fsPend++;
     rd.then(()=>{_fsPend=Math.max(0,_fsPend-1);},()=>{_fsPend=Math.max(0,_fsPend-1);});
+    _fsWatch('תגיות: '+String(path).split(/[\\\/]/).pop(),rd);
     const ab=await Promise.race([rd,new Promise(r=>setTimeout(()=>r('timeout'),6000))]);
     if(ab==='timeout'){_tagCache.set(path,null);return null;}
     const u8=(ab instanceof Uint8Array)?ab:new Uint8Array(ab);
@@ -3194,6 +3223,7 @@ async function trackArt(path){
     _fsPend++;
     rd.then(()=>{done=true;_fsPend=Math.max(0,_fsPend-1);},
             ()=>{done=true;_fsPend=Math.max(0,_fsPend-1);});
+    _fsWatch('עטיפה: '+String(path).split(/[\\\/]/).pop(),rd);
     const ab=await Promise.race([rd,new Promise(res=>setTimeout(()=>res('⏱'),6000))]);
     if(ab==='⏱'){_artCache.set(path,'');return '';}   // איטי מדי — בלי עטיפה, בלי לתקוע כלום
     const u8=(ab instanceof Uint8Array)?ab:new Uint8Array(ab);
@@ -4081,7 +4111,7 @@ function playedMainWire(){
 function renderAll(){renderMusic();renderAdLists();renderHours();renderLog();renderQueue();renderLiveInfo();renderPrograms();renderPlayed();try{renderPlayedMain();playedMainWire();tagFillRender();}catch(e){}if(typeof spRenderAll==='function')spRenderAll();}
 /* 🏷 מספר-גרסה — עולה ב-1 בכל שדרוג, כדי לעקוב איזה עדכון רץ בפועל.
    מוצג מתחת לשם-התחנה בפינה, ונכתב גם לכותרת-החלון. */
-const APP_VER='VER 1065', APP_BUILD='2026-10-19';
+const APP_VER='VER 1066', APP_BUILD='2026-10-19';
 async function init(){
   Neutralino.init();
   try{
