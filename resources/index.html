@@ -1666,7 +1666,9 @@ async function _scanMediaRun(silent){
     return badRoots.some(b=>x.indexOf(String(b||'').replace(/\\/g,'/'))===0);};
   if(badRoots.length){
     dlog('error','⚠ תיקיות שלא נקראו — קבציהן לא סומנו חסרים',{dirs:badRoots.slice(0,6),lastErr:SCAN.lastErr});
-    try{logPlay('sys','⚠️ '+badRoots.length+' תיקיות לא נקראו בסריקה — הקבצים שבהן נשמרו כמות שהם','');}catch(e){}
+    // שמות התיקיות ביומן הרגיל — שלא יהיה צורך לחפור בלוג-המפתח כדי לדעת מי נכשלה
+    try{const _nm=badRoots.slice(0,4).join(' · ')+(badRoots.length>4?(' · ועוד '+(badRoots.length-4)):'');
+      logPlay('sys','⚠️ '+badRoots.length+' תיקיות לא נקראו בסריקה — הקבצים שבהן נשמרו כמות שהם: '+_nm,'');}catch(e){}
   }
   S.tracks=S.tracks.filter(t=>seen.has(t.file)||!t.missing||underBad(t.file));
   S.tracks.forEach(t=>{if(!seen.has(t.file)&&!underBad(t.file))t.missing=true;});
@@ -4079,7 +4081,7 @@ function playedMainWire(){
 function renderAll(){renderMusic();renderAdLists();renderHours();renderLog();renderQueue();renderLiveInfo();renderPrograms();renderPlayed();try{renderPlayedMain();playedMainWire();tagFillRender();}catch(e){}if(typeof spRenderAll==='function')spRenderAll();}
 /* 🏷 מספר-גרסה — עולה ב-1 בכל שדרוג, כדי לעקוב איזה עדכון רץ בפועל.
    מוצג מתחת לשם-התחנה בפינה, ונכתב גם לכותרת-החלון. */
-const APP_VER='VER 1064', APP_BUILD='2026-10-19';
+const APP_VER='VER 1065', APP_BUILD='2026-10-19';
 async function init(){
   Neutralino.init();
   try{
