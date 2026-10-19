@@ -4079,7 +4079,7 @@ function playedMainWire(){
 function renderAll(){renderMusic();renderAdLists();renderHours();renderLog();renderQueue();renderLiveInfo();renderPrograms();renderPlayed();try{renderPlayedMain();playedMainWire();tagFillRender();}catch(e){}if(typeof spRenderAll==='function')spRenderAll();}
 /* 🏷 מספר-גרסה — עולה ב-1 בכל שדרוג, כדי לעקוב איזה עדכון רץ בפועל.
    מוצג מתחת לשם-התחנה בפינה, ונכתב גם לכותרת-החלון. */
-const APP_VER='VER 1063', APP_BUILD='2026-09-17';
+const APP_VER='VER 1064', APP_BUILD='2026-10-19';
 async function init(){
   Neutralino.init();
   try{
@@ -6250,8 +6250,18 @@ function aidSyncBehind(Q,winS){
       if(!pr)continue;const h2=aidSeekAtLast(pr,Q,minOff);
       if(h2.at>bp.at||(bp.at===0&&h2.r>bp.r))bp=h2;
     }
-    if(bp.r<0.5&&AID.startHead){const h3=aidSeekAtLast(AID.startHead,Q,minOff);if(h3.r>=0.5)bp=h3;}
-    return bp.r>=0.5?Math.max(0,Math.min(13,winS-bp.at*AID_HOP/AID_SR)):null;
+    /* ⚡ הטבעת-הראש נמדדת תמיד — לא רק כגיבוי (הלקח מ-19.10: "מתחיל לפני"):
+       פתיח שרק התחיל אינו יכול להתאים בהטבעה-המלאה (היא לא נכנסת בחלון אחרי
+       השעה), ואז ההתאמה-המלאה היחידה היא מופע ישן יותר של הצליל — והכניסה
+       כוונה אחורה מדי, אל תוך מה שלפני החדשות. הראש קצר ונכנס מיד אחרי
+       השעה; מופע מאוחר-יותר שלו גובר על מופע מוקדם של ההטבעה-המלאה. */
+    if(AID.startHead){const h3=aidSeekAtLast(AID.startHead,Q,minOff);
+      if(h3.r>=0.5&&h3.at>bp.at)bp=h3;}
+    if(bp.r<0.5)return null;
+    /* המרחק מוחזר כפי-שנמדד (תקרת-שפיות 30ש'): העיגול הישן ל-13 "כיבס"
+       מיקום של צליל שנשמע לפני השעה לערך שעובר את שער-רגע-השמיעה — והכניסה
+       כוונה 13ש' אחורה אל תוך הפרומו. מעכשיו השער שופט את הרגע האמיתי. */
+    return Math.max(0,Math.min(30,winS-bp.at*AID_HOP/AID_SR));
   }catch(e){return null}
 }
 async function aidHourScan(){
@@ -6449,7 +6459,9 @@ function aidEnter(score,votes,src,behindS,winS){
     // 🎯 סנכרון-אמת: כשהזיהוי יודע בדיוק כמה שניות אחורה מתחיל הפתיח —
     // קופצים לשם (+0.7ש' פיצוי על בייטים שנוספו מאז הניתוח), והשידור
     // נפתח בדיוק בתחילת-הפתיח. אחרת — ההיסט הידני מההגדרות.
-    const lead=behindS!=null?Math.max(0,Math.min(14,behindS+0.7))
+    /* התקרה הורחבה 14→22 (19.10): פעימה מאוחרת מודדת מרחק גדול מ-14 —
+       העיגול הישן התחיל את ההשמעה באמצע-הפתיח. החוצץ שומר 45-90ש'. */
+    const lead=behindS!=null?Math.max(0,Math.min(22,behindS+0.7))
                             :Math.max(0,Math.min(6,c.entryLead==null?1:+c.entryLead));
     AID._lastEntryLead=+lead.toFixed(2);
     try{
@@ -6528,8 +6540,50 @@ function aidEnter(score,votes,src,behindS,winS){
   try{renderNow();renderProgress();}catch(e){}
   aidRender();
 }
+/* ---------- 🎯 יציאה מסונכרנת-להשמעה (הלקח מ-19.10: "מסתיים לפני") ----------
+   הזיהוי חי על קצה-הזרם, אבל ההשמעה מפגרת אחריו בכוונה: הכניסה קופצת אחורה
+   לתחילת-הפתיח (behindS+0.7) ונשארת שם כל המהדורה — 8-14 שניות מאחורי הקצה.
+   יציאה מיידית ברגע-הזיהוי חתכה לאוזן את השניות האחרונות של המהדורה: בטבלה
+   "נכנסה בזיהוי ויצאה בזיהוי-סיום" ובפועל הסוף נקטע. התיקון: מודדים כמה
+   ההשמעה מפגרת, מחשבים מתי צליל-הסיום שזוהה *יגיע לאוזן* — ומתזמנים את
+   החיתוך לרגע הזה. חדשות לא קוטעים: עדיף לצאת שניות מאוחר מאשר מוקדם.
+   היציאות המיידיות (ידני, משך-מרבי, תקלת-שמע, כיבוי) נשארות מיידיות. */
+function aidAirLag(){
+  try{
+    const e=aidLiveEdge();
+    if(e)return Math.max(0,e.lag);
+    const b=STRM.buffered;
+    if(b&&b.length)return Math.max(0,b.end(b.length-1)-(STRM.currentTime||0));
+  }catch(e){}
+  return AID._lastEntryLead!=null?Math.max(0,+AID._lastEntryLead):0;
+}
+function aidExitSynced(reason,behindS){
+  if(AID.mode!=='onair')return;
+  if(AID._exitPend)return;                 // חיתוך כבר מתוזמן — הזיהוי הראשון קובע
+  const lag=aidAirLag();
+  // משך צליל-הסיום — מהטבעת-הסיום עצמה (בגבולות שפיות 2-9ש')
+  let tail=4;
+  try{const p=AID.endPrint&&(AID.endPrint[1]||AID.endPrint[0]);
+    if(p&&p.rows)tail=p.rows*AID_HOP/AID_SR;}catch(e){}
+  tail=Math.max(2,Math.min(9,tail||4));
+  // מתי הסיום יסתיים באוזן: פיגור-ההשמעה − כמה אחורה התחיל הסיום + משך-הסיום
+  let delay=behindS!=null?lag-Math.max(0,+behindS)+tail:lag;
+  delay=Math.max(0,Math.min(18,delay));
+  if(delay<1){aidExit(reason);return;}
+  AID._exitPend={at:Date.now(),delayS:+delay.toFixed(1),reason};
+  aidSay('🎯 '+reason+' — ההשמעה מפגרת '+lag.toFixed(0)+'ש׳ אחרי הזיהוי; החיתוך תוזמן בעוד '+delay.toFixed(0)+'ש׳, כדי שהסיום יישמע עד סופו');
+  try{dlog('aid','🎯 יציאה מתוזמנת-להשמעה',{lagS:+lag.toFixed(1),
+    behindS:behindS==null?null:+(+behindS).toFixed(1),
+    tailS:+tail.toFixed(1),delayS:+delay.toFixed(1)});}catch(e){}
+  AID._exitPend.t=setTimeout(()=>{try{
+    const p=AID._exitPend;AID._exitPend=null;
+    if(AID.mode==='onair')aidExit(reason+' · 🎯 תוזמן-להשמעה (+'+((p&&p.delayS)||0)+'ש׳)');
+  }catch(e){AID._exitPend=null;}},Math.round(delay*1000));
+}
 function aidExit(reason){
   if(AID.mode!=='onair')return;
+  // חיתוך מתוזמן שעוד ממתין — יציאה ישירה (ידני/משך-מרבי/תקלה) גוברת ומבטלת אותו
+  if(AID._exitPend){try{clearTimeout(AID._exitPend.t);}catch(e){}AID._exitPend=null;}
   // 🔬 תיעוד היציאה: משך, ציון-סיום אחרון, ומסלול-היציאה
   try{dlog('aid','🏁 יציאה: '+reason,
     {durS:Math.round((Date.now()-AID.onAirAt)/1000),endScore:+(AID.meter.end||0).toFixed(3),
@@ -6843,6 +6897,11 @@ function aidHourMissCheck(now){
   AID._missHour=mh;
   if(!c.days.includes(now.getDay())||!c.hours.includes(mh))return;
   if(AID.lastEdKey===now.getDay()+'-'+mh)return;      // המהדורה של השעה הזו כן שודרה
+  /* 🔁 חסין-אתחול (19.10: נרשם ❌ על 08:00 שדווקא נכנסה ב-08:00:10): אחרי
+     הפעלה-מחדש lastEdKey מתאפס — אבל טבלת-המעקב עצמה זוכרת. שורת-כניסה של
+     השעה הזו מהשעות האחרונות = המהדורה כן שודרה, אין לרשום החמצה. */
+  try{const _dk=now.getDate()+'.'+(now.getMonth()+1);
+    if((c.edLog||[]).some(r=>r&&!r.miss&&r.hh===mh&&r.d===_dk&&Date.now()-r.at<3*3600000))return;}catch(e){}
   c.hourMiss[mh]=(c.hourMiss[mh]||0)+1;save();
   // 📋 טבלת-המעקב: שעה מסומנת שבה לא נכנסה מהדורה — נרשמת ללמידה
   try{c.edLog.push({at:Date.now(),d:now.getDate()+'.'+(now.getMonth()+1),hh:mh,miss:true});
@@ -7150,7 +7209,7 @@ async function aid2Pulse(){
           aid2Say('🏁 הסיום זוהה במקור השני ('+Math.round(en.r*100)+'%) — נותנים לראשי 6ש׳ ואז יוצאים');
           // 🏁 עזרת-יציאה: 6ש' חסד לראשי; אם עדיין באוויר — העזר מוציא
           setTimeout(()=>{if(AID.mode==='onair'&&Date.now()-AID.onAirAt>aidExitMinMs())
-            aidExit('הסיום זוהה במקור-העזר ('+Math.round((AID.aux.endScore||0)*100)+'%)');},AID2_EXIT_GRACE_MS);
+            aidExitSynced('הסיום זוהה במקור-העזר ('+Math.round((AID.aux.endScore||0)*100)+'%)');},AID2_EXIT_GRACE_MS);
         }
       }else AID._endStreak2=ev?(AID._endStreak2||0)+1:0;
     }
@@ -7617,7 +7676,7 @@ function rsDecide(i){
       const xr=+r.x||0;
       s._xLo=xr<0.40?(s._xLo||0)+1:(xr>=0.60?0:(s._xLo||0));
       if(s._xLo>=3&&Date.now()-AID.onAirAt>aidExitMinMs()){
-        aidExit('🤝 התחנות התפצלו (התאמת-1:1 ירדה ל-'+Math.round(xr*100)+'%) — המהדורה הארצית הסתיימה');return;
+        aidExitSynced('🤝 התחנות התפצלו (התאמת-1:1 ירדה ל-'+Math.round(xr*100)+'%) — המהדורה הארצית הסתיימה');return;
       }
     }
     return;                                     // 🏁 זיהוי-הסיום — אצל מנוע-הסגירה הנפרד (reDecide)
@@ -7956,8 +8015,8 @@ function reDecide(i){
   // 🏁 מנוע-הסיום 24/7: ציון מעל שיא-רקע-היממה = הסיומת האמיתית — יציאה מיידית
   const fl24=aidEndFloor24();
   if(okTime&&disc&&fl24>0&&r.end>=fl24){
-    aidExit('מנוע-הסיום 24/7: הסיומת זוהתה במנוע-הסגירה ('+Math.round(r.end*100)
-      +'% — מעל רקע-היממה '+Math.round((aidCfg().endBg24Max||0)*100)+'%)');return;
+    aidExitSynced('מנוע-הסיום 24/7: הסיומת זוהתה במנוע-הסגירה ('+Math.round(r.end*100)
+      +'% — מעל רקע-היממה '+Math.round((aidCfg().endBg24Max||0)*100)+'%)',r.endBehindS);return;
   }
   /* 🔒 נעילת-מסלול-סיום: סיומת שמושמעת באמת זזה בקצב-השעון בין פעימות;
      דיבור שדומה לה קופץ. מתחת לסף-החזק (80%) — היציאה דורשת נעילה. */
@@ -7971,7 +8030,7 @@ function reDecide(i){
   {const eFl3=aidEndFloor();if(eFl3>0)hard=Math.min(hard,eFl3);
    const eBf3=aidEndBlockFloor();if(eBf3>0)hard=Math.max(hard,eBf3);}
   if(okTime&&disc&&r.end>=hard&&(r.end>=AID_EXIT_STRONG||s._eLock===true)){
-    aidExit('הסיום זוהה במנוע-הסגירה ('+Math.round(r.end*100)+'%'+(s._eLock?' · 🔒 נעול-מסלול':'')+')');
+    aidExitSynced('הסיום זוהה במנוע-הסגירה ('+Math.round(r.end*100)+'%'+(s._eLock?' · 🔒 נעול-מסלול':'')+')',r.endBehindS);
   }else if(okTime&&disc&&r.end>=hard&&Date.now()-(AID._eLkLogAt||0)>20000){
     AID._eLkLogAt=Date.now();
     dlog('aid','🔒 יציאת-הסגירה נחסמה: ציון-סיום בלי נעילת-מסלול',{end:+r.end.toFixed(3),hard:+hard.toFixed(3)});
@@ -8147,7 +8206,7 @@ async function aidPulse(){
       {const sx=spxShouldExit();
        if(sx){
          try{dlog('aid','🎙 יציאה לפי דיבור-מול-מוזיקה (הסיומת לא זוהתה)',sx);}catch(e){}
-         aidExit('הדיבור פסק והמוזיקה חזרה ('+Math.round(sx.cur*100)+'% מול '
+         aidExitSynced('הדיבור פסק והמוזיקה חזרה ('+Math.round(sx.cur*100)+'% מול '
            +Math.round(sx.base*100)+'% בליבת-המהדורה) — ג׳ינגל-הסיום לא זוהה');
          return;
        }}
@@ -8371,7 +8430,7 @@ async function aidPulse(){
       // 🏁 מנוע-הסיום: דגימה אחת מעל הרף שנמדד מהאוויר — יציאה מיידית
       const eFl=aidEndFloor();
       if(mainAirs&&okTime&&disc&&eFl>0&&en.r>=eFl){
-        aidExit('מנוע-הסיום: הסיומת זוהתה ('+Math.round(en.r*100)+'% — מעל '+Math.round(eFl*100)+'%, הרף שנמדד מחוץ למהדורות)');return;
+        aidExitSynced('מנוע-הסיום: הסיומת זוהתה ('+Math.round(en.r*100)+'% — מעל '+Math.round(eFl*100)+'%, הרף שנמדד מחוץ למהדורות)',(AID._ebp!=null&&Date.now()-(AID._eba||0)<4000)?AID._ebp:null);return;
       }
       /* 📊 רצפת-הסיום חלה על *כל* מסלולי-היציאה (הלקח מ-24.8 07:03: יציאה
          ב-60% באמצע המהדורה דרך מסלול-הרצף, שהרצפה לא כיסתה): ציון שהרקע
@@ -8385,7 +8444,7 @@ async function aidPulse(){
       // 🔒 מתחת לסף-החזק (80%) היציאה דורשת נעילת-מסלול — דיבור שדומה לסיומת לא זז בקצב-השעון
       const eLockOk=en.r>=AID_EXIT_STRONG||AID._endLockM===true;
       if(mainAirs&&okTime&&exitSig&&!eBlock&&eLockOk)
-        aidExit('הסיום זוהה ('+Math.round(en.r*100)+'%'+(AID._endLockM?' · 🔒 נעול-מסלול':'')+')'+(grace?' · סף-רגיש אחרי המשך-הנלמד':(zone?' · באזור-הסיום הצפוי':(soft?' · סף-מוקל אחרי 2.5 דק׳':''))));
+        aidExitSynced('הסיום זוהה ('+Math.round(en.r*100)+'%'+(AID._endLockM?' · 🔒 נעול-מסלול':'')+')'+(grace?' · סף-רגיש אחרי המשך-הנלמד':(zone?' · באזור-הסיום הצפוי':(soft?' · סף-מוקל אחרי 2.5 דק׳':''))),(AID._ebp!=null&&Date.now()-(AID._eba||0)<4000)?AID._ebp:null);
       else{
         if(mainAirs&&okTime&&exitSig&&!eBlock&&!eLockOk&&Date.now()-(AID._eLkLogAt2||0)>20000){AID._eLkLogAt2=Date.now();
           aidSay('🔒 יציאה נחסמה: צליל דמוי-סיום ('+Math.round(en.r*100)+'%) שאינו זז בקצב-השעון — לא הסיומת. ממשיכים במהדורה');}
