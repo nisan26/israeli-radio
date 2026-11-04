@@ -2580,6 +2580,13 @@ function bindSettings(){
   $('#station-name').textContent=s.stationName;document.title=(typeof APP_VER!=='undefined'?APP_VER+' · ':'')+s.stationName+' — מערכת שידור';
   {const _v=document.getElementById('app-ver');if(_v&&typeof APP_VER!=='undefined')_v.textContent='מערכת שידור מקצועית · '+APP_VER;}
 }
+/* 🎚 VER 1079: טקסט התדירות + מעבר להגדרות */
+function ijFreqText(){try{const c=ijCfg();if(!c.on)return 'כבוי בהגדרות';
+  return c.mode==='hour'?(c.perHour===1?'פעם בשעה':c.perHour+' פעמים בשעה'):(c.songs===1?'בכל שיר':'כל '+c.songs+' שירים');}catch(e){return '';}}
+function ijGoSettings(){try{closeModal();}catch(e){}
+  try{const nb=document.querySelector('.navbtn[data-sec="more"]');if(nb)nb.click();}catch(e){}
+  setTimeout(()=>{const c=document.getElementById('ij-on');if(c){const k=c.closest('.card');k.scrollIntoView({block:'center',behavior:'smooth'});
+    k.style.transition='box-shadow .3s';k.style.boxShadow='0 0 0 4px var(--jingle)';setTimeout(()=>k.style.boxShadow='',2500);}},200);}
 /* 🎚 VER 1078: הגדרות אות על פתיח השיר */
 function ijBindUI(){
   const c=ijCfg(),g=id=>document.getElementById(id);if(!g('ij-on'))return;
@@ -2594,7 +2601,7 @@ function ijBindUI(){
   if(g('ij-on')._b)return;g('ij-on')._b=1;
   const upd=(k,conv)=>e=>{const cc=ijCfg();cc[k]=conv(e.target);S.settings.introJ=cc;
     if(k==='mode'||k==='songs'||k==='perHour'){S.ijSongs=0;S.ijLastAt=Date.now();}
-    save();ijBindUI();toast('✅ נשמר');};
+    save();ijBindUI();try{spRefresh();}catch(e){}toast('✅ נשמר');};
   g('ij-on').onchange=upd('on',e=>e.checked);
   g('ij-mode').onchange=upd('mode',e=>e.value);
   g('ij-songs').onchange=upd('songs',e=>+e.value);
@@ -4973,7 +4980,7 @@ function playedMainWire(){
 function renderAll(){try{renderLibrarySoon();}catch(e){}renderMusic();renderAdLists();renderHours();renderLog();renderQueue();renderLiveInfo();renderPrograms();renderPlayed();try{renderPlayedMain();playedMainWire();tagFillRender();}catch(e){}if(typeof spRenderAll==='function')spRenderAll();}
 /* 🏷 מספר-גרסה — עולה ב-1 בכל שדרוג, כדי לעקוב איזה עדכון רץ בפועל.
    מוצג מתחת לשם-התחנה בפינה, ונכתב גם לכותרת-החלון. */
-const APP_VER='VER 1078', APP_BUILD='2026-11-04';
+const APP_VER='VER 1079', APP_BUILD='2026-11-04';
 async function init(){
   Neutralino.init();
   try{
@@ -5929,7 +5936,7 @@ function spSummary(t){
   if(!p.hours.length||!p.days.length)return'חסרות שעות או ימים';
   const dtxt=p.days.length===7?'כל יום':p.days.map(d=>DAY_HE[d]).join(', ');
   const htxt=p.hours.length===24?'כל השעות':hoursRangesText(p.hours);
-  let s=p.pos&&t.type==='jingle'?`${p.pos==='before'?'⏮ בתחילת כל הפסקת פרסומות':p.pos==='intro'?'🎚 על פתיח שיר (מיקס) — לפי התדירות בהגדרות':'⏭ בסוף כל הפסקת פרסומות'} · ${htxt} · ${dtxt}`
+  let s=p.pos&&t.type==='jingle'?`${p.pos==='before'?'⏮ בתחילת כל הפסקת פרסומות':p.pos==='intro'?'🎚 על פתיח שיר · '+ijFreqText():'⏭ בסוף כל הפסקת פרסומות'} · ${htxt} · ${dtxt}`
                                 :`${SP_MODE_ICON[p.mode]} ${spModeShort(p)} · ${htxt} · ${dtxt}`;
   if(p.start||p.end)s+=` · 📅 ${p.start||'…'} → ${p.end||'…'}`;
   return s;
@@ -6092,6 +6099,12 @@ function spCtrlHTML(d,bulk){
     ${[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23].map(h=>`<div class="hcell ${d.hours.includes(h)?'on':''}" data-h="${h}">${pad2(h)}</div>`).join('')}</div>
   <div class="hint" style="margin-bottom:16px">אפשר לגרור עם העכבר כדי לסמן כמה שעות ברצף.</div>
 
+  ${d.intro?`<div class="card" style="margin-bottom:16px;border:2px solid var(--jingle);background:rgba(14,147,166,.08)">
+    <b style="font-size:14px">🎚 הג'ינגל הזה עולה על פתיח השירים (מיקס)</b>
+    <div style="margin:6px 0 10px;font-size:13.5px">התדירות נקבעת בהגדרות: <b>${ijFreqText()}</b>.<br>
+    כאן קובעים רק <b>באילו ימים ושעות</b> מותר לו לעלות. אין דקה קבועה בשעה — הוא עולה בתחילת השיר שהגיע תורו.</div>
+    <button class="btn small" type="button" onclick="ijGoSettings()">⚙️ שנה תדירות</button></div>
+  <div style="display:none">`:''}
   <div style="margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
     <b style="font-size:13.5px">⏱ באיזו דקה בתוך השעה</b>${chk('mode')}</div>
   <div class="spmode" id="sp-e-mode" style="margin-bottom:16px">
@@ -6106,6 +6119,7 @@ function spCtrlHTML(d,bulk){
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px">
     <input type="number" id="sp-e-prio" min="0" max="99" step="1" value="${d.prio}" style="width:90px">
     <span class="hint" style="flex:1;min-width:200px">1 = ראשון לשידור, 2 אחריו וכן הלאה. <b>0 = ללא עדיפות</b> — קבצים כאלה משודרים אחרי בעלי העדיפות, בסדר אקראי.</span></div>
+  ${d.intro?'</div>':''}
 
   <div style="margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
     <b style="font-size:13.5px">📆 תקופת קמפיין (לא חובה)</b>${chk('range')}</div>
@@ -6114,7 +6128,7 @@ function spCtrlHTML(d,bulk){
     <label style="font-size:13px">עד <input type="date" id="sp-e-end" value="${d.end||''}"></label>
     <button class="btn small" id="sp-e-clrange">נקה תאריכים</button></div>
 
-  <div class="splog" id="sp-e-prev" style="background:var(--bg2)">—</div>`;
+  <div class="splog" id="sp-e-prev" style="background:var(--bg2)${d.intro?';display:none':''}">—</div>`;
 }
 function spReadCtrl(){
   const days=[...$('#sp-e-days').children].filter(c=>c.classList.contains('on')).map(c=>+c.dataset.d);
@@ -6198,7 +6212,8 @@ function spApplyTo(ids,d,apply){
 function spEdit(id){
   const t=trk(id);if(!t)return;
   const p=spPlan(t);
-  const d={on:p.on,days:p.days.slice(),hours:p.hours.slice(),mode:p.mode,mins:p.mins.slice(),prio:p.prio,start:p.start,end:p.end};
+  const d={on:p.on,days:p.days.slice(),hours:p.hours.slice(),mode:p.mode,mins:p.mins.slice(),prio:p.prio,start:p.start,end:p.end,
+    intro:t.type==='jingle'&&p.pos==='intro'};   // 🎚 VER 1079
   showModal(`<h3>🕐 תזמון — ${esc(t.name)}</h3>
     <div class="hint" style="margin-bottom:14px">${TYPE_EMOJI[t.type]||''} ${TYPE_HE[t.type]||t.type}${t.duration>0?' · '+fmtDur(t.duration):''}</div>
     ${spCtrlHTML(d,false)}
