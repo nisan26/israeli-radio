@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/neutralinojs/neutralinojs/main/schemas/neutralino.config.schema.json",
   "applicationId": "il.radio.station",
-  "version": "1.0.51",
+  "version": "1.0.77",
   "defaultMode": "window",
   "port": 0,
   "documentRoot": "/resources/",

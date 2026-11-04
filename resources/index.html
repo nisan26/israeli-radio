@@ -207,6 +207,95 @@ h2.pagetitle{font-size:25px;margin-bottom:4px;font-weight:800}
 input[type=range]{-webkit-appearance:none;height:7px;background:var(--track);border-radius:4px;border:none;padding:0}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 8px rgba(61,139,255,.6)}
 #queue-list{max-height:360px;overflow-y:auto}
+/* 🎛 VER 1069: אקולייזר */
+.eqbox{display:flex;flex-direction:column;gap:10px}
+.eqtop{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.eqbands{direction:ltr;display:flex;gap:6px;justify-content:space-between;padding:10px 8px;border-radius:12px;background:var(--panel2);overflow-x:auto}
+.eqband{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:38px}
+.eqband.pre{border-right:1px dashed var(--line);padding-right:8px;margin-right:2px}
+.eqband input.eqs{writing-mode:vertical-lr;direction:rtl;height:150px;width:26px;margin:0;accent-color:var(--accent)}
+.eqv{font-size:11px;font-variant-numeric:tabular-nums;color:var(--muted);min-height:14px}
+.eql{font-size:11.5px;font-weight:700}
+#eqbtn.on{background:var(--accent);color:var(--onfill,#fff);border-color:var(--accent)}
+#modal .eqbands{min-width:560px}
+/* 🔥 VER 1066: להיטים */
+.hits-tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.hits-tbl th{position:sticky;top:0;background:var(--bg2);text-align:start;padding:6px 8px;border-bottom:1px solid var(--line);color:var(--muted);font-weight:600}
+.hits-tbl td{padding:6px 8px;border-bottom:1px solid var(--line)}
+.hits-tbl tr.miss td{opacity:.72}
+.hits-tbl tr.out td{opacity:.45}
+.hits-tbl td small{color:var(--muted)}
+.hits-tops{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.hits-top{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg2)}
+.hits-top.off{opacity:.5}
+.hits-top .hn{font-size:12.5px;color:var(--muted);margin-bottom:4px}
+.hits-top .ht{font-size:14px;line-height:1.35}
+.hits-top .hm{color:var(--muted)}
+.hb{display:inline-block;font-size:11.5px;padding:1px 7px;border-radius:999px;background:var(--panel2);margin:1px 0;white-space:nowrap}
+.hb.live{background:rgba(255,80,80,.12)}
+.hgo{display:inline-flex;gap:3px;margin-inline-start:6px}.hgo .btn{padding:1px 6px;font-size:11.5px}
+.hb.new{background:rgba(47,107,255,.15);color:var(--accent)}
+/* VER 1066: מיקום/עדיפות בטבלת הקבצים המתוזמנים */
+.sp-ctl{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+select.sp-pos,select.sp-prio{font-size:12px;padding:3px 6px;border-radius:8px;max-width:100%}
+/* 🎙 VER 1075 — מסך שידור חדש: פס-נגן עליון + שלושה לוחות (ספרייה · ישודר · שודר) */
+#live-top.studio{display:block;margin-bottom:14px}
+#live-top.studio #nowplaying{display:grid;grid-template-columns:minmax(260px,1.1fr) minmax(240px,1.4fr) auto;grid-template-areas:"a b c" "d d d";gap:10px 22px;align-items:center;padding:16px 20px;border-radius:18px}
+#live-top.studio .db-a{grid-area:a;min-width:0}
+#live-top.studio .db-b{grid-area:b;min-width:0}
+#live-top.studio .db-c{grid-area:c}
+#live-top.studio .db-d{grid-area:d;display:flex;gap:14px;align-items:center;flex-wrap:wrap;border-top:1px solid rgba(140,175,255,.14);padding-top:10px}
+#live-top.studio #np-art{width:92px;height:92px;font-size:38px;border-radius:14px}
+#live-top.studio #np-title{font-size:22px;margin:4px 0 0;min-height:0}
+#live-top.studio #np-artist{font-size:14px}
+#live-top.studio #np-viz{height:58px;margin:0 0 6px}
+#live-top.studio #np-progress{margin:4px 0 4px}
+#live-top.studio #countdown{font-size:44px;margin:0;min-width:150px}
+#live-top.studio #transport{margin:0;flex:1}
+#live-top.studio #volwrap{margin:0;min-width:240px;flex:0 1 320px;display:flex;align-items:center;gap:8px}
+#live-top.studio #live-nowinfo{margin-top:4px;font-size:12px}
+@media(max-width:1100px){#live-top.studio #nowplaying{grid-template-columns:1fr auto;grid-template-areas:"a c" "b b" "d d"}}
+#studio-grid{display:grid;grid-template-columns:1.1fr 1.25fr .95fr;gap:14px;margin-bottom:16px}
+@media(max-width:1650px){#studio-grid{grid-template-columns:1fr 1.1fr}#hist-panel{grid-column:1/-1;height:auto;max-height:520px}}
+@media(max-width:900px){#studio-grid{grid-template-columns:1fr}}
+.spanel{display:flex;flex-direction:column;margin:0!important;height:calc(100vh - 300px);min-height:470px}
+.spanel h3{margin-bottom:8px}
+.spanel .sp-tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.spanel .sp-tools input{flex:1;min-width:150px;padding:7px 10px;border-radius:9px;border:1px solid var(--line);background:var(--bg2);color:inherit;font-size:13.5px}
+.spanel .sp-tools select{padding:6px 8px;border-radius:9px;font-size:13px}
+.spanel .sp-body{flex:1;overflow:auto;border-radius:10px;min-height:0}
+.spanel .sp-foot{margin-top:6px;font-size:11.5px}
+#pl-card #pl-wrap{max-height:none}
+.lib-tbl,.hist-tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.lib-tbl th,.hist-tbl th{position:sticky;top:0;background:var(--bg2);text-align:start;font-weight:600;padding:7px 8px;border-bottom:1px solid var(--line);color:var(--muted);white-space:nowrap;z-index:1;cursor:pointer;user-select:none}
+.lib-tbl td,.hist-tbl td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+.lib-tbl tr:hover td{background:var(--hover,rgba(47,107,255,.06))}
+.lib-tbl tr.inq td{background:rgba(255,171,46,.10)}
+.lib-tbl tr.onair td{background:rgba(79,208,255,.14);font-weight:700}
+.lib-tbl td.nm{overflow-wrap:anywhere;min-width:120px}
+.lib-tbl td.ar{min-width:90px;max-width:200px}
+.lib-tbl td.ar,.hist-tbl td.src{color:var(--muted);overflow-wrap:anywhere}
+.lib-tbl td.du,.hist-tbl td.tm{font-variant-numeric:tabular-nums;white-space:nowrap}
+.lib-tbl td.act{white-space:nowrap;text-align:end}
+.lib-tbl td.act button{padding:2px 7px;font-size:12px;margin-inline-start:3px}
+.lib-more{text-align:center;padding:10px}
+/* 📋 VER 1064: רשימת השמעה */
+#pl-wrap{max-height:460px;overflow:auto;border-radius:10px}
+#pl-table{width:100%;border-collapse:collapse;font-size:13.5px}
+#pl-table th{position:sticky;top:0;background:var(--bg2,#1b2236);text-align:start;font-weight:600;padding:7px 8px;border-bottom:1px solid var(--line,#2a3550);color:var(--muted);white-space:nowrap;z-index:1}
+#pl-table td{padding:6px 8px;border-bottom:1px solid var(--line,rgba(255,255,255,.07));vertical-align:middle}
+#pl-table td.n,#pl-table td.tm,#pl-table td.du{font-variant-numeric:tabular-nums;white-space:nowrap}
+#pl-table td.n{color:var(--muted);width:34px}
+#pl-table tr.now td{font-weight:700;background:rgba(79,208,255,.12)}
+#pl-table tr.now td.n{color:#4fd0ff}
+#pl-table tr.pend td{background:rgba(255,171,46,.08)}
+#pl-table tr.sched td{background:rgba(255,90,120,.06)}
+#pl-table tr.skip td{opacity:.45;text-decoration:line-through}
+#pl-table td.nm{min-width:160px;overflow-wrap:anywhere}
+#pl-table td.ar{color:var(--muted);overflow-wrap:anywhere;min-width:80px}
+#pl-table td.src{color:var(--muted);font-size:12px;white-space:nowrap}
+#pl-table .rm{padding:2px 7px}
+@media (max-width:900px){#pl-table td.src,#pl-table th.src{display:none}}
 .qitem{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:1px solid transparent;margin-bottom:5px;background:var(--bg2);transition:.12s}
 .qitem.drag-over{border-color:var(--accent);background:var(--hover)}
 .qitem.dragging{opacity:.4}
@@ -350,6 +439,9 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
 .dgbignum{font-size:30px;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1}
 .dgcatch{display:flex;flex-direction:column;gap:10px;background:rgba(192,91,255,.07);border:1.5px solid #c05bff;border-radius:13px;padding:14px;margin-top:9px}
 #dg-catch-clock{font-size:40px;font-weight:800;text-align:center;color:#8b30d6;font-variant-numeric:tabular-nums;line-height:1}
+#pl-card.drag-on{outline:2px dashed #4fc3f7;outline-offset:-3px}
+#pl-table tr.drag-over td{box-shadow:inset 0 3px 0 #4fc3f7}
+tr[data-dragok]{cursor:grab}tr.dragging{opacity:.45}
 </style>
 </head>
 <body>
@@ -366,6 +458,7 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
     <button class="navbtn" data-sec="ainews"><span class="em">🤖</span>חדשות AI</button>
     <button class="navbtn" data-sec="edlog"><span class="em">📋</span>מעקב מהדורות</button>
     <button class="navbtn" data-sec="programs"><span class="em">🎬</span>תוכניות מתוזמנות</button>
+    <button class="navbtn" data-sec="hits"><span class="em">🔥</span>להיטים ישראליים</button>
     <button class="navbtn" data-sec="gdrive"><span class="em">📁</span>Google Drive</button>
     <button class="navbtn" data-sec="weather"><span class="em">🌤</span>קריין מזג-אוויר</button>
     <button class="navbtn" data-sec="hours"><span class="em">🕐</span>לוח שעות</button>
@@ -514,6 +607,9 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
 .agchips{display:flex;flex-wrap:wrap;gap:6px}
 .agchips .timechip{font-size:14px;padding:6px 11px;margin:0}
 .agchips .timechip button{font-size:15px}
+#pl-card.drag-on{outline:2px dashed #4fc3f7;outline-offset:-3px}
+#pl-table tr.drag-over td{box-shadow:inset 0 3px 0 #4fc3f7}
+tr[data-dragok]{cursor:grab}tr.dragging{opacity:.45}
 </style>
     <!-- ================= LIVE ================= -->
     <section class="section active" id="sec-live">
@@ -527,24 +623,31 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
           <button class="btn" onclick="linkFolder('sponsor')">🔗 תיקיית חסויות</button></div>
         <div class="bigstep"><div class="n">3</div><div class="tx"><b>לחץ על "התחל שידור"</b><br><span class="hint">זהו! פרסומות ישודרו אוטומטית כל 30 דקות וחסות בתחילת כל שעה — אפשר לשנות במסך "פרסומות וחסויות".</span></div></div>
       </div>
-      <div id="live-top">
+      <div id="live-top" class="studio">
         <div id="nowplaying">
+          <div class="db-a">
           <div id="np-head">
             <div id="np-art">🎵</div>
             <div id="np-head-text">
               <div style="display:flex;justify-content:space-between;align-items:center">
                 <span class="badge song" id="np-badge">מוכן</span>
                 <span id="np-live">● LIVE</span>
+                <span id="np-agc" style="color:#4fd0ff;font-size:12px;margin-inline-start:8px;font-variant-numeric:tabular-nums"></span>
                 <span style="color:var(--muted);font-size:12.5px;margin-inline-start:auto" id="np-source"></span>
               </div>
               <div id="np-title">אין שידור פעיל</div>
               <div id="np-artist">לחץ על ▶ כדי להתחיל</div>
             </div>
           </div>
-          <canvas id="np-viz" height="150"></canvas>
-          <div id="np-progress"><div id="np-bar"></div></div>
-          <div id="np-times"><span id="np-el">0:00</span><span id="np-rem">-0:00</span></div>
-          <div id="countdown">--:--<small>נותר לשיר</small></div>
+          </div>
+          <div class="db-b">
+            <canvas id="np-viz" height="150"></canvas>
+            <div id="np-progress"><div id="np-bar"></div></div>
+            <div id="np-times"><span id="np-el">0:00</span><span id="np-rem">-0:00</span></div>
+            <div class="hint" id="live-nowinfo"></div>
+          </div>
+          <div class="db-c"><div id="countdown">--:--<small>נותר לשיר</small></div></div>
+          <div class="db-d">
           <div id="transport">
             <button id="btn-play" title="התחל שידור אוטומטי לפי ההגדרות">▶ התחל שידור</button>
             <button class="tbtn" id="btn-pause" title="השהה / המשך">⏸</button>
@@ -553,6 +656,7 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
             <button class="btn" id="shufflebtn" title="השמעה אקראית — השירים ייבחרו בהגרלה במקום לפי הסדר">🔀 אקראי</button>
             <button class="btn" id="repeatbtn" title="חזרה על כל השירים לפי הסדר, בלולאה אינסופית ללא הפסקה">🔁 חזור על הכל</button>
             <button class="btn" id="talkbtn" title="הנמכת מוזיקה לדיבור">🎙 מצב דיבור</button>
+            <button class="btn" id="eqbtn" title="אקולייזר — עיצוב הצליל של כל השידור" onclick="eqOpenModal()">🎛 אקולייזר</button>
             <div id="vu"></div>
           </div>
           <div id="volwrap">
@@ -560,8 +664,10 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
             <input type="range" id="vol" min="0" max="100" value="90" style="flex:1">
             <span id="vol-val" style="color:var(--muted);font-size:12.5px;width:40px">90%</span>
           </div>
-          <div class="hint" style="margin-top:10px" id="live-nowinfo"></div>
+          </div>
         </div>
+        <!-- התור הישן (גרירה/חיפוש) נשאר בקוד אבל מוסתר — הספרייה ורשימת-ההשמעה מחליפות אותו -->
+        <div id="legacy-queue" style="display:none">
         <div class="card" style="margin-bottom:0">
           <h3>⏭ הבאים בתור <span class="hint" style="font-weight:400;margin-inline-start:auto">גרור לסידור מחדש</span></h3>
           <div id="queue-art" class="ph">🎵</div>
@@ -570,6 +676,32 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
           <div id="queue-list"><div class="empty">התור יתמלא אוטומטית כשהשידור יתחיל</div></div>
         </div>
         </div>
+      </div>
+      <!-- 🎙 VER 1075 / RadioStudio: שלושה לוחות — ספרייה · ישודר · שודר -->
+      <div id="studio-grid">
+        <div class="card spanel" id="lib-panel">
+          <h3>📚 ספרייה <span class="hint" id="lib-sum" style="font-weight:400;margin-inline-start:auto"></span></h3>
+          <div class="sp-tools">
+            <input id="lib-q" type="text" placeholder="🔍 חפש שיר, אמן או קובץ..." spellcheck="false" autocomplete="off">
+            <select id="lib-kind"><option value="song">🎵 שירים</option><option value="ad">📢 פרסומות</option><option value="sponsor">🤝 חסויות</option><option value="jingle">🎛 ג'ינגלים</option><option value="program">🎬 תוכניות</option><option value="all">הכל</option></select>
+            <select id="lib-pl"><option value="">כל הפלייליסטים</option></select>
+          </div>
+          <div class="sp-body" id="lib-wrap"><div class="empty">טוען את הספרייה…</div></div>
+          <div class="hint sp-foot">לחיצה כפולה על שיר = הבא בתור · ▶ = שדר עכשיו · 🎧 = האזנה מקדימה</div>
+        </div>
+        <div class="card spanel" id="pl-card">
+          <h3>📋 ישודר <span class="hint" id="pl-sum" style="font-weight:400;margin-inline-start:auto"></span></h3>
+          <div class="sp-body" id="pl-wrap"><div class="empty">הרשימה תתמלא כשהשידור יתחיל</div></div>
+          <div class="hint sp-foot">השעות משוערות לפי אורך הקבצים · פרסומות מתוזמנות נכנסות בסוף השיר שבמהלכו הגיע זמנן</div>
+        </div>
+        <div class="card spanel" id="hist-panel">
+          <h3>🕘 שודר <span class="hint" id="hist-sum" style="font-weight:400;margin-inline-start:auto"></span></h3>
+          <div class="sp-tools">
+            <select id="hist-kind"><option value="all">הכל</option><option value="song">🎵 שירים</option><option value="spots">📢 פרסומות, חסויות וג'ינגלים</option><option value="news">📰 חדשות</option></select>
+          </div>
+          <div class="sp-body" id="hist-wrap"><div class="empty">עדיין לא שודר כלום</div></div>
+        </div>
+      </div>
         <div class="card" id="played-card" style="margin-bottom:0">
           <h3>🎵 שירים שכבר נוגנו
             <span class="hint" style="font-weight:400;margin-inline-start:auto">🗑 מוחק את הקובץ מתיקיית המקור (לפח המיחזור)</span></h3>
@@ -912,6 +1044,66 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
     </section>
 
     <!-- ================= GOOGLE DRIVE ================= -->
+    <section class="section" id="sec-hits">
+      <h2 class="pagetitle">🔥 להיטים ישראליים מהאינטרנט</h2>
+      <div class="pagesub">התוכנה מורידה כל 3 שעות את מצעד "הכי מושמעים" של Apple Music ישראל, את הפלייליסט השבועי של גלגלצ, ואת מה שהתנגן בפועל בגלגלצ, בכאן גימל (רשת ג) ובלב המדינה 91FM. היא משאירה רק שירים ישראליים, בונה מהם מצעד משולב (שיר שמופיע ביותר מקורות עולה למעלה), ומזהה אילו מהשירים כבר יש לך בספרייה. הלהיטים שנמצאו נכנסים לשידור לפי ההגדרות שלך. שירים שחסרים מסומנים ❌. התוכנה לא מורידה שירים, אז אם תרצה אותם תוסיף אותם לתיקיית המוזיקה בעצמך.</div>
+      <div class="colpanel">
+        <div class="cp-row"><b class="snbig">⚙️ רוטציית להיטים</b>
+          <label class="switch" style="margin-inline-start:auto"><input type="checkbox" id="hits-on"><span class="sl"></span></label></div>
+        <div class="cp-row hint" id="hits-active"></div>
+        <div class="cp-row" style="gap:6px;flex-wrap:wrap"><b style="min-width:90px">ימים</b><div id="hits-days" style="display:flex;gap:5px;flex-wrap:wrap"></div></div>
+        <div class="cp-row" style="gap:10px;flex-wrap:wrap;align-items:center">
+          <b style="min-width:90px">שעות</b> מ-<select id="hits-from"></select> עד <select id="hits-to"></select>
+        </div>
+        <div class="cp-row" style="gap:10px;flex-wrap:wrap;align-items:center">
+          <b style="min-width:90px">תדירות</b> להיט אחד אחרי כל
+          <select id="hits-every"><option value="1">שיר 1</option><option value="2">2 שירים</option><option value="3">3 שירים</option><option value="4">4 שירים</option><option value="5">5 שירים</option><option value="6">6 שירים</option><option value="8">8 שירים</option><option value="10">10 שירים</option></select>
+        </div>
+        <div class="cp-row" style="gap:10px;flex-wrap:wrap;align-items:center">
+          <b style="min-width:90px">כמות</b> כל להיט עד
+          <select id="hits-maxday"><option value="1">פעם 1</option><option value="2">2 פעמים</option><option value="3">3 פעמים</option><option value="4">4 פעמים</option><option value="6">6 פעמים</option><option value="8">8 פעמים</option><option value="12">12 פעמים</option></select> ביום,
+          לפחות <select id="hits-gap"><option value="30">חצי שעה</option><option value="60">שעה</option><option value="90">שעה וחצי</option><option value="120">שעתיים</option><option value="180">3 שעות</option><option value="240">4 שעות</option></select> בין השמעות
+        </div>
+        <div class="cp-row" style="gap:10px;flex-wrap:wrap;align-items:center">
+          <b style="min-width:90px">מהמצעד</b>
+          <select id="hits-top"><option value="10">10 המקומות הראשונים</option><option value="20">20 הראשונים</option><option value="30">30 הראשונים</option><option value="40">40 הראשונים</option><option value="60">60 הראשונים</option><option value="100">כל ה-100</option></select>
+          <select id="hits-age"><option value="0">כל השירים במצעד</option><option value="30">רק שיצאו בחודש האחרון</option><option value="90">רק מ-3 החודשים האחרונים</option><option value="180">רק מחצי השנה האחרונה</option><option value="365">רק מהשנה האחרונה</option></select>
+        </div>
+      </div>
+      <div class="colpanel">
+        <div class="cp-row"><b class="snbig">🥇 מקום ראשון בכל מקור</b></div>
+        <div id="hits-tops" class="hits-tops"></div>
+        <div class="cp-row hint" id="hits-srcs" style="flex-wrap:wrap;margin-top:8px"></div>
+        <div class="cp-row hint" style="gap:8px;flex-wrap:wrap;align-items:center">▶️ <b>YouTube:</b> מפתח API חינמי (Google Cloud → YouTube Data API v3):
+          <input id="hits-ytkey" type="text" placeholder="AIza..." spellcheck="false" autocomplete="off" style="flex:1;min-width:200px;direction:ltr;text-align:left;font-size:12.5px;padding:5px 8px"></div>
+      </div>
+      <div class="colpanel">
+        <div class="cp-row" style="gap:8px;flex-wrap:wrap"><b class="snbig">📊 המצעד המשולב</b>
+          <select id="hits-filter" style="margin-inline-start:auto"><option value="all">הכל</option><option value="have">✅ בספרייה</option><option value="miss">❌ חסרים</option></select>
+          <button class="btn small" id="hits-rematch">🔍 חפש שוב בספרייה</button>
+          <button class="btn small" onclick="hitsExportMissing()" title="מעתיק את רשימת החסרים ושומר קובץ CSV">📋 רשימת חסרים</button>
+          <button class="btn small" onclick="hitsOpenInbox()" title="שים כאן קבצים של להיטים שקנית — הם ייקלטו וייכנסו לרוטציה לבד">📥 תיקיית להיטים חדשים</button>
+          <button class="btn small primary" id="hits-refresh">↻ עדכן עכשיו</button></div>
+        <div class="cp-row hint" id="hits-status"></div>
+        <div id="hits-table" style="max-height:520px;overflow:auto"></div>
+      </div>
+      <div class="colpanel">
+        <div class="cp-row" style="gap:8px;flex-wrap:wrap"><b class="snbig">🆕 חדש בלינקטון — להורדה עם החשבון של התחנה</b>
+          <label style="display:inline-flex;gap:5px;align-items:center;margin-inline-start:auto" title="רק שירים שמופיעים במצעד המשולב: Spotify, YouTube, Apple, גלגלצ, גימל, 91FM"><input type="checkbox" id="lnk-pop" checked> 🔥 רק פופולריים</label>
+          <select id="lnk-filter"><option value="miss">❌ חסרים בספרייה</option><option value="all">הכל</option><option value="have">✅ בספרייה</option></select>
+          <button class="btn small primary" id="lnk-refresh">↻ עדכן</button></div>
+        <div class="cp-row hint" id="lnk-status"></div>
+        <div class="cp-row hint" style="line-height:1.6">לחיצה על "⬇ הורד בלינקטון" פותחת את דף השיר באתר. מורידים משם כרגיל, עם החשבון של התחנה. הקובץ שהורד <b>נקלט לבד</b> מתיקיית ההורדות: הוא מועבר ל"להיטים חדשים", נסרק ונכנס לרוטציה.</div>
+        <div class="cp-row" style="gap:8px;flex-wrap:wrap;align-items:center">
+          <label style="display:inline-flex;gap:6px;align-items:center"><input type="checkbox" id="lnk-watch"> קליטה אוטומטית מתיקיית ההורדות</label>
+          <input id="lnk-dldir" type="text" style="flex:1;min-width:220px;direction:ltr;text-align:left;font-size:12.5px;padding:6px 8px" placeholder="C:/Users/.../Downloads">
+          <button class="btn small" id="lnk-pick">📂 בחר תיקייה</button>
+          <label style="display:inline-flex;gap:6px;align-items:center" title="כבוי: רק קבצים ששמם תואם לשיר מלינקטון/מהמצעד"><input type="checkbox" id="lnk-importall"> לקלוט כל קובץ אודיו חדש</label>
+        </div>
+        <div id="lnk-table" style="max-height:460px;overflow:auto"></div>
+      </div>
+    </section>
+
     <section class="section" id="sec-gdrive">
       <h2 class="pagetitle">📁 שידור קבצים מ-Google Drive</h2>
       <div class="pagesub">הדבק קישור-שיתוף של <b>קובץ</b> אודיו מ-Google Drive. התוכנה מורידה אותו למחשב (גם קבצים גדולים של 100MB+), ומשדרת אותו בשעות שתבחר — בלי התחברות לחשבון.</div>
@@ -1091,7 +1283,13 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padd
           <select id="set-artistgap"><option value="0">כבוי</option><option value="30">חצי שעה</option><option value="60">שעה</option><option value="120">שעתיים</option></select></div>
         <div class="setrow"><div class="lbl">🎚 איזון עוצמה אוטומטי (נורמליזציה)<small>כל השירים, הפרסומות והג'ינגלים מתנגנים באותה עוצמה — התוכנה מנתחת כל קובץ ברקע ומתקנת אוטומטית. שיר חלש מוגבר, שיר חזק מונמך.</small></div>
           <label class="switch"><input type="checkbox" id="set-norm"><span class="sl"></span></label></div>
+        <div class="setrow"><div class="lbl">🎚 מיישר עוצמה חי (AGC)<small>תוך כדי הניגון התוכנה מודדת כל שיר ומתקנת אותו בהדרגה לאותה רמה — שיר נמוך מוגבר, שיר גבוה מונמך (עד ±8dB). מגביל בסוף השרשרת מונע עיוות. התיקון הנוכחי מוצג ליד שם השיר.</small></div>
+          <label class="switch"><input type="checkbox" id="set-agc"><span class="sl"></span></label></div>
         <div class="setrow"><div class="lbl"><span class="hint" id="norm-status2"></span></div></div>
+      </div>
+      <div class="card">
+        <h3>🎛 אקולייזר</h3>
+        <div class="eq-mount" id="eq-settings"></div>
       </div>
       <div class="card">
         <h3>💾 גיבוי</h3>
@@ -1154,7 +1352,7 @@ const MEDIA_SUBDIRS=Object.values(DIR).map(d=>d.replace(/\\/g,'/').split(MEDIA_M
 function relocatePath(p){
   if(!p||typeof p!=='string')return p;
   const s=p.replace(/\\/g,'/');
-  const i=s.indexOf(MEDIA_MARK);
+  const i=s.lastIndexOf(MEDIA_MARK);
   if(i<0)return p;                                   // לא בתיקיית-המדיה שלנו — משאירים כמו שהוא
   const rel=s.slice(i+MEDIA_MARK.length);            // לדוגמה: "אותות/startnews.mp3"
   const sub=rel.split('/')[0];
@@ -1164,25 +1362,11 @@ function relocatePath(p){
 }
 const AUDIO_RE=/\.(mp3|wav|ogg|m4a|aac|flac|opus|wma)$/i;
 const FS=()=>Neutralino.filesystem;
-const urlCache={},urlOrder=[];
+const urlCache={},urlOrder=[],urlInflight={};   // VER 1064: urlInflight — קריאה אחת לכל קובץ בו-זמנית
 let _fsPend=0,_diskBadUntil=0;   // 🚦 קריאות-קבצים תלויות · עד-מתי הצינור נחשב חסום
-/* 🔎 רישום הקריאות-הפתוחות — לאבחון "מי תוקע את מי" (הלקח מ-19.10: "מיליון
-   עננים" קיים ותקין, אבל חיכה בתור מאחורי שתי קריאות שנתלו על כונן לא-נגיש.
-   היומן אמר רק מי הקורבן; עכשיו הוא אומר גם מי התוקע וכמה זמן הוא תלוי). */
-const _fsInflight=new Map();let _fsSeq=0;
-function _fsWatch(name,pr){
-  const k=++_fsSeq;_fsInflight.set(k,{name:String(name||'?'),at:Date.now()});
-  try{pr.then(()=>_fsInflight.delete(k),()=>_fsInflight.delete(k));}catch(e){_fsInflight.delete(k);}
-}
-function _fsStuck(exclude){
-  const out=[],now=Date.now();
-  for(const v of _fsInflight.values())
-    if(now-v.at>7000&&v.name!==exclude)out.push('"'+v.name+'" ('+Math.round((now-v.at)/1000)+'ש׳)');
-  return out.join(' · ');
-}
 function pruneUrlCache(){
   const inUse=[$('#audioA').src,$('#audioB').src,$('#audioCart').src,$('#audioPrev').src];
-  while(urlOrder.length>10){
+  while(urlOrder.length>16){   // VER 1076: מקום גם לפרסומות שנטענות מראש בזמן החדשות
     const i=urlOrder.findIndex(k=>!inUse.includes(urlCache[k]));
     if(i<0)break;
     const k=urlOrder.splice(i,1)[0];
@@ -1202,20 +1386,23 @@ function pickCachedSong(){
     return{trackId:id,src:'🆘 מהזיכרון (הדיסק לא הגיב)',kind:'song'};
   }catch(e){return null}
 }
-async function trackURL(id){
+async function trackURL(id,bg){
   const t=trk(id);if(!t||t.missing)return null;
   if(urlCache[t.file])return urlCache[t.file];
-  /* 🚦 הקובץ יושב מתחת לתיקייה שהסריקה האחרונה לא הצליחה לקרוא (כונן מנותק /
-     נתיב לא נגיש): קריאה כזו נתלית דקות וסותמת את צינור-הקבצים לכל השירים —
-     זה מה שעיכב שיר תקין מעבר ל-8ש' (19.10). מדלגים עליו, בלי לסמן "חסר",
-     עד שסריקה תצליח לקרוא את התיקייה שוב. */
-  if(typeof SCAN!=='undefined'&&SCAN.bad&&SCAN.bad.length){
-    const _x=String(t.file).replace(/\\/g,'/');
-    if(SCAN.bad.some(b=>b&&_x.indexOf(String(b).replace(/\\/g,'/'))===0)){
-      if(Date.now()-(window._badRootSayAt||0)>120000){window._badRootSayAt=Date.now();
-        try{logPlay('sys','🚦 מדלגים על "'+(t.name||t.file)+'" — התיקייה שלו לא נקראה בסריקה האחרונה (כונן מנותק?), וקריאה ממנה הייתה סותמת את צינור-הקבצים','');}catch(e){}}
-      return null;
-    }
+  /* 🎙 RadioStudio.exe: הקובץ מוזרם ישירות מהדיסק — הניגון מתחיל מיד, בלי לטעון את כל הקובץ לזיכרון */
+  if(window.__STUDIO&&window.__studioMediaURL){
+    try{await FS().getStats(t.file);}catch(e){t.missing=true;return null;}
+    const u=window.__studioMediaURL(t.file);
+    urlCache[t.file]=u;urlOrder.push(t.file);pruneUrlCache();
+    return u;
+  }
+  /* VER 1064: אותו קובץ כבר נקרא (למשל טעינה-מוקדמת של השיר הבא) — מצטרפים לקריאה הקיימת
+     במקום לקרוא שוב: חוסך עומס על הדיסק ולא משאיר כתובת-blob יתומה בזיכרון. */
+  if(urlInflight[t.file]){
+    const u=await Promise.race([urlInflight[t.file].catch(()=>'ERR'),new Promise(r=>setTimeout(()=>r('⏱'),8000))]);
+    if(u==='ERR')return null;                       // הקובץ חסר/נכשל — לא "דיסק איטי"
+    if(u==='⏱'){if(!urlCache[t.file])_diskBadUntil=Math.max(_diskBadUntil,Date.now()+15000);return null;}
+    return u||null;
   }
   /* ⏱ קריאה עם מגבלת-זמן — הלקח מ"נתקעים השירים" (23.8, 19:20): דיסק/דרייב-ענן
      שהפסיק להגיב השאיר את ה-await הזה תלוי לנצח. loading נשאר דלוק, הממשק קפא
@@ -1234,21 +1421,29 @@ async function trackURL(id){
   }
   try{
     const t0=Date.now();_fsPend++;
+    /* VER 1064: המונה משתחרר פעם אחת בדיוק — כשהקריאה מסתיימת, או אחרי 60ש׳ אם היא נתקעה לגמרי
+       (אחרת 3 קריאות תקועות חוסמות את הצינור עד הפעלה-מחדש). */
+    let _rel=false;const _dec=()=>{if(!_rel){_rel=true;_fsPend=Math.max(0,_fsPend-1);}};
+    setTimeout(_dec,60000);
+    const _file=t.file;
     const read=FS().readBinaryFile(t.file).then(ab=>{
-      _fsPend=Math.max(0,_fsPend-1);_diskBadUntil=0;
+      _dec();_diskBadUntil=0;
+      if(urlCache[_file])return urlCache[_file];
       const took=Date.now()-t0;
       if(took>2500)try{dlog('sys','🐢 קריאת-קובץ הסתיימה באיחור',{name:t.name||t.file,tookMs:took,pending:_fsPend});}catch(e){}
       const u=URL.createObjectURL(new Blob([ab]));
       urlCache[t.file]=u;urlOrder.push(t.file);pruneUrlCache();
       return u;
     });
-    read.catch(()=>{_fsPend=Math.max(0,_fsPend-1);});   // כשל מאוחר — משחררים את המונה בשקט
-    _fsWatch(t.name||t.file,read);
+    read.catch(_dec);   // כשל מאוחר — משחררים את המונה בשקט
+    urlInflight[_file]=read;read.then(()=>{if(urlInflight[_file]===read)delete urlInflight[_file];},()=>{if(urlInflight[_file]===read)delete urlInflight[_file];});
+    /* VER 1074: טעינה-מוקדמת (השיר הבא) רצה ברקע בלי מגבלת 8 שניות ובלי להכריז "הדיסק תקוע" —
+       היא לא באוויר. קודם כל טעינה-מוקדמת איטית רשמה כשל והעבירה את התחנה ל"שירים מהזיכרון". */
+    if(bg){try{return await read;}catch(e){return null;}}
     const u=await Promise.race([read,new Promise(res=>setTimeout(()=>res('⏱'),8000))]);
     if(u==='⏱'){
       _diskBadUntil=Date.now()+30000;
-      const _st=_fsStuck(t.name||t.file);
-      try{logPlay('sys','⚠️ "'+(t.name||t.file)+'" לא נטען תוך 8ש׳ ('+_fsPend+' קריאות תלויות) — עוברים לשירים מהזיכרון עד שהצינור ישתחרר'+(_st?'. תקועות בצינור: '+_st:''),'');}catch(e){}
+      try{logPlay('sys','⚠️ "'+(t.name||t.file)+'" לא נטען תוך 8ש׳ ('+_fsPend+' קריאות תלויות) — עוברים לשירים מהזיכרון עד שהצינור ישתחרר · תיקייה: '+String(t.file||'').replace(/\\/g,'/').split('/').slice(0,-1).join('/'),'');}catch(e){}
       return null;                               // לא מסמנים "חסר" — הקובץ כנראה קיים, רק איטי
     }
     return u;
@@ -1318,7 +1513,9 @@ function normalizeState(){
   // 🚚 ניוד: מעגנים מחדש נתיבי-קבצים-פנימיים לתיקיית "מדיה" הנוכחית — כך שהעתקת התוכנה למחשב/מיקום אחר
   //    עובדת לבד, כולל קבצי צליל-הפתיחה/סיום של זיהוי החדשות (הסיבה ל"אין זיהוי במחשב אחר").
   try{
-    if(Array.isArray(S.tracks))for(const t of S.tracks)if(t&&t.file)t.file=relocatePath(t.file);
+    // VER 1064: לא נוגעים בקבצים שבתוך תיקייה חיצונית מחוברת (למשל D:/מדיה/מוזיקה)
+    const _lk=(Array.isArray(S.links)?S.links:[]).map(l=>String(l&&l.path||'').replace(/\\/g,'/').replace(/\/+$/,'').toLowerCase()+'/').filter(p=>p.length>1);
+    if(Array.isArray(S.tracks))for(const t of S.tracks)if(t&&t.file&&!_lk.some(p=>String(t.file).replace(/\\/g,'/').toLowerCase().startsWith(p)))t.file=relocatePath(t.file);
     if(S.news2)for(const k of ['startFile','endFile','ignoreFile'])if(S.news2[k])S.news2[k]=relocatePath(S.news2[k]);
     for(const c of ['news','streamNews']){const cs=S.colSched[c];if(cs)for(const k of ['introFile','outroFile','startFile','endFile'])if(cs[k])cs[k]=relocatePath(cs[k]);}
     if(S.gdrive&&Array.isArray(S.gdrive.items))for(const it of S.gdrive.items)if(it&&it.file)it.file=relocatePath(it.file);
@@ -1389,13 +1586,14 @@ async function loadState(){
   let src='';
   let o=await _tryRead(DATA_FILE);
   if(o)src='רגיל';
-  if(!o){o=await _tryRead(DATA_TMP);if(o)src='קובץ-ביניים';}
   if(!o){o=await _tryRead(DATA_BAK);if(o)src='גיבוי';}
+  if(!o){o=await _tryRead(DATA_TMP);if(o)src='קובץ-ביניים';}
   if(o){
     S=o;
     if(src!=='רגיל'){
       // 🛟 שוחזר ממקור-משנה — נודיע בקול, ונקבע את הקובץ הראשי מיד
       setTimeout(()=>{try{logPlay('sys','🛟 קובץ-הנתונים הראשי היה פגום — שוחזר מ'+src,'');}catch(e){}},4000);
+      try{await FS().copy(DATA_FILE,DATA_FILE+'.bad',{overwrite:true});}catch(e){}   // 🛟 VER 1064: שומרים את הקובץ הפגום לבדיקה במקום לדרוס אותו
       try{await FS().writeFile(DATA_FILE,JSON.stringify(S));}catch(e){}
     }
   }else{
@@ -1694,9 +1892,9 @@ async function _scanMediaRun(silent){
     return badRoots.some(b=>x.indexOf(String(b||'').replace(/\\/g,'/'))===0);};
   if(badRoots.length){
     dlog('error','⚠ תיקיות שלא נקראו — קבציהן לא סומנו חסרים',{dirs:badRoots.slice(0,6),lastErr:SCAN.lastErr});
-    // שמות התיקיות ביומן הרגיל — שלא יהיה צורך לחפור בלוג-המפתח כדי לדעת מי נכשלה
-    try{const _nm=badRoots.slice(0,4).join(' · ')+(badRoots.length>4?(' · ועוד '+(badRoots.length-4)):'');
-      logPlay('sys','⚠️ '+badRoots.length+' תיקיות לא נקראו בסריקה — הקבצים שבהן נשמרו כמות שהם: '+_nm,'');}catch(e){}
+    // VER 1067: מראים אילו תיקיות — כדי שאפשר יהיה לבדוק אם הכונן מנותק / התיקייה נמחקה (פעם בשעה, לא בכל סריקה)
+    if(Date.now()-(window._badRootsSayAt||0)>3600000||window._badRootsSig!==badRoots.join('|')){window._badRootsSayAt=Date.now();window._badRootsSig=badRoots.join('|');
+      try{logPlay('sys','⚠️ '+badRoots.length+' תיקיות לא נקראו בסריקה (הקבצים שבהן נשמרו כמות שהם): '+badRoots.slice(0,6).join(' · ')+(SCAN.lastErr?' — '+SCAN.lastErr.slice(0,80):''),'');}catch(e){}}
   }
   S.tracks=S.tracks.filter(t=>seen.has(t.file)||!t.missing||underBad(t.file));
   S.tracks.forEach(t=>{if(!seen.has(t.file)&&!underBad(t.file))t.missing=true;});
@@ -1755,10 +1953,15 @@ async function importDropped(dt,type){
   else toast(`✅ נוספו ${n} קבצים (${TYPE_HE[type]})`);
 }
 let dragDepth=0;
-window.addEventListener('dragenter',e=>{
-  if(e.dataTransfer&&[...e.dataTransfer.types].includes('Files')){dragDepth++;$('#dropoverlay').classList.add('show');}});
-window.addEventListener('dragleave',()=>{dragDepth--;if(dragDepth<=0){dragDepth=0;$('#dropoverlay').classList.remove('show');}});
-window.addEventListener('dragover',e=>e.preventDefault());
+/* 🖐 VER 1077: גרירה אחת בלבד — שירים לתוך טבלת "ישודר" (רשימת ההשמעה). כל גרירה אחרת בוטלה:
+   אין שכבת "לאן להכניס", אין גרירת פרסומות/ג'ינגלים/חסויות, ושחרור מחוץ לטבלה לא עושה כלום. */
+function plDropZone(e){return !!(e&&e.target&&e.target.closest&&e.target.closest('#pl-card'));}
+window.addEventListener('dragstart',e=>{
+  const ok=e.target&&e.target.closest&&e.target.closest('[data-dragok]');
+  if(!ok)e.preventDefault();                       // תמונות, קישורים, טקסט, שורות אחרות — לא נגררים
+},true);
+window.addEventListener('dragover',e=>{e.preventDefault();
+  if(!plDropZone(e)&&e.dataTransfer)try{e.dataTransfer.dropEffect='none';}catch(_){}});
 window.addEventListener('drop',e=>{e.preventDefault();dragDepth=0;$('#dropoverlay').classList.remove('show');});
 // ⎋ מילוט — שכבה שנתקעה פתוחה (גרירה שיצאה מהחלון) לא תחסום את המסך
 window.addEventListener('keydown',e=>{
@@ -1848,7 +2051,8 @@ $$('.navbtn').forEach(b=>b.onclick=()=>{
   if(b.dataset.sec==='programs'&&typeof renderPrograms==='function'){renderPgDays();renderPrograms();if(typeof pgBindUI==='function')pgBindUI();}
   if(b.dataset.sec==='ads'&&typeof spRenderAll==='function')spRenderAll();
   if(b.dataset.sec==='gdrive'&&typeof gdBindUI==='function'){gdBindUI();gdRender();}
-  if(b.dataset.sec==='more'){if(typeof _logRenderDirty!=='undefined'&&_logRenderDirty){_logRenderDirty=false;renderLog();}
+  if(b.dataset.sec==='hits'&&typeof hitsBindUI==='function'){hitsFillHours();hitsBindUI();try{lnkBindUI();}catch(e){}}
+  if(b.dataset.sec==='more'){try{const m=document.getElementById('eq-settings');if(m){m.innerHTML=eqPanelHTML();eqWire(m);}}catch(e){}if(typeof _logRenderDirty!=='undefined'&&_logRenderDirty){_logRenderDirty=false;renderLog();}
                              if(typeof mtBindUI==='function')mtBindUI();}
   if(b.dataset.sec==='weather'&&typeof wxBindUI==='function')wxBindUI();
   if(b.dataset.sec==='devlog'){devBindUI();devRender();DEV.renderDirty=false;}
@@ -2302,7 +2506,7 @@ function renderHours(){
 }
 $('#qa-apply').onclick=()=>{
   const f=+$('#qa-from').value,t=+$('#qa-to').value,p=$('#qa-pl').value;
-  for(let h=f;h!==(t+1)%24;h=(h+1)%24){S.schedule[h]=p;if(h===t)break;}
+  for(let h=f;;h=(h+1)%24){S.schedule[h]=p;if(h===t)break;}
   save();renderHours();toast('✔ הלוח עודכן');
 };
 $('#qa-clear').onclick=()=>{for(let h=0;h<24;h++)S.schedule[h]='';save();renderHours();};
@@ -2348,6 +2552,7 @@ function bindSettings(){
   $('#set-duck').value=String(s.duckPct);
   $('#set-songgap').value=String(s.songGapMin??60);$('#set-artistgap').value=String(s.artistGapMin??60);
   $('#set-norm').checked=s.normalize!==false;
+  {const ag=$('#set-agc');if(ag)ag.checked=s.agc!==false;}
   if($('#set-winstartup'))$('#set-winstartup').checked=s.winStartup!==false;
   if($('#set-autostart'))$('#set-autostart').checked=s.autoStart!==false;
   if($('#set-rebirth'))$('#set-rebirth').checked=!(s.rebirth&&s.rebirth.on===false);
@@ -2362,6 +2567,7 @@ $('#set-djmix').onchange=e=>{S.settings.djMix=e.target.checked;save();toast(e.ta
 $('#set-duck').onchange=e=>{S.settings.duckPct=+e.target.value;save();};
 $('#set-songgap').onchange=e=>{S.settings.songGapMin=+e.target.value;save();toast('✅ נשמר');};
 $('#set-artistgap').onchange=e=>{S.settings.artistGapMin=+e.target.value;save();toast('✅ נשמר');};
+{const ag=$('#set-agc');if(ag)ag.onchange=e=>{S.settings.agc=e.target.checked;save();toast(e.target.checked?'🎚 מיישר העוצמה החי פעיל':'🎚 מיישר העוצמה החי כובה');};}
 $('#set-norm').onchange=e=>{S.settings.normalize=e.target.checked;save();applyCurrentGain();updateNormStatus();
   toast(e.target.checked?'🎚 איזון עוצמה הופעל — הניתוח ימשיך ברקע':'🎚 איזון עוצמה כובה');};
 $('#set-winstartup').onchange=e=>{S.settings.winStartup=e.target.checked;save();
@@ -2429,21 +2635,159 @@ let plannedNext=null;   // השיר הבא נבחר ונטען מראש — חז
 let talkOn=false,cartPlaying=false,baseVol=.9;
 
 let gA=null,gB=null,gCart=null;
+let anA=null,anB=null,_tailQuiet=0,_deckHeard=false;
+/* 🎚 VER 1066: מיישר-עוצמה חי (AGC). מודד את השיר בזמן הניגון (חלון של ~3 שניות) ומזיז לאט
+   את העוצמה של הנגן כך שכל שיר יוצא באותה רמה (-14dB RMS, כמו יעד הנורמליזציה): שיר נמוך
+   מוגבר, שיר גבוה מונמך. עד ±8dB, בקצב איטי (עלייה 0.7dB/ש', ירידה 2.5dB/ש', חלון ~6ש') כדי שלא ישמעו "נשימות".
+   בקטעים שקטים (פתיחה/סיום/הפסקה) לא משנים כלום — כדי לא להגביר רעש. */
+let levA=null,levB=null,limiter=null;
+/* 🎛 VER 1069: אקולייזר */
+let eqPre=null,eqF=[];
+const EQ_FREQS=[32,64,125,250,500,1000,2000,4000,8000,16000];
+const EQ_LBL=['32','64','125','250','500','1K','2K','4K','8K','16K'];
+const EQ_PRESETS={
+  flat:{name:'שטוח',b:[0,0,0,0,0,0,0,0,0,0],pre:0},
+  radio:{name:'רדיו FM',b:[3,2.5,1.5,0,-1,0,1.5,2.5,3,2],pre:-2},
+  bass:{name:'בס מוגבר',b:[6,5,3.5,1.5,0,0,0,0,0,0],pre:-4},
+  vocal:{name:'קול / דיבור',b:[-3,-2,-1,0.5,2,3,3,2,0.5,-1],pre:-2},
+  mizrahi:{name:'מזרחית',b:[4,3,1.5,0,-0.5,1,2.5,3,2,1],pre:-3},
+  pop:{name:'פופ',b:[2,3,2,0,-1,-0.5,1,2,3,3],pre:-3},
+  warm:{name:'חם',b:[3,2.5,2,1,0,-0.5,-1,-1.5,-2,-2.5],pre:-2},
+  bright:{name:'בהיר',b:[-1,-1,-0.5,0,0,0.5,1.5,3,4,4.5],pre:-3},
+};
+function eqCfg(){
+  const s=S.settings;s.eq=s.eq||{};const e=s.eq;
+  if(e.on===undefined)e.on=false;
+  if(!Array.isArray(e.b)||e.b.length!==10)e.b=[0,0,0,0,0,0,0,0,0,0];
+  e.b=e.b.map(v=>Math.max(-12,Math.min(12,+v||0)));
+  e.pre=Math.max(-12,Math.min(6,+e.pre||0));
+  if(!e.preset)e.preset='flat';
+  return e;
+}
+function eqApply(){
+  if(!ctx||!eqPre||!eqF.length)return;
+  const e=eqCfg(),t=ctx.currentTime;
+  eqF.forEach((f,i)=>{try{f.gain.setTargetAtTime(e.on?e.b[i]:0,t,0.03);}catch(x){f.gain.value=e.on?e.b[i]:0;}});
+  try{eqPre.gain.setTargetAtTime(e.on?Math.pow(10,e.pre/20):1,t,0.03);}catch(x){eqPre.gain.value=e.on?Math.pow(10,e.pre/20):1;}
+}
+function eqPanelHTML(){
+  const e=eqCfg();
+  return`<div class="eqbox">
+    <div class="eqtop">
+      <label class="switch"><input type="checkbox" class="eq-on" ${e.on?'checked':''}><span class="sl"></span></label>
+      <b class="eq-state">${e.on?'האקולייזר פעיל':'האקולייזר כבוי (צליל מקורי)'}</b>
+      <select class="eq-preset" style="margin-inline-start:auto">${Object.entries(EQ_PRESETS).map(([k,p])=>`<option value="${k}" ${e.preset===k?'selected':''}>${p.name}</option>`).join('')}<option value="custom" ${e.preset==='custom'?'selected':''}>מותאם אישית</option></select>
+      <button class="btn small eq-reset">↺ איפוס</button>
+    </div>
+    <div class="eqbands">
+      <div class="eqband pre"><span class="eqv">${e.pre>0?'+':''}${e.pre.toFixed(1)}</span>
+        <input type="range" class="eqs" data-i="pre" min="-12" max="6" step="0.5" value="${e.pre}"><span class="eql">הגבר</span></div>
+      ${EQ_FREQS.map((f,i)=>`<div class="eqband"><span class="eqv">${e.b[i]>0?'+':''}${e.b[i].toFixed(1)}</span>
+        <input type="range" class="eqs" data-i="${i}" min="-12" max="12" step="0.5" value="${e.b[i]}"><span class="eql">${EQ_LBL[i]}</span></div>`).join('')}
+    </div>
+    <div class="hint">dB לכל תדר · "הגבר" מוריד/מעלה את הכל לפני האקולייזר — כשמגבירים תדרים, כדאי להוריד אותו קצת כדי שהמגביל לא יעבוד קשה. האקולייזר חל על כל השידור: מוזיקה, פרסומות וחדשות.</div>
+  </div>`;
+}
+function eqWire(root){
+  if(!root)return;
+  const e=eqCfg();
+  const refresh=()=>{document.querySelectorAll('.eq-mount').forEach(m=>{if(m!==root){m.innerHTML=eqPanelHTML();eqWire(m);}});eqBtnState();};
+  const on=root.querySelector('.eq-on');
+  if(on)on.onchange=()=>{e.on=on.checked;eqApply();save();root.querySelector('.eq-state').textContent=e.on?'האקולייזר פעיל':'האקולייזר כבוי (צליל מקורי)';refresh();};
+  const ps=root.querySelector('.eq-preset');
+  if(ps)ps.onchange=()=>{const p=EQ_PRESETS[ps.value];if(!p){e.preset='custom';save();return;}
+    e.b=p.b.slice();e.pre=p.pre;e.preset=ps.value;if(!e.on)e.on=true;eqApply();save();root.innerHTML=eqPanelHTML();eqWire(root);refresh();
+    toast('🎛 אקולייזר: '+p.name);};
+  const rs=root.querySelector('.eq-reset');
+  if(rs)rs.onclick=()=>{e.b=[0,0,0,0,0,0,0,0,0,0];e.pre=0;e.preset='flat';eqApply();save();root.innerHTML=eqPanelHTML();eqWire(root);refresh();};
+  root.querySelectorAll('input.eqs').forEach(inp=>{
+    inp.oninput=()=>{const v=+inp.value,i=inp.dataset.i;
+      if(i==='pre')e.pre=v;else e.b[+i]=v;
+      e.preset='custom';if(ps)ps.value='custom';
+      const lab=inp.parentElement.querySelector('.eqv');if(lab)lab.textContent=(v>0?'+':'')+v.toFixed(1);
+      eqApply();};
+    inp.onchange=()=>{save();refresh();};
+    inp.ondblclick=()=>{inp.value=0;inp.oninput();save();refresh();};   // לחיצה כפולה = 0
+  });
+}
+function eqBtnState(){const b=document.getElementById('eqbtn');if(b)b.classList.toggle('on',!!eqCfg().on);}
+function eqOpenModal(){
+  showModal(`<h3>🎛 אקולייזר</h3><div class="eq-mount" id="eq-modal"></div>
+    <div id="modal-actions"><button class="btn primary" onclick="closeModal()">סגור</button></div>`,
+    ()=>{const m=document.getElementById('eq-modal');m.innerHTML=eqPanelHTML();eqWire(m);});
+}
+const AGC={A:{ms:0,warm:0,db:0},B:{ms:0,warm:0,db:0},last:0};
+const AGC_TARGET=-14,AGC_MAX=8,AGC_GATE=0.012;
+function agcReset(el){const k=el===A?'A':el===B?'B':null;if(!k)return;AGC[k]={ms:0,warm:0,db:0};
+  const lv=el===A?levA:levB;if(lv&&ctx){gCancel(lv.gain,ctx.currentTime);gSet(lv.gain,1,ctx.currentTime);}}
+function agcTick(){
+  try{
+    if(!ctx||!levA)return;
+    const on=S.settings.agc!==false;
+    const now=performance.now(),dt=AGC.last?Math.min(1,(now-AGC.last)/1000):0.2;AGC.last=now;
+    if(!on){for(const [lv,k] of [[levA,'A'],[levB,'B']])if(AGC[k].db!==0){AGC[k].db=0;gCancel(lv.gain,ctx.currentTime);lv.gain.setTargetAtTime(1,ctx.currentTime,0.3);}agcShow(null);return;}
+    if(!current||current.stream||!isPlaying()||(active!==A&&active!==B)){agcShow(null);return;}
+    if(current.kind!=='song'&&current.kind!=='program'){agcShow(null);return;}   // פרסומות/ג'ינגלים — לפי הנורמליזציה בלבד
+    const k=active===A?'A':'B',st=AGC[k],lv=active===A?levA:levB;
+    const r=deckRms(active);if(r<0)return;
+    if(r<AGC_GATE){agcShow(st);return;}                       // שקט — לא מתקנים
+    if(!st.ms)st.ms=r*r;else st.ms+=(r*r-st.ms)*Math.min(1,dt/6);st.warm+=dt;   // מתחילים מהמדידה הראשונה (לא מ-0 — אחרת הגברת-שווא בתחילת כל שיר)
+    if(st.warm<3){agcShow(st);return;}
+    const normDb=20*Math.log10(Math.max(1e-6,normGainOf(current.track)));
+    const lvlDb=10*Math.log10(Math.max(1e-9,st.ms))+normDb;     // הרמה שיוצאת אחרי הנורמליזציה
+    const want=Math.max(-AGC_MAX,Math.min(AGC_MAX,AGC_TARGET-lvlDb));
+    const step=want>st.db?Math.min(want-st.db,0.7*dt):Math.max(want-st.db,-2.5*dt);
+    st.db+=step;
+    gCancel(lv.gain,ctx.currentTime);
+    lv.gain.setTargetAtTime(Math.pow(10,st.db/20),ctx.currentTime,0.08);
+    agcShow(st);
+  }catch(e){}
+}
+function agcShow(st){
+  const el=document.getElementById('np-agc');if(!el)return;
+  if(!st||S.settings.agc===false){el.textContent='';return;}
+  el.textContent='🎚 '+(st.db>=0?'+':'')+st.db.toFixed(1)+'dB';
+  el.title='מיישר-העוצמה החי מתקן את השיר הזה ב-'+st.db.toFixed(1)+'dB';
+}
+/* VER 1064: עוצמת ה-RMS של קובץ שמתנגן בנגן A/B (לפני הפייד והנורמליזציה) */
+function deckRms(el){
+  const an=el===A?anA:el===B?anB:null;if(!an)return -1;
+  const a=new Float32Array(an.fftSize);
+  try{an.getFloatTimeDomainData(a);}catch(e){return -1;}
+  let s=0;for(let i=0;i<a.length;i++)s+=a[i]*a[i];
+  return Math.sqrt(s/a.length);
+}
+const QUIET_RMS=0.0045;   // ≈ -47dBFS — מתחת לזה זה שקט/רעש-רקע
 function initGraph(){
   if(ctx)return;
   ctx=new (window.AudioContext||window.webkitAudioContext)();
   musicGain=ctx.createGain();cartGain=ctx.createGain();masterGain=ctx.createGain();analyser=ctx.createAnalyser();
   analyser.fftSize=64;analyser.smoothingTimeConstant=.75;
   gA=ctx.createGain();gB=ctx.createGain();gCart=ctx.createGain();
-  ctx.createMediaElementSource(A).connect(gA);gA.connect(musicGain);
-  ctx.createMediaElementSource(B).connect(gB);gB.connect(musicGain);
+  /* VER 1064: מד-רמה לכל נגן (לפני העוצמה) — לזיהוי שקט אמיתי בסוף שיר ובתחילתו */
+  const _sA=ctx.createMediaElementSource(A),_sB=ctx.createMediaElementSource(B);
+  /* VER 1066: מיישר-עוצמה חי — צומת עוצמה נוסף לכל נגן (levA/levB), אחרי הנורמליזציה והקרוספייד */
+  levA=ctx.createGain();levB=ctx.createGain();
+  _sA.connect(gA);gA.connect(levA);levA.connect(musicGain);_sB.connect(gB);gB.connect(levB);levB.connect(musicGain);
+  try{anA=ctx.createAnalyser();anA.fftSize=1024;_sA.connect(anA);anB=ctx.createAnalyser();anB.fftSize=1024;_sB.connect(anB);}catch(e){anA=anB=null;}
   ctx.createMediaElementSource(CART).connect(gCart);gCart.connect(cartGain);
   // 🎧 צומת הסטרים החי בתוך הגרף: newsGain (עוצמה) + analyserNews (מדידת קול אמיתי RMS)
   newsGain=ctx.createGain();newsGain.gain.value=0;
   analyserNews=ctx.createAnalyser();analyserNews.fftSize=256;
   analyserNews.connect(newsGain);
   musicGain.connect(masterGain);cartGain.connect(masterGain);newsGain.connect(masterGain);
-  masterGain.connect(analyser);analyser.connect(ctx.destination);
+  /* VER 1066: מגביל בסוף השרשרת — הגברה של שיר שקט לא תגרום לעיוות */
+  /* 🎛 VER 1069: אקולייזר 10 ערוצים (+ הגבר-קדם) בין העוצמה הראשית למגביל — חל על כל מה שיוצא לשידור */
+  let _eqOut=masterGain;
+  try{eqPre=ctx.createGain();masterGain.connect(eqPre);_eqOut=eqPre;
+    eqF=EQ_FREQS.map((f,i)=>{const b=ctx.createBiquadFilter();b.type=i===0?'lowshelf':i===EQ_FREQS.length-1?'highshelf':'peaking';
+      b.frequency.value=f;if(b.type==='peaking')b.Q.value=1.1;b.gain.value=0;_eqOut.connect(b);_eqOut=b;return b;});
+  }catch(e){eqF=[];}
+  try{limiter=ctx.createDynamicsCompressor();limiter.threshold.value=-2;limiter.knee.value=2;limiter.ratio.value=20;
+    limiter.attack.value=0.002;limiter.release.value=0.18;_eqOut.connect(limiter);limiter.connect(analyser);}
+  catch(e){limiter=null;_eqOut.connect(analyser);}
+  try{eqApply();}catch(e){}
+  analyser.connect(ctx.destination);
   gSet(masterGain.gain,baseVol,ctx.currentTime);applyDuck();
 }
 // מחברים את נגן הסטרים הגרפי (STRM2) לגרף — פעם אחת בלבד (MediaElementSource נוצר פעם אחת לכל אלמנט)
@@ -2491,7 +2835,16 @@ function applyCurrentGain(){if(current&&active)setElGain(active,current.track,tr
 let _measureCtx=null;
 async function measureGain(t){
   try{
-    const ab=await FS().readBinaryFile(t.file);
+    /* VER 1064: מגבלת-זמן לקריאה, ודילוג על קבצים ענקיים (תוכנית של שעה = מעל 1GB בזיכרון אחרי פענוח) */
+    // VER 1064: אם הקובץ כבר בזיכרון (נטען לניגון) — מודדים משם, בלי לקרוא שוב מהדיסק
+    const _cu=urlCache[t.file];
+    const _cap=(t.type==='program'?60:150)*1048576;   // תוכנית ארוכה = ענקית אחרי פענוח; שיר WAV עד 150MB עדיין נמדד
+    if(!_cu){try{const st=await FS().getStats(t.file);if(st&&st.size>_cap)return 'big';}catch(e){return 'retry';}}
+    const _rd=_cu?fetch(_cu).then(r=>r.arrayBuffer()):FS().readBinaryFile(t.file);
+    _normRead=_rd;
+    const ab=await Promise.race([_rd,new Promise((_,rej)=>setTimeout(()=>rej(new Error('norm-read-timeout')),30000))]).catch(()=>null);
+    if(!ab)return 'retry';
+    if(ab.byteLength>_cap)return 'big';
     _measureCtx=_measureCtx||new OfflineAudioContext(1,1,44100);
     const buf=await _measureCtx.decodeAudioData(ab.slice(0));
     const chn=buf.numberOfChannels,block=Math.floor(buf.sampleRate*.4);
@@ -2528,23 +2881,33 @@ async function measureGain(t){
     if(cueOut<buf.duration*0.75)cueOut=+buf.duration.toFixed(2);   // 🛡 פייד-אאוט אמיתי חי רק בסוף — לא באמצע השיר
     if(cueOutSoft<=cueIn+0.3)cueOutSoft=+buf.duration.toFixed(2);
     if(cueOutSoft<buf.duration*0.5)cueOutSoft=+buf.duration.toFixed(2);
-    return {g,cueIn,cueOut,cueOutSoft};
+    return {g,cueIn,cueOut,cueOutSoft,dur:buf.duration};
   }catch(e){return null;}
 }
-let _normBusy=false;
+let _normBusy=false,_normRead=null;
 function nextToAnalyze(){
-  const cand=t=>t&&!t.missing&&(t.gainDb===undefined||t.anaV!==3);
+  const cand=t=>t&&!t.missing&&(t.gainDb===undefined||t.anaV!==3)&&!(t._anaRetryAt>Date.now());
   if(current&&cand(current.track))return current.track;
   for(const it of pending){const t=trk(it.trackId);if(cand(t))return t;}
+  // VER 1064: השיר הבא המתוכנן נמדד לפני שהוא עולה — כך יש לו נקודות כניסה/יציאה למיקס חלק
+  if(plannedNext){const t=trk(plannedNext.trackId);if(cand(t))return t;}
   return S.tracks.find(cand)||null;
 }
 async function normLoop(){
   if(_normBusy||!S||S.settings.normalize===false)return;
+  if(_fsPend>=1||Date.now()<_diskBadUntil||loading)return;   // VER 1064/1074: לא מתחרים בנגן על הדיסק — גם לא בטעינה-המוקדמת
+  if(Object.keys(urlInflight).length)return;
   const t=nextToAnalyze();if(!t)return;
   _normBusy=true;
   try{
     const r=await measureGain(t);
-    if(r&&isFinite(r.g)){t.gainDb=r.g;t.cueIn=r.cueIn;t.cueOut=r.cueOut;t.cueOutSoft=r.cueOutSoft;}
+    /* VER 1064: כשל-קריאה זמני (דיסק איטי) — לא מסמנים "נמדד"; מנסים שוב בעוד 10 דק׳.
+       קובץ ענק — מסמנים בלי ניתוח (כמו קודם), כדי שלא ינסה שוב ושוב. */
+    if(r==='retry'){t._anaRetryAt=Date.now()+600000;
+      try{if(_normRead)await Promise.race([_normRead.catch(()=>{}),new Promise(z=>setTimeout(z,60000))]);}catch(e){}
+      return;}
+    if(r&&isFinite(r.g)){t.gainDb=r.g;t.cueIn=r.cueIn;t.cueOut=r.cueOut;t.cueOutSoft=r.cueOutSoft;
+      if(!(t.duration>0)&&isFinite(r.dur)&&r.dur>0)t.duration=+r.dur.toFixed(2);}   // VER 1064: משך לרשימת-ההשמעה
     else t.gainDb=t.gainDb??0;
     t.anaV=3;
     save();
@@ -2647,7 +3010,19 @@ async function playItem(item,depth=0){
   const djEf=(typeof window._djEf==='number')?window._djEf:null;window._djEf=null;
   const url=isStream?item.stream:(t?await trackURL(item.trackId):null);
   if(_gen!==PLAYGEN.n)return;                    // 🎫 קריאה חדשה עקפה אותנו
-  if(!url){playNextInner(depth+1);return;}
+  if(!url){
+    /* VER 1064: פרסומת/חסות/תוכנית שלא נטענה בזמן (דיסק איטי) חוזרת לראש התור ותנוגן כשהדיסק ישתחרר —
+       במקום להיעלם בשקט. קובץ שבאמת חסר (missing) לא חוזר. */
+    if(!isStream&&t&&!t.missing&&item.kind&&item.kind!=='song'&&Date.now()<_diskBadUntil){
+      pending.unshift(item);
+      if(Date.now()-(window._rqSayAt||0)>60000){window._rqSayAt=Date.now();
+        try{dlog('play','📥 פריט שלא נטען הוחזר לתור',{name:t.name,kind:item.kind});}catch(e){}}
+      // בינתיים מנגנים שיר (מהזיכרון אם אפשר) — לא מנסים שוב את אותו פריט מיד
+      const s=pickCachedSong()||plannedNext||planTake()||pickSong();plannedNext=null;
+      if(s&&s.trackId!==item.trackId){playItem(s,depth+1);return;}
+      loading=false;return;
+    }
+    playNextInner(depth+1);return;}
   initGraph();if(ctx.state==='suspended')ctx.resume();
   const prev=active,el=isStream?STRM:((active===A)?B:A);
   /* 🛡 ביטול כל דעיכה-ועצירה תלויה על האלמנט הזה. שני מסלולים: הטיימר של
@@ -2673,8 +3048,11 @@ async function playItem(item,depth=0){
     // ⏱ גם לקובץ: play() יכול להיתלות לנצח כשהדקודר/התקן-השמע נתקע — 10ש׳ ומדלגים
     else await Promise.race([el.play(),new Promise((_,rej)=>setTimeout(()=>rej(new Error('play-timeout')),10000))]);
   }catch(e){console.warn(e);
-    if(isStream){try{el.pause();el.removeAttribute('src');el.load();}catch(e2){}toast('⚠️ הסטרים של החדשות לא נטען — ממשיכים');}
-    else{
+    /* VER 1064: בקשה חדשה כבר השתלטה על הנגן — לא נוגעים בו (קודם זה מחק את הסטרים החדש) */
+    if(_gen!==PLAYGEN.n){try{if(el.src===url&&el!==active)el.pause();}catch(e2){}return;}
+    if(isStream){try{if(el.src===url){el.pause();el.removeAttribute('src');el.load();}}catch(e2){}toast('⚠️ הסטרים של החדשות לא נטען — ממשיכים');}
+    else{try{if(el.src===url&&el!==active){el.pause();el.removeAttribute('src');}}catch(e2){}}
+    if(!isStream){
       /* 🔇 חסימת-ניגון של המנוע (autoplay policy): כשהדפדפן חוסם את play() כי
          לא הייתה נגיעה של משתמש, *כל* קובץ ייכשל — וההודעה נרשמה לכל אחד מהם.
          נמדד 31.8: 2,511 שורות ב-30 דקות (עד 174 בדקה), שהציפו את היומן ואת
@@ -2697,7 +3075,7 @@ async function playItem(item,depth=0){
     }
     if(_gen!==PLAYGEN.n)return;
     playNextInner(depth+1);return;}
-  if(_gen!==PLAYGEN.n){try{el.pause();}catch(e){}return;}   // 🎫 קריאה חדשה עקפה אותנו בזמן ה-play
+  if(_gen!==PLAYGEN.n){try{if(el.src===url&&el!==active)el.pause();}catch(e){}return;}   // 🎫 קריאה חדשה עקפה אותנו בזמן ה-play
   if(t&&t.cueIn&&t.cueIn>0.15&&t.cueIn<10&&el.currentTime<t.cueIn)el.currentTime=t.cueIn; // דילוג על שקט בפתיחה
   loading=false;
   if(doFade){
@@ -2707,7 +3085,13 @@ async function playItem(item,depth=0){
   }
   else if(prev&&prev!==el){clearInterval(prev._fade);stopEl(prev);}
   active=el;current={...item,track:t,startedAt:Date.now()};userPaused=false;
+  // 🎬 VER 1064: זוכרים את התוכנית האחרונה; כל פריט אחר שאינו חדשות/אות סוגר אותה
+  if(item.kind==='program')LASTPROG={at:current.startedAt,dur:(isFinite(el.duration)?el.duration:(t&&t.duration)),name:t?t.name:''};
+  else if(item.kind!=='news'&&item.kind!=='sig'&&!item.stream)LASTPROG=null;
+  _tailQuiet=0;_deckHeard=false;
+  if(el===A||el===B)agcReset(el);   // 🎚 VER 1066: מיישר-העוצמה מתחיל מחדש לכל שיר
   if(t&&t.type==='song'){
+    try{if(typeof hitsOnSongStart==='function')hitsOnSongStart(t);}catch(e){}   // 🔥 VER 1066
     (S.playHist=S.playHist||[]).push({file:t.file,a:(t.artist||'').toLowerCase().trim(),t:Date.now()});
     if(S.playHist.length>400)S.playHist=S.playHist.slice(-300);
     renderPlayed(); // 🎵 עדכון רשימת "שירים שנוגנו" בזמן אמת
@@ -2717,6 +3101,13 @@ async function playItem(item,depth=0){
   renderNow();renderQueue();
   preloadNext();
 }
+/* VER 1066: מי ינוגן אחרי הפריט הנוכחי — בלי לשנות את התור */
+function peekNextItem(){
+  try{
+    if(pending.length){let b=null,br=1e9;for(const it of pending){const r=prioRank(it);if(r<br){br=r;b=it;}}return b;}
+    return plannedNext||null;
+  }catch(e){return null;}
+}
 function stopEl(el){if(!el)return;clearTimeout(el._stopT);el._stopT=null;try{clearInterval(el._fade);el._fade=null;}catch(e){}try{el.pause();el.removeAttribute('src');el.load();el.volume=1;}catch(e){}}
 /* השיר הבא נבחר ונטען מראש — גם בזמן הפסקת פרסומות וגם במצב אקראי.
    כשהפריט האחרון בתור נגמר, המוזיקה נכנסת מיידית. */
@@ -2724,14 +3115,15 @@ function preloadNext(){
   let id=null;
   if(pending.length)id=pending[0].trackId;
   else{
-    if(!plannedNext)plannedNext=pickSong();   // מתכננים את השיר הבא כבר עכשיו
+    if(!plannedNext)plannedNext=(typeof hitsPick==='function'&&hitsPick())||planTake()||pickSong();   // מתכננים את השיר הבא כבר עכשיו (VER 1064: לפי רשימת-ההשמעה המוצגת)
     id=plannedNext?plannedNext.trackId:null;
   }
-  if(id)trackURL(id).catch(()=>{});
+  if(id)trackURL(id,true).catch(()=>{});   // VER 1074: ברקע — בלי מגבלת-זמן ובלי אזעקה
 }
 // 🎯 עדיפות ניגון: חדשות/אותות תמיד קודם, אחריהם לפי סדר העדיפות שנקבע (ג'ינגל/פרסומת/חסות)
 function prioRank(item){
   if(!item)return 99;
+  if(item.now)return -2;   // VER 1064: "שדר עכשיו" מהחיפוש — לפני כל מה שבתור
   if(item.kind==='news'||item.kind==='sig')return -1;
   if(item.spot)return .5;   // 📢 קבצים מתוזמנים — שומרים על סדר העדיפות שהמנוע קבע
   const ord=S.settings.breakOrder||['jingle','ad','sponsor'];
@@ -2758,7 +3150,7 @@ function pulseReset(){_lastCT=-1;_ctFrozenSince=0;}
 function antiSilence(){
   if(typeof AID!=='undefined'&&AID.mode==='onair')return; // 📰 חדשות באוויר — מנוהל ע"י מנוע ה-AI
   if(!autoOn||userPaused){pulseReset();return;}   // המשתמש עצר במכוון — לא מפריעים
-  if(loading){ if(Date.now()-_loadingSince>12000){loading=false;} else {pulseReset();return;} } // טעינה תקועה >12ש' → משחררים
+  if(loading){ if(Date.now()-_loadingSince>20000){loading=false;} else {pulseReset();return;} } // טעינה תקועה >12ש' → משחררים
   if(isPlaying()){
     if(!pulseStuck()){_silentSince=0;return;}     // משהו מתנגן ומתקדם — הכל תקין
     // הנגן "מנגן" אבל קפא — משחררים בכוח ועוברים לפריט הבא
@@ -2784,14 +3176,41 @@ function playNext(reason){_advReason=reason||'לא-ידוע';
      pending:pending.length,loading:typeof loading!=='undefined'?loading:null,
      mode:typeof AID!=='undefined'&&AID?AID.mode:null});}catch(e){}
   playNextInner(0);}
+/* 🎬 VER 1064: תוכנית ארוכה (מעל 30 דק׳) — פרסומות, חסויות וג'ינגלים מתוזמנים שהגיע זמנם *במהלך*
+   התוכנית לא משודרים בסופה. הם פשוט מדלגים (ונרשמים ביומן), והשידור חוזר למוזיקה / להפסקה הבאה בזמנה. */
+let LASTPROG=null;   // {at,dur,name}
+const PROG_LONG_MS=30*60000;
+/* VER 1065: תוכנית ארוכה מתנגנת עכשיו — לפי אורך הקובץ (מעל 30 דק׳) או לפי כמה זמן היא כבר באוויר */
+function progIsLongNow(){
+  try{
+    if(!current||current.kind!=='program'||!isPlaying())return false;
+    const d=active&&isFinite(active.duration)?active.duration:(current.track&&+current.track.duration)||0;
+    return d*1000>PROG_LONG_MS||Date.now()-(current.startedAt||Date.now())>PROG_LONG_MS;
+  }catch(e){return false;}
+}
+function progDropMissed(){
+  try{
+    if(!LASTPROG||!pending.length)return;
+    const lp=LASTPROG;
+    const long=Date.now()-lp.at>PROG_LONG_MS||(isFinite(lp.dur)&&lp.dur*1000>PROG_LONG_MS&&Date.now()-lp.at>60000);   // לפי כמה זמן התוכנית באמת שודרה (דילוג ידני אחרי דקה — הפרסומות נשארות)
+    if(!long)return;
+    const drop=pending.filter(x=>x&&x.spot&&x.progAt===lp.at);
+    if(!drop.length)return;
+    pending=pending.filter(x=>!(x&&x.spot&&x.progAt===lp.at));
+    const names=drop.map(x=>{const tt=trk(x.trackId);return tt?tt.name:'?';});
+    try{logPlay('info','⏭ דילוג על '+drop.length+' פריטים מתוזמנים שהגיע זמנם במהלך התוכנית "'+(lp.name||'')+'" (מעל 30 דק׳): '+names.join(', '),'תוכנית ארוכה');}catch(e){}
+    try{dlog('sched','⏭ פרסומות שפוספסו בתוכנית ארוכה — דולגו',{program:lp.name,count:drop.length,names});}catch(e){}
+  }catch(e){}
+}
 function playNextInner(depth){
   // 📰 חדשות באוויר = קדושות: שום פריט לא מתחיל לנגן עד שהחדשות יוצאות (aidExit
   // משחרר קודם את המצב ואז קורא לכאן). מגן מפני rebuffer רגעי של הסטרים שנראה
   // כמו "שקט" — הג'ינגלים ימתינו בתור וינוגנו מיד בסיום החדשות.
   if(typeof AID!=='undefined'&&AID.mode==='onair'){try{renderQueue();}catch(e){}return;}
+  progDropMissed();                                 // 🎬 VER 1064: פרסומות שפוספסו בתוכנית ארוכה — לא משודרות
   sortPending();                                    // מסדרים את התור לפי עדיפות לפני בחירת הפריט הבא
   let item=pending.shift();
-  if(!item){item=plannedNext||pickSong();plannedNext=null;}
+  if(!item){item=plannedNext||(typeof hitsPick==='function'&&hitsPick())||planTake()||pickSong();plannedNext=null;}
   // 🆘 הצינור חסום — הפריט הבא ממילא לא ייטען: מנגנים שיר מהזיכרון במקום שקט
   if(item&&!item.stream&&Date.now()<_diskBadUntil){
     const cs=pickCachedSong();
@@ -2813,7 +3232,7 @@ function playNextInner(depth){
 }
 function hourPl(){const h=new Date().getHours();const p=S.schedule[h]||'';
   return playlists().includes(p)?p:'';}
-function pickSong(){
+function pickSong(avoid,avoidArt){
   const p=hourPl();
   let ids=plSongs(p).map(t=>t.id),key=p||'_all';
   if(!ids.length){ids=plSongs('').map(t=>t.id);key='_all';}
@@ -2836,7 +3255,13 @@ function pickSong(){
     for(let i=1;i<=ids.length;i++)candidates.push(ids[(st+i)%ids.length]);
   }
   let chosen=null;
-  for(const id of candidates){const t=trk(id);if(t&&!violates(t)){chosen=t;break;}}
+  // VER 1064: avoid — שירים שכבר מתוכננים ברשימת-ההשמעה, כדי שהתחזית לא תכפיל שיר/אמן
+  if(avoid&&avoid.size){
+    for(const id of candidates){if(avoid.has(id))continue;const t=trk(id);
+      if(t&&!violates(t)&&!(aGap&&avoidArt&&artistKey(t)&&avoidArt.has(artistKey(t)))){chosen=t;break;}}
+    if(!chosen)for(const id of candidates){if(avoid.has(id))continue;const t=trk(id);if(t&&!violates(t)){chosen=t;break;}}
+  }
+  if(!chosen)for(const id of candidates){const t=trk(id);if(t&&!violates(t)){chosen=t;break;}}
   if(!chosen){                                        // כל השירים "חסומים" — מנגנים את הישן ביותר כדי שהשידור לא ייעצר
     let bestT=Infinity;
     ids.forEach(id=>{const t=trk(id);if(!t)return;
@@ -2844,8 +3269,39 @@ function pickSong(){
       if(last<bestT){bestT=last;chosen=t;}});
   }
   if(!chosen)return null;
-  if(!S.settings.shuffle)plPos[key]=ids.indexOf(chosen.id);
-  return{trackId:chosen.id,src:p?('פלייליסט: '+p):'כל המוזיקה',kind:'song'};
+  if(!S.settings.shuffle&&!avoid)plPos[key]=ids.indexOf(chosen.id);
+  return{trackId:chosen.id,src:p?('פלייליסט: '+p):'כל המוזיקה',kind:'song',pl:p};
+}
+/* 📋 VER 1064: תכנון-קדימה במצב אקראי — השירים שמוצגים ברשימת-ההשמעה הם באמת השירים שיתנגנו.
+   songPlan מחזיק את השירים שאחרי "הבא בתור"; preloadNext לוקח ממנו לפי הסדר. */
+let songPlan=[];
+function planValid(it){
+  const t=it&&trk(it.trackId);if(!t||t.missing||t.type!=='song')return false;
+  if((it.pl||'')!==hourPl())return false;
+  const sGap=(S.settings.songGapMin||0)*60000;
+  if(sGap&&(S.playHist||[]).some(x=>x.file===t.file&&Date.now()-x.t<sGap))return false;
+  return true;
+}
+function planPeek(n){
+  if(!S.settings.shuffle){songPlan=[];return[];}
+  songPlan=songPlan.filter(x=>planValid(x)&&!pending.some(p=>p&&p.trackId===x.trackId));
+  const avoid=new Set(songPlan.map(x=>x.trackId)),art=new Set();
+  for(const x of pending)if(x&&x.trackId)avoid.add(x.trackId);
+  if(plannedNext)avoid.add(plannedNext.trackId);
+  if(current&&current.track)avoid.add(current.track.id);
+  for(const id of avoid){const t=trk(id);if(t&&t.artist)art.add(String(t.artist).toLowerCase().trim());}
+  let guard=0;
+  while(songPlan.length<n&&guard++<n*3){
+    const it=pickSong(avoid,art);if(!it||avoid.has(it.trackId))break;
+    songPlan.push(it);avoid.add(it.trackId);
+    const t=trk(it.trackId);if(t&&t.artist)art.add(String(t.artist).toLowerCase().trim());
+  }
+  return songPlan.slice(0,n);
+}
+function planTake(){
+  if(!S.settings.shuffle){songPlan=[];return null;}
+  while(songPlan.length){const it=songPlan.shift();if(planValid(it)&&!(current&&current.track&&current.track.id===it.trackId))return it;}
+  return null;
 }
 function peekUpcoming(n){
   if(S.settings.shuffle)return[];
@@ -2932,7 +3388,13 @@ function transitionTick(){
   // 🎧 מיקס-DJ: לשירים, אורך-החפיפה מתאים את עצמו לזנב-הדעיכה הטבעי של השיר
   // (עד 8ש') — הבא נכנס בדיוק כשהיוצא דועך, בעוצמה-שווה, כמו סגה של אולפן.
   let ef;
-  if(isSong){
+  /* 🎵 VER 1066: אם הבא בתור הוא ג'ינגל/פרסומת/חסות/תוכנית — השיר מתנגן עד הסוף הטבעי שלו
+     (כולל הדעיכה), ורק אז הפריט נכנס. קודם המעבר-החופף של שיר→שיר (עד 8ש' לפני הסוף)
+     הופעל גם כשהבא היה פרסומת — והפרסומת, שנכנסת בחיתוך, קטעה את השיר באמצע הסיום. */
+  const _nx=peekNextItem();
+  const _toSpot=isSong&&_nx&&_nx.kind&&_nx.kind!=='song';
+  if(_toSpot){out=effOut(t,false,d);ef=0;}
+  else if(isSong){
     const f=Math.max(0,+S.settings.fadeSec||0);
     const tail=Math.max(0,d-out);
     ef=(S.settings.djMix===false)?f:Math.min(8,Math.max(f,tail>1.5?tail*0.85:f));
@@ -2940,6 +3402,22 @@ function transitionTick(){
   if(isSong&&ef>0)window._djEf=+ef.toFixed(2);
   // חיתוך-נקי (בלי פייד) שנקודתו היא הסוף האמיתי — לא יורים 0.08ש' לפני הסוף;
   // אירוע-הסיום של הנגן מטפל, ואין שני מעברים מתחרים על אותו רגע.
+  /* 🔇 VER 1064: שקט אמיתי בסוף השיר — "מעבר בין שירים שקט". קורה כשהשיר עוד לא נותח
+     (אין נקודת-סיום מדודה) או כשבסוף הקובץ יש שניות של שקט. 1.5 שניות רצופות של שקט
+     → השיר הבא נכנס מיד במעבר קצר. לשיר שנמדד — רק ב-12 השניות האחרונות (לא חותכים "סוף מדומה"). */
+  if(isSong&&active!==STRM){
+    const ct=active.currentTime,left=d-ct;
+    const r=deckRms(active);
+    if(r>=0.02)_deckHeard=true;   // מד-הרמה באמת מקבל אות — רק אז סומכים עליו
+    const measured=!!(t&&t.anaV===3&&t.cueOut>0);
+    if(_deckHeard&&ct>Math.max(15,d*0.6)&&left>0.6&&(measured?left<12:left<40)){
+      if(r>=0&&r<QUIET_RMS){_tailQuiet+=0.25;
+        if(_tailQuiet>=1.5){_tailQuiet=0;window._djEf=0.6;
+          try{dlog('play','🔇 שקט בסוף השיר — מעבר מיידי',{name:t&&t.name,at:+ct.toFixed(1),dur:+d.toFixed(1)});}catch(e){}
+          playNext('שקט-בסוף-שיר');return;}
+      }else _tailQuiet=0;
+    }else _tailQuiet=0;
+  }
   if(ef<=0.01&&out>=d-0.3)return;
   const trigger=out-ef-0.08;
   if(trigger>0&&active.currentTime>=trigger)playNext('מעבר-חופף');
@@ -2951,6 +3429,7 @@ function fire(key){if(firedKeys.has(key))return false;firedKeys.add(key);
 function schedulerTick(){
   if(!autoOn)return;
   const n=new Date();
+  progDropMissed();   // 🎬 VER 1065: פרסומות שפוספסו בתוכנית ארוכה יוצאות מהתור מיד, לא רק בסופה
   firePrograms(n); // 🎬 תוכניות מתוזמנות — רק מכניסות לתור, בטוח גם בזמן חדשות
   if(typeof AID!=='undefined'&&AID.mode==='onair')return;   // 📰 חדשות באוויר — לא מנגנים כלום
   if(!isPlaying()&&!userPaused&&!loading)playNext('תזמון-שקט');
@@ -2969,6 +3448,11 @@ function parseAPIC(u8){
   const ver=u8[3];
   const tagSize=((u8[6]&0x7f)<<21)|((u8[7]&0x7f)<<14)|((u8[8]&0x7f)<<7)|(u8[9]&0x7f);
   let i=10;const end=Math.min(u8.length,10+tagSize);
+  // VER 1064: דילוג על "כותרת מורחבת" (ID3v2.3/2.4) — בלעדיו לא נקראו אמן/שם/תמונה מקבצים כאלה
+  if((ver===3||ver===4)&&(u8[5]&0x40)&&u8.length>=14){
+    const xs=ver===4?(((u8[10]&0x7f)<<21)|((u8[11]&0x7f)<<14)|((u8[12]&0x7f)<<7)|(u8[13]&0x7f)):(((u8[10]<<24)>>>0)+(u8[11]<<16)+(u8[12]<<8)+u8[13]+4);
+    if(xs>0&&xs<tagSize)i+=xs;
+  }
   if(ver===2){                                                                  // ID3v2.2: מזהה 3 תווים + גודל 3 בייט
     while(i+6<=end){
       const id=String.fromCharCode(u8[i],u8[i+1],u8[i+2]),size=(u8[i+3]<<16)|(u8[i+4]<<8)|u8[i+5];
@@ -3044,6 +3528,11 @@ function parseTags(u8){
   const ver=u8[3];
   const tagSize=((u8[6]&0x7f)<<21)|((u8[7]&0x7f)<<14)|((u8[8]&0x7f)<<7)|(u8[9]&0x7f);
   let i=10;const end=Math.min(u8.length,10+tagSize);
+  // VER 1064: דילוג על "כותרת מורחבת" (ID3v2.3/2.4) — בלעדיו לא נקראו אמן/שם/תמונה מקבצים כאלה
+  if((ver===3||ver===4)&&(u8[5]&0x40)&&u8.length>=14){
+    const xs=ver===4?(((u8[10]&0x7f)<<21)|((u8[11]&0x7f)<<14)|((u8[12]&0x7f)<<7)|(u8[13]&0x7f)):(((u8[10]<<24)>>>0)+(u8[11]<<16)+(u8[12]<<8)+u8[13]+4);
+    if(xs>0&&xs<tagSize)i+=xs;
+  }
   const put=(id,fstart,size)=>{
     const lim=Math.min(end,fstart+size);
     if(id==='TPE1'||id==='TP1'){if(!out.artist)out.artist=_id3Text(u8,fstart,lim);}
@@ -3098,7 +3587,6 @@ async function trackTags(path){
     catch(e){rd=FS().readBinaryFile(path);}                  // גרסה ישנה — קובץ שלם
     _fsPend++;
     rd.then(()=>{_fsPend=Math.max(0,_fsPend-1);},()=>{_fsPend=Math.max(0,_fsPend-1);});
-    _fsWatch('תגיות: '+String(path).split(/[\\\/]/).pop(),rd);
     const ab=await Promise.race([rd,new Promise(r=>setTimeout(()=>r('timeout'),6000))]);
     if(ab==='timeout'){_tagCache.set(path,null);return null;}
     const u8=(ab instanceof Uint8Array)?ab:new Uint8Array(ab);
@@ -3223,7 +3711,6 @@ async function trackArt(path){
     _fsPend++;
     rd.then(()=>{done=true;_fsPend=Math.max(0,_fsPend-1);},
             ()=>{done=true;_fsPend=Math.max(0,_fsPend-1);});
-    _fsWatch('עטיפה: '+String(path).split(/[\\\/]/).pop(),rd);
     const ab=await Promise.race([rd,new Promise(res=>setTimeout(()=>res('⏱'),6000))]);
     if(ab==='⏱'){_artCache.set(path,'');return '';}   // איטי מדי — בלי עטיפה, בלי לתקוע כלום
     const u8=(ab instanceof Uint8Array)?ab:new Uint8Array(ab);
@@ -3329,7 +3816,11 @@ async function mtHttp(url,extra){
   const cmd='curl -s -m 10 -A "radio-station" '+(extra||'')+' "'+url.replace(/"/g,'%22')+'"';
   try{
     const r=await Neutralino.os.execCommand(cmd);
-    const out=String((r&&(r.stdOut||r.stdErr))||'').trim();
+    let out=String((r&&(r.stdOut||r.stdErr))||'').trim();
+    // VER 1067: כשהשרת לא ענה — אומרים למה (לפי קוד-היציאה של curl)
+    if(!out&&r&&(r.exitCode||r.exitCode===undefined||r.exitCode===null)&&r.exitCode!==0){const W={6:'שם השרת לא נמצא (DNS) — בדוק את הכתובת',7:'השרת דחה את החיבור — השרת כבוי או שהפורט שגוי',28:'השרת לא ענה תוך 10 שניות — השרת כבוי, עמוס או חסום',52:'השרת סגר את החיבור בלי תשובה',56:'החיבור נקטע באמצע'};
+      out=(W[r.exitCode]||'curl נכשל בלי פלט')+' (קוד '+r.exitCode+')';}
+    if(!out&&r&&r.exitCode===0)out='השרת החזיר תשובה ריקה';
     return {ok:!r||r.exitCode===0,out:out.slice(0,300),code:r?r.exitCode:0};
   }catch(e){return {ok:false,out:String(e&&e.message||e).slice(0,200),code:-1};}
 }
@@ -3535,7 +4026,7 @@ function renderQSearch(){
 }
 function qInsert(id,now){
   const t=trk(id);if(!t||t.missing){toast('⚠️ הקובץ חסר');return;}
-  pending.unshift({trackId:id,src:'🔍 חיפוש',kind:t.type==='song'?'song':t.type});
+  pending.unshift({trackId:id,src:'🔍 חיפוש',kind:t.type==='song'?'song':t.type,now:!!(now&&(autoOn||isPlaying()))});
   if(now&&(autoOn||isPlaying()))playNext('חיפוש-ידני');   // קטיעה מיידית ומעבר לשיר שנבחר
   else renderQueue();
   const inp=$('#q-search');if(inp)inp.value='';renderQSearch();updateQueueArt();
@@ -3631,7 +4122,7 @@ function renderQueue(){
   if(plannedNext){const t=trk(plannedNext.trackId);if(t)items.push({t,src:'',pend:false,pi:-1});}
   peekUpcoming(Math.max(0,6-items.length)).forEach(id=>{const t=trk(id);if(t&&!(plannedNext&&plannedNext.trackId===id))items.push({t,src:'',pend:false,pi:-1});});
   const ql=$('#queue-list');
-  ql.innerHTML=items.length?items.map(x=>`<div class="qitem ${x.pend?'pend':''}" ${x.pend?`draggable="true" data-pi="${x.pi}"`:''}>
+  ql.innerHTML=items.length?items.map(x=>`<div class="qitem ${x.pend?'pend':''}" ${x.pend?`data-pi="${x.pi}"`:''}>
     ${x.pend?'<span class="grip" title="גרור לסידור">⠿</span>':''}
     <span class="badge ${x.t.type}">${TYPE_EMOJI[x.t.type]}</span>
     <span class="t">${esc(x.t.name)}${x.src?` <small style="color:var(--muted)">· ${esc(x.src)}</small>`:''}</span>
@@ -3642,8 +4133,209 @@ function renderQueue(){
     ql.innerHTML+='<div class="hint" style="padding:6px 4px">🔀 השמעה אקראית פעילה — אחרי הפריטים שבתור, השירים יוגרלו</div>';
   wireQueueDrag(ql);
   updateQueueArt();
+  try{renderPlaylist();}catch(e){console.warn('playlist',e);}
+  try{renderAirHistory();}catch(e){}
+  try{const lw=$('#lib-wrap');if(lw&&(!lw._lastAir||lw._lastAir!==(current&&current.track&&current.track.id)||lw._lastQ!==pending.length)){lw._lastAir=current&&current.track&&current.track.id;lw._lastQ=pending.length;renderLibrarySoon();}}catch(e){}
+}
+/* 📚 VER 1075: ספרייה — כל מה שיש במחשב, עם חיפוש, סינון לפי סוג ופלייליסט, ומיון */
+let _libSort={k:'name',dir:1},_libLimit=400,_libT=0;
+function renderLibrarySoon(){clearTimeout(_libT);_libT=setTimeout(()=>{try{renderLibrary();}catch(e){console.warn('lib',e);}},120);}
+function renderLibrary(){
+  const wrap=$('#lib-wrap');if(!wrap||!S)return;
+  const kind=($('#lib-kind')||{}).value||'song',plSel=$('#lib-pl'),pl=plSel?plSel.value:'';
+  const q=String(($('#lib-q')||{}).value||'').toLowerCase().trim();
+  // רשימת הפלייליסטים (תיקיות) — מתעדכנת לבד
+  if(plSel){const pls=playlists();const sig=pls.join('|');if(plSel._sig!==sig){plSel._sig=sig;const cur=plSel.value;
+    plSel.innerHTML='<option value="">כל הפלייליסטים</option>'+pls.map(p=>`<option value="${esc(p)}">${esc(p)}</option>`).join('');plSel.value=pls.includes(cur)?cur:'';}
+    plSel.style.display=kind==='song'?'':'none';}
+  let list=S.tracks.filter(t=>!t.missing&&(kind==='all'||t.type===kind)&&(kind!=='song'||!pl||t.pl===pl));
+  if(q){const words=q.split(/\s+/).filter(Boolean);
+    list=list.filter(t=>{const h=((t.name||'')+' '+(t.artist||'')+' '+String(t.file||'').split(/[\\/]/).pop()).toLowerCase();return words.every(w=>h.includes(w));});}
+  const plays={};for(const x of (S.playHist||[]))plays[x.file]=(plays[x.file]||0)+1;
+  const K=_libSort.k,D=_libSort.dir;
+  const val=t=>K==='dur'?(+t.duration||0):K==='plays'?(plays[t.file]||0):K==='artist'?String(t.artist||''):String(t.name||'');
+  list.sort((a,b)=>{const x=val(a),y=val(b);return (typeof x==='number'?x-y:String(x).localeCompare(String(y),'he'))*D;});
+  const total=list.length,shown=list.slice(0,_libLimit);
+  const inQ=new Set(pending.map(x=>x&&x.trackId));if(plannedNext)inQ.add(plannedNext.trackId);
+  const air=current&&current.track?current.track.id:null;
+  const arrow=k=>_libSort.k===k?(_libSort.dir>0?' ▲':' ▼'):'';
+  wrap.innerHTML=total?('<table class="lib-tbl"><thead><tr><th data-k="name">שם'+arrow('name')+'</th><th data-k="artist">אמן'+arrow('artist')+'</th><th data-k="dur">משך'+arrow('dur')+'</th><th data-k="plays" title="השמעות אחרונות">🔁'+arrow('plays')+'</th><th></th></tr></thead><tbody>'
+    +shown.map(t=>`<tr data-id="${t.id}" class="${t.id===air?'onair':(inQ.has(t.id)?'inq':'')}"${t.type==='song'?' draggable="true" data-dragok="1" title="גרור לרשימת ההשמעה"':''}>
+      <td class="nm">${t.id===air?'▶ ':''}${esc(t.name||'')}</td><td class="ar">${esc(t.artist||'')}</td>
+      <td class="du">${t.duration>0?fmtDur(t.duration):'—'}</td><td class="du">${plays[t.file]||''}</td>
+      <td class="act"><button class="btn small" data-a="prev" title="האזנה מקדימה">🎧</button><button class="btn small" data-a="next" title="הבא בתור">⏭</button><button class="btn small primary" data-a="now" title="שדר עכשיו">▶</button></td></tr>`).join('')
+    +'</tbody></table>'+(total>shown.length?`<div class="lib-more"><button class="btn small" id="lib-more">הצג עוד (${shown.length} מתוך ${total})</button></div>`:''))
+    :'<div class="empty">'+(q?'לא נמצא — נסה מילה אחרת':'אין קבצים מהסוג הזה. חבר תיקייה בעמוד "מוזיקה ופלייליסטים"')+'</div>';
+  const sum=$('#lib-sum');if(sum)sum.textContent=total+' '+(kind==='song'?'שירים':'קבצים')+(q?' נמצאו':'');
+  if(!wrap._w){wrap._w=1;
+    wrap.addEventListener('dragstart',e=>{const tr=e.target.closest&&e.target.closest('tr[data-dragok]');if(!tr)return;
+      try{e.dataTransfer.setData('application/x-radio-track',tr.dataset.id);e.dataTransfer.setData('text/plain','');e.dataTransfer.effectAllowed='copy';}catch(_){}
+      tr.classList.add('dragging');});
+    wrap.addEventListener('dragend',e=>{const tr=e.target.closest&&e.target.closest('tr');if(tr)tr.classList.remove('dragging');plDragClear();});
+    wrap.addEventListener('click',e=>{
+      const th=e.target.closest('th[data-k]');if(th){const k=th.dataset.k;_libSort=_libSort.k===k?{k,dir:-_libSort.dir}:{k,dir:(k==='plays'||k==='dur')?-1:1};renderLibrary();return;}
+      if(e.target.id==='lib-more'){_libLimit+=400;renderLibrary();return;}
+      const b=e.target.closest('button[data-a]');if(!b)return;const tr=b.closest('tr[data-id]');if(!tr)return;const id=tr.dataset.id;
+      if(b.dataset.a==='prev')previewTrack(id,b);else qInsert(id,b.dataset.a==='now');
+      setTimeout(renderLibrarySoon,200);
+    });
+    wrap.addEventListener('dblclick',e=>{const tr=e.target.closest('tr[data-id]');if(!tr||e.target.closest('button'))return;qInsert(tr.dataset.id,false);setTimeout(renderLibrarySoon,200);});
+  }
+}
+{const lq=$('#lib-q');if(lq)lq.addEventListener('input',()=>{_libLimit=400;renderLibrarySoon();});
+ const lk=$('#lib-kind');if(lk)lk.addEventListener('change',()=>{_libLimit=400;renderLibrary();});
+ const lp=$('#lib-pl');if(lp)lp.addEventListener('change',()=>{_libLimit=400;renderLibrary();});
+ const hk=$('#hist-kind');if(hk)hk.addEventListener('change',()=>renderAirHistory(true));}
+/* 🕘 VER 1075: שודר — כל מה שעלה לאוויר (מהיומן), החדש למעלה */
+let _histSig='';
+function renderAirHistory(force){
+  const wrap=$('#hist-wrap');if(!wrap||!S||!Array.isArray(S.log))return;
+  const kind=($('#hist-kind')||{}).value||'all';
+  const AIR={song:1,ad:1,sponsor:1,jingle:1,program:1,sig:1};
+  let rows=S.log.filter(e=>AIR[e.type]||(e.type==='news'&&/^📰 (מבזק חי|החדשות עלו|הפתיח זוהה)/.test(e.name||'')));
+  if(kind==='song')rows=rows.filter(e=>e.type==='song');
+  else if(kind==='spots')rows=rows.filter(e=>e.type==='ad'||e.type==='sponsor'||e.type==='jingle');
+  else if(kind==='news')rows=rows.filter(e=>e.type==='news'||e.type==='sig');
+  rows=rows.slice(0,250);
+  const sig=kind+'|'+(rows[0]?rows[0].t:'')+'|'+rows.length;
+  if(!force&&sig===_histSig)return;_histSig=sig;
+  const today=new Date().toDateString();
+  wrap.innerHTML=rows.length?('<table class="hist-tbl"><thead><tr><th>שעה</th><th>סוג</th><th>שם</th><th>מקור</th></tr></thead><tbody>'
+    +rows.map(e=>{const d=new Date(e.t);const tm=(d.toDateString()===today?'':pad2(d.getDate())+'/'+pad2(d.getMonth()+1)+' ')+pad2(d.getHours())+':'+pad2(d.getMinutes())+':'+pad2(d.getSeconds());
+      return`<tr><td class="tm">${tm}</td><td><span class="badge ${esc(e.type)}">${TYPE_EMOJI[e.type]||'🎬'} ${esc(TYPE_HE[e.type]||(e.type==='program'?'תוכנית':e.type))}</span></td><td>${esc(e.name||'')}</td><td class="src">${esc(e.src||'')}</td></tr>`;}).join('')
+    +'</tbody></table>'):'<div class="empty">עדיין לא שודר כלום</div>';
+  const sum=$('#hist-sum');if(sum){const n=S.log.filter(e=>e.type==='song'&&new Date(e.t).toDateString()===today).length;sum.textContent=n+' שירים היום';}
+}
+/* 📋 VER 1064: רשימת השמעה מלאה בעמוד הראשי (כמו RadioBOSS) — מה מתנגן עכשיו, מה בתור, הפרסומות
+   המתוזמנות והשירים הבאים, עם שעת-התחלה משוערת ומשך לכל פריט. */
+function plEstDur(t,kind){
+  const d=+(t&&t.duration)||0;
+  if(!d)return kind==='song'?210:30;
+  const isSong=kind==='song';
+  let out=effOut(t,isSong,d);
+  if(t.cueIn>0.15&&t.cueIn<10)out-=t.cueIn;
+  const f=isSong?Math.min(4,Math.max(0,+S.settings.fadeSec||0)):Math.max(0,+S.settings.adFadeSec||0);
+  return Math.max(1,out-f);
+}
+function plHM(ms){const d=new Date(ms);return pad2(d.getHours())+':'+pad2(d.getMinutes())+':'+pad2(d.getSeconds());}
+function renderPlaylist(){
+  const wrap=$('#pl-wrap');if(!wrap||!S)return;
+  const MAX=25,now=Date.now(),rows=[];
+  let cur=now;
+  // ▶ מה מתנגן עכשיו
+  if(current&&(isPlaying()||loading)){
+    const st=current.startedAt||now;let dur=0,left=0;
+    if(current.stream){dur=current.streamDur||180;left=Math.max(0,dur-(now-st)/1000);}
+    else if(current.track&&active&&isFinite(active.duration)&&active.duration>0){
+      dur=active.duration;left=Math.max(0,effOut(current.track,current.kind==='song',dur)-active.currentTime);}
+    else{dur=+(current.track&&current.track.duration)||0;left=dur;}
+    rows.push({cls:'now',at:st,dur,t:current.track,kind:current.stream?'news':(current.kind||(current.track&&current.track.type)),src:current.src||'',stream:!!current.stream});
+    cur=now+left*1000;
+  }
+  // הרצף הבא: התור (לפי סדר העדיפות שבו ינוגן) → הבא המתוכנן → שירים עתידיים
+  const seq=pending.map((it,pi)=>({it,pi})).sort((a,b)=>prioRank(a.it)-prioRank(b.it));
+  if(plannedNext)seq.push({it:plannedNext,pi:-1});
+  const fut=S.settings.shuffle?planPeek(14):peekUpcoming(14).map(id=>({trackId:id,kind:'song',src:''}));
+  for(const it of fut)if(!seq.some(x=>x.it&&x.it.trackId===it.trackId))seq.push({it,pi:-1});
+  // פרסומות/חסויות/ג'ינגלים מתוזמנים שעוד לא נכנסו לתור
+  let slots=[];try{slots=(spScan(new Date(now),3,40)||[]).filter(s=>s.at.getTime()>now);}catch(e){}
+  const inQ=new Set(pending.map(x=>x&&x.trackId));
+  let si=0;
+  const isLongProg=(kind,durS)=>kind==='program'&&durS*1000>PROG_LONG_MS;
+  const addSlots=(upTo,skipUpTo)=>{
+    while(si<slots.length&&slots[si].at.getTime()<=upTo&&rows.length<MAX){
+      const s=slots[si++];const skipped=skipUpTo&&s.at.getTime()<skipUpTo;
+      for(const t of s.list){
+        if(!t||inQ.has(t.id))continue;
+        const d=plEstDur(t,t.type);
+        rows.push({cls:skipped?'sched skip':'sched',at:skipped?s.at.getTime():cur,dur:+t.duration||0,t,kind:t.type,
+          src:(skipped?'⏭ ידולג (תוכנית ארוכה) · ':'')+'🕐 '+pad2(s.at.getHours())+':'+pad2(s.at.getMinutes())});
+        if(!skipped)cur+=d*1000;
+        if(rows.length>=MAX)break;
+      }
+    }
+  };
+  // תוכנית ארוכה שמתנגנת עכשיו — פרסומות שזמנן בתוכה ידולגו
+  const r0=rows[0];
+  if(r0&&isLongProg(r0.kind,r0.dur))addSlots(cur,cur);
+  for(const x of seq){
+    if(rows.length>=MAX)break;
+    addSlots(cur);
+    if(rows.length>=MAX)break;
+    const it=x.it;
+    if(it.stream){rows.push({cls:'pend',at:cur,dur:it.streamDur||180,t:null,kind:'news',src:it.src||'',stream:true,pi:x.pi});cur+=(it.streamDur||180)*1000;continue;}
+    const t=trk(it.trackId);if(!t)continue;
+    const kind=it.kind==='program'?'program':(it.kind||t.type);
+    const d=plEstDur(t,kind==='program'?'program':t.type);
+    const st=cur;
+    rows.push({cls:x.pi>=0?'pend':'',at:st,dur:+t.duration||0,t,kind,src:it.src||'',pi:x.pi});
+    cur+=d*1000;
+    if(isLongProg(kind,+t.duration||0))addSlots(cur,cur);
+  }
+  addSlots(cur);
+  if(!rows.length){wrap.innerHTML='<div class="empty">הרשימה תתמלא כשהשידור יתחיל</div>';const s0=$('#pl-sum');if(s0)s0.textContent='';return;}
+  const KIND_HE={song:'שיר',ad:'פרסומת',sponsor:'חסות',jingle:"ג'ינגל",news:'חדשות',sig:'אות',program:'תוכנית',meta:'מטא'};
+  const nm=r=>r.stream?'📰 מבזק חי (סטרים)':(r.t?(r.t.name||''):'');
+  const ar=r=>(r.t&&r.t.artist)?r.t.artist:'';
+  wrap.innerHTML='<table id="pl-table"><thead><tr><th>#</th><th>שעה</th><th>משך</th><th>שם</th><th>אמן</th><th>סוג</th><th class="src">מקור</th><th></th></tr></thead><tbody>'
+    +rows.map((r,i)=>`<tr class="${r.cls}" data-row="${r.cls==='now'?'now':(r.pi>=0?'p':'x')}"${r.pi>=0?` data-pi="${r.pi}"`:''}${(r.pi>=0&&r.kind==='song'&&!r.stream)?' draggable="true" data-dragok="1" title="גרור כדי לשנות את המיקום"':''}>
+      <td class="n">${r.cls==='now'?'▶':i}</td>
+      <td class="tm">${plHM(r.at)}</td>
+      <td class="du">${r.dur>0?fmtDur(r.dur):'—'}</td>
+      <td class="nm">${esc(nm(r))}</td>
+      <td class="ar">${esc(ar(r))}</td>
+      <td><span class="badge ${esc(r.kind==='program'?'song':r.kind)}">${TYPE_EMOJI[r.kind]||'🎬'} ${esc(KIND_HE[r.kind]||r.kind||'')}</span></td>
+      <td class="src">${esc(r.src||'')}</td>
+      <td>${r.pi>=0?`<button class="iconbtn rm" title="הסר מהתור" onclick="removeFromQueue(${r.pi})">✕</button>`:''}</td></tr>`).join('')
+    +'</tbody></table>';
+  const total=rows.filter(r=>r.cls!=='now'&&!/skip/.test(r.cls)).reduce((a,r)=>a+(r.dur||0),0);
+  const s=$('#pl-sum');if(s)s.textContent=(rows.length-(rows[0]&&rows[0].cls==='now'?1:0))+' פריטים · '+fmtDur(total)+' · עד '+plHM(cur).slice(0,5);
 }
 {const _qs=$('#q-search');if(_qs)_qs.oninput=renderQSearch;}
+/* 🖐 VER 1077: היעד היחיד לגרירה — טבלת "ישודר".
+   מקורות: שיר מהספרייה, קובץ שמע מסייר-הקבצים של Windows, או שיר שכבר בתור (שינוי מיקום).
+   השחרור על שורה = נכנס לפניה; על "מתנגן עכשיו" = הבא בתור; על שאר הרשימה = בסוף התור. */
+function plDragClear(){document.querySelectorAll('#pl-card .drag-over,#pl-card.drag-on').forEach(x=>x.classList.remove('drag-over','drag-on'));}
+function plDropIndex(e){
+  const tr=e.target.closest&&e.target.closest('#pl-table tbody tr');
+  if(!tr)return pending.length;
+  if(tr.dataset.row==='now')return 0;
+  if(tr.dataset.row==='p'){const pi=+tr.dataset.pi;return (pi>=0&&pi<=pending.length)?pi:pending.length;}
+  return pending.length;
+}
+(function wirePlDrop(){
+  const card=$('#pl-card');if(!card)return;
+  card.addEventListener('dragstart',e=>{const tr=e.target.closest&&e.target.closest('tr[data-dragok][data-pi]');if(!tr)return;
+    try{e.dataTransfer.setData('application/x-radio-pi',tr.dataset.pi);e.dataTransfer.setData('text/plain','');e.dataTransfer.effectAllowed='move';}catch(_){}
+    tr.classList.add('dragging');});
+  card.addEventListener('dragend',e=>{const tr=e.target.closest&&e.target.closest('tr');if(tr)tr.classList.remove('dragging');plDragClear();});
+  card.addEventListener('dragover',e=>{e.preventDefault();
+    const types=[...(e.dataTransfer&&e.dataTransfer.types||[])];
+    if(!types.some(t=>t==='Files'||t==='application/x-radio-track'||t==='application/x-radio-pi')){try{e.dataTransfer.dropEffect='none';}catch(_){}return;}
+    try{e.dataTransfer.dropEffect=types.includes('application/x-radio-pi')?'move':'copy';}catch(_){}
+    card.classList.add('drag-on');
+    const tr=e.target.closest&&e.target.closest('#pl-table tbody tr');
+    card.querySelectorAll('tr.drag-over').forEach(x=>{if(x!==tr)x.classList.remove('drag-over');});
+    if(tr)tr.classList.add('drag-over');});
+  card.addEventListener('dragleave',e=>{if(!card.contains(e.relatedTarget))plDragClear();});
+  card.addEventListener('drop',e=>{e.preventDefault();e.stopPropagation();
+    const at=plDropIndex(e);plDragClear();
+    const dt=e.dataTransfer;if(!dt)return;
+    const pi=dt.getData('application/x-radio-pi');
+    if(pi!==''){const from=+pi;
+      if(from>=0&&from<pending.length){const it=pending.splice(from,1)[0];let to=at>from?at-1:at;to=Math.max(0,Math.min(pending.length,to));pending.splice(to,0,it);renderQueue();}
+      return;}
+    const id=dt.getData('application/x-radio-track');
+    if(id){const t=trk(id);if(!t||t.missing||t.type!=='song')return;
+      pending.splice(Math.min(at,pending.length),0,{trackId:id,src:'🎯 נגרר',kind:'song'});
+      if(plannedNext&&plannedNext.trackId===id)plannedNext=null;
+      renderQueue();toast('🎯 "'+(t.name||'')+'" נכנס לרשימת ההשמעה');
+      try{logPlay('song','🎯 נגרר לרשימת ההשמעה: '+(t.name||'')+(t.artist?' — '+t.artist:''),'גרירה');}catch(_){}
+      if(autoOn&&!isPlaying()&&!loading&&!userPaused)playNext('גרירה');
+      return;}
+    if(dt.files&&dt.files.length)dropFiles(dt.files,at);
+  });
+})();
 function removeFromQueue(pi){if(pi>=0&&pi<pending.length){pending.splice(pi,1);renderQueue();}}
 let _dragPi=null;
 function wireQueueDrag(ql){
@@ -3681,6 +4373,7 @@ $('#btn-pause').onclick=()=>{
 $('#btn-skip').onclick=()=>{if(autoOn||isPlaying())playNext('דילוג-ידני');};
 $('#btn-stop').onclick=()=>{
   autoOn=false;userPaused=false;pending=[];plannedNext=null;
+  PLAYGEN.n++;loading=false;   // VER 1064: מבטל גם פריט שעדיין נטען — אחרת הוא היה מתחיל לנגן אחרי העצירה
   // 📰 היה שבור: קריאה לפונקציה מהמערכת-הישנה שנמחקה הפילה את כל העצירה (נתפס בלוג-המפתח).
   //    עכשיו: אם חדשות באוויר — סוגרים את מצב-האוויר מסודר, ואז עוצרים את הנגנים.
   try{if(typeof AID!=='undefined'&&AID.mode==='onair')aidExit('עצירת השידור');}catch(e){}
@@ -3849,7 +4542,7 @@ function firePrograms(now){
   const nowMin=now.getHours()*60+now.getMinutes();
   // 🌙 תוכנית של 23:5x שנדחתה מעבר לחצות: היום כבר התחלף, ולכן גם המפתח וגם
   //    בדיקת-הימים חייבים להתייחס לאתמול — אחרת היא פשוט לא תשודר לעולם.
-  const yd=new Date(now.getTime()-86400000);
+  const yd=new Date(now.getFullYear(),now.getMonth(),now.getDate()-1,12);   // VER 1064: נכון גם ביום מעבר-שעון (23/25 שעות)
   const ydk=yd.toDateString(), ydDay=yd.getDay();
   const ydStr=yd.getFullYear()+'-'+pad2(yd.getMonth()+1)+'-'+pad2(yd.getDate());
   for(const pr of (S.programs||[])){
@@ -3911,7 +4604,7 @@ function dropUI(cls,txt,ico){
   try{toast((ico&&txt.indexOf(ico)!==0?ico+' ':'')+txt);}catch(e){}
 }
 function dropReset(){_dropMsg='';}
-async function dropFiles(fileList){
+async function dropFiles(fileList,at){
   const files=Array.from(fileList||[]).filter(f=>AUDIO_RE.test(f.name));
   const rejected=Array.from(fileList||[]).length-files.length;
   if(!files.length){
@@ -3955,9 +4648,8 @@ async function dropFiles(fileList){
   /* ⏭ הראשון שנגרר קופץ לראש התור — הוא "השיר הבא". השאר נכנסים
      אחריו לפי הסדר שנגררו. אם חדשות באוויר, התור ממתין כרגיל. */
   const drops=S.tracks.filter(t=>t.dropped).slice(-added);
-  for(let i=drops.length-1;i>=0;i--)
-    pending.unshift({trackId:drops[i].id,src:'🎯 נגרר',kind:'song'});
-  plannedNext=null;
+  {const pos=(typeof at==='number'&&at>=0)?Math.min(at,pending.length):0;
+   pending.splice(pos,0,...drops.map(d=>({trackId:d.id,src:'🎯 נגרר',kind:'song'})));}
   try{renderAll();}catch(e){}
   dropUI('','✅ '+(added===1?('"'+(first.name||'')+'" ינוגן הבא בתור'):(added+' שירים נכנסו לראש התור')),'✅');
   toast(added===1?'🎯 "'+(first.name||'')+'" הבא בתור':'🎯 '+added+' שירים נכנסו לראש התור');
@@ -3996,8 +4688,11 @@ function deletePlayedFile(i){
     <div id="modal-actions"><button class="btn danger" id="pd-yes">🗑 מחק מהתיקייה</button><button class="btn" onclick="closeModal()">ביטול</button></div>`,
     ()=>{const y=$('#pd-yes');if(y)y.onclick=async()=>{closeModal();await doDeleteFile(r);};});
 }
+/* VER 1064: removeFile לא זורק שגיאה גם כשהמחיקה נכשלה (קובץ נעול/לקריאה-בלבד) — בודקים שהקובץ באמת נעלם */
+async function fileStillThere(p){try{await FS().getStats(p);return true;}catch(e){return false;}}
 async function doDeleteFile(r){
   try{await removeFile(r.file);}catch(e){console.warn('delete',e);}
+  if(await fileStillThere(r.file)){toast('⚠️ "'+r.name+'" לא נמחק — הקובץ נעול או מוגן מפני כתיבה');return;}
   S.tracks=S.tracks.filter(t=>t.file!==r.file);
   S.playHist=(S.playHist||[]).filter(h=>h.file!==r.file);
   pending=pending.filter(it=>{const tt=trk(it.trackId);return !tt||tt.file!==r.file;});
@@ -4081,7 +4776,7 @@ function confirmDeleteFiles(rows){
 async function doDeleteMany(rows){
   let n=0,fail=0;
   for(const r of rows){
-    try{await removeFile(r.file);n++;}catch(e){fail++;continue;}
+    try{await removeFile(r.file);if(await fileStillThere(r.file))throw new Error('locked');n++;}catch(e){fail++;continue;}
     S.tracks=S.tracks.filter(t=>t.file!==r.file);
     S.playHist=(S.playHist||[]).filter(h=>h.file!==r.file);
     pending=pending.filter(it=>{const tt=trk(it.trackId);return !tt||tt.file!==r.file;});
@@ -4108,10 +4803,10 @@ function playedMainWire(){
 }
 
 /* ================= אתחול ================= */
-function renderAll(){renderMusic();renderAdLists();renderHours();renderLog();renderQueue();renderLiveInfo();renderPrograms();renderPlayed();try{renderPlayedMain();playedMainWire();tagFillRender();}catch(e){}if(typeof spRenderAll==='function')spRenderAll();}
+function renderAll(){try{renderLibrarySoon();}catch(e){}renderMusic();renderAdLists();renderHours();renderLog();renderQueue();renderLiveInfo();renderPrograms();renderPlayed();try{renderPlayedMain();playedMainWire();tagFillRender();}catch(e){}if(typeof spRenderAll==='function')spRenderAll();}
 /* 🏷 מספר-גרסה — עולה ב-1 בכל שדרוג, כדי לעקוב איזה עדכון רץ בפועל.
    מוצג מתחת לשם-התחנה בפינה, ונכתב גם לכותרת-החלון. */
-const APP_VER='VER 1066', APP_BUILD='2026-10-19';
+const APP_VER='VER 1077', APP_BUILD='2026-10-20';
 async function init(){
   Neutralino.init();
   try{
@@ -4123,14 +4818,15 @@ async function init(){
      ממשיכה לרוץ הגרסה הישנה — ומבחוץ זה נראה בדיוק כמו תיקון שלא עבד.
      כאן משווים את זמן-הקובץ לזמן-העלייה, ואומרים את זה במפורש. */
   try{
-    const _bootAt=Date.now();
+    const _bootAt=Date.now();let _mt0=null;   // VER 1064: משווים לזמן-הקובץ שנראה בבדיקה הראשונה (העתקה שומרת תאריך ישן)
     const _chk=async()=>{
       try{
         const st=await FS().getStats(BASE+'/resources.neu');
         const mt=st&&(st.modifiedAt||st.modifiedTime||st.mtime);
         const ms=typeof mt==='number'?(mt<1e12?mt*1000:mt):Date.parse(mt||'');
         if(!isFinite(ms)||!ms)return;
-        if(ms>_bootAt+15000&&!AID._updSaid){
+        if(_mt0===null){_mt0=ms;if(!(ms>_bootAt+15000))return;}
+        if((ms!==_mt0||ms>_bootAt+15000)&&!AID._updSaid){
           AID._updSaid=true;
           const mins=Math.round((Date.now()-ms)/60000);
           try{logPlay('sys','🔄 חבילת-עדכון חדשה ממתינה על הדיסק ('+(mins<1?'ממש עכשיו':'לפני '+mins+' דק׳)')+' — הגרסה הרצה היא '+APP_VER+'. סגור ופתח את התוכנה כדי לטעון אותה','');}catch(e){}
@@ -4234,7 +4930,7 @@ async function init(){
       window.addEventListener('beforeunload',()=>{try{flushSave();}catch(e){}});}catch(e){}
   await loadState();
   bindSettings();
-  snApplyPlayMode();
+  snApplyPlayMode();try{eqBtnState();}catch(e){}   // 🎛 VER 1069
   renderAll();setIdleUI();
   tickClock();setInterval(()=>{tickClock();schedulerTick();gdTick();renderProgress();rbTick();},1000);
   setInterval(()=>{renderQueue();renderLiveInfo();},5000);
@@ -4264,6 +4960,7 @@ async function init(){
   setInterval(()=>{try{adPauseExpire();}catch(e){}},60000);
   setInterval(normLoop,1200);        // 🎚 ניתוח איזון עוצמה ברקע, קובץ אחר קובץ
   setInterval(transitionTick,250);   // מעבר חופף בין שירים — בלי שקט
+  setInterval(agcTick,200);          // 🎚 VER 1066: מיישר-עוצמה חי
   setInterval(antiSilence,2000);     // 🔊 מונע-שקט — התחנה לעולם לא שקטה כשמשדרים
   updateNormStatus();
   vuLoop();
@@ -4273,7 +4970,11 @@ async function init(){
   // 🚀 רישום הפעלה-אוטומטית עם הדלקת המחשב (אם מסומן)
   if(S.settings.winStartup)snSetWinStartup(true);
   // ▶ התחלת ניגון אוטומטית עם פתיחת התוכנה (אם מסומן)
-  if(S.settings.autoStart)setTimeout(snAutoStartPlay,1200);
+  /* VER 1064: אחרי ריענון-עומק — ממשיכים לפי מה שהיה לפניו (שידר → ממשיך; עצור → נשאר עצור).
+     קודם: בלי "הפעלה אוטומטית" התחנה נשארה שקטה אחרי הריענון של 03:20. */
+  const _rbRecent=S.rbAt&&Date.now()-S.rbAt<900000;   // 15 דק׳ — גם אם סריקת-המדיה בעלייה איטית
+  if(_rbRecent?S.rbWasOn:S.settings.autoStart)setTimeout(snAutoStartPlay,1200);
+  if(S.rbAt){S.rbAt=0;save();}
 }
 // ▶ מתחיל את השידור אוטומטית עם פתיחת התוכנה
 function snAutoStartPlay(){
@@ -4341,6 +5042,7 @@ async function rbGo(reason){
         S.resume={id:current.track.id,pos:Math.max(0,active.currentTime||0),at:Date.now()};
       else S.resume=null;
     }catch(e){S.resume=null;}
+    S.rbAt=Date.now();S.rbWasOn=!!autoOn;   // VER 1064: אחרי הריענון ממשיכים לשדר רק אם שידרנו לפניו — בלי קשר ל"הפעלה אוטומטית"
     logPlay('info','🔄 '+reason+' — ריענון-עומק מלא (המשך אוטומטי מאותה נקודה)','');
     try{dlog('sys','🔄 '+reason,
       {resume:!!S.resume,pos:S.resume?Math.round(S.resume.pos):null,
@@ -4369,7 +5071,7 @@ async function snSetWinStartup(enable){
   try{
     const dir=((window.NL_PATH||'')+'').replace(/\//g,'\\').replace(/\\+$/,'');
     if(!dir)return false;
-    const exe=dir+'\\תחנת-רדיו.exe';
+    const exe=dir+(window.__STUDIO?'\\RadioStudio.exe':'\\תחנת-רדיו.exe');   // VER 1075: באולפן החדש — RadioStudio.exe
     const runKey="'HKCU:\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run'";
     let ps;
     if(enable){
@@ -4445,6 +5147,7 @@ function spPlan(t){
   p.mins=spParseMins(Array.isArray(p.mins)?p.mins.join(','):p.mins);
   p.prio=Math.max(0,Math.min(99,Math.round(+p.prio||0)));
   p.on=p.on!==false;
+  p.pos=(p.pos==='before'||p.pos==='after')?p.pos:'';   // VER 1066: ג'ינגל צמוד להפסקה — לפני/אחרי הפרסומות
   p.start=typeof p.start==='string'?p.start:'';
   p.end=typeof p.end==='string'?p.end:'';
   p._v=1;
@@ -4520,7 +5223,11 @@ function inShabbat(now){
          פעם לכל קובץ בכל אחת מ-24 השעות שהיא סורקת, וכל ציור של לוח-השידור
          פתח מאות בקשות-רשת ברצף. פעולות-משתמש (עיר, מצב, כפתור-רענון)
          קוראות ישירות ל-shabbatFetch ולא נוגעות במחסום הזה. */
-      if(t>=h&&Date.now()>=_shbNextTry){_shbNextTry=Date.now()+900000;shabbatFetch(true);}
+      /* VER 1064: כשהמטמון פג (אין אינטרנט) — תמיד ממשיכים לזמנים הידניים. קודם רק הקריאה שעברה
+         את מחסום-הקצב הגיעה אליהם, וכל השאר החזירו "לא שבת" — ופרסומות שודרו בשבת. */
+      if(t>=h){
+        if(Date.now()>=h&&Date.now()>=_shbNextTry){_shbNextTry=Date.now()+900000;shabbatFetch(true);}
+      }
       else return t>=c&&t<h;
     }
   }
@@ -4698,7 +5405,31 @@ function spMatch(t,now,dstr){
   if(!p.hours.includes(h))return false;
   return spSlots(t,ds,h).includes(now.getMinutes());
 }
-function spDue(now){const ds=spDateStr(now);return spLive().filter(t=>spMatch(t,now,ds));}
+/* VER 1066: ג'ינגל שסומן "לפני/אחרי הפרסומות" לא מתוזמן לפי שעה — הוא נצמד לכל הפסקת פרסומות */
+const spBreakJ=t=>t&&t.type==='jingle'&&!!spPlan(t).pos;
+const spTimed=()=>spLive().filter(t=>!spBreakJ(t));
+function spDue(now){const ds=spDateStr(now);return spTimed().filter(t=>spMatch(t,now,ds));}
+/* VER 1066: מצמידים להפסקה ג'ינגל-פתיחה (לפני הפרסומות) וג'ינגל-סגירה (אחרי) — אחד מכל סוג,
+   ברוטציה, לפי העדיפות. רק כשיש בהפסקה פרסומת או חסות. */
+function spAttachJingles(list,now,preview){
+  try{
+    if(!list.some(t=>t&&(t.type==='ad'||t.type==='sponsor')))return list;
+    const n=now||new Date(),ds=spDateStr(n),h=n.getHours();
+    const body=list.filter(t=>!spBreakJ(t));
+    const pick=pos=>{
+      const c=spLive().filter(t=>spBreakJ(t)&&spPlan(t).pos===pos&&spEligible(t,n,ds)&&spPlan(t).hours.includes(h))
+        .sort((a,b)=>((spPlan(a).prio||999)-(spPlan(b).prio||999))||String(a.name||'').localeCompare(String(b.name||''),'he'));
+      if(!c.length)return null;
+      const best=spPlan(c[0]).prio>0?c.filter(t=>spPlan(t).prio===spPlan(c[0]).prio):c;   // עדיפות הגבוהה ביותר קודם
+      S.jPosRot=S.jPosRot||{};
+      const i=(S.jPosRot[pos]||0)%best.length;
+      if(!preview)S.jPosRot[pos]=i+1;
+      return best[i];
+    };
+    const b=pick('before'),a=pick('after');
+    return [...(b?[b]:[]),...body,...(a?[a]:[])];
+  }catch(e){return list;}
+}
 
 /* ================== סדר ההשמעה ================== */
 function spShuffle(a){const r=a.slice();for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const x=r[i];r[i]=r[j];r[j]=x;}return r;}
@@ -4727,7 +5458,10 @@ const spDeferCount=()=>spDefer.reduce((a,g)=>a+g.ids.length,0);
    (כדי לשמור על סדר ההגעה) ולפני השירים שכבר מתוכננים. */
 function spInsertAt(){let i=0;while(i<pending.length&&pending[i]&&pending[i].spot)i++;return i;}
 function spPushQueue(list,label){
-  const items=list.map(t=>({trackId:t.id,src:label,kind:t.type,spot:true}));
+  /* VER 1064: פרסומות שנכנסו לתור בזמן שתוכנית מתנגנת מסומנות בתוכנית — אם התוכנית ארוכה מ-30 דק׳,
+     הן לא ישודרו בסופה (ראה progDropMissed) */
+  const _pa=(typeof current!=='undefined'&&current&&current.kind==='program'&&typeof isPlaying==='function'&&isPlaying())?current.startedAt:0;
+  const items=list.map(t=>({trackId:t.id,src:label,kind:t.type,spot:true,progAt:_pa||undefined}));
   if(!items.length)return 0;
   pending.splice(spInsertAt(),0,...items);
   try{renderQueue();}catch(e){}
@@ -4764,6 +5498,15 @@ function spFireNow(list,label,now,released){
      try{dlog('sched','🛡 סינון-כפילות: '+before.filter(n=>!kept.has(n)).join(', ')+' — '+label,{requested:before.length,passed:list.length});}catch(e){}}}
   if(!list.length)return;
   const n=now||new Date(),dk=n.toDateString();
+  /* 🎬 VER 1065: תוכנית ארוכה (מעל 30 דק׳) מתנגנת עכשיו — הפרסומות של המשבצת הזו פוספסו בגלל התוכנית.
+     הן לא נכנסות לתור בכלל (ולא נספרות כשודרו); נרשמת שורה ביומן. */
+  if(progIsLongNow()){
+    try{logPlay('info','⏭ '+list.length+' פריטים מתוזמנים לא נכנסו לתור — תוכנית ארוכה באוויר ("'+((current.track&&current.track.name)||'')+'"): '+list.map(t=>t.name).join(', '),label);}catch(e){}
+    try{dlog('sched','⏭ פוספס בגלל תוכנית ארוכה — הוצא מהתור',{label,names:list.map(t=>t.name)});}catch(e){}
+    try{spBust();spRenderLiveNext();}catch(e){}
+    return;
+  }
+  list=spAttachJingles(list,n);   // 🎺 VER 1066: ג'ינגלים צמודים — לפני/אחרי הפרסומות
   spPushQueue(list,label);
   for(const t of list){
     t.lastPlay=Date.now();
@@ -4783,6 +5526,34 @@ function spFireNow(list,label,now,released){
   spBust();spRenderLiveNext();spRenderLog();spRenderBoardIfVisible();
 }
 /* החדשות נגמרו — משחררים את כל מי שהמתין */
+/* ⚡ VER 1076: טעינה-מראש בזמן החדשות — מה שיתנגן מיד בסיומן (ג'ינגל-לפני, הפרסומות שממתינות,
+   ראש התור והשיר המתוכנן) נטען לזיכרון כבר עכשיו, כך שאין "שטח מת" בין סוף המהדורה לפרסומת. */
+let _anPreBusy=false;
+async function preloadAfterNews(){
+  if(_anPreBusy||!spNewsOnAir())return;
+  _anPreBusy=true;
+  try{
+    const ids=[],add=id=>{if(id&&!ids.includes(id))ids.push(id);};
+    const seen=new Set(),list=[];
+    for(const g of spDefer)for(const id of g.ids){if(seen.has(id))continue;seen.add(id);const t=trk(id);if(t&&!t.missing)list.push(t);}
+    if(list.length){
+      try{for(const t of spAttachJingles(spOrder(list,true),new Date(),true))add(t.id);}catch(e){for(const t of list)add(t.id);}
+    }
+    sortPending();
+    for(const it of pending.slice(0,3))if(it&&!it.stream)add(it.trackId);
+    if(!plannedNext)plannedNext=(typeof hitsPick==='function'&&hitsPick())||planTake()||pickSong();
+    if(plannedNext)add(plannedNext.trackId);
+    let n=0;
+    for(const id of ids.slice(0,10)){
+      if(!spNewsOnAir())break;
+      const t=trk(id);if(!t||t.missing||urlCache[t.file])continue;
+      try{await trackURL(id,true);n++;}catch(e){}
+    }
+    if(n)try{dlog('sched','⚡ נטען מראש לסיום החדשות',{files:n,deferred:list.length,pending:pending.length});}catch(e){}
+  }catch(e){}
+  finally{_anPreBusy=false;}
+}
+setInterval(()=>{try{preloadAfterNews();}catch(e){}},5000);
 function spAfterNews(reason){
   if(!spDefer.length)return;
   const groups=spDefer;spDefer=[];
@@ -4820,11 +5591,11 @@ function spTick(){
 /* מחזיר רשימת משבצות: {at:Date, list:[track]} ל-N השעות הקרובות. */
 function spScan(from,hours,maxSlots,preview){
   const start=from||new Date(),out=[];
-  const tracks=spLive();
+  const tracks=spTimed();
   if(!tracks.length)return out;
   const cap=maxSlots||80;
   for(let off=0;off<(hours||24)&&out.length<cap;off++){
-    const hd=new Date(start.getTime());hd.setMinutes(0,0,0);hd.setHours(hd.getHours()+off);
+    const h0=new Date(start.getTime());h0.setMinutes(0,0,0);const hd=new Date(h0.getTime()+off*3600000);   // VER 1064: בלי שעה כפולה ביום מעבר-שעון
     const ds=spDateStr(hd),h=hd.getHours();
     const slots=new Map();
     for(const t of tracks){
@@ -4840,7 +5611,7 @@ function spScan(from,hours,maxSlots,preview){
     for(const m of mins){
       const at=new Date(hd.getTime());at.setMinutes(m,0,0);
       if(at.getTime()<start.getTime())continue;
-      out.push({at,list:spOrder(slots.get(m),preview!==false)});
+      out.push({at,list:spAttachJingles(spOrder(slots.get(m),preview!==false),at,true)});
       if(out.length>=cap)break;
     }
   }
@@ -4991,7 +5762,8 @@ function spSummary(t){
   if(!p.hours.length||!p.days.length)return'חסרות שעות או ימים';
   const dtxt=p.days.length===7?'כל יום':p.days.map(d=>DAY_HE[d]).join(', ');
   const htxt=p.hours.length===24?'כל השעות':hoursRangesText(p.hours);
-  let s=`${SP_MODE_ICON[p.mode]} ${spModeShort(p)} · ${htxt} · ${dtxt}`;
+  let s=p.pos&&t.type==='jingle'?`${p.pos==='before'?'⏮ בתחילת כל הפסקת פרסומות':'⏭ בסוף כל הפסקת פרסומות'} · ${htxt} · ${dtxt}`
+                                :`${SP_MODE_ICON[p.mode]} ${spModeShort(p)} · ${htxt} · ${dtxt}`;
   if(p.start||p.end)s+=` · 📅 ${p.start||'…'} → ${p.end||'…'}`;
   return s;
 }
@@ -5006,12 +5778,27 @@ function spRow(t,now){
         ${p.prio>0?`<span class="pill">עדיפות ${p.prio}</span>`:'<span class="pill off">ללא עדיפות</span>'}
         ${(p.on&&!t.missing&&active)?'<span class="pill">פעיל כעת</span>':''}</div>
       <small class="${p.on?(active?'ok':''):'warn'}">${spSummary(t)}</small>
-      <small style="color:var(--muted)">${p.on?`≈ ${perDay} השמעות ביום`:''}${t.playsTotal?` · שודר ${t.playsTotal} פעמים`:''}</small>
+      <small style="color:var(--muted)">${p.on&&!(t.type==='jingle'&&p.pos)?`≈ ${perDay} השמעות ביום`:''}${t.playsTotal?` · שודר ${t.playsTotal} פעמים`:''}</small>
+      <div class="sp-ctl">      ${t.type==='jingle'?`<select class="sp-pos" title="מתי הג'ינגל מתנגן" onchange="spSetPos('${t.id}',this.value)">
+        <option value=""${!p.pos?' selected':''}>🕐 לפי התזמון</option>
+        <option value="before"${p.pos==='before'?' selected':''}>⏮ לפני הפרסומות</option>
+        <option value="after"${p.pos==='after'?' selected':''}>⏭ אחרי הפרסומות</option></select>`:''}
+      <select class="sp-prio" title="עדיפות: 1 = מתנגן ראשון בהפסקה" onchange="spSetPrio('${t.id}',this.value)">
+        <option value="0"${!p.prio?' selected':''}>⭐ עדיפות: ללא</option>
+        ${[1,2,3,4,5,6,7,8,9,10].map(k=>`<option value="${k}"${p.prio===k?' selected':''}>⭐ עדיפות ${k}</option>`).join('')}</select>
+      </div>
     </td>
     <td style="width:56px;color:var(--muted)">${fmtD(t)}</td>
     <td style="width:38px"><button class="iconbtn" title="תזמון" onclick="spEdit('${t.id}')">🕐</button></td>
     <td style="width:38px"><button class="iconbtn" onclick="deleteTrack('${t.id}')">🗑</button></td></tr>`;
 }
+/* VER 1066: כפתורי מיקום ועדיפות בשורה */
+function spSetPos(id,v){const t=trk(id);if(!t)return;const p=spPlan(t);p.pos=(v==='before'||v==='after')?v:'';spTouch(t);save();
+  try{spRefresh();}catch(e){}
+  toast(p.pos==='before'?'⏮ "'+t.name+'" יתנגן בתחילת כל הפסקת פרסומות':p.pos==='after'?'⏭ "'+t.name+'" יתנגן בסוף כל הפסקת פרסומות':'🕐 "'+t.name+'" חוזר לתזמון לפי שעה');}
+function spSetPrio(id,v){const t=trk(id);if(!t)return;const p=spPlan(t);p.prio=Math.max(0,Math.min(99,Math.round(+v||0)));spTouch(t);save();
+  try{spRefresh();}catch(e){}
+  toast(p.prio?'⭐ "'+t.name+'" — עדיפות '+p.prio+' (1 מתנגן ראשון)':'"'+t.name+'" — ללא עדיפות');}
 /* מסדרים את הרשימה כך שמה שמתוזמן ופעיל למעלה. שולפים מ-S.tracks ולא מ-byType
    כדי שקבצים חסרים יופיעו עם אזהרה במקום להיעלם. */
 function spSortForList(type){
@@ -5343,7 +6130,9 @@ function spTab(name){
   const shb=()=>S.settings.shabbat||(S.settings.shabbat={on:false,online:true,geonameid:4164138,city:'מיאמי · Miami, FL',startHm:'18:00',endHm:'20:00',cache:null});
   on('#shb-on',()=>{const s=shb();s.on=$('#shb-on').checked;save();spRenderCfg();spRefresh();if(s.on&&s.online!==false)shabbatFetch(true);toast(s.on?'🕯️ מצב שבת הופעל — אין פרסומות בשבת':'מצב שבת כובה');},'onchange');
   on('#shb-mode',()=>{const s=shb();s.online=($('#shb-mode').value==='online');save();spRenderCfg();spRefresh();if(s.on&&s.online)shabbatFetch(true);},'onchange');
-  on('#shb-city',()=>{const s=shb();const id=+$('#shb-city').value;s.geonameid=id;const c=SHABBAT_CITIES.find(x=>x.id===id);s.city=c?c.name:'';s.cache=null;save();shabbatFetch(true);spRenderCfg();},'onchange');
+  on('#shb-city',()=>{const s=shb();const id=+$('#shb-city').value;s.geonameid=id;const c=SHABBAT_CITIES.find(x=>x.id===id);s.city=c?c.name:'';s.cache=null;save();shabbatFetch(true);
+    try{const yt=S.settings.yomtov;if(yt){yt.cache=null;yomtovFetch(true);}}catch(e){}   // VER 1064: גם זמני החגים לפי העיר החדשה
+    spRenderCfg();},'onchange');
   on('#shb-refresh',()=>{shabbatFetch(true);toast('📡 מעדכן זמני שבת מהרשת…');});
   // ⏸ הפסקה ידנית של פרסומות וחסויות
   on('#adp-btn',()=>{
@@ -5531,7 +6320,7 @@ function aidPrintFromPcm(pcm,capS){
   const s0=a*AID_HOP,s1=Math.min(pcm.length,(b+1)*AID_HOP+AID_WIN,s0+Math.floor(capS*AID_SR));
   const core=pcm.subarray(s0,s1);
   if(core.length<AID_SR*0.8)return null;
-  const base=aidChanNorm(aidMelGram(core));if(!base)return null;
+  const _g0=aidMelGram(core);if(!_g0)return null;const base=aidChanNorm(_g0);if(!base)return null;   // VER 1064
   return AID_SPEEDS.map(sp=>{
     const v=aidStretch(base,sp);
     let e=0;for(let i=0;i<v.G.length;i++)e+=v.G[i]*v.G[i];
@@ -5771,7 +6560,7 @@ function aidE7Marks(gram){
 }
 function aidE7Ref(pcm){
   const core=aidTrimCore(pcm);if(!core)return null;
-  const g=aidChanNorm(aidMelGram(core));if(!g)return null;
+  const _g0=aidMelGram(core);if(!_g0)return null;const g=aidChanNorm(_g0);if(!g)return null;   // VER 1064
   return aidE7Marks(g);
 }
 function aidE7Score(ref,prep){
@@ -5885,7 +6674,7 @@ async function aidProvision(){
       try{await scanMedia(true);}catch(e){}
       aidSay('🎺 פתיח-החדשות הרשמי שוחזר אוטומטית — כלל הברזל פעיל');
     }
-  }catch(e){}
+  }catch(e){AID._prov=false;}   // VER 1064: כשל (תיקייה נעולה) — ננסה שוב בפעם הבאה
 }
 const AID={mode:'idle',feed:null,startPrint:null,endPrint:null,printsFor:'',
   meter:{start:0,end:0,level:0},onAirAt:0,lastEnterAt:0,lastGoodDecode:0,busy:false,_pulseN:0,_uiWired:false,_warned:'',
@@ -6190,6 +6979,7 @@ function aidListen(){
       try{
         const ctrl=new AbortController();feed.ctrl=ctrl;
         const resp=await fetch(url,{signal:ctrl.signal});
+        if(!resp.ok||!resp.body)throw new Error('http '+resp.status);   // VER 1064: דף-שגיאה של השרת אינו אודיו
         const reader=resp.body.getReader();
         // 🔗 מקור מאוחד: מקימים את צינור-הנגן על אותו חיבור (לפי סוג-האודיו מהשרת)
         const ctype=String((resp.headers&&resp.headers.get&&resp.headers.get('content-type'))||'').toLowerCase();
@@ -6280,20 +7070,10 @@ function aidSyncBehind(Q,winS){
     let bp={r:0,at:0};
     for(const pr of [AID.startPrint,...(AID.altPrints||[])]){
       if(!pr)continue;const h2=aidSeekAtLast(pr,Q,minOff);
-      if(h2.at>bp.at||(bp.at===0&&h2.r>bp.r))bp=h2;
+      if(h2.r>=0.5?(bp.r<0.5||h2.at>bp.at):(bp.r<0.5&&h2.r>bp.r))bp=h2;   // VER 1064: תוצאה חלשה לא דורסת זיהוי טוב
     }
-    /* ⚡ הטבעת-הראש נמדדת תמיד — לא רק כגיבוי (הלקח מ-19.10: "מתחיל לפני"):
-       פתיח שרק התחיל אינו יכול להתאים בהטבעה-המלאה (היא לא נכנסת בחלון אחרי
-       השעה), ואז ההתאמה-המלאה היחידה היא מופע ישן יותר של הצליל — והכניסה
-       כוונה אחורה מדי, אל תוך מה שלפני החדשות. הראש קצר ונכנס מיד אחרי
-       השעה; מופע מאוחר-יותר שלו גובר על מופע מוקדם של ההטבעה-המלאה. */
-    if(AID.startHead){const h3=aidSeekAtLast(AID.startHead,Q,minOff);
-      if(h3.r>=0.5&&h3.at>bp.at)bp=h3;}
-    if(bp.r<0.5)return null;
-    /* המרחק מוחזר כפי-שנמדד (תקרת-שפיות 30ש'): העיגול הישן ל-13 "כיבס"
-       מיקום של צליל שנשמע לפני השעה לערך שעובר את שער-רגע-השמיעה — והכניסה
-       כוונה 13ש' אחורה אל תוך הפרומו. מעכשיו השער שופט את הרגע האמיתי. */
-    return Math.max(0,Math.min(30,winS-bp.at*AID_HOP/AID_SR));
+    if(bp.r<0.5&&AID.startHead){const h3=aidSeekAtLast(AID.startHead,Q,minOff);if(h3.r>=0.5)bp=h3;}
+    return bp.r>=0.5?Math.max(0,Math.min(13,winS-bp.at*AID_HOP/AID_SR)):null;
   }catch(e){return null}
 }
 async function aidHourScan(){
@@ -6491,9 +7271,7 @@ function aidEnter(score,votes,src,behindS,winS){
     // 🎯 סנכרון-אמת: כשהזיהוי יודע בדיוק כמה שניות אחורה מתחיל הפתיח —
     // קופצים לשם (+0.7ש' פיצוי על בייטים שנוספו מאז הניתוח), והשידור
     // נפתח בדיוק בתחילת-הפתיח. אחרת — ההיסט הידני מההגדרות.
-    /* התקרה הורחבה 14→22 (19.10): פעימה מאוחרת מודדת מרחק גדול מ-14 —
-       העיגול הישן התחיל את ההשמעה באמצע-הפתיח. החוצץ שומר 45-90ש'. */
-    const lead=behindS!=null?Math.max(0,Math.min(22,behindS+0.7))
+    const lead=behindS!=null?Math.max(0,Math.min(14,behindS+0.7))
                             :Math.max(0,Math.min(6,c.entryLead==null?1:+c.entryLead));
     AID._lastEntryLead=+lead.toFixed(2);
     try{
@@ -6520,7 +7298,7 @@ function aidEnter(score,votes,src,behindS,winS){
     },ms));
   }else{
     if(auxAir)try{aidMseTeardown();}catch(e){}      // צינור-הסנכרון של הראשי מתפנה — משדרים חיבור-ישיר למקור החלופי
-    try{STRM.muted=false;STRM.volume=0;STRM.preload='auto';STRM.src=airUrl;STRM.load();STRM.play().catch(()=>{});}catch(e){}
+    try{STRM.muted=false;STRM.volume=0;STRM.preload='auto';STRM.src=airUrl;STRM._airSrc=STRM.src;STRM.load();STRM.play().catch(()=>{});}catch(e){}
     /* 🎯 דילוג על ה-burst-on-connect: חיבור טרי ל-Icecast/Shoutcast מקבל
        מיד כמה שניות של אודיו-עבר (חוצץ-הפתיחה של השרת), ורק אז ממשיך חי.
        בלי דילוג, הנגן משמיע קודם את חוצץ-העבר — כלומר את התוכן *שלפני*
@@ -6539,7 +7317,7 @@ function aidEnter(score,votes,src,behindS,winS){
      let _n=0;
      const _iv=setInterval(()=>{try{
        _n++;
-       if(AID.mode!=='onair'||STRM.src!==airUrl||_n>40){clearInterval(_iv);return;}
+       if(AID.mode!=='onair'||STRM.src!==(STRM._airSrc||airUrl)||_n>40){clearInterval(_iv);return;}   // VER 1064: הדפדפן מנרמל את הכתובת (/ בסוף)
        const b=STRM.buffered;
        if(b&&b.length){
          const end=b.end(b.length-1),lag=end-STRM.currentTime;
@@ -6572,50 +7350,8 @@ function aidEnter(score,votes,src,behindS,winS){
   try{renderNow();renderProgress();}catch(e){}
   aidRender();
 }
-/* ---------- 🎯 יציאה מסונכרנת-להשמעה (הלקח מ-19.10: "מסתיים לפני") ----------
-   הזיהוי חי על קצה-הזרם, אבל ההשמעה מפגרת אחריו בכוונה: הכניסה קופצת אחורה
-   לתחילת-הפתיח (behindS+0.7) ונשארת שם כל המהדורה — 8-14 שניות מאחורי הקצה.
-   יציאה מיידית ברגע-הזיהוי חתכה לאוזן את השניות האחרונות של המהדורה: בטבלה
-   "נכנסה בזיהוי ויצאה בזיהוי-סיום" ובפועל הסוף נקטע. התיקון: מודדים כמה
-   ההשמעה מפגרת, מחשבים מתי צליל-הסיום שזוהה *יגיע לאוזן* — ומתזמנים את
-   החיתוך לרגע הזה. חדשות לא קוטעים: עדיף לצאת שניות מאוחר מאשר מוקדם.
-   היציאות המיידיות (ידני, משך-מרבי, תקלת-שמע, כיבוי) נשארות מיידיות. */
-function aidAirLag(){
-  try{
-    const e=aidLiveEdge();
-    if(e)return Math.max(0,e.lag);
-    const b=STRM.buffered;
-    if(b&&b.length)return Math.max(0,b.end(b.length-1)-(STRM.currentTime||0));
-  }catch(e){}
-  return AID._lastEntryLead!=null?Math.max(0,+AID._lastEntryLead):0;
-}
-function aidExitSynced(reason,behindS){
-  if(AID.mode!=='onair')return;
-  if(AID._exitPend)return;                 // חיתוך כבר מתוזמן — הזיהוי הראשון קובע
-  const lag=aidAirLag();
-  // משך צליל-הסיום — מהטבעת-הסיום עצמה (בגבולות שפיות 2-9ש')
-  let tail=4;
-  try{const p=AID.endPrint&&(AID.endPrint[1]||AID.endPrint[0]);
-    if(p&&p.rows)tail=p.rows*AID_HOP/AID_SR;}catch(e){}
-  tail=Math.max(2,Math.min(9,tail||4));
-  // מתי הסיום יסתיים באוזן: פיגור-ההשמעה − כמה אחורה התחיל הסיום + משך-הסיום
-  let delay=behindS!=null?lag-Math.max(0,+behindS)+tail:lag;
-  delay=Math.max(0,Math.min(18,delay));
-  if(delay<1){aidExit(reason);return;}
-  AID._exitPend={at:Date.now(),delayS:+delay.toFixed(1),reason};
-  aidSay('🎯 '+reason+' — ההשמעה מפגרת '+lag.toFixed(0)+'ש׳ אחרי הזיהוי; החיתוך תוזמן בעוד '+delay.toFixed(0)+'ש׳, כדי שהסיום יישמע עד סופו');
-  try{dlog('aid','🎯 יציאה מתוזמנת-להשמעה',{lagS:+lag.toFixed(1),
-    behindS:behindS==null?null:+(+behindS).toFixed(1),
-    tailS:+tail.toFixed(1),delayS:+delay.toFixed(1)});}catch(e){}
-  AID._exitPend.t=setTimeout(()=>{try{
-    const p=AID._exitPend;AID._exitPend=null;
-    if(AID.mode==='onair')aidExit(reason+' · 🎯 תוזמן-להשמעה (+'+((p&&p.delayS)||0)+'ש׳)');
-  }catch(e){AID._exitPend=null;}},Math.round(delay*1000));
-}
 function aidExit(reason){
   if(AID.mode!=='onair')return;
-  // חיתוך מתוזמן שעוד ממתין — יציאה ישירה (ידני/משך-מרבי/תקלה) גוברת ומבטלת אותו
-  if(AID._exitPend){try{clearTimeout(AID._exitPend.t);}catch(e){}AID._exitPend=null;}
   // 🔬 תיעוד היציאה: משך, ציון-סיום אחרון, ומסלול-היציאה
   try{dlog('aid','🏁 יציאה: '+reason,
     {durS:Math.round((Date.now()-AID.onAirAt)/1000),endScore:+(AID.meter.end||0).toFixed(3),
@@ -6685,8 +7421,11 @@ function aidExit(reason){
   if(!unified){try{aidHangup();}catch(e){}}
   aidSay('🏁 '+reason+' — חוזרים למוזיקה');
   try{toast('🏁 החדשות הסתיימו — חוזרים למוזיקה');}catch(e){}
-  try{if(typeof spAfterNews==='function')setTimeout(()=>spAfterNews('📰 מיד בסיום החדשות'),80);}catch(e){}
-  if(autoOn){try{playNext('חדשות-יצאו');}catch(e){}}
+  /* VER 1076: הפרסומות שהמתינו נכנסות לתור *לפני* שבוחרים את הפריט הבא — קודם שיר נבחר ראשון,
+     והפרסומות חיכו לסופו / נטענו "קר" אחרי שקט. spFireNow כבר מתחיל לנגן אם צריך (loading דולק),
+     ואז לא קוראים שוב ל-playNext (קריאה כפולה הייתה מעלימה את הפריט הראשון). */
+  try{if(typeof spAfterNews==='function')spAfterNews('📰 מיד בסיום החדשות');}catch(e){}
+  if(autoOn&&!loading){try{playNext('חדשות-יצאו');}catch(e){}}
   try{renderNow();renderProgress();}catch(e){}
   aidRender();
 }
@@ -6929,11 +7668,6 @@ function aidHourMissCheck(now){
   AID._missHour=mh;
   if(!c.days.includes(now.getDay())||!c.hours.includes(mh))return;
   if(AID.lastEdKey===now.getDay()+'-'+mh)return;      // המהדורה של השעה הזו כן שודרה
-  /* 🔁 חסין-אתחול (19.10: נרשם ❌ על 08:00 שדווקא נכנסה ב-08:00:10): אחרי
-     הפעלה-מחדש lastEdKey מתאפס — אבל טבלת-המעקב עצמה זוכרת. שורת-כניסה של
-     השעה הזו מהשעות האחרונות = המהדורה כן שודרה, אין לרשום החמצה. */
-  try{const _dk=now.getDate()+'.'+(now.getMonth()+1);
-    if((c.edLog||[]).some(r=>r&&!r.miss&&r.hh===mh&&r.d===_dk&&Date.now()-r.at<3*3600000))return;}catch(e){}
   c.hourMiss[mh]=(c.hourMiss[mh]||0)+1;save();
   // 📋 טבלת-המעקב: שעה מסומנת שבה לא נכנסה מהדורה — נרשמת ללמידה
   try{c.edLog.push({at:Date.now(),d:now.getDate()+'.'+(now.getMonth()+1),hh:mh,miss:true});
@@ -7039,6 +7773,7 @@ function aid2Listen(){
       try{
         const ctrl=new AbortController();feed.ctrl=ctrl;
         const resp=await fetch(url,{signal:ctrl.signal});
+        if(!resp.ok||!resp.body)throw new Error('http '+resp.status);   // VER 1064: דף-שגיאה של השרת אינו אודיו
         const reader=resp.body.getReader();
         // 🔇 חניקת-יומן: כשהשרת דוחה את החיבור, הלולאה חוזרת כל 1.8ש' — והשורה הזו
         //    הציפה את היומן (570 מתוך 587 שורות) ומחקה את היסטוריית-החדשות האמיתית
@@ -7241,7 +7976,7 @@ async function aid2Pulse(){
           aid2Say('🏁 הסיום זוהה במקור השני ('+Math.round(en.r*100)+'%) — נותנים לראשי 6ש׳ ואז יוצאים');
           // 🏁 עזרת-יציאה: 6ש' חסד לראשי; אם עדיין באוויר — העזר מוציא
           setTimeout(()=>{if(AID.mode==='onair'&&Date.now()-AID.onAirAt>aidExitMinMs())
-            aidExitSynced('הסיום זוהה במקור-העזר ('+Math.round((AID.aux.endScore||0)*100)+'%)');},AID2_EXIT_GRACE_MS);
+            aidExit('הסיום זוהה במקור-העזר ('+Math.round((AID.aux.endScore||0)*100)+'%)');},AID2_EXIT_GRACE_MS);
         }
       }else AID._endStreak2=ev?(AID._endStreak2||0)+1:0;
     }
@@ -7708,7 +8443,7 @@ function rsDecide(i){
       const xr=+r.x||0;
       s._xLo=xr<0.40?(s._xLo||0)+1:(xr>=0.60?0:(s._xLo||0));
       if(s._xLo>=3&&Date.now()-AID.onAirAt>aidExitMinMs()){
-        aidExitSynced('🤝 התחנות התפצלו (התאמת-1:1 ירדה ל-'+Math.round(xr*100)+'%) — המהדורה הארצית הסתיימה');return;
+        aidExit('🤝 התחנות התפצלו (התאמת-1:1 ירדה ל-'+Math.round(xr*100)+'%) — המהדורה הארצית הסתיימה');return;
       }
     }
     return;                                     // 🏁 זיהוי-הסיום — אצל מנוע-הסגירה הנפרד (reDecide)
@@ -7760,8 +8495,8 @@ function rsDecide(i){
   if(!fresh)return;
   // 🤝 מי עוד שמע? מתעדים את תמונת-המצב של כל הסטרימים ברגע ההחלטה
   const others=RS.st.map((x,k)=>({src:k,label:x&&x.label,
-    start:x&&x.last?+x.last.start.toFixed(3):null,
-    head:x&&x.last?+x.last.head.toFixed(3):null,
+    start:x&&x.last?+(+x.last.start||0).toFixed(3):null,
+    head:x&&x.last?+(+x.last.head||0).toFixed(3):null,
     ageMs:x&&x.lastAt?Date.now()-x.lastAt:null}));
   dlog('aid','🦀 החלטת-כניסה מהמנוע המקומי ('+nm+')',
     {src:i,label:nm,start:r.start,head:r.head,end:r.end,behindS:r.behindS,
@@ -8017,7 +8752,7 @@ function lsTick(){
       });}catch(e){}
     }
     if(!LS.proc)lsSpawn();
-    lsShadow();
+    // VER 1064: lsShadow כבר רץ כל שנייה בטיימר משלו — קריאה כפולה כאן ספרה שקט מהר מדי
     lsSample();
   }catch(e){}
 }
@@ -8047,8 +8782,8 @@ function reDecide(i){
   // 🏁 מנוע-הסיום 24/7: ציון מעל שיא-רקע-היממה = הסיומת האמיתית — יציאה מיידית
   const fl24=aidEndFloor24();
   if(okTime&&disc&&fl24>0&&r.end>=fl24){
-    aidExitSynced('מנוע-הסיום 24/7: הסיומת זוהתה במנוע-הסגירה ('+Math.round(r.end*100)
-      +'% — מעל רקע-היממה '+Math.round((aidCfg().endBg24Max||0)*100)+'%)',r.endBehindS);return;
+    aidExit('מנוע-הסיום 24/7: הסיומת זוהתה במנוע-הסגירה ('+Math.round(r.end*100)
+      +'% — מעל רקע-היממה '+Math.round((aidCfg().endBg24Max||0)*100)+'%)');return;
   }
   /* 🔒 נעילת-מסלול-סיום: סיומת שמושמעת באמת זזה בקצב-השעון בין פעימות;
      דיבור שדומה לה קופץ. מתחת לסף-החזק (80%) — היציאה דורשת נעילה. */
@@ -8062,7 +8797,7 @@ function reDecide(i){
   {const eFl3=aidEndFloor();if(eFl3>0)hard=Math.min(hard,eFl3);
    const eBf3=aidEndBlockFloor();if(eBf3>0)hard=Math.max(hard,eBf3);}
   if(okTime&&disc&&r.end>=hard&&(r.end>=AID_EXIT_STRONG||s._eLock===true)){
-    aidExitSynced('הסיום זוהה במנוע-הסגירה ('+Math.round(r.end*100)+'%'+(s._eLock?' · 🔒 נעול-מסלול':'')+')',r.endBehindS);
+    aidExit('הסיום זוהה במנוע-הסגירה ('+Math.round(r.end*100)+'%'+(s._eLock?' · 🔒 נעול-מסלול':'')+')');
   }else if(okTime&&disc&&r.end>=hard&&Date.now()-(AID._eLkLogAt||0)>20000){
     AID._eLkLogAt=Date.now();
     dlog('aid','🔒 יציאת-הסגירה נחסמה: ציון-סיום בלי נעילת-מסלול',{end:+r.end.toFixed(3),hard:+hard.toFixed(3)});
@@ -8238,7 +8973,7 @@ async function aidPulse(){
       {const sx=spxShouldExit();
        if(sx){
          try{dlog('aid','🎙 יציאה לפי דיבור-מול-מוזיקה (הסיומת לא זוהתה)',sx);}catch(e){}
-         aidExitSynced('הדיבור פסק והמוזיקה חזרה ('+Math.round(sx.cur*100)+'% מול '
+         aidExit('הדיבור פסק והמוזיקה חזרה ('+Math.round(sx.cur*100)+'% מול '
            +Math.round(sx.base*100)+'% בליבת-המהדורה) — ג׳ינגל-הסיום לא זוהה');
          return;
        }}
@@ -8264,9 +8999,11 @@ async function aidPulse(){
     if(AID.busy)return;
     const tail=aidTail(280000);if(!tail)return;
     AID.busy=true;AID._busyAt=Date.now();
+    const _btok=AID._busyTok=(AID._busyTok||0)+1;   // VER 1064: פענוח ישן שמסתיים באיחור לא משחרר את הנעילה של החדש
     let pcm=null;
     try{pcm=await aidDecode(tail);AID.lastGoodDecode=Date.now();AID._decFails=0;}catch(e){AID._decErr=String(e&&e.message||e);}
-    AID.busy=false;
+    if(AID._busyTok===_btok)AID.busy=false;
+    if(AID._busyTok!==_btok)return;
     if(!pcm||pcm.length<AID_SR*4)return;
     if(pcm.length>14*AID_SR)pcm=pcm.subarray(pcm.length-14*AID_SR);
     // מד-רמה
@@ -8462,7 +9199,7 @@ async function aidPulse(){
       // 🏁 מנוע-הסיום: דגימה אחת מעל הרף שנמדד מהאוויר — יציאה מיידית
       const eFl=aidEndFloor();
       if(mainAirs&&okTime&&disc&&eFl>0&&en.r>=eFl){
-        aidExitSynced('מנוע-הסיום: הסיומת זוהתה ('+Math.round(en.r*100)+'% — מעל '+Math.round(eFl*100)+'%, הרף שנמדד מחוץ למהדורות)',(AID._ebp!=null&&Date.now()-(AID._eba||0)<4000)?AID._ebp:null);return;
+        aidExit('מנוע-הסיום: הסיומת זוהתה ('+Math.round(en.r*100)+'% — מעל '+Math.round(eFl*100)+'%, הרף שנמדד מחוץ למהדורות)');return;
       }
       /* 📊 רצפת-הסיום חלה על *כל* מסלולי-היציאה (הלקח מ-24.8 07:03: יציאה
          ב-60% באמצע המהדורה דרך מסלול-הרצף, שהרצפה לא כיסתה): ציון שהרקע
@@ -8476,7 +9213,7 @@ async function aidPulse(){
       // 🔒 מתחת לסף-החזק (80%) היציאה דורשת נעילת-מסלול — דיבור שדומה לסיומת לא זז בקצב-השעון
       const eLockOk=en.r>=AID_EXIT_STRONG||AID._endLockM===true;
       if(mainAirs&&okTime&&exitSig&&!eBlock&&eLockOk)
-        aidExitSynced('הסיום זוהה ('+Math.round(en.r*100)+'%'+(AID._endLockM?' · 🔒 נעול-מסלול':'')+')'+(grace?' · סף-רגיש אחרי המשך-הנלמד':(zone?' · באזור-הסיום הצפוי':(soft?' · סף-מוקל אחרי 2.5 דק׳':''))),(AID._ebp!=null&&Date.now()-(AID._eba||0)<4000)?AID._ebp:null);
+        aidExit('הסיום זוהה ('+Math.round(en.r*100)+'%'+(AID._endLockM?' · 🔒 נעול-מסלול':'')+')'+(grace?' · סף-רגיש אחרי המשך-הנלמד':(zone?' · באזור-הסיום הצפוי':(soft?' · סף-מוקל אחרי 2.5 דק׳':''))));
       else{
         if(mainAirs&&okTime&&exitSig&&!eBlock&&!eLockOk&&Date.now()-(AID._eLkLogAt2||0)>20000){AID._eLkLogAt2=Date.now();
           aidSay('🔒 יציאה נחסמה: צליל דמוי-סיום ('+Math.round(en.r*100)+'%) שאינו זז בקצב-השעון — לא הסיומת. ממשיכים במהדורה');}
@@ -8538,7 +9275,8 @@ async function aidAudition(which){
   if(!p){toast('⚠️ לא נבחר קובץ');return;}
   try{
     const raw=await FS().readBinaryFile(p);
-    player.src=URL.createObjectURL(new Blob([raw]));
+    if(player._aidUrl)try{URL.revokeObjectURL(player._aidUrl);}catch(e){}   // VER 1064: משחררים את ההאזנה הקודמת מהזיכרון
+    player._aidUrl=URL.createObjectURL(new Blob([raw]));player.src=player._aidUrl;
     player.volume=1;player.play().catch(()=>{});player._aid=true;
     player.onended=()=>{player._aid=false;};
   }catch(e){toast('⚠️ לא ניתן לנגן');}
@@ -9123,7 +9861,7 @@ async function wxGeocode(name){
   const st=document.getElementById('wx-city-status');
   if(st)st.textContent='מאתר…';
   try{
-    const r=await fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(name)+'&language=he&count=1',{cache:'no-store'});
+    const r=await fetch('https://geocoding-api.open-meteo.com/v1/search?name='+encodeURIComponent(name)+'&language=he&count=1',{cache:'no-store',signal:AbortSignal.timeout(15000)});
     const j=await r.json();const g=j&&j.results&&j.results[0];
     if(!g){if(st)st.textContent='⚠️ עיר לא נמצאה';return false;}
     const w=wxCfg();w.city=name;w.lat=g.latitude;w.lon=g.longitude;
@@ -9139,7 +9877,7 @@ async function wxFetch(){
   const u='https://api.open-meteo.com/v1/forecast?latitude='+w.lat+'&longitude='+w.lon
     +'&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m'
     +'&daily=temperature_2m_max,temperature_2m_min&forecast_days=1&timezone=auto';
-  const r=await fetch(u,{cache:'no-store'});
+  const r=await fetch(u,{cache:'no-store',signal:AbortSignal.timeout(15000)});   // VER 1064: בלי תקיעה
   return await r.json();
 }
 /* קוד-מזג בינלאומי (WMO) → תיאור בעברית רהוטה */
@@ -9207,13 +9945,17 @@ function wxSpeakLocal(text,voice){
     const u=new SpeechSynthesisUtterance(text);
     u.lang='he-IL';u.voice=voice;
     u.rate=+wxCfg().rate||1;
-    const done=()=>{if(!WX.talking)return;WX.talking=false;window.wxTalking=false;
-      try{applyDuck();}catch(e){}res(true);};
-    WX.talking=true;window.wxTalking=true;
+    /* VER 1064: ההבטחה תמיד נסגרת (גם כשהקריין כובה באמצע), והטיימר של הקראה קודמת
+       כבר לא משחרר את ההנמכה באמצע הקראה חדשה. */
+    let fin=false,tm=0;
+    const done=()=>{if(fin)return;fin=true;clearTimeout(tm);
+      if(WX._utt===u){WX._utt=null;WX.talking=false;window.wxTalking=false;try{applyDuck();}catch(e){}}
+      res(true);};
+    WX._utt=u;WX.talking=true;window.wxTalking=true;
     try{applyDuck();}catch(e){}
     u.onend=done;u.onerror=done;
     // חגורת-ביטחון: אם המנוע נתקע — משחררים את ההנמכה אחרי דקה וחצי
-    setTimeout(done,90000);
+    tm=setTimeout(done,90000);
     speechSynthesis.speak(u);
   });
 }
@@ -9308,11 +10050,13 @@ function wxPlayGoogleChunk(ch){
     const a=new Audio();WX._netAudio=a;
     a.src=urls[i]+encodeURIComponent(ch);
     try{a.playbackRate=+wxCfg().rate||1;}catch(e){}
-    let fin=false;const done=ok=>{if(fin)return;fin=true;res(ok);};
+    /* VER 1064: onerror וגם play().catch נורים יחד בכשל — קודם זה ניגן את אותו משפט פעמיים (הד) */
+    let fin=false,moved=false;const done=ok=>{if(fin)return;fin=true;res(ok);};
+    const next=()=>{if(moved||fin)return;moved=true;try{a.pause();}catch(e){}tryUrl(i+1).then(done);};
     a.onended=()=>done(true);
-    a.onerror=()=>{tryUrl(i+1).then(done);};
-    setTimeout(()=>done(false),30000);
-    a.play().catch(()=>{tryUrl(i+1).then(done);});
+    a.onerror=next;
+    setTimeout(()=>{if(!moved){try{a.pause();}catch(e){}done(false);}},30000);
+    a.play().catch(next);
   });
   return tryUrl(0);
 }
@@ -9438,4 +10182,525 @@ function wxBindUI(){
   wxRenderPill();wxRenderHours();
 }
 setInterval(()=>{try{if(typeof S!=='undefined'&&S)wxTick();}catch(e){}},1000);     // 🌤 פעימת קריין מזג-האוויר
+
+/* ================= 🔥 VER 1066: להיטים ישראליים מהאינטרנט =================
+   מקור: מצעד "הכי מושמעים" של Apple Music ישראל (מתעדכן יומית). נשארים רק שירים
+   ישראליים (שם בעברית). התוכנה מחפשת כל להיט בספרייה שלך; מה שנמצא נכנס לרוטציה לפי
+   ההגדרות (ימים, שעות, להיט אחרי כל X שירים, מקסימום השמעות ביום לכל להיט). מה שחסר
+   מוצג ברשימה — התוכנה לא מורידה שירים, רק מזהה ומנגנת מהספרייה. */
+/* VER 1068: כמה מקורות — כל אחד מוסיף נקודות לשיר; מי שמופיע בהכי הרבה מקורות עולה במצעד המשולב.
+   🍎 Apple Music ישראל — "הכי מושמעים" (מקום במצעד)
+   📋 הפלייליסט השבועי של גלגלצ — מה שמנוגן בימים אלו (כולל סימון "חדש")
+   🔴 גלגלצ · כאן גימל (רשת ג) · לב המדינה 91FM — מה שהתנגן בפועל בתחנה (100 השירים האחרונים, דרך
+      רשימות "מתעדכן LIVE" של PlayingList ב-Spotify). התוכנה דוגמת אותן כל כמה שעות וסופרת
+      כמה פעמים כל שיר נראה ב-7 הימים האחרונים — זה ה"מה הכי מושמע" בכל תחנה. */
+const HITS_SOURCES=[
+  {id:'sptop',name:'Spotify Top 50 ישראל',icon:'🟢',kind:'spotify',pl:'37i9dQZEVXbJ6IpvItkve3'},
+  {id:'yt',name:'YouTube — הכי נצפים בישראל',icon:'▶️',kind:'youtube'},
+  {id:'apple',name:'Apple Music ישראל',icon:'🍎',kind:'apple'},
+  {id:'glzpl',name:'פלייליסט גלגלצ',icon:'📋',kind:'glz',url:'https://glz.co.il/%D7%92%D7%9C%D7%92%D7%9C%D7%A6/%D7%9B%D7%AA%D7%91%D7%95%D7%AA/%D7%94%D7%A4%D7%9C%D7%99%D7%99%D7%9C%D7%99%D7%A1%D7%98-%D7%A9%D7%9C-%D7%92%D7%9C%D7%92%D7%9C%D7%A6'},
+  {id:'glz',name:'גלגלצ — מה התנגן',icon:'🔴',kind:'spotify',pl:'2SXRvfqiMBXFkaMi03npLZ'},
+  {id:'gimel',name:'כאן גימל (רשת ג)',icon:'🔴',kind:'spotify',pl:'5v2ZRiBDwkLnR0pSkUdUW2'},
+  {id:'lev91',name:'לב המדינה 91FM',icon:'🔴',kind:'spotify',pl:'576hQYG5AEgZdMy1oN5qBV'},
+];
+const HITS_URL='https://rss.marketingtools.apple.com/api/v2/il/music/most-played/100/songs.json';
+const HITS_URL_OLD='https://rss.applemarketingtools.com/api/v2/il/music/most-played/100/songs.json';
+function hitsCfg(){
+  S.hits=S.hits||{};
+  const h=S.hits;
+  if(h.on===undefined)h.on=false;
+  if(!Array.isArray(h.days))h.days=[0,1,2,3,4,5,6];
+  if(!(h.from>=0&&h.from<=23))h.from=6;
+  if(!(h.to>=0&&h.to<=23))h.to=23;
+  if(!(h.every>=1))h.every=3;               // להיט אחרי כל X שירים רגילים
+  if(!(h.maxDay>=1))h.maxDay=4;             // מקסימום השמעות ביום לכל להיט
+  if(!(h.gapMin>=0))h.gapMin=120;           // מינימום דקות בין השמעות של אותו להיט
+  if(!(h.top>=5))h.top=40;                  // כמה מקומות מהמצעד
+  if(!(h.maxAgeDays>=0))h.maxAgeDays=0;     // 0 = כל המצעד; אחרת רק שירים שיצאו ב-X הימים האחרונים
+  if(!Array.isArray(h.list))h.list=[];
+  if(!h.plays||typeof h.plays!=='object')h.plays={};
+  if(!h.srcOn||typeof h.srcOn!=='object')h.srcOn={};   // VER 1068: אילו מקורות פעילים (ברירת-מחדל: כולם)
+  if(!(h.since>=0))h.since=0;
+  return h;
+}
+const HEB_RE=/[֐-׿]/;
+function hitsNorm(s){
+  return String(s||'').toLowerCase()
+    .replace(/[֑-ׇ]/g,'')                     // ניקוד וטעמים
+    .replace(/\((feat|ft|prod|remix|רמיקס|לייב|live)[^)]*\)/g,' ')
+    .replace(/[׳'"`’״\-–—_.,!?:;()\[\]{}|\/\\#&+*~]/g,' ')
+    .replace(/\s+/g,' ').trim();
+}
+/* מוריד טקסט: קודם דרך הדפדפן, ואם נחסם (CORS) — דרך curl של Windows לקובץ זמני */
+async function hitsGet(urls,needle,tag){
+  for(const u of urls){
+    try{const r=await fetch(u,{cache:'no-store',signal:AbortSignal.timeout(20000)});if(r.ok){const tx=await r.text();if(tx&&tx.indexOf(needle)>=0)return tx;}}catch(e){}
+  }
+  const dest=BASE+'/hits-'+tag+'.tmp';
+  for(const u of urls){
+    try{
+      await Promise.race([Neutralino.os.execCommand('curl -L -s --compressed --max-time 25 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" -o "'+dest+'" "'+u+'"'),new Promise(r=>setTimeout(r,30000))]);
+      const tx=await FS().readFile(dest);if(tx&&tx.indexOf(needle)>=0)return tx;
+    }catch(e){}
+  }
+  throw new Error('no-data');
+}
+function hitsDecode(s){return String(s||'').replace(/&nbsp;/g,' ').replace(/&quot;/g,'"').replace(/&#39;|&apos;/g,"'").replace(/&amp;/g,'&')
+  .replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&#(\d+);/g,(m,n)=>String.fromCharCode(+n)).replace(/\s+/g,' ').trim();}
+const hitsClean=t=>String(t||'').replace(/\((?:[^()]*?)\)/g,' ').replace(/\s+/g,' ').trim();   // בלי (חדש)/(רמיקס…) — לשם ההתאמה
+async function hitsFromApple(){
+  const j=JSON.parse(await hitsGet([HITS_URL,HITS_URL_OLD],'"results"','apple'));
+  const out=[];let rank=0;
+  for(const r of ((j&&j.feed&&j.feed.results)||[])){rank++;
+    out.push({title:String(r.name||''),artist:String(r.artistName||''),date:String(r.releaseDate||''),rank,url:String(r.url||'')});}
+  return out;
+}
+async function hitsFromGlz(src){
+  const h=await hitsGet([src.url],'ישראלי:','glzpl');
+  const sect=(a,b)=>{const i=h.indexOf(a);if(i<0)return'';const j=h.indexOf(b,i+a.length);return h.slice(i+a.length,j>i?j:i+60000);};
+  const parts=[sect('ישראלי:','לועזי:'),sect('ערב + לילה ישראלי','ערב + לילה לועזי')];
+  const out=[];let rank=0;
+  for(const p of parts){
+    const lines=p.replace(/<\/p>|<br\s*\/?>|<\/li>|<\/div>/gi,'\n').replace(/<[^>]+>/g,'').split('\n').map(hitsDecode).filter(Boolean);
+    for(const ln of lines){
+      const k=ln.indexOf(' - ');if(k<1)continue;
+      const artist=ln.slice(0,k).trim(),rawT=ln.slice(k+3).trim();
+      const title=hitsClean(rawT);if(!title)continue;
+      out.push({title,artist,rank:++rank,isNew:/\(חדש\)/.test(rawT)});
+    }
+  }
+  return out;
+}
+/* ▶️ VER 1073: YouTube — דרך ה-API הרשמי של YouTube (מפתח חינמי מ-Google Cloud): 50 קליפי המוזיקה הנצפים ביותר בישראל */
+async function hitsFromYouTube(){
+  const key=String(hitsCfg().ytKey||'').trim();if(!key)throw new Error('no-key');
+  const u='https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=IL&videoCategoryId=10&maxResults=50&hl=he&key='+encodeURIComponent(key);
+  const j=JSON.parse(await hitsGet([u],'"items"','yt'));
+  return (j.items||[]).map((v,i)=>{
+    const sn=v.snippet||{};let t=String(sn.title||'').replace(/\[[^\]]*\]|\([^)]*\)|\|.*$/g,' ').replace(/\s+/g,' ').trim();
+    let artist=String(sn.channelTitle||'').replace(/\s*-\s*Topic$/,'').trim(),title=t;
+    const k=t.indexOf(' - ');if(k>0){artist=t.slice(0,k).trim();title=t.slice(k+3).trim();}
+    return{title:hitsClean(title),artist,rank:i+1};
+  });
+}
+async function hitsFromSpotify(src){
+  const h=await hitsGet(['https://open.spotify.com/embed/playlist/'+src.pl],'trackList','sp-'+src.id);
+  let list=null;
+  try{
+    const m=h.match(/<script id="__NEXT_DATA__"[^>]*>([\s\S]*?)<\/script>/);
+    const j=JSON.parse(m[1]);
+    list=j.props.pageProps.state.data.entity.trackList;
+  }catch(e){}
+  if(!Array.isArray(list)){   // גיבוי: חילוץ ישיר מהטקסט
+    list=[];const re=/"title":"((?:[^"\\]|\\.)*)","subtitle":"((?:[^"\\]|\\.)*)"/g;let m;
+    while((m=re.exec(h)))try{list.push({title:JSON.parse('"'+m[1]+'"'),subtitle:JSON.parse('"'+m[2]+'"')});}catch(e){}
+  }
+  return list.map((t,i)=>({title:hitsClean(t.title||''),artist:String(t.subtitle||''),rank:i+1}));
+}
+async function hitsFetch(manual){
+  const h=hitsCfg();
+  if(hitsFetch._busy)return;hitsFetch._busy=true;
+  const st=document.getElementById('hits-status');if(st&&manual)st.textContent='⏳ מוריד מצעדים ורשימות השמעה…';
+  h.src=h.src||{};h.seen=h.seen||{};
+  const res={},ok=[],bad=[];
+  try{
+    await Promise.all(HITS_SOURCES.filter(s=>h.srcOn[s.id]!==false&&!(s.kind==='youtube'&&!String(h.ytKey||'').trim())).map(async s=>{
+      try{
+        const arr=s.kind==='apple'?await hitsFromApple():s.kind==='glz'?await hitsFromGlz(s):s.kind==='youtube'?await hitsFromYouTube():await hitsFromSpotify(s);
+        const isr=arr.filter(x=>HEB_RE.test(x.title)||HEB_RE.test(x.artist));   // רק שירים ישראליים
+        if(!isr.length)throw new Error('empty');
+        res[s.id]=isr;ok.push(s.id);
+        h.src[s.id]={at:Date.now(),n:isr.length,top:isr[0]?{title:isr[0].title,artist:isr[0].artist}:null};
+      }catch(e){bad.push(s.id);h.src[s.id]=Object.assign({},h.src[s.id]||{},{errAt:Date.now(),err:String(e&&e.message||e)});}
+    }));
+    if(!ok.length)throw new Error('no-source');
+    // 📈 תחנות "מה התנגן": סופרים הופעות לאורך זמן (חלון של 7 ימים, דגימה אחת לכל 3 שעות לכל תחנה)
+    const now=Date.now(),slot=Math.floor(now/(3*3600000));
+    for(const sid of ['glz','gimel','lev91'])if(res[sid])for(const x of res[sid]){
+      const k=hitsNorm(x.title);if(!k)continue;
+      const e=h.seen[k]=h.seen[k]||{t:x.title,a:x.artist,s:{}};
+      const arr=e.s[sid]=e.s[sid]||[];if(arr[arr.length-1]!==slot)arr.push(slot);
+    }
+    const minSlot=slot-56;   // 7 ימים
+    for(const k in h.seen){const e=h.seen[k];let any=false;
+      for(const sid in e.s){e.s[sid]=e.s[sid].filter(v=>v>=minSlot);if(e.s[sid].length)any=true;else delete e.s[sid];}
+      if(!any)delete h.seen[k];}
+    // 🧮 ניקוד משולב
+    const M=new Map();
+    const get=(t,a)=>{const k=hitsNorm(t);if(!k)return null;let o=M.get(k);if(!o){o={k,title:t,artist:a,srcs:{},score:0,isNew:false,date:''};M.set(k,o);}
+      if(!o.artist&&a)o.artist=a;if(HEB_RE.test(a)&&!HEB_RE.test(o.artist))o.artist=a;return o;};
+    for(const x of (res.apple||[])){const o=get(x.title,x.artist);if(!o)continue;o.srcs.apple=x.rank;o.date=x.date;o.url=x.url||'';o.score+=3*(1-(x.rank-1)/100);}
+    // 🟢▶️ VER 1073: Spotify Top 50 ו-YouTube — מדד הפופולריות האמיתי (השמעות/צפיות), לפי המקום
+    for(const x of (res.sptop||[])){const o=get(x.title,x.artist);if(!o)continue;o.srcs.sptop=x.rank;o.score+=4*(1-(x.rank-1)/50);}
+    for(const x of (res.yt||[])){const o=get(x.title,x.artist);if(!o)continue;o.srcs.yt=x.rank;o.score+=3*(1-(x.rank-1)/50);}
+    for(const x of (res.glzpl||[])){const o=get(x.title,x.artist);if(!o)continue;o.srcs.glzpl=true;o.score+=2+(x.isNew?1:0);if(x.isNew)o.isNew=true;}
+    for(const sid of ['glz','gimel','lev91'])for(const x of (res[sid]||[])){const o=get(x.title,x.artist);if(!o)continue;o.srcs[sid]=true;o.score+=1;}
+    for(const [k,o] of M){const e=h.seen[k];if(!e)continue;let n=0;for(const sid in e.s)n+=e.s[sid].length;o.plays7=n;o.score+=Math.min(3,n*0.25);}
+    const list=[...M.values()].sort((a,b)=>b.score-a.score||String(a.title).localeCompare(String(b.title),'he'));
+    list.forEach((o,i)=>{o.rank=i+1;o.score=+o.score.toFixed(2);});
+    h.list=list.map(o=>({rank:o.rank,title:o.title,artist:o.artist,date:o.date,srcs:o.srcs,isNew:o.isNew,score:o.score,plays7:o.plays7||0,url:o.url||''}));
+    h.fetchedAt=Date.now();h.err=bad.length?('נכשלו: '+bad.join(', ')):'';if(!bad.length)h.errAt=0;
+    hitsMatch();save();
+    const m=h.list.filter(x=>x.file).length;
+    try{logPlay('info','🔥 המצעד המשולב עודכן — '+h.list.length+' שירים ישראליים מ-'+ok.length+' מקורות, '+m+' בספרייה'+(bad.length?' · לא הגיבו: '+bad.map(id=>(HITS_SOURCES.find(s=>s.id===id)||{}).name).join(', '):''),'להיטים');}catch(e){}
+    if(manual)toast('🔥 עודכן מ-'+ok.length+' מקורות — '+m+' מתוך '+h.list.length+' להיטים בספרייה');
+  }catch(e){
+    h.err=String(e&&e.message||e);h.errAt=Date.now();save();
+    if(manual)toast('⚠️ לא הצלחתי להוריד את המצעדים — בדוק חיבור לאינטרנט');
+    try{dlog('error','🔥 הורדת המצעדים נכשלה',{err:h.err,bad});}catch(e2){}
+  }finally{hitsFetch._busy=false;try{hitsRender();}catch(e){}}
+}
+/* התאמה לספרייה: לפי שם השיר בעברית (ושם הקובץ). כשיש כמה התאמות — מעדיפים התאמה מדויקת. */
+function hitsMatch(){
+  const h=hitsCfg();
+  const songs=(S.tracks||[]).filter(t=>t.type==='song'&&!t.missing);
+  const idx=songs.map(t=>({t,n:hitsNorm(t.name),all:' '+hitsNorm((t.name||'')+' '+(t.artist||'')+' '+String(t.file||'').split(/[\\/]/).pop().replace(/\.[^.]+$/,''))+' '}));
+  for(const x of h.list){
+    const nt=hitsNorm(x.title);x.file=null;
+    if(nt.length<2)continue;
+    let best=idx.find(o=>o.n===nt);
+    if(!best&&nt.length>=3)best=idx.find(o=>o.all.indexOf(' '+nt+' ')>=0);
+    if(best)x.file=best.t.file;
+  }
+}
+function hitsActiveNow(n){
+  const h=hitsCfg();if(!h.on||!h.list.length)return false;
+  n=n||new Date();
+  if(!h.days.includes(n.getDay()))return false;
+  const hr=n.getHours();
+  return h.from<=h.to?(hr>=h.from&&hr<=h.to):(hr>=h.from||hr<=h.to);
+}
+function hitsPlaysToday(file){
+  const h=hitsCfg(),p=h.plays[file],dk=new Date().toDateString();
+  return(p&&p.d===dk)?p.n:0;
+}
+function hitsPool(){
+  const h=hitsCfg(),now=Date.now();
+  const cut=h.maxAgeDays>0?now-h.maxAgeDays*86400000:0;
+  const out=[];
+  for(const x of h.list.slice(0,999)){
+    if(x.rank>h.top||!x.file)continue;
+    if(cut&&Date.parse(x.date)&&Date.parse(x.date)<cut)continue;
+    const t=(S.tracks||[]).find(tt=>tt.file===x.file&&!tt.missing);if(!t)continue;
+    out.push({x,t});
+  }
+  return out;
+}
+/* האם הגיע תור של להיט — ואיזה. נקרא כשמתכננים את השיר הבא. */
+function hitsPick(){
+  try{
+    if(!hitsActiveNow())return null;
+    const h=hitsCfg();
+    if(h.since<h.every)return null;
+    const now=Date.now(),gap=h.gapMin*60000;
+    const curId=current&&current.track?current.track.id:null;
+    const inQ=new Set(pending.map(x=>x&&x.trackId));
+    const c=hitsPool().filter(({x,t})=>{
+      if(t.id===curId||inQ.has(t.id))return false;
+      const p=h.plays[t.file],dk=new Date().toDateString();
+      if(p&&p.d===dk&&p.n>=h.maxDay)return false;
+      if(p&&gap&&now-(p.last||0)<gap)return false;
+      return true;
+    });
+    if(!c.length)return null;
+    c.sort((a,b)=>(hitsPlaysToday(a.t.file)-hitsPlaysToday(b.t.file))||(a.x.rank-b.x.rank));
+    const w=c[0];
+    return{trackId:w.t.id,src:'🔥 להיט #'+w.x.rank,kind:'song',hit:true,pl:hourPl()};
+  }catch(e){return null;}
+}
+/* נקרא כשמתחיל שיר: סופר השמעות להיט / שירים רגילים מאז הלהיט האחרון */
+function hitsOnSongStart(t){
+  try{
+    const h=hitsCfg();if(!h.on||!t)return;
+    const isHit=h.list.some(x=>x.file===t.file&&x.rank<=h.top);
+    if(isHit){
+      const dk=new Date().toDateString(),p=h.plays[t.file];
+      h.plays[t.file]={d:dk,n:(p&&p.d===dk?p.n:0)+1,last:Date.now()};
+      h.since=0;
+      // ניקוי ספירות ישנות
+      for(const k in h.plays)if(h.plays[k].d!==dk&&Date.now()-(h.plays[k].last||0)>7*86400000)delete h.plays[k];
+    }else h.since=(h.since||0)+1;
+    if(document.getElementById('sec-hits')&&document.getElementById('sec-hits').classList.contains('active'))hitsRender();
+  }catch(e){}
+}
+function hitsRender(){
+  const h=hitsCfg();
+  const sum=document.getElementById('hits-status');
+  if(sum){
+    const m=h.list.filter(x=>x.file).length;
+    sum.innerHTML=h.fetchedAt?('עודכן '+new Date(h.fetchedAt).toLocaleString('he-IL',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})
+      +' · '+h.list.length+' שירים ישראליים במצעד המשולב · <b>'+m+'</b> בספרייה · <b>'+(h.list.length-m)+'</b> חסרים'
+      +(h.err&&h.errAt>=h.fetchedAt?' · ⚠️ '+esc(h.err):'')):(h.err?'⚠️ לא הצלחתי להוריד את המצעד — בדוק חיבור לאינטרנט':'עדיין לא הורד מצעד — לחץ "עדכן עכשיו"');
+  }
+  const tops=document.getElementById('hits-tops');
+  if(tops){
+    h.src=h.src||{};
+    tops.innerHTML=HITS_SOURCES.map(s=>{const r=h.src[s.id]||{},off=h.srcOn[s.id]===false;
+      const stale=r.errAt&&(!r.at||r.errAt>r.at);
+      return`<div class="hits-top${off?' off':''}"><div class="hn">${s.icon} ${esc(s.name)}</div>
+        <div class="ht">${off?'כבוי':(s.kind==='youtube'&&!String(h.ytKey||'').trim())?'<small>צריך מפתח API (למטה)</small>':r.top?('🥇 <b>'+esc(r.top.title)+'</b><br><small>'+esc(r.top.artist||'')+'</small>'):(stale?'⚠️ לא הגיב':'—')}</div>
+        <small class="hm">${off?'':(r.n?r.n+' שירים ישראליים':'')+(stale&&r.top?' · ⚠️ העדכון האחרון נכשל':'')}</small></div>`;}).join('');
+  }
+  const sc=document.getElementById('hits-srcs');
+  if(sc&&!sc._w){sc._w=1;sc.innerHTML=HITS_SOURCES.map(s=>`<label style="display:inline-flex;gap:5px;align-items:center;margin-inline-end:12px"><input type="checkbox" data-src="${s.id}" ${h.srcOn[s.id]===false?'':'checked'}> ${s.icon} ${esc(s.name)}</label>`).join('');
+    sc.querySelectorAll('input[data-src]').forEach(c=>c.onchange=()=>{h.srcOn[c.dataset.src]=c.checked;save();hitsRender();});}
+  const act=document.getElementById('hits-active');
+  if(act)act.innerHTML=!h.on?'<span class="pill off">כבוי</span>':(hitsActiveNow()?'<span class="pill">פעיל עכשיו</span> · '+(h.since>=h.every?'הלהיט הבא — מיד אחרי השיר הנוכחי':'עוד '+(h.every-h.since)+' שירים עד הלהיט הבא'):'<span class="pill off">מחוץ לשעות/ימים שהוגדרו</span>');
+  const tb=document.getElementById('hits-table');
+  if(tb){
+    const filt=(document.getElementById('hits-filter')||{}).value||'all';
+    const rows=h.list.filter(x=>filt==='all'||(filt==='have'?!!x.file:!x.file));
+    const badge=x=>{const s=x.srcs||{},b=[];
+      if(s.sptop)b.push('<span class="hb" title="Spotify Top 50 ישראל">🟢 #'+s.sptop+'</span>');
+      if(s.yt)b.push('<span class="hb" title="YouTube — הכי נצפים בישראל">▶️ #'+s.yt+'</span>');
+      if(s.apple)b.push('<span class="hb" title="Apple Music ישראל">🍎 #'+s.apple+'</span>');
+      if(s.glzpl)b.push('<span class="hb" title="הפלייליסט השבועי של גלגלצ">📋 גלגלצ</span>');
+      if(s.glz)b.push('<span class="hb live" title="התנגן לאחרונה בגלגלצ">🔴 גלגלצ</span>');
+      if(s.gimel)b.push('<span class="hb live" title="התנגן לאחרונה בכאן גימל">🔴 גימל</span>');
+      if(s.lev91)b.push('<span class="hb live" title="התנגן לאחרונה בלב המדינה 91FM">🔴 91FM</span>');
+      if(!b.length&&!x.srcs)b.push('<span class="hb">🍎</span>');
+      return b.join(' ');};
+    tb.innerHTML=rows.length?('<table class="hits-tbl"><thead><tr><th>#</th><th>שיר</th><th>אמן</th><th>מקורות</th><th title="כמה פעמים נראה ברשימות מה-התנגן ב-7 הימים האחרונים">השמעות בתחנות</th><th>בספרייה</th><th>היום</th></tr></thead><tbody>'
+      +rows.map(x=>{const inTop=x.rank<=h.top;return`<tr class="${x.file?'have':'miss'}${inTop?'':' out'}">
+        <td>${x.rank}</td><td><b>${esc(x.title)}</b>${x.isNew?' <span class="hb new">חדש</span>':''}</td><td>${esc(x.artist)}</td><td>${badge(x)}</td><td>${x.plays7||''}</td>
+        <td>${x.file?'✅ <small>'+esc(String(x.file).split(/[\\/]/).pop())+'</small>':`❌ חסר <span class="hgo">${x.url?`<button class="btn small" title="פתח ב-Apple Music / iTunes — לרכישה" onclick="hitsOpen(${x.rank},'apple')">🍎 קנה</button>`:''}<button class="btn small primary" title="חפש את השיר בלינקטון ופתח אותו להורדה" onclick="lnkFindHit(${x.rank},this)">⬇ לינקטון</button><button class="btn small" title="חפש ב-Spotify" onclick="hitsOpen(${x.rank},'spotify')">🟢</button><button class="btn small" title="חפש ב-YouTube (להאזנה ובדיקה)" onclick="hitsOpen(${x.rank},'yt')">▶</button></span>`}</td>
+        <td>${x.file?hitsPlaysToday(x.file):''}</td></tr>`;}).join('')+'</tbody></table>')
+      :'<div class="empty">אין שירים להצגה</div>';
+  }
+}
+/* 🛒 VER 1070: שירים חסרים — פתיחה בחנות/חיפוש, ייצוא רשימה, ותיקיית "להיטים חדשים" שנקלטת לבד */
+function hitsOpen(rank,where){
+  const x=hitsCfg().list.find(y=>y.rank===rank);if(!x)return;
+  const q=encodeURIComponent((x.artist?x.artist+' ':'')+x.title);
+  const u=where==='apple'&&x.url?x.url:where==='spotify'?'https://open.spotify.com/search/'+q:'https://www.youtube.com/results?search_query='+q;
+  try{Neutralino.os.open(u);}catch(e){window.open(u,'_blank');}
+}
+const HITS_INBOX=()=>DIR.song+'/להיטים חדשים';
+async function hitsExportMissing(){
+  const h=hitsCfg(),miss=h.list.filter(x=>!x.file&&x.rank<=h.top);
+  if(!miss.length){toast('✅ אין שירים חסרים במקומות שנבחרו');return;}
+  const csv='\ufeff'+['מקום,שיר,אמן,מקורות,קישור'].concat(miss.map(x=>[x.rank,x.title,x.artist,Object.keys(x.srcs||{}).join('+'),x.url||'']
+    .map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(','))).join('\r\n');
+  const txt=miss.map(x=>x.rank+'. '+(x.artist?x.artist+' - ':'')+x.title).join('\n');
+  try{await FS().writeFile(BASE+'/להיטים-חסרים.csv',csv);}catch(e){}
+  try{await Neutralino.clipboard.writeText(txt);}catch(e){}
+  toast('📋 '+miss.length+' שירים חסרים — הרשימה הועתקה ונשמרה ב"להיטים-חסרים.csv" בתיקיית התוכנה');
+}
+async function hitsOpenInbox(){
+  try{await ensureDirs();await FS().createDirectory(HITS_INBOX());}catch(e){}
+  try{await Neutralino.os.open(HITS_INBOX());}catch(e){}
+}
+// 📥 תיקיית "להיטים חדשים": כל 3 דקות בודקים אם נוסף בה קובץ — אם כן, סורקים, מזהים ומעדכנים את המצעד
+let _hitsInboxSeen=null;
+setInterval(async()=>{try{
+  if(typeof S==='undefined'||!S)return;const h=hitsCfg();if(!h.list.length)return;
+  let r;try{r=await listAudio(HITS_INBOX(),false);}catch(e){return;}
+  if(!r||r.failed)return;
+  const names=r.files.map(f=>f.entry).sort().join('|');
+  if(_hitsInboxSeen===null){_hitsInboxSeen=names;return;}
+  if(names===_hitsInboxSeen)return;
+  const before=h.list.filter(x=>x.file).length;
+  _hitsInboxSeen=names;
+  await scanMedia(true);hitsMatch();save();
+  const after=h.list.filter(x=>x.file).length;
+  if(after>before)try{logPlay('info','📥 נקלטו '+(after-before)+' להיטים חדשים מהתיקייה "להיטים חדשים" — הם נכנסו לרוטציה','להיטים');}catch(e){}
+  try{hitsRender();}catch(e){}
+}catch(e){}},180000);
+function hitsFillHours(){
+  for(const id of ['hits-from','hits-to']){const e=document.getElementById(id);if(e&&!e.options.length)
+    e.innerHTML=Array.from({length:24},(_,i)=>`<option value="${i}">${pad2(i)}:00</option>`).join('');}
+}
+function hitsBindUI(){
+  const h=hitsCfg();
+  const on=document.getElementById('hits-on');if(!on)return;
+  on.checked=!!h.on;
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.value=String(v);};
+  set('hits-from',h.from);set('hits-to',h.to);set('hits-every',h.every);set('hits-maxday',h.maxDay);
+  set('hits-gap',h.gapMin);set('hits-top',h.top);set('hits-age',h.maxAgeDays);
+  const db=document.getElementById('hits-days');
+  if(db){db.innerHTML=DAY_HE.map((d,i)=>`<div class="dchip ${h.days.includes(i)?'on':''}" data-d="${i}">${d}</div>`).join('');
+    [...db.children].forEach(c=>c.onclick=()=>{const i=+c.dataset.d;h.days=h.days.includes(i)?h.days.filter(x=>x!==i):[...h.days,i];if(!h.days.length)h.days=[i];save();hitsBindUI();});}
+  if(!on._w){on._w=1;
+    on.onchange=()=>{h.on=on.checked;save();hitsRender();toast(h.on?'🔥 רוטציית הלהיטים הופעלה':'🔥 רוטציית הלהיטים כובתה');if(h.on&&!h.list.length)hitsFetch(true);};
+    const num=(id,k)=>{const e=document.getElementById(id);if(e)e.onchange=()=>{h[k]=+e.value;save();hitsRender();};};
+    num('hits-from','from');num('hits-to','to');num('hits-every','every');num('hits-maxday','maxDay');num('hits-gap','gapMin');num('hits-top','top');num('hits-age','maxAgeDays');
+    const rf=document.getElementById('hits-refresh');if(rf)rf.onclick=()=>hitsFetch(true);
+    const yk=document.getElementById('hits-ytkey');if(yk){yk.value=h.ytKey||'';yk.onchange=()=>{h.ytKey=yk.value.trim();save();if(h.ytKey)hitsFetch(true);};}
+    const rm=document.getElementById('hits-rematch');if(rm)rm.onclick=()=>{hitsMatch();save();hitsRender();toast('🔍 החיפוש בספרייה עודכן');};
+    const fl=document.getElementById('hits-filter');if(fl)fl.onchange=()=>hitsRender();
+  }
+  hitsRender();
+}
+// עדכון אוטומטי: פעם ב-12 שעות (כשהרוטציה פעילה), וחיפוש-מחדש בספרייה פעם בשעה
+setInterval(()=>{try{
+  if(typeof S==='undefined'||!S)return;const h=hitsCfg();
+  // VER 1068: כל 3 שעות — כדי לספור מה באמת התנגן בתחנות לאורך השבוע (גם כשהרוטציה כבויה אבל המצעד הורד פעם)
+  if((h.on||h.list.length)&&(!h.fetchedAt||Date.now()-h.fetchedAt>3*3600000)&&!(h.errAt&&Date.now()-h.errAt<30*60000))hitsFetch(false);
+  if(h.list.length&&Date.now()-(hitsMatch._at||0)>3600000){hitsMatch._at=Date.now();hitsMatch();}
+}catch(e){}},60000);
+
+/* ================= 🆕 VER 1071: לינקטון — שירים חדשים להורדה (בהרשאה של התחנה) =================
+   התוכנה קוראת את הקטלוג הציבורי של לינקטון (השירים החדשים שהופצו לתחנות), מסמנת מה כבר יש
+   בספרייה ומה חסר, ופותחת את דף השיר באתר כדי להוריד עם החשבון של התחנה. קובץ שהורד לתיקיית
+   ההורדות נקלט לבד: מועבר ל"להיטים חדשים", נסרק ונכנס לרוטציה. */
+const LNK_API='https://www.linktone.co.il/api_vue/vod/results';
+function lnkCfg(){
+  S.lnk=S.lnk||{};const c=S.lnk;
+  if(!Array.isArray(c.items))c.items=[];
+  if(c.watch===undefined)c.watch=true;          // לקלוט אוטומטית מתיקיית ההורדות
+  if(c.importAll===undefined)c.importAll=false;  // רק קבצים שתואמים לשיר מלינקטון/מהמצעד
+  if(!c.dlDir)c.dlDir='';
+  if(!c.pages||c.pages<4)c.pages=4;   // VER 1073: יותר שירים אחורה — כדי למצוא גם להיטים שעלו לפני כמה שבועות
+  return c;
+}
+async function lnkPage(page){
+  const body=JSON.stringify({page,mixed_results:true,genre:[],date_from:null,date_to:null,q:'',type:'single',is_album:false});
+  try{const r=await fetch(LNK_API,{method:'POST',headers:{'Content-Type':'application/json'},body,signal:AbortSignal.timeout(20000)});
+    if(r.ok){const j=await r.json();if(j&&j.data&&Array.isArray(j.data.items))return j.data.items;}}catch(e){}
+  // נחסם בדפדפן (CORS) — דרך curl של Windows: גוף הבקשה מקובץ, התשובה לקובץ
+  const req=BASE+'/lnk-req.json',out=BASE+'/lnk-res.json';
+  await FS().writeFile(req,body);
+  await Promise.race([Neutralino.os.execCommand('curl -s --compressed --max-time 25 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" -H "Content-Type: application/json" -X POST --data-binary "@'+req+'" -o "'+out+'" "'+LNK_API+'"'),new Promise(r=>setTimeout(r,30000))]);
+  const j=JSON.parse(await FS().readFile(out));
+  if(!j||!j.data||!Array.isArray(j.data.items))throw new Error('bad');
+  return j.data.items;
+}
+/* VER 1072: כפתור "⬇ לינקטון" בטבלת המצעד — מחפש את השיר בקטלוג של לינקטון ופותח את הדף שלו */
+async function lnkSearch(q){
+  const body=JSON.stringify({page:1,mixed_results:true,genre:[],date_from:null,date_to:null,q,type:'',is_album:false});
+  try{const r=await fetch(LNK_API,{method:'POST',headers:{'Content-Type':'application/json'},body,signal:AbortSignal.timeout(20000)});
+    if(r.ok){const j=await r.json();if(j&&j.data&&Array.isArray(j.data.items))return j.data.items;}}catch(e){}
+  const req=BASE+'/lnk-req.json',out=BASE+'/lnk-res.json';
+  await FS().writeFile(req,body);
+  await Promise.race([Neutralino.os.execCommand('curl -s --compressed --max-time 25 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" -H "Content-Type: application/json" -X POST --data-binary "@'+req+'" -o "'+out+'" "'+LNK_API+'"'),new Promise(r=>setTimeout(r,30000))]);
+  const j=JSON.parse(await FS().readFile(out));
+  return(j&&j.data&&Array.isArray(j.data.items))?j.data.items:[];
+}
+async function lnkFindHit(rank,btn){
+  const x=hitsCfg().list.find(y=>y.rank===rank);if(!x)return;
+  const open=u=>{try{Neutralino.os.open(u);}catch(e){window.open(u,'_blank');}};
+  const nt=hitsNorm(x.title);
+  // קודם ברשימה שכבר הורדה
+  const known=lnkCfg().items.find(i=>hitsNorm(hitsClean(i.name))===nt);
+  if(known&&known.link){open(known.link);return;}
+  const old=btn?btn.textContent:'';if(btn){btn.textContent='⏳';btn.disabled=true;}
+  try{
+    const items=await lnkSearch(x.title);
+    const names=it=>({n:hitsNorm(hitsClean(it.name||'')),a:hitsNorm(String(it.override_artist_name||(it.artist&&it.artist.name)||''))});
+    const ta=hitsNorm(x.artist||'');
+    let hit=items.find(it=>{const m=names(it);return m.n===nt&&ta&&m.a&&(m.a.includes(ta)||ta.includes(m.a));})
+          ||items.find(it=>names(it).n===nt)
+          ||items.find(it=>{const m=names(it);return nt.length>=3&&(m.n.includes(nt)||nt.includes(m.n))&&m.n.length>=3;});
+    if(hit&&hit.link){open(hit.link);toast('⬇ נפתח בלינקטון: '+(hit.name||x.title)+' — הורד משם, והשיר ייקלט לבד');}
+    else{toast('🔍 "'+x.title+'" לא נמצא בלינקטון — פותח את הקטלוג');open('https://www.linktone.co.il/catalog/');}
+  }catch(e){toast('⚠️ לא הצלחתי לחפש בלינקטון — פותח את הקטלוג');open('https://www.linktone.co.il/catalog/');}
+  finally{if(btn){btn.textContent=old;btn.disabled=false;}}
+}
+async function lnkFetch(manual){
+  const c=lnkCfg();if(lnkFetch._busy)return;lnkFetch._busy=true;
+  const st=document.getElementById('lnk-status');if(st&&manual)st.textContent='⏳ קורא את הקטלוג של לינקטון…';
+  try{
+    const all=[];
+    for(let p=1;p<=c.pages;p++){const arr=await lnkPage(p);all.push(...arr);if(arr.length<10)break;}
+    const items=[];const seen=new Set();
+    for(const it of all){
+      if(!it||!it.id||seen.has(it.id))continue;seen.add(it.id);
+      const artist=String(it.override_artist_name||(it.artist&&it.artist.name)||'').trim();
+      const name=String(it.name||'').trim();if(!name)continue;
+      items.push({id:it.id,name,artist,date:String(it.online_date||it.created_date||'').slice(0,16),
+        link:String(it.link||('https://www.linktone.co.il/catalog/')),pic:String(it.pic_tumb||''),
+        heb:HEB_RE.test(name)||HEB_RE.test(artist)});
+    }
+    if(!items.length)throw new Error('empty');
+    const prev=new Set(c.items.map(x=>x.id));
+    const fresh=items.filter(x=>!prev.has(x.id));
+    c.items=items;c.at=Date.now();c.err='';
+    lnkMatch();save();
+    if(fresh.length&&prev.size)try{logPlay('info','🆕 לינקטון: '+fresh.length+' שירים חדשים בקטלוג — '+fresh.slice(0,4).map(x=>x.artist+' - '+x.name).join(' · '),'לינקטון');}catch(e){}
+    if(manual)toast('🆕 לינקטון: '+items.length+' שירים אחרונים · '+items.filter(x=>!x.file).length+' חסרים בספרייה');
+  }catch(e){c.err=String(e&&e.message||e);c.errAt=Date.now();save();if(manual)toast('⚠️ לא הצלחתי לקרוא את הקטלוג של לינקטון');}
+  finally{lnkFetch._busy=false;try{lnkRender();}catch(e){}}
+}
+function lnkMatch(){
+  const c=lnkCfg();
+  const songs=(S.tracks||[]).filter(t=>t.type==='song'&&!t.missing);
+  const idx=songs.map(t=>({t,n:hitsNorm(t.name),all:' '+hitsNorm((t.name||'')+' '+(t.artist||'')+' '+String(t.file||'').split(/[\\/]/).pop().replace(/\.[^.]+$/,''))+' '}));
+  for(const x of c.items){const nt=hitsNorm(hitsClean(x.name));x.file=null;if(nt.length<2)continue;
+    let b=idx.find(o=>o.n===nt);if(!b&&nt.length>=3)b=idx.find(o=>o.all.indexOf(' '+nt+' ')>=0);if(b)x.file=b.t.file;}
+}
+function lnkOpen(id){const x=lnkCfg().items.find(y=>y.id===id);if(!x)return;try{Neutralino.os.open(x.link);}catch(e){window.open(x.link,'_blank');}}
+function lnkRender(){
+  const c=lnkCfg();
+  const st=document.getElementById('lnk-status');
+  if(st)st.innerHTML=c.at?('עודכן '+new Date(c.at).toLocaleString('he-IL',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})+' · '+c.items.length+' שירים אחרונים · <b>'+c.items.filter(x=>x.file).length+'</b> בספרייה · <b>'+c.items.filter(x=>!x.file).length+'</b> חסרים'+(c.err&&c.errAt>c.at?' · ⚠️ העדכון האחרון נכשל':'')):(c.err?'⚠️ לא הצלחתי לקרוא את הקטלוג':'לחץ "עדכן" כדי לקרוא את הקטלוג');
+  const dd=document.getElementById('lnk-dldir');if(dd&&document.activeElement!==dd)dd.value=c.dlDir||'';
+  const w=document.getElementById('lnk-watch');if(w)w.checked=!!c.watch;
+  const ia=document.getElementById('lnk-importall');if(ia)ia.checked=!!c.importAll;
+  const tb=document.getElementById('lnk-table');if(!tb)return;
+  const f=(document.getElementById('lnk-filter')||{}).value||'miss';
+  /* 🔥 VER 1073: רק פופולריים — שיר מלינקטון שמופיע במצעד המשולב (Spotify/YouTube/Apple/תחנות), ממוין לפי המקום */
+  const pop=(document.getElementById('lnk-pop')||{checked:c.popOnly!==false}).checked;c.popOnly=pop;
+  const hl=hitsCfg().list,hmap=new Map(hl.map(y=>[hitsNorm(y.title),y]));
+  const popOf=x=>hmap.get(hitsNorm(hitsClean(x.name)))||null;
+  let rows=c.items.filter(x=>f==='all'||(f==='miss'?!x.file:!!x.file));
+  if(pop){rows=rows.filter(x=>popOf(x));rows.sort((a,b)=>popOf(a).rank-popOf(b).rank);}
+  const pbad=x=>{const p=popOf(x);if(!p)return'';const s=p.srcs||{},b=['<span class="hb new">#'+p.rank+'</span>'];
+    if(s.sptop)b.push('<span class="hb">🟢 #'+s.sptop+'</span>');if(s.yt)b.push('<span class="hb">▶️ #'+s.yt+'</span>');if(s.apple)b.push('<span class="hb">🍎 #'+s.apple+'</span>');
+    if(s.glz||s.glzpl)b.push('<span class="hb live">גלגלצ</span>');if(s.gimel)b.push('<span class="hb live">גימל</span>');if(s.lev91)b.push('<span class="hb live">91FM</span>');return b.join(' ');};
+  tb.innerHTML=rows.length?('<table class="hits-tbl"><thead><tr><th>עלה</th><th>שיר</th><th>אמן</th><th>פופולריות</th><th>בספרייה</th><th></th></tr></thead><tbody>'
+    +rows.map(x=>`<tr class="${x.file?'have':'miss'}"><td style="white-space:nowrap">${esc(x.date.slice(5,16).replace('-','/'))}</td><td><b>${esc(x.name)}</b></td><td>${esc(x.artist)}</td><td>${pbad(x)}</td>
+      <td>${x.file?'✅ <small>'+esc(String(x.file).split(/[\\/]/).pop())+'</small>':'❌'}</td>
+      <td>${x.file?'':`<button class="btn small primary" onclick="lnkOpen(${x.id})" title="פותח את דף השיר בלינקטון — הורדה עם החשבון של התחנה">⬇ הורד בלינקטון</button>`}</td></tr>`).join('')+'</tbody></table>')
+    :'<div class="empty">'+(pop?(hl.length?'אין כרגע שירים פופולריים מהמצעד בין השירים האחרונים בלינקטון'+(f==='miss'?' שחסרים לך':''):'כדי לסנן לפי פופולריות — לחץ קודם "עדכן עכשיו" במצעד המשולב למעלה'):(f==='miss'?'✅ כל השירים האחרונים כבר בספרייה':'אין שירים להצגה'))+'</div>';
+}
+async function lnkDefaultDlDir(){
+  const c=lnkCfg();if(c.dlDir)return c.dlDir;
+  try{const up=await Neutralino.os.getEnv('USERPROFILE');if(up){c.dlDir=String(up).replace(/\\/g,'/').replace(/\/+$/,'')+'/Downloads';save();}}catch(e){}
+  return c.dlDir;
+}
+function lnkBindUI(){
+  const c=lnkCfg();
+  const b=document.getElementById('lnk-refresh');if(b&&!b._w){b._w=1;
+    b.onclick=()=>lnkFetch(true);
+    const f=document.getElementById('lnk-filter');if(f)f.onchange=lnkRender;
+    const pp=document.getElementById('lnk-pop');if(pp){pp.checked=c.popOnly!==false;pp.onchange=()=>{c.popOnly=pp.checked;save();lnkRender();};}
+    const w=document.getElementById('lnk-watch');if(w)w.onchange=()=>{c.watch=w.checked;save();};
+    const ia=document.getElementById('lnk-importall');if(ia)ia.onchange=()=>{c.importAll=ia.checked;save();};
+    const dd=document.getElementById('lnk-dldir');if(dd)dd.onchange=()=>{c.dlDir=dd.value.trim().replace(/\\/g,'/').replace(/\/+$/,'');save();_lnkSeen=null;};
+    const pk=document.getElementById('lnk-pick');if(pk)pk.onclick=async()=>{try{const p=await Neutralino.os.showFolderDialog('בחר את תיקיית ההורדות של הדפדפן');if(p){c.dlDir=String(p).replace(/\\/g,'/').replace(/\/+$/,'');save();_lnkSeen=null;lnkRender();}}catch(e){}};
+  }
+  lnkDefaultDlDir().then(()=>lnkRender());
+  if(!c.at)lnkFetch(false);else lnkRender();
+}
+/* 📥 קליטה אוטומטית מתיקיית ההורדות: קובץ אודיו חדש שמתאים לשיר מלינקטון או מהמצעד → "להיטים חדשים" */
+let _lnkSeen=null;
+async function lnkWatchTick(){
+  const c=lnkCfg();if(!c.watch)return;
+  const dir=await lnkDefaultDlDir();if(!dir)return;
+  let r;try{r=await listAudio(dir,false);}catch(e){return;}if(!r||r.failed)return;
+  const names=r.files.map(f=>f.entry);
+  if(_lnkSeen===null){_lnkSeen=new Set(names);return;}   // מה שכבר היה שם — לא נוגעים
+  const fresh=names.filter(n=>!_lnkSeen.has(n));if(!fresh.length)return;
+  const want=[...c.items.filter(x=>!x.file).map(x=>hitsNorm(hitsClean(x.name))),...hitsCfg().list.filter(x=>!x.file).map(x=>hitsNorm(x.title))].filter(k=>k&&k.length>=2);
+  let moved=0;
+  for(const n of fresh){
+    const base=hitsNorm(n.replace(/\.[^.]+$/,''));
+    const ok=c.importAll||want.some(k=>(' '+base+' ').indexOf(' '+k+' ')>=0);
+    if(!ok){_lnkSeen.add(n);continue;}
+    // ממתינים שההורדה תסתיים: הגודל לא משתנה בין שתי בדיקות
+    let s1=0,s2=-1;try{s1=(await FS().getStats(dir+'/'+n)).size;await new Promise(z=>setTimeout(z,4000));s2=(await FS().getStats(dir+'/'+n)).size;}catch(e){continue;}
+    if(!s1||s1!==s2)continue;   // עוד יורד — ננסה בפעימה הבאה
+    try{await ensureDirs();await FS().createDirectory(HITS_INBOX()).catch(()=>{});
+      await FS().move(dir+'/'+n,HITS_INBOX()+'/'+n);moved++;_lnkSeen.add(n);}catch(e){_lnkSeen.add(n);}
+  }
+  if(moved){
+    await scanMedia(true);hitsMatch();lnkMatch();save();
+    try{logPlay('info','📥 נקלטו '+moved+' שירים מתיקיית ההורדות ל"להיטים חדשים" — הם בספרייה ובמצעד','לינקטון');}catch(e){}
+    try{toast('📥 נקלטו '+moved+' שירים חדשים');}catch(e){}
+    try{lnkRender();hitsRender();}catch(e){}
+  }
+}
+setInterval(()=>{try{if(typeof S!=='undefined'&&S)lnkWatchTick();}catch(e){}},90000);
+setInterval(()=>{try{if(typeof S==='undefined'||!S)return;const c=lnkCfg();
+  if(c.at&&Date.now()-c.at>3*3600000&&!(c.errAt&&Date.now()-c.errAt<30*60000))lnkFetch(false);}catch(e){}},300000);
 </script>
