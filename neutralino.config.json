@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/neutralinojs/neutralinojs/main/schemas/neutralino.config.schema.json",
   "applicationId": "il.radio.station",
-  "version": "1.0.79",
+  "version": "1.0.80",
   "defaultMode": "window",
   "port": 0,
   "documentRoot": "/resources/",
@@ -20,7 +20,8 @@
     "window.*",
     "events.*",
     "debug.log",
-    "clipboard.*"
+    "clipboard.*",
+    "server.*"
   ],
   "globalVariables": {},
   "modes": {

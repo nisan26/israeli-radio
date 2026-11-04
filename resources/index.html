@@ -1404,6 +1404,62 @@ function pickCachedSong(){
     return{trackId:id,src:'🆘 מהזיכרון (הדיסק לא הגיב)',kind:'song'};
   }catch(e){return null}
 }
+/* 🚀 VER 1080: קריאת-קבצים מהירה — במקום readBinaryFile (שמעביר את כל ה-MP3 כטקסט
+   מקודד בתוך הצינור הפנימי של התוכנה, תור אחד שנסתם בשיר גדול או בניתוח-עוצמה ברקע),
+   התיקייה של הקובץ "מחוברת" לשרת המקומי של Neutralino (server.mount) והקובץ נקרא
+   ב-fetch רגיל — מהיר פי כמה ולא תוקע את שאר התוכנה.
+   בטיחות: 3 הקריאות הראשונות נבדקות מול גודל הקובץ בדיסק. כל אי-התאמה / גרסה
+   שלא תומכת → חוזרים אוטומטית לשיטה הישנה, ונכתבת שורה אחת ביומן. */
+const FASTRD={off:false,ok:0,fail:0,mounts:{},said:false};
+function _fhash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return(h>>>0).toString(36);}
+function _fsplit(p){const s=String(p||'');const i=Math.max(s.lastIndexOf('/'),s.lastIndexOf('\\'));return i>0?[s.slice(0,i),s.slice(i+1)]:['',''];}
+function fastMount(dir){
+  if(FASTRD.mounts[dir])return FASTRD.mounts[dir];
+  const vp='/fm_'+_fhash(dir.toLowerCase());
+  const pr=Neutralino.server.mount(vp,dir).then(()=>vp,e=>{
+    if(/already|exist/i.test(String((e&&(e.code+' '+e.message))||'')))return vp;   // כבר מחובר — בסדר
+    throw e;});
+  FASTRD.mounts[dir]=pr;pr.catch(()=>{if(FASTRD.mounts[dir]===pr)delete FASTRD.mounts[dir];});
+  return pr;
+}
+function fastOff(why){
+  if(FASTRD.off)return;FASTRD.off=true;
+  try{logPlay('sys','ℹ️ קריאת-קבצים מהירה לא זמינה במחשב הזה ('+why+') — ממשיכים בשיטה הרגילה','');}catch(e){}
+  try{dlog('sys','🚀 fast-read כבוי',{why,ok:FASTRD.ok,fail:FASTRD.fail});}catch(e){}
+}
+async function fastRead(file){
+  if(FASTRD.off||window.__STUDIO)return null;
+  if(!(window.Neutralino&&Neutralino.server&&typeof Neutralino.server.mount==='function')){fastOff('אין תמיכה בגרסה');return null;}
+  const [dir,name]=_fsplit(file);if(!dir||!name)return null;
+  try{
+    const vp=await Promise.race([fastMount(dir),new Promise((_,r)=>setTimeout(()=>r(new Error('mount-timeout')),5000))]);
+    const verify=FASTRD.ok<3;
+    const st=verify?await FS().getStats(file):null;
+    const ac=new AbortController(),_at=setTimeout(()=>ac.abort(),FASTRD.ok>0?25000:6000);   // לא נתקעים: עד שהשיטה הוכחה — 6ש׳, אחר-כך 25ש׳
+    let ab;
+    try{
+      const r=await fetch(vp+'/'+encodeURIComponent(name),{cache:'no-store',signal:ac.signal});
+      if(!r.ok)throw new Error('http '+r.status);
+      if(/text\/html/i.test(r.headers.get('content-type')||''))throw new Error('html');
+      ab=await r.arrayBuffer();
+    }finally{clearTimeout(_at);}
+    if(!ab||!ab.byteLength)throw new Error('empty');
+    if(verify&&st&&st.size>0&&ab.byteLength!==st.size)throw new Error('size '+ab.byteLength+'≠'+st.size);
+    FASTRD.ok++;FASTRD.fail=0;
+    if(!FASTRD.said&&FASTRD.ok>=3){FASTRD.said=true;
+      try{logPlay('sys','🚀 קריאת-קבצים מהירה פעילה — השירים נטענים ישירות, בלי לתקוע את הצינור','');}catch(e){}}
+    return ab;
+  }catch(e){
+    FASTRD.fail++;
+    const m=(e&&e.name==='AbortError')?'timeout':String((e&&(e.code||e.message))||e);
+    try{dlog('sys','🚀 fast-read נכשל — שיטה רגילה לקובץ הזה',{file:name,err:m.slice(0,120),ok:FASTRD.ok,fail:FASTRD.fail});}catch(e2){}
+    if(/NE_RT_NATPRME|NE_RT_NATRTER|not allowed|unknown|not found function/i.test(m))fastOff(m.slice(0,60));
+    else if(FASTRD.ok===0&&m==='timeout')fastOff('השרת המקומי לא ענה');   // לא מנסים שוב ושוב
+    else if((FASTRD.ok===0&&FASTRD.fail>=3)||FASTRD.fail>=8)fastOff(m.slice(0,60));
+    return null;
+  }
+}
+const readFileFast=f=>fastRead(f).then(ab=>ab||FS().readBinaryFile(f));
 async function trackURL(id,bg){
   const t=trk(id);if(!t||t.missing)return null;
   if(urlCache[t.file])return urlCache[t.file];
@@ -1444,7 +1500,7 @@ async function trackURL(id,bg){
     let _rel=false;const _dec=()=>{if(!_rel){_rel=true;_fsPend=Math.max(0,_fsPend-1);}};
     setTimeout(_dec,60000);
     const _file=t.file;
-    const read=FS().readBinaryFile(t.file).then(ab=>{
+    const read=readFileFast(t.file).then(ab=>{   // 🚀 VER 1080
       _dec();_diskBadUntil=0;
       if(urlCache[_file])return urlCache[_file];
       const took=Date.now()-t0;
@@ -2892,7 +2948,7 @@ async function measureGain(t){
     const _cu=urlCache[t.file];
     const _cap=(t.type==='program'?60:150)*1048576;   // תוכנית ארוכה = ענקית אחרי פענוח; שיר WAV עד 150MB עדיין נמדד
     if(!_cu){try{const st=await FS().getStats(t.file);if(st&&st.size>_cap)return 'big';}catch(e){return 'retry';}}
-    const _rd=_cu?fetch(_cu).then(r=>r.arrayBuffer()):FS().readBinaryFile(t.file);
+    const _rd=_cu?fetch(_cu).then(r=>r.arrayBuffer()):readFileFast(t.file);   // 🚀 VER 1080
     _normRead=_rd;
     const ab=await Promise.race([_rd,new Promise((_,rej)=>setTimeout(()=>rej(new Error('norm-read-timeout')),30000))]).catch(()=>null);
     if(!ab)return 'retry';
@@ -3045,7 +3101,8 @@ async function ijFire(el,song,manual){
   const j=ijNextJ(false);
   if(!j){if(manual)toast("⚠️ אין ג'ינגל שמסומן \"🎚 על פתיח שיר\" — סמן אחד בעמוד הפרסומות");return false;}
   const startedAt=Date.now();
-  let u=null;try{u=await trackURL(j.id);}catch(e){}
+  // VER 1080: קריאת האות ברקע עם מגבלה משלה — אות איטי לא מכריז 'הדיסק תקוע' ולא מעביר לזיכרון
+  let u=null;try{u=await Promise.race([trackURL(j.id,true),new Promise(r=>setTimeout(()=>r(null),4000))]);}catch(e){}
   if(!u){try{dlog('play','🎚 אות-פתיח לא נטען — מדלגים',{name:j.name});}catch(e){}return false;}
   // השיר כבר התחלף / עבר יותר מדי זמן מתחילתו — לא עולים על אמצע שיר
   if(active!==el||(!manual&&Date.now()-startedAt>4000))return false;
@@ -4980,7 +5037,7 @@ function playedMainWire(){
 function renderAll(){try{renderLibrarySoon();}catch(e){}renderMusic();renderAdLists();renderHours();renderLog();renderQueue();renderLiveInfo();renderPrograms();renderPlayed();try{renderPlayedMain();playedMainWire();tagFillRender();}catch(e){}if(typeof spRenderAll==='function')spRenderAll();}
 /* 🏷 מספר-גרסה — עולה ב-1 בכל שדרוג, כדי לעקוב איזה עדכון רץ בפועל.
    מוצג מתחת לשם-התחנה בפינה, ונכתב גם לכותרת-החלון. */
-const APP_VER='VER 1079', APP_BUILD='2026-11-04';
+const APP_VER='VER 1080', APP_BUILD='2026-11-04';
 async function init(){
   Neutralino.init();
   try{
