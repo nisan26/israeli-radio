@@ -821,7 +821,12 @@ tr[data-dragok]{cursor:grab}tr.dragging{opacity:.45}
         <div id="ads-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px">
           <div class="card"><h3>📢 פרסומות</h3><div id="ads-list"></div></div>
           <div class="card"><h3>🤝 חסויות</h3><div id="sponsors-list"></div></div>
-          <div class="card"><h3>🎺 ג'ינגלים</h3><div id="jingles-list"></div></div>
+          <div class="card"><h3>🎺 ג'ינגלים</h3>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px;font-size:13px">📰 ג'ינגלים "מיד אחרי החדשות":
+              <select id="pn-mode" onchange="S.settings.pnMode=this.value;save();try{spRefresh();}catch(e){}toast('✅ נשמר')">
+                <option value="one">אחד בכל מהדורה — לפי הסדר 1 → 2 → 3…</option>
+                <option value="all">כולם ברצף בכל מהדורה — 1, 2, 3…</option></select></div>
+            <div id="jingles-list"></div></div>
         </div>
       </div>
 
@@ -2631,6 +2636,7 @@ function bindSettings(){
   if($('#set-autostart'))$('#set-autostart').checked=s.autoStart!==false;
   if($('#set-rebirth'))$('#set-rebirth').checked=!(s.rebirth&&s.rebirth.on===false);
   try{ijBindUI();}catch(e){console.warn('ij ui',e);}
+  {const pm=document.getElementById('pn-mode');if(pm)pm.value=S.settings.pnMode==='all'?'all':'one';}
   renderPrioList();
   bindColPanels();
   $('#station-name').textContent=s.stationName;document.title=(typeof APP_VER!=='undefined'?APP_VER+' · ':'')+s.stationName+' — מערכת שידור';
@@ -3356,6 +3362,7 @@ function prioRank(item){
   if(!item)return 99;
   if(item.now)return -2;   // VER 1064: "שדר עכשיו" מהחיפוש — לפני כל מה שבתור
   if(item.kind==='news'||item.kind==='sig')return -1;
+  if(item.pn)return .4;     // 📰 VER 1081: ג'ינגל אחרי-החדשות — לפני הפרסומות
   if(item.spot)return .5;   // 📢 קבצים מתוזמנים — שומרים על סדר העדיפות שהמנוע קבע
   const ord=S.settings.breakOrder||['jingle','ad','sponsor'];
   const i=ord.indexOf(item.kind);
@@ -5037,7 +5044,7 @@ function playedMainWire(){
 function renderAll(){try{renderLibrarySoon();}catch(e){}renderMusic();renderAdLists();renderHours();renderLog();renderQueue();renderLiveInfo();renderPrograms();renderPlayed();try{renderPlayedMain();playedMainWire();tagFillRender();}catch(e){}if(typeof spRenderAll==='function')spRenderAll();}
 /* 🏷 מספר-גרסה — עולה ב-1 בכל שדרוג, כדי לעקוב איזה עדכון רץ בפועל.
    מוצג מתחת לשם-התחנה בפינה, ונכתב גם לכותרת-החלון. */
-const APP_VER='VER 1080', APP_BUILD='2026-11-04';
+const APP_VER='VER 1081', APP_BUILD='2026-11-07';
 async function init(){
   Neutralino.init();
   try{
@@ -5378,7 +5385,7 @@ function spPlan(t){
   p.mins=spParseMins(Array.isArray(p.mins)?p.mins.join(','):p.mins);
   p.prio=Math.max(0,Math.min(99,Math.round(+p.prio||0)));
   p.on=p.on!==false;
-  p.pos=(p.pos==='before'||p.pos==='after'||p.pos==='intro')?p.pos:'';   // VER 1078: intro = על פתיח שיר   // VER 1066: ג'ינגל צמוד להפסקה — לפני/אחרי הפרסומות
+  p.pos=['before','after','intro','postnews'].includes(p.pos)?p.pos:'';   // VER 1081: postnews = מיד אחרי החדשות   // VER 1078: intro = על פתיח שיר   // VER 1066: ג'ינגל צמוד להפסקה — לפני/אחרי הפרסומות
   p.start=typeof p.start==='string'?p.start:'';
   p.end=typeof p.end==='string'?p.end:'';
   p._v=1;
@@ -5765,6 +5772,7 @@ async function preloadAfterNews(){
   _anPreBusy=true;
   try{
     const ids=[],add=id=>{if(id&&!ids.includes(id))ids.push(id);};
+    try{for(const t of pnPick(true))add(t.id);}catch(e){}   // 📰 VER 1081: הג'ינגל שיעלה ראשון אחרי החדשות
     const seen=new Set(),list=[];
     for(const g of spDefer)for(const id of g.ids){if(seen.has(id))continue;seen.add(id);const t=trk(id);if(t&&!t.missing)list.push(t);}
     if(list.length){
@@ -5785,6 +5793,30 @@ async function preloadAfterNews(){
   finally{_anPreBusy=false;}
 }
 setInterval(()=>{try{preloadAfterNews();}catch(e){}},5000);
+/* 📰 VER 1081: ג'ינגל מיד אחרי החדשות — לפני הפרסומות.
+   הסדר לפי מספר העדיפות של כל ג'ינגל (1 ראשון, אחריו 2, 3...; בלי עדיפות — בסוף לפי שם).
+   מצב "אחד": בכל מהדורה הבא בתור (1 → 2 → 3 → … → חוזר ל-1). מצב "כולם": כולם ברצף לפי הסדר. */
+function pnList(now){
+  try{const n=now||new Date(),ds=spDateStr(n),h=n.getHours();
+    return spLive().filter(t=>t.type==='jingle'&&spPlan(t).pos==='postnews'&&spEligible(t,n,ds)&&spPlan(t).hours.includes(h))
+      .sort((a,b)=>{const pa=spPlan(a).prio||999,pb=spPlan(b).prio||999;return(pa-pb)||String(a.name||'').localeCompare(String(b.name||''),'he');});
+  }catch(e){return[];}
+}
+function pnPick(peek){
+  const L=pnList();if(!L.length)return[];
+  if(S.settings.pnMode==='all')return L;
+  const i=(S.pnRot||0)%L.length;if(!peek)S.pnRot=i+1;
+  return[L[i]];
+}
+function pnFire(){
+  const list=pnPick(false);if(!list.length)return 0;
+  const items=list.map(t=>({trackId:t.id,src:'📰 מיד אחרי החדשות',kind:'jingle',spot:true,pn:true}));
+  pending.unshift(...items);
+  for(const t of list){t.lastPlay=Date.now();t.playsTotal=(t.playsTotal||0)+1;}
+  try{dlog('sched','📰 ג\'ינגל אחרי החדשות נכנס לראש התור: '+list.map(t=>t.name).join(', '),{mode:S.settings.pnMode||'one'});}catch(e){}
+  save();try{renderQueue();}catch(e){}
+  return items.length;
+}
 function spAfterNews(reason){
   if(!spDefer.length)return;
   const groups=spDefer;spDefer=[];
@@ -5993,7 +6025,7 @@ function spSummary(t){
   if(!p.hours.length||!p.days.length)return'חסרות שעות או ימים';
   const dtxt=p.days.length===7?'כל יום':p.days.map(d=>DAY_HE[d]).join(', ');
   const htxt=p.hours.length===24?'כל השעות':hoursRangesText(p.hours);
-  let s=p.pos&&t.type==='jingle'?`${p.pos==='before'?'⏮ בתחילת כל הפסקת פרסומות':p.pos==='intro'?'🎚 על פתיח שיר · '+ijFreqText():'⏭ בסוף כל הפסקת פרסומות'} · ${htxt} · ${dtxt}`
+  let s=p.pos&&t.type==='jingle'?`${p.pos==='before'?'⏮ בתחילת כל הפסקת פרסומות':p.pos==='intro'?'🎚 על פתיח שיר · '+ijFreqText():p.pos==='postnews'?'📰 מיד אחרי החדשות, לפני הפרסומות'+(p.prio?' · מספר '+p.prio+' בסדר':''):'⏭ בסוף כל הפסקת פרסומות'} · ${htxt} · ${dtxt}`
                                 :`${SP_MODE_ICON[p.mode]} ${spModeShort(p)} · ${htxt} · ${dtxt}`;
   if(p.start||p.end)s+=` · 📅 ${p.start||'…'} → ${p.end||'…'}`;
   return s;
@@ -6014,7 +6046,8 @@ function spRow(t,now){
         <option value=""${!p.pos?' selected':''}>🕐 לפי התזמון</option>
         <option value="before"${p.pos==='before'?' selected':''}>⏮ לפני הפרסומות</option>
         <option value="after"${p.pos==='after'?' selected':''}>⏭ אחרי הפרסומות</option>
-        <option value="intro"${p.pos==='intro'?' selected':''}>🎚 על פתיח שיר (מיקס)</option></select>`:''}
+        <option value="intro"${p.pos==='intro'?' selected':''}>🎚 על פתיח שיר (מיקס)</option>
+        <option value="postnews"${p.pos==='postnews'?' selected':''}>📰 מיד אחרי החדשות</option></select>`:''}
       <select class="sp-prio" title="עדיפות: 1 = מתנגן ראשון בהפסקה" onchange="spSetPrio('${t.id}',this.value)">
         <option value="0"${!p.prio?' selected':''}>⭐ עדיפות: ללא</option>
         ${[1,2,3,4,5,6,7,8,9,10].map(k=>`<option value="${k}"${p.prio===k?' selected':''}>⭐ עדיפות ${k}</option>`).join('')}</select>
@@ -6025,9 +6058,9 @@ function spRow(t,now){
     <td style="width:38px"><button class="iconbtn" onclick="deleteTrack('${t.id}')">🗑</button></td></tr>`;
 }
 /* VER 1066: כפתורי מיקום ועדיפות בשורה */
-function spSetPos(id,v){const t=trk(id);if(!t)return;const p=spPlan(t);p.pos=(v==='before'||v==='after'||v==='intro')?v:'';spTouch(t);save();
+function spSetPos(id,v){const t=trk(id);if(!t)return;const p=spPlan(t);p.pos=['before','after','intro','postnews'].includes(v)?v:'';spTouch(t);save();
   try{spRefresh();}catch(e){}try{ijStatus();}catch(e){}
-  toast(p.pos==='intro'?'🎚 "'+t.name+'" יעלה על פתיח השירים — התדירות בהגדרות':p.pos==='before'?'⏮ "'+t.name+'" יתנגן בתחילת כל הפסקת פרסומות':p.pos==='after'?'⏭ "'+t.name+'" יתנגן בסוף כל הפסקת פרסומות':'🕐 "'+t.name+'" חוזר לתזמון לפי שעה');}
+  toast(p.pos==='postnews'?'📰 "'+t.name+'" יתנגן מיד בסיום החדשות, לפני הפרסומות — הסדר לפי מספר העדיפות':p.pos==='intro'?'🎚 "'+t.name+'" יעלה על פתיח השירים — התדירות בהגדרות':p.pos==='before'?'⏮ "'+t.name+'" יתנגן בתחילת כל הפסקת פרסומות':p.pos==='after'?'⏭ "'+t.name+'" יתנגן בסוף כל הפסקת פרסומות':'🕐 "'+t.name+'" חוזר לתזמון לפי שעה');}
 function spSetPrio(id,v){const t=trk(id);if(!t)return;const p=spPlan(t);p.prio=Math.max(0,Math.min(99,Math.round(+v||0)));spTouch(t);save();
   try{spRefresh();}catch(e){}
   toast(p.prio?'⭐ "'+t.name+'" — עדיפות '+p.prio+' (1 מתנגן ראשון)':'"'+t.name+'" — ללא עדיפות');}
@@ -6162,6 +6195,13 @@ function spCtrlHTML(d,bulk){
     כאן קובעים רק <b>באילו ימים ושעות</b> מותר לו לעלות. אין דקה קבועה בשעה — הוא עולה בתחילת השיר שהגיע תורו.</div>
     <button class="btn small" type="button" onclick="ijGoSettings()">⚙️ שנה תדירות</button></div>
   <div style="display:none">`:''}
+  ${d.postnews?`<div class="card" style="margin-bottom:16px;border:2px solid var(--jingle);background:rgba(14,147,166,.08)">
+    <b style="font-size:14px">📰 הג'ינגל הזה מתנגן מיד בסיום החדשות — לפני הפרסומות</b>
+    <div style="margin:6px 0 0;font-size:13.5px">אין דקה קבועה בשעה — הוא עולה ברגע שהמהדורה נגמרת.<br>
+    <b>הסדר בין ג'ינגלים כאלה = העדיפות למטה</b> (1 ראשון, אחריו 2, 3, 4, 5).
+    ${S.settings.pnMode==='all'?'בכל מהדורה מתנגנים כולם ברצף לפי הסדר.':'בכל מהדורה מתנגן אחד — הבא בתור לפי הסדר (1, אחר-כך 2, 3...).'}
+    כאן אפשר גם להגביל ימים ושעות.</div></div>
+  <div style="display:none">`:''}
   <div style="margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
     <b style="font-size:13.5px">⏱ באיזו דקה בתוך השעה</b>${chk('mode')}</div>
   <div class="spmode" id="sp-e-mode" style="margin-bottom:16px">
@@ -6171,8 +6211,9 @@ function spCtrlHTML(d,bulk){
           <small>${SP_MODE_HELP[m]}</small></div>`
       :`<div class="mbtn ${d.mode===m?'on':''}" data-m="${m}"><b>${SP_MODE_SHORT[m]}</b>${SP_MODE[m]}<small>${SP_MODE_HELP[m]}</small></div>`).join('')}</div>
 
+  ${d.postnews?'</div>':''}
   <div style="margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
-    <b style="font-size:13.5px">🏅 עדיפות מול קבצים אחרים באותו זמן</b>${chk('prio')}</div>
+    <b style="font-size:13.5px">${d.postnews?'🔢 מספר בסדר אחרי החדשות (1 = ראשון)':'🏅 עדיפות מול קבצים אחרים באותו זמן'}</b>${chk('prio')}</div>
   <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px">
     <input type="number" id="sp-e-prio" min="0" max="99" step="1" value="${d.prio}" style="width:90px">
     <span class="hint" style="flex:1;min-width:200px">1 = ראשון לשידור, 2 אחריו וכן הלאה. <b>0 = ללא עדיפות</b> — קבצים כאלה משודרים אחרי בעלי העדיפות, בסדר אקראי.</span></div>
@@ -6185,7 +6226,7 @@ function spCtrlHTML(d,bulk){
     <label style="font-size:13px">עד <input type="date" id="sp-e-end" value="${d.end||''}"></label>
     <button class="btn small" id="sp-e-clrange">נקה תאריכים</button></div>
 
-  <div class="splog" id="sp-e-prev" style="background:var(--bg2)${d.intro?';display:none':''}">—</div>`;
+  <div class="splog" id="sp-e-prev" style="background:var(--bg2)${(d.intro||d.postnews)?';display:none':''}">—</div>`;
 }
 function spReadCtrl(){
   const days=[...$('#sp-e-days').children].filter(c=>c.classList.contains('on')).map(c=>+c.dataset.d);
@@ -6270,7 +6311,7 @@ function spEdit(id){
   const t=trk(id);if(!t)return;
   const p=spPlan(t);
   const d={on:p.on,days:p.days.slice(),hours:p.hours.slice(),mode:p.mode,mins:p.mins.slice(),prio:p.prio,start:p.start,end:p.end,
-    intro:t.type==='jingle'&&p.pos==='intro'};   // 🎚 VER 1079
+    intro:t.type==='jingle'&&p.pos==='intro',postnews:t.type==='jingle'&&p.pos==='postnews'};   // 🎚 VER 1079 · 📰 VER 1081
   showModal(`<h3>🕐 תזמון — ${esc(t.name)}</h3>
     <div class="hint" style="margin-bottom:14px">${TYPE_EMOJI[t.type]||''} ${TYPE_HE[t.type]||t.type}${t.duration>0?' · '+fmtDur(t.duration):''}</div>
     ${spCtrlHTML(d,false)}
@@ -7664,6 +7705,7 @@ function aidExit(reason){
   /* VER 1076: הפרסומות שהמתינו נכנסות לתור *לפני* שבוחרים את הפריט הבא — קודם שיר נבחר ראשון,
      והפרסומות חיכו לסופו / נטענו "קר" אחרי שקט. spFireNow כבר מתחיל לנגן אם צריך (loading דולק),
      ואז לא קוראים שוב ל-playNext (קריאה כפולה הייתה מעלימה את הפריט הראשון). */
+  try{pnFire();}catch(e){console.warn('pn',e);}   // 📰 VER 1081: ג'ינגל אחרי החדשות — ראשון בתור
   try{if(typeof spAfterNews==='function')spAfterNews('📰 מיד בסיום החדשות');}catch(e){}
   if(autoOn&&!loading){try{playNext('חדשות-יצאו');}catch(e){}}
   try{renderNow();renderProgress();}catch(e){}
